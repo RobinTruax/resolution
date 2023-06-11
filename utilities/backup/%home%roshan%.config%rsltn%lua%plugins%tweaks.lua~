@@ -120,24 +120,7 @@ return {
     -- modicator.nvim: color changing line number -- TODO: Align with lualine.
     {
         'mawkler/modicator.nvim',
-        event = { "BufReadPost", "BufNewFile" },
-        dependencies = {'folke/tokyonight.nvim'},
-        config = function()
-            require('modicator').setup()
-
-            local ModicatorColors = {
-                NormalMode   = { fg = '#82aaff' },
-                InsertMode   = { fg = '#c3e88d' },
-                VisualMode   = { fg = '#c099ff' },
-                CommandMode  = { fg = '#ffc777' },
-                ReplaceMode  = { fg = '#ff757f' },
-                TerminalMode = { fg = '#4fd6be' },
-                SelectMode   = { fg = '#c099ff' },
-            }
-
-            for hl, col in pairs(ModicatorColors) do
-                vim.api.nvim_set_hl(0, hl, col)
-            end
-        end
+        dependencies = {'mawkler/onedark.nvim'},
+        config = true
     }
 }

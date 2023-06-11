@@ -3,6 +3,9 @@ resolution v0.1.0
 this file runs on startup; there is usually no reason to modify it
 --]]
 
+-- set neovim options
+require('config.preferences')
+
 -- set up plugins
 require('core.plugins')
 

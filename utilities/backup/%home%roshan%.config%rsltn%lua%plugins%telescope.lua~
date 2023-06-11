@@ -21,12 +21,11 @@ return {
             -- basic setup
             require('telescope').setup({
                 defaults = {
-                    path_display = {truncate = 0},
                     layout_strategy = 'horizontal',
                     prompt_prefix = '  ',
                     selection_caret = '  ',
                     layout_config = {
-                        anchor = 's',
+                        anchor = 'S',
                         height = 0.5,
                         width = 0.9999,
                         prompt_position = 'top',
@@ -37,6 +36,7 @@ return {
             })
 
             -- proper placement
+            local layout_strategies = require('telescope.pickers.layout_strategies')
             local resolve = require('telescope.config.resolve')
             resolve.resolve_anchor_pos = function(anchor, p_width, p_height, max_columns, max_lines)
                 anchor = anchor:upper()
@@ -56,6 +56,8 @@ return {
                 end
                 return pos
             end
+
+            --layout_strategies.bottom_pane = ''
 
             -- wrapping
             vim.api.nvim_create_autocmd("User", {
