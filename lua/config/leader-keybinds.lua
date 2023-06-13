@@ -1,12 +1,12 @@
 --[[
 resolution v0.1.0
-this file defines the keybinds for rsltn's main operations
+this file defines the keybinds for rsltn's main operations, which use the <leader> key
 --]]
 
-local leader_keybinds = {
+return {
     -- top-level keybinds
     ['a'] = {
-        desc = 'toggle [a]utosnippets', 
+        desc = 'toggle [a]utosnippets',
         cmd = ''
     },
     ['d'] = {
@@ -52,3 +52,4 @@ local leader_keybinds = {
 
     -- utilities
 }
+

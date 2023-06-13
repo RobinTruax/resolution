@@ -65,61 +65,6 @@ return {
                     vim.wo.number = true
                 end,
             })
-
-            -- colors
-            local TelescopePrompt = {
-                TelescopeNormal = {
-                    bg = '#1F2335',
-                },
-                TelescopeBorder = {
-                    fg = '#1F2335',
-                    bg = '#1F2335',
-                },
-                TelescopeSelection = {
-                    bg = '#2d3149',
-                },
-                TelescopeSelectionCaret = {
-                    fg = '#1F2335',
-                    bg = '#1F2335',
-                },
-                TelescopeMatching = {
-                    fg = '#7aa2f7',
-                },
-                TelescopePromptNormal = {
-                    bg = '#2d3149',
-                },
-                TelescopePromptTitle = {
-                    fg = '#2d3149',
-                    bg = '#7aa2f7',
-                },
-                TelescopePromptPrefix = {
-                    fg = '#7aa2f7',
-                    bg = '#2d3149',
-                },
-                TelescopePromptBorder = {
-                    fg = '#2d3149',
-                    bg = '#2d3149',
-                },
-                TelescopePreviewTitle = {
-                    fg = '#1F2335',
-                    bg = '#1F2335',
-                },
-                TelescopePreviewBorder = {
-                    fg = '#1F2335',
-                    bg = '#1F2335',
-                },
-                TelescopeResultsTitle = {
-                    fg = '#1F2335',
-                    bg = '#1F2335',
-                },
-                TelescopeResultsBorder = {
-                    fg = '#1F2335',
-                    bg = '#1F2335',
-                },
-            }
-            for hl, col in pairs(TelescopePrompt) do
-                vim.api.nvim_set_hl(0, hl, col)
-            end
         end,
     },
 }

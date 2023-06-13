@@ -3,9 +3,6 @@ resolution v0.1.0
 this file runs on startup; there is usually no reason to modify it
 --]]
 
--- set neovim options
-require('config.preferences')
-
 -- set up plugins
 require('core.plugins')
 
@@ -17,3 +14,6 @@ require('core.maps-other')
 
 -- set autocmds
 require('core.autocmds')
+
+-- set any lingering neovim options
+require('core.execute-config')

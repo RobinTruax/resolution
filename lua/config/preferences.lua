@@ -3,7 +3,7 @@ resolution v0.1.0
 this file contains all options provided by resolution other than keybinds and aesthetics
 --]]
 
-local M = {}
+local prefs = {}
 
 ------------------------- redefinitions -------------------------
 
@@ -13,7 +13,7 @@ local cfg = vim.fn.stdpath('config')
 
 ----------------------- necessary settings ----------------------
 
-M.project_root_path = '/home/roshan/Documents/Mathematics/'
+prefs.project_root_path = '/home/roshan/Documents/Mathematics/'
 
 ------------------------ visual elements ------------------------
 
@@ -27,16 +27,16 @@ opt.list = false -- no line breaks in middle of word
 opt.scrolloff = 8 -- # of guaranteed lines at top & bottom
 opt.pumheight = 5 -- maximum size of pop-up menu
 
-opt.cmdheight = 1 -- height of command line prompt
+prefs.cmdheight = 1 -- height of command line prompt
 opt.showmode = false -- show INSERT MODE message in command line
 
 opt.updatetime = 1000 -- time before keybind menu opens
 
 -------------------- snippets and completion --------------------
 
-M.autosnippets = true -- default behavior of auto-expanding snippets
-M.automath_snippets = true -- default behavior of auto-mathing snippets
-M.autocomplete = true -- default behavior of autocompletion
+prefs.autosnippets = true -- default behavior of auto-expanding snippets
+prefs.automath_snippets = true -- default behavior of auto-mathing snippets
+prefs.autocomplete = true -- default behavior of autocompletion
 opt.spell = true -- spell checker
 
 ---------------------- tabs and indentation ---------------------
@@ -69,3 +69,5 @@ opt.swapfile = false -- enable swapfiles
 --------------------------- clipboard ---------------------------
 
 vim.opt.clipboard = 'unnamedplus' -- unify system & vim clipboard
+
+return prefs
