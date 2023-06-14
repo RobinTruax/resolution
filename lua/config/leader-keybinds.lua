@@ -46,7 +46,7 @@ return {
         cmd = '<cmd> ToggleTerm <cr>'
     },
     ['v'] = {
-        desc = '[v]iew file in project', 
+        desc = '[v]iew file in project',
         cmd = ''
     },
 

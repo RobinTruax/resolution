@@ -23,17 +23,17 @@ colors.util_colors = {
 
 colors.get_telescope_colors = function(scheme, mode)
     return {
-        TelescopeNormal        = { bg = colors.util_colors[scheme][mode].tel_nrm },
-        TelescopeBorder        = { fg = colors.util_colors[scheme][mode].tel_nrm, bg = colors.util_colors[scheme][mode].tel_nrm },
-        TelescopeSelection     = { bg = colors.util_colors[scheme][mode].tel_emp },
-        TelescopePromptNormal  = { bg = colors.util_colors[scheme][mode].tel_emp },
-        TelescopePromptTitle   = { fg = colors.util_colors[scheme][mode].tel_emp, bg = colors.util_colors[scheme][mode].tel_spc },
-        TelescopePromptPrefix  = { fg = colors.util_colors[scheme][mode].tel_spc, bg = colors.util_colors[scheme][mode].tel_emp },
-        TelescopePromptBorder  = { fg = colors.util_colors[scheme][mode].tel_emp, bg = colors.util_colors[scheme][mode].tel_emp },
-        TelescopePreviewTitle  = { fg = colors.util_colors[scheme][mode].tel_nrm, bg = colors.util_colors[scheme][mode].tel_nrm },
-        TelescopePreviewBorder = { fg = colors.util_colors[scheme][mode].tel_nrm, bg = colors.util_colors[scheme][mode].tel_nrm },
-        TelescopeResultsTitle  = { fg = colors.util_colors[scheme][mode].tel_nrm, bg = colors.util_colors[scheme][mode].tel_nrm },
-        TelescopeResultsBorder = { fg = colors.util_colors[scheme][mode].tel_nrm, bg = colors.util_colors[scheme][mode].tel_nrm },
+        TelescopeNormal        = { bg = colors.utils[scheme][mode].tel_nrm },
+        TelescopeBorder        = { fg = colors.utils[scheme][mode].tel_nrm, bg = colors.utils[scheme][mode].tel_nrm },
+        TelescopeSelection     = { bg = colors.utils[scheme][mode].tel_emp },
+        TelescopePromptNormal  = { bg = colors.utils[scheme][mode].tel_emp },
+        TelescopePromptTitle   = { fg = colors.utils[scheme][mode].tel_emp, bg = colors.utils[scheme][mode].tel_spc },
+        TelescopePromptPrefix  = { fg = colors.utils[scheme][mode].tel_spc, bg = colors.utils[scheme][mode].tel_emp },
+        TelescopePromptBorder  = { fg = colors.utils[scheme][mode].tel_emp, bg = colors.utils[scheme][mode].tel_emp },
+        TelescopePreviewTitle  = { fg = colors.utils[scheme][mode].tel_nrm, bg = colors.utils[scheme][mode].tel_nrm },
+        TelescopePreviewBorder = { fg = colors.utils[scheme][mode].tel_nrm, bg = colors.utils[scheme][mode].tel_nrm },
+        TelescopeResultsTitle  = { fg = colors.utils[scheme][mode].tel_nrm, bg = colors.utils[scheme][mode].tel_nrm },
+        TelescopeResultsBorder = { fg = colors.utils[scheme][mode].tel_nrm, bg = colors.utils[scheme][mode].tel_nrm },
     }
 end
 

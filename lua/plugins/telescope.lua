@@ -1,9 +1,18 @@
 -- configuration for telescope
 return {
+
+    -- telescope-fzf-native.nvim: fzf syntax/faster search
     {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
         lazy = true,
+    },
+
+    -- nvim-neoclip.lua: search yanks
+    {
+        'AckslD/nvim-neoclip.lua',
+        lazy = true,
+        config = true,
     },
 
     -- telescope.nvim
@@ -13,6 +22,8 @@ return {
             'nvim-lua/plenary.nvim',
             'BurntSushi/ripgrep',
             'nvim-telescope/telescope-fzf-native.nvim',
+            'AckslD/nvim-neoclip.lua',
+            'debugloop/telescope-undo.nvim',
         },
         cmd = 'Telescope',
 
@@ -65,6 +76,10 @@ return {
                     vim.wo.number = true
                 end,
             })
+
+            require('telescope').load_extension('fzf')
+            require('telescope').load_extension('neoclip')
+            require('telescope').load_extension('undo')
         end,
     },
 }

@@ -58,7 +58,8 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-        event = { "BufReadPost", "BufNewFile" },
+        event = { 'BufReadPost', 'BufNewFile' },
+        cmd = {'Telescope'},
         config = function()
             local section_separators = {}
             if require('config.aesthetics').ui_sharp == true then
@@ -92,7 +93,7 @@ return {
                 },
                 -- winbar = {
                 -- lualine_c = {
-                --     "navic",
+                --     'navic',
                 --     color_correction = nil,
                 --     navic_opts = nil
                 -- }
@@ -105,15 +106,16 @@ return {
     {
         'akinsho/bufferline.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-        event = { "BufReadPost", "BufNewFile" },
+        event = { 'BufReadPost', 'BufNewFile' },
+        cmd = {'Telescope'},
         config = function()
             require('bufferline').setup({
                 options = {
                     always_show_bufferline = false,
                     offsets = {
                         {
-                            filetype = "neo-tree",
-                            highlight = "Directory",
+                            filetype = 'neo-tree',
+                            highlight = 'Directory',
                             separator = true
                         }
                     }
