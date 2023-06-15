@@ -185,52 +185,72 @@ return {
 
 -------------------------- search (s) ---------------------------
 
-    ['se'] = {
-        desc = 'system file [e]xplorer',
+    ['sE'] = {
+        desc = '',
         cmd = ''
     },
     ['sf'] = {
-        desc = 'search [f]iles (root)',
+        desc = '',
         cmd = ''
     },
     ['sh'] = {
-        desc = 'search [h]idden files (root)',
+        desc = '',
         cmd = ''
     },
     ['sc'] = {
-        desc = 'search [c]ommand history',
+        desc = '',
         cmd = ''
     },
     ['ss'] = {
-        desc = 'search [s]earch history',
+        desc = '',
         cmd = ''
     },
-    ['sm'] = {
-        desc = 'search/replace [m]ultiple files',
+    ['sp'] = {
+        desc = '',
         cmd = ''
     },
     ['sg'] = {
-        desc = '[g]rep in file',
+        desc = '',
         cmd = ''
     },
     ['sG'] = {
-        desc = '[G]rep in project',
+        desc = '',
         cmd = ''
     },
-    ['sr'] = {
-        desc = '[r]esume search',
+    ['s'] = {
+        desc = '',
         cmd = ''
     },
-    ['sb'] = {
-        desc = 'search [b]ookmarks',
+    ['s'] = {
+        desc = '',
         cmd = ''
     },
-    ['sy'] = {
-        desc = 'search [y]anks',
+    ['s'] = {
+        desc = '',
         cmd = ''
     },
-    ['su'] = {
-        desc = 'search [u]ndo',
+    ['s'] = {
+        desc = '',
+        cmd = ''
+    },
+    ['s'] = {
+        desc = '',
+        cmd = ''
+    },
+    ['s'] = {
+        desc = '',
+        cmd = ''
+    },
+    ['s'] = {
+        desc = '',
+        cmd = ''
+    },
+    ['s'] = {
+        desc = '',
+        cmd = ''
+    },
+    ['s'] = {
+        desc = '',
         cmd = ''
     },
 

@@ -13,11 +13,10 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +18 ~/Documents/Mathematics/Classes/quantum-complexity/presentation/main.tex
 argglobal
 %argdel
-edit ~/Documents/Mathematics/Classes/quantum-complexity/presentation/main.tex
 argglobal
+enew
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -26,14 +25,6 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 22 - ((21 * winheight(0) + 24) / 49)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 22
-normal! 010|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

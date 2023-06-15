@@ -58,7 +58,7 @@ vim.opt.smartcase  = true -- searching is smartly case-sensitive
 opt.undodir               = cfg .. '/utilities/undo//'     -- undo directory
 opt.backupdir             = cfg .. '/utilities/backup//'   -- backup directory
 opt.directory             = cfg .. '/utilities/swap//'     -- swap file directory
-glb.auto_session_root_dir = cfg .. '/utilities/sessions//' -- session directory
+glb.auto_session_root_dir = cfg .. '/utilities/sessopms//' -- session directory
 
 opt.undolevels            = 1000                           -- max number of undos
 opt.undofile              = true                           -- enable permanent undo file
