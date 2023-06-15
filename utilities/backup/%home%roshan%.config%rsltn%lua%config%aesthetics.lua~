@@ -1,4 +1,0 @@
-local default_colorscheme = 'tokyonight'
-local default_mode = 'light'
-
-require('core.colors').set_colorscheme(default_colorscheme, default_mode)
