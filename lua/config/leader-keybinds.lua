@@ -6,10 +6,15 @@ these use the <leader> key
 
 return {
 
+    [''] = {
+        desc = 'Leader shortcuts (prefix)',
+        cmd = false,
+    },
+
 --------------------------- top-level ---------------------------
 
     ['a'] = {
-        desc = 'toggle [a]utosnippets',
+        desc = 'Toggle [a]utosnippets',
         cmd = ''
     },
     ['d'] = {
@@ -17,11 +22,11 @@ return {
         cmd = '<cmd> bd <cr>'
     },
     ['e'] = {
-        desc = 'file explorer',
+        desc = 'File [e]xplorer',
         cmd = ''
     },
     ['h'] = {
-        desc = '[h]help and documentation',
+        desc = '[h]elp and documentation',
         cmd = ''
     },
     ['j'] = {
@@ -37,15 +42,19 @@ return {
         cmd = '<cmd> VimtexCompile <cr>'
     },
     ['m'] = {
-        desc = 'open [m]ath project',
+        desc = 'Open [m]ath project',
         cmd = ''
     },
     ['n'] = {
-        desc = 'the [n]apkin',
+        desc = 'The [n]apkin',
         cmd = ''
     },
     ['N'] = {
-        desc = 'the [N]otebook',
+        desc = 'The [N]otebook',
+        cmd = ''
+    },
+    ['P'] = {
+        desc = '[P]eek at definition',
         cmd = ''
     },
     ['q'] = {
@@ -53,7 +62,7 @@ return {
         cmd = '<cmd> wqa <cr>'
     },
     ['T'] = {
-        desc = '[t]erminal',
+        desc = '[T]erminal',
         cmd = '<cmd> ToggleTerm <cr>'
     },
     ['v'] = {
@@ -63,150 +72,166 @@ return {
 
 -------------------------- windows (w) --------------------------
 
+    ['w'] = {
+        desc = '[w]indows (prefix)',
+        cmd = false,
+    },
     ['w+'] = {
-        desc = 'increase win. height',
+        desc = 'Increase win. height',
         cmd = ''
     },
     ['w-'] = {
-        desc = 'decrease win. height',
+        desc = 'Decrease win. height',
         cmd = ''
     },
     ['w>'] = {
-        desc = 'increase win. width',
+        desc = 'Increase win. width',
         cmd = ''
     },
     ['w<'] = {
-        desc = 'decrease win. height',
+        desc = 'Decrease win. height',
         cmd = ''
     },
     ['w_'] = {
-        desc = 'maximize win. height',
+        desc = 'Maximize win. height',
         cmd = ''
     },
     ['w|'] = {
-        desc = 'maximize win. width',
+        desc = 'Maximize win. width',
         cmd = ''
     },
     ['w='] = {
-        desc = 'equalize windows',
+        desc = 'Equalize windows',
         cmd = ''
     },
     ['wq'] = {
-        desc = 'close window',
+        desc = 'Close window',
         cmd = ''
     },
     ['wo'] = {
-        desc = 'close other windows',
+        desc = 'Close other windows',
         cmd = ''
     },
     ['wh'] = {
-        desc = 'horizontal split',
+        desc = 'Horizontal split',
         cmd = ''
     },
     ['wv'] = {
-        desc = 'vertical split',
+        desc = 'Vertical split',
         cmd = ''
     },
     ['ws'] = {
-        desc = 'swap windows',
+        desc = 'Swap windows',
         cmd = ''
     },
 
 -------------------------- buffers (b) --------------------------
 
+    ['b'] = {
+        desc = '[b]uffers (prefix)',
+        cmd = false,
+    },
     ['bp'] = {
-        desc = 'pin buffer',
+        desc = 'Pin buffer',
         cmd = ''
     },
     ['bs'] = {
-        desc = 'pick buffer',
+        desc = 'Pick buffer',
         cmd = ''
     },
     ['bd'] = {
-        desc = 'pick and delete buffer',
+        desc = 'Pick and delete buffer',
         cmd = ''
     },
     ['br'] = {
-        desc = 'remember session',
+        desc = 'Remember session',
         cmd = ''
     },
     ['bS'] = {
-        desc = 'search sessions',,
+        desc = 'Search sessions',
         cmd = ''
     },
 
 ------------------------ preferences (p) ------------------------
 
 
+    ['p'] = {
+        desc = '[p]references (prefix)',
+        cmd = false,
+    },
     ['pc'] = {
-        desc = 'choose colorscheme',
+        desc = 'Choose colorscheme',
         cmd = ''
     },
     ['pd'] = {
-        desc = 'toggle dark mode',
+        desc = 'Toggle dark mode',
         cmd = ''
     },
     ['pw'] = {
-        desc = 'toggle word wrap',
+        desc = 'Toggle word wrap',
         cmd = ''
     },
     ['pn'] = {
-        desc = 'toggle numbering',
+        desc = 'Toggle numbering',
         cmd = ''
     },
     ['pr'] = {
-        desc = 'toggle relative numbering',
+        desc = 'Toggle relative numbering',
         cmd = ''
     },
     ['pv'] = {
-        desc = 'toggle virtual editing',
+        desc = 'Toggle virtual editing',
         cmd = ''
     },
     ['ps'] = {
-        desc = 'toggle autosnippets',
+        desc = 'Toggle autosnippets',
         cmd = ''
     },
     ['pm'] = {
-        desc = 'toggle autocomplete',
+        desc = 'Toggle autocomplete',
         cmd = ''
     },
     ['pi'] = {
-        desc = 'toggle autoindent',
+        desc = 'Toggle autoindent',
         cmd = ''
     },
     ['pl'] = {
-        desc = 'toggle conceal',
+        desc = 'Toggle conceal',
         cmd = ''
     },
     ['pz'] = {
-        desc = 'toggle spell-checker',
+        desc = 'Toggle spell-checker',
         cmd = ''
     },
 
 -------------------------- search (s) ---------------------------
 
+    ['s'] = {
+        desc = '[s]earch (prefix)',
+        cmd = false,
+    },
     ['se'] = {
-        desc = 'system file [e]xplorer',
+        desc = 'System file [e]xplorer',
         cmd = ''
     },
     ['sf'] = {
-        desc = 'search [f]iles (root)',
+        desc = '[s]earch [f]iles (root)',
         cmd = ''
     },
     ['sh'] = {
-        desc = 'search [h]idden files (root)',
+        desc = '[s]earch [h]idden files (root)',
         cmd = ''
     },
     ['sc'] = {
-        desc = 'search [c]ommand history',
+        desc = '[s]earch [c]ommand history',
         cmd = ''
     },
     ['ss'] = {
-        desc = 'search [s]earch history',
+        desc = '[s]earch [s]earch history',
         cmd = ''
     },
     ['sm'] = {
-        desc = 'search/replace [m]ultiple files',
+        desc = '[s]earch/rep. [m]ulti. files',
         cmd = ''
     },
     ['sg'] = {
@@ -222,33 +247,168 @@ return {
         cmd = ''
     },
     ['sb'] = {
-        desc = 'search [b]ookmarks',
+        desc = '[s]earch [b]ookmarks',
         cmd = ''
     },
     ['sy'] = {
-        desc = 'search [y]anks',
+        desc = '[s]earch [y]anks',
         cmd = ''
     },
     ['su'] = {
-        desc = 'search [u]ndo',
+        desc = '[s]earch [u]ndo tree',
         cmd = ''
     },
 
 ---------------------- file management (f) ----------------------
 
+    ['f'] = {
+        desc = '[f]ile management (prefix)',
+        cmd = false,
+    },
+    ['fc'] = {
+        desc = '[c]reate project',
+        cmd = ''
+    },
+    ['fa'] = {
+        desc = '[a]rchive project',
+        cmd = ''
+    },
+    ['fe'] = {
+        desc = '[e]dit project',
+        cmd = ''
+    },
+    ['fn'] = {
+        desc = '[n]ew file in project',
+        cmd = ''
+    },
 
+----------------------- git and github (g) ----------------------
+
+    ['g'] = {
+        desc = '[g]it and GitHub (prefix)',
+        cmd = false,
+    },
+    ['ga'] = {
+        desc = 'Update [a]ll reg. repos',
+        cmd = ''
+    },
+    ['gb'] = {
+        desc = 'Update [b]uilt-in repos',
+        cmd = ''
+    },
+    ['gu'] = {
+        desc = 'Update [u]ser repos',
+        cmd = ''
+    },
+    ['gr'] = {
+        desc = 'Create [r]epo from project',
+        cmd = ''
+    },
+    ['gc'] = {
+        desc = '[c]reate project from repo',
+        cmd = ''
+    },
+    ['gp'] = {
+        desc = 'Toggle file [p]ublicity',
+        cmd = ''
+    },
+    ['gP'] = {
+        desc = 'Toggle project [p]ublicity',
+        cmd = ''
+    },
+    ['gh'] = {
+        desc = 'Configure [g]it[h]ub user',
+        cmd = ''
+    },
 
 ---------------------- tex operations (t) -----------------------
 
-
+    ['t'] = {
+        desc = '[t]eX operations (prefix)',
+        cmd = false,
+    },
+    ['tc'] = {
+        desc = 'La[t]ex [c]ite',
+        cmd = ''
+    },
+    ['tm'] = {
+        desc = 'La[t]ex [m]atrices',
+        cmd = ''
+    },
+    ['tt'] = {
+        desc = 'La[t]ex [t]tables',
+        cmd = ''
+    },
+    ['td'] = {
+        desc = 'La[t]ex new [d]efinition',
+        cmd = ''
+    },
+    ['tr'] = {
+        desc = 'La[t]ex [r]eferences',
+        cmd = ''
+    },
+    ['te'] = {
+        desc = 'La[t]ex [e]rrors',
+        cmd = ''
+    },
+    ['ts'] = {
+        desc = 'La[t]ex sync[t]ex',
+        cmd = ''
+    },
+    ['tx'] = {
+        desc = 'La[t]ex clean au[x]',
+        cmd = ''
+    },
 
 ---------------------- code operations (c) ----------------------
 
-
+    ['c'] = {
+        desc = '[c]ode operations (prefix)',
+        cmd = false,
+    },
+    ['cf'] = {
+        desc = '[f]ormat code',
+        cmd = ''
+    },
+    ['cr'] = {
+        desc = '[r]ename',
+        cmd = ''
+    },
 
 ---------------------- tex extensions (x) -----------------------
 
-
+    ['x'] = {
+        desc = 'TeX e[x]tensions (prefix)',
+        cmd = false,
+    },
+    ['xo'] = {
+        desc = 'E[x]tension: [o]verleaf',
+        cmd = false
+    },
+    ['xc'] = {
+        desc = 'E[x]tension: [c]ommutative diagrams',
+        cmd = false
+    },
+    ['xq'] = {
+        desc = 'E[x]tension: [q]uantum circuits',
+        cmd = false
+    },
+    ['xk'] = {
+        desc = 'E[x]tension: [k]nots',
+        cmd = false
+    },
+    ['xg'] = {
+        desc = 'E[x]tension: [g]raphs',
+        cmd = false
+    },
+    ['xt'] = {
+        desc = 'E[x]tension: [t]ikz editor',
+        cmd = false
+    },
+    ['xi'] = {
+        desc = 'E[x]tension: [i]nkscape',
+        cmd = false
+    },
 
 }
 

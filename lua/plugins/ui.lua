@@ -40,7 +40,7 @@ return {
     -- which-key.nvim: keybind-based menus
     {
         'folke/which-key.nvim',
-        keys = { '<Space>' },
+        keys = '<Space>',
         event = { "BufReadPost", "BufNewFile" },
         config = function()
             vim.o.timeout = true

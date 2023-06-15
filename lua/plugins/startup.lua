@@ -1,4 +1,17 @@
 return {
+    -- noice.nvim: a number of changes
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+        },
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        }
+    },
+
+    -- startup-nvim: startup screen
     {
         'startup-nvim/startup.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
@@ -28,12 +41,12 @@ return {
 
             local header = {
                 '',
-                b_ul..'──────────── ∘°❉°∘ ───────────'..b_ur,
+                b_ul .. '──────────── ∘°❉°∘ ───────────' .. b_ur,
                 '│                              │',
                 '│     ｒｅｓｏｌｕｔｉｏｎ     │',
                 '│          ｖ０.１.０          │',
                 '│                              │',
-                b_bl..'──────────── °∘❉∘° ───────────'..b_br,
+                b_bl .. '──────────── °∘❉∘° ───────────' .. b_br,
             }
             local center = {
                 '',
@@ -41,9 +54,9 @@ return {
             }
             local footer = {
                 '',
-                b_ul..'───────────────────────'..b_ur,
+                b_ul .. '───────────────────────' .. b_ur,
                 '│ ｐｒｅｓｓ ｓｐａｃｅ │',
-                b_bl..'───────────────────────'..b_br,
+                b_bl .. '───────────────────────' .. b_br,
             }
 
             require('startup').setup({
@@ -72,13 +85,13 @@ return {
                     type = 'text',
                     align = 'center',
                     margin = 0,
-                    content = vertical_content(footer, 1),
+                    content = vertical_content({ '.' }, 10),
                     highlight = 'Normal'
                 },
                 options = {
                     cursor_column = 0.5,
                     disable_statuslines = true,
-                    paddings = {0,0,0,0},
+                    paddings = { 0, 0, 0, 0 },
                 },
                 parts = { 'header', 'center', 'footer', 'extra', },
             })
@@ -137,7 +150,6 @@ return {
         'akinsho/bufferline.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         event = { 'BufReadPost', 'BufNewFile' },
-        -- cmd = 'Telescope',
         config = function()
             require('bufferline').setup({
                 options = {
@@ -151,6 +163,13 @@ return {
                     }
                 },
             })
+
+            vim.keymap.set('n', '<C-Left>', '<Esc>:BufferLineCyclePrev<cr>', { silent = true, desc = 'Previous buffer' })
+            vim.keymap.set('n', '<C-Right>', '<Esc>:BufferLineCycleNext<cr>', { silent = true, desc = 'Next buffer' })
+            vim.keymap.set('n', '<C-S-Left>', '<Esc>:BufferLineMovePrev<cr>',
+                { silent = true, desc = 'Move buffer to previous' })
+            vim.keymap.set('n', '<C-S-Right>', '<Esc>:BufferLineMoveNext<cr>',
+                { silent = true, desc = 'Move buffer to next' })
         end
     },
 }

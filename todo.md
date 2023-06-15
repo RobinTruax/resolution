@@ -1,0 +1,4 @@
+ - Keybinds
+ - LSP setup
+ - Spelling and math dictionary
+ - Status line component for macro recording AND current command
