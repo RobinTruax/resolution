@@ -6,7 +6,6 @@ return {
         cmd = 'ToggleTerm',
         config = true,
     },
-
     -- neo-tree.nvim: file explorer
     {
         'nvim-neo-tree/neo-tree.nvim',
@@ -18,7 +17,6 @@ return {
             'MunifTanjim/nui.nvim',
         },
     },
-
     -- lazygit.nvim: git integration
     {
         "kdheepak/lazygit.nvim",
@@ -27,7 +25,6 @@ return {
             "nvim-lua/plenary.nvim",
         },
     },
-
     -- nvim-spectre: search/replace across multiple files
     {
         'nvim-pack/nvim-spectre',
@@ -36,7 +33,6 @@ return {
             require('spectre').setup()
         end,
     },
-
     -- which-key.nvim: keybind-based menus
     {
         'folke/which-key.nvim',
@@ -44,13 +40,10 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         config = function()
             vim.o.timeout = true
-            local border = require('config.aesthetics').ui_borderless and 'none' or 'single'
             require('which-key').setup({
-                window = {
-                    border = border,
-                    margin = {1, 0, 0, 0},
+                plugins = {
+                    registers = true,
                 },
-                triggers_nowait = {},
             })
         end,
     },

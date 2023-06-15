@@ -4,23 +4,46 @@ return {
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
             local vertical_content = function(text, proportion)
-                local height = math.floor(vim.o.lines * proportion) - #text - 1
+                local height = math.floor(vim.o.lines * proportion) - #text
+                if height < 0 then
+                    height = 0
+                end
+
                 local finished_text = {}
                 for i = 1, height, 1 do
                     finished_text[i] = ''
                 end
+
                 for i, v in ipairs(text) do
                     finished_text[height + i] = v
                 end
+
                 return finished_text
             end
 
+            local b_ul = '┌' and require('config.aesthetics').ui_sharp or '╭'
+            local b_ur = '┐' and require('config.aesthetics').ui_sharp or '╮'
+            local b_bl = '└' and require('config.aesthetics').ui_sharp or '╰'
+            local b_br = '┘' and require('config.aesthetics').ui_sharp or '╯'
+
             local header = {
-                'ｒｅｓｏｌｕｔｉｏｎ',
-                'ｖ０.１.０'
+                '',
+                b_ul..'──────────── ∘°❉°∘ ───────────'..b_ur,
+                '│                              │',
+                '│     ｒｅｓｏｌｕｔｉｏｎ     │',
+                '│          ｖ０.１.０          │',
+                '│                              │',
+                b_bl..'──────────── °∘❉∘° ───────────'..b_br,
             }
             local center = {
-                'ｂｙ ｒｏｂｉｎ'
+                '',
+                'ｂｙ ｒｏｂｉｎ',
+            }
+            local footer = {
+                '',
+                b_ul..'───────────────────────'..b_ur,
+                '│ ｐｒｅｓｓ ｓｐａｃｅ │',
+                b_bl..'───────────────────────'..b_br,
             }
 
             require('startup').setup({
@@ -35,21 +58,29 @@ return {
                     type = 'text',
                     align = 'center',
                     margin = 0,
-                    content = vertical_content(center, 0.1),
+                    content = vertical_content(center, 0.05),
                     highlight = 'StartupCenter'
                 },
                 footer = {
                     type = 'text',
                     align = 'center',
                     margin = 0,
-                    content = vertical_content({ '.' }, 0.9),
-                    highlight = 'StartupCenter'
+                    content = vertical_content(footer, 0.6),
+                    highlight = 'StartupFooter'
+                },
+                extra = {
+                    type = 'text',
+                    align = 'center',
+                    margin = 0,
+                    content = vertical_content(footer, 1),
+                    highlight = 'Normal'
                 },
                 options = {
                     cursor_column = 0.5,
                     disable_statuslines = true,
+                    paddings = {0,0,0,0},
                 },
-                parts = { 'header', 'center', 'footer' },
+                parts = { 'header', 'center', 'footer', 'extra', },
             })
         end
     },

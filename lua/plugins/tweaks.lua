@@ -110,13 +110,6 @@ return {
         config = true
     },
 
-    -- toggleterm.nvim: a better terminal
-    {
-        'akinsho/toggleterm.nvim',
-        cmd = 'ToggleTerm',
-        config = true
-    },
-
     -- modicator.nvim: color changing line number -- TODO: Align with lualine.
     {
         'mawkler/modicator.nvim',

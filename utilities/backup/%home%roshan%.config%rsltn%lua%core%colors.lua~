@@ -23,17 +23,17 @@ colors.util_colors = {
 
 colors.get_telescope_colors = function(scheme, mode)
     return {
-        TelescopeNormal        = { bg = colors.utils[scheme][mode].tel_nrm },
-        TelescopeBorder        = { fg = colors.utils[scheme][mode].tel_nrm, bg = colors.utils[scheme][mode].tel_nrm },
-        TelescopeSelection     = { bg = colors.utils[scheme][mode].tel_emp },
-        TelescopePromptNormal  = { bg = colors.utils[scheme][mode].tel_emp },
-        TelescopePromptTitle   = { fg = colors.utils[scheme][mode].tel_emp, bg = colors.utils[scheme][mode].tel_spc },
-        TelescopePromptPrefix  = { fg = colors.utils[scheme][mode].tel_spc, bg = colors.utils[scheme][mode].tel_emp },
-        TelescopePromptBorder  = { fg = colors.utils[scheme][mode].tel_emp, bg = colors.utils[scheme][mode].tel_emp },
-        TelescopePreviewTitle  = { fg = colors.utils[scheme][mode].tel_nrm, bg = colors.utils[scheme][mode].tel_nrm },
-        TelescopePreviewBorder = { fg = colors.utils[scheme][mode].tel_nrm, bg = colors.utils[scheme][mode].tel_nrm },
-        TelescopeResultsTitle  = { fg = colors.utils[scheme][mode].tel_nrm, bg = colors.utils[scheme][mode].tel_nrm },
-        TelescopeResultsBorder = { fg = colors.utils[scheme][mode].tel_nrm, bg = colors.utils[scheme][mode].tel_nrm },
+        TelescopeNormal        = { bg = colors.util_colors[scheme][mode].tel_nrm },
+        TelescopeBorder        = { fg = colors.util_colors[scheme][mode].tel_nrm, bg = colors.util_colors[scheme][mode].tel_nrm },
+        TelescopeSelection     = { bg = colors.util_colors[scheme][mode].tel_emp },
+        TelescopePromptNormal  = { bg = colors.util_colors[scheme][mode].tel_emp },
+        TelescopePromptTitle   = { fg = colors.util_colors[scheme][mode].tel_emp, bg = colors.util_colors[scheme][mode].tel_spc },
+        TelescopePromptPrefix  = { fg = colors.util_colors[scheme][mode].tel_spc, bg = colors.util_colors[scheme][mode].tel_emp },
+        TelescopePromptBorder  = { fg = colors.util_colors[scheme][mode].tel_emp, bg = colors.util_colors[scheme][mode].tel_emp },
+        TelescopePreviewTitle  = { fg = colors.util_colors[scheme][mode].tel_nrm, bg = colors.util_colors[scheme][mode].tel_nrm },
+        TelescopePreviewBorder = { fg = colors.util_colors[scheme][mode].tel_nrm, bg = colors.util_colors[scheme][mode].tel_nrm },
+        TelescopeResultsTitle  = { fg = colors.util_colors[scheme][mode].tel_nrm, bg = colors.util_colors[scheme][mode].tel_nrm },
+        TelescopeResultsBorder = { fg = colors.util_colors[scheme][mode].tel_nrm, bg = colors.util_colors[scheme][mode].tel_nrm },
     }
 end
 
@@ -49,6 +49,7 @@ colors.colorscheme_config = {
             dark = {
                 StartupHeader = { fg = '#65bcff' },
                 StartupCenter = { fg = '#636da6' },
+                StartupFooter = { fg = '#4fd6be' },
                 NormalMode    = { fg = '#82aaff' },
                 InsertMode    = { fg = '#c3e88d' },
                 VisualMode    = { fg = '#c099ff' },
@@ -60,6 +61,7 @@ colors.colorscheme_config = {
             light = {
                 StartupHeader = { fg = '#2e7de9' },
                 StartupCenter = { fg = '#848cb5' },
+                StartupFooter = { fg = '#848cb5' },
                 NormalMode    = { fg = '#2e7de9' },
                 InsertMode    = { fg = '#587539' },
                 VisualMode    = { fg = '#9854f1' },

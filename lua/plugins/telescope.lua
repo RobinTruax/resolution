@@ -15,6 +15,31 @@ return {
         config = true,
     },
 
+    -- auto-session: session manager
+    {
+        'rmagatti/auto-session',
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            require("auto-session").setup({
+                log_level = "error",
+                auto_session_suppress_dirs = { "~/", "/" },
+                auto_session_enable_last_session = false,
+                auto_session_enabled = true,
+                auto_session_create_enabled = true,
+                auto_save_enabled = true
+            })
+        end
+    },
+    -- session-lens: link to telescope
+    {
+        'rmagatti/session-lens',
+        requires = { 'rmagatti/auto-session' },
+        config = function()
+            require('session-lens').setup({})
+        end,
+        lazy = true
+    },
+
     -- telescope.nvim
     {
         'nvim-telescope/telescope.nvim',
@@ -24,6 +49,7 @@ return {
             'nvim-telescope/telescope-fzf-native.nvim',
             'AckslD/nvim-neoclip.lua',
             'debugloop/telescope-undo.nvim',
+            'rmagatti/auto-session',
         },
         cmd = 'Telescope',
 
@@ -32,7 +58,7 @@ return {
             -- basic setup
             require('telescope').setup({
                 defaults = {
-                    path_display = {truncate = 0},
+                    path_display = { truncate = 0 },
                     layout_strategy = 'horizontal',
                     prompt_prefix = '  ',
                     selection_caret = '  ',

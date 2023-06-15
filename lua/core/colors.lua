@@ -49,6 +49,7 @@ colors.colorscheme_config = {
             dark = {
                 StartupHeader = { fg = '#65bcff' },
                 StartupCenter = { fg = '#636da6' },
+                StartupFooter = { fg = '#4fd6be' },
                 NormalMode    = { fg = '#82aaff' },
                 InsertMode    = { fg = '#c3e88d' },
                 VisualMode    = { fg = '#c099ff' },
@@ -60,6 +61,7 @@ colors.colorscheme_config = {
             light = {
                 StartupHeader = { fg = '#2e7de9' },
                 StartupCenter = { fg = '#848cb5' },
+                StartupFooter = { fg = '#188092' },
                 NormalMode    = { fg = '#2e7de9' },
                 InsertMode    = { fg = '#587539' },
                 VisualMode    = { fg = '#9854f1' },

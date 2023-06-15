@@ -1,6 +1,7 @@
 --[[
 resolution v0.1.0
-this file runs on startup; there is usually no reason to modify it
+this file runs on startup
+there is usually no reason to modify it
 --]]
 
 -- set up plugins
@@ -14,6 +15,9 @@ require('core.maps-other')
 
 -- set autocmds
 require('core.autocmds')
+
+-- miscellaneous
+require('core.misc')
 
 -- set any lingering neovim options
 require('core.execute-config')
