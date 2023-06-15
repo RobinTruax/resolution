@@ -33,7 +33,7 @@ return {
     -- session-lens: link to telescope
     {
         'rmagatti/session-lens',
-        requires = { 'rmagatti/auto-session' },
+        dependencies = { 'rmagatti/auto-session' },
         config = function()
             require('session-lens').setup({})
         end,
@@ -43,7 +43,10 @@ return {
     -- telescope.nvim
     {
         'nvim-telescope/telescope.nvim',
+        cmd = 'Telescope',
         dependencies = {
+            'nvim-lualine/lualine.nvim',
+            'akinsho/bufferline.nvim',
             'nvim-lua/plenary.nvim',
             'BurntSushi/ripgrep',
             'nvim-telescope/telescope-fzf-native.nvim',
@@ -51,8 +54,6 @@ return {
             'debugloop/telescope-undo.nvim',
             'rmagatti/auto-session',
         },
-        cmd = 'Telescope',
-
         -- configuration and ui standardization
         config = function()
             -- basic setup

@@ -1,7 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "176e85eeb63f1a5970d6b88f1725039d85ca0055" },
   "auto-session": { "branch": "main", "commit": "7afbb149f87be279778689596c781882014f7eef" },
-  "browser-bookmarks.nvim": { "branch": "main", "commit": "c7e13f168c79247155ea94d30dd278aebac3241b" },
   "bufferline.nvim": { "branch": "main", "commit": "02d795081e6a24ec1fd506c513491543793d0780" },
   "cmd-parser.nvim": { "branch": "master", "commit": "6363b8bddef968c3ec51a38172af44f675f01ef3" },
   "everforest": { "branch": "master", "commit": "1db527e770deb8cbb3b5b60d8921f80bd2a4c12c" },
