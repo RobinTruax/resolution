@@ -1,8 +1,9 @@
---[[
-resolution v0.1.0
-this file defines the keybinds for rsltn's main operations
-these use the <leader> key
---]]
+--[[------------------- resolution v0.1.0 -----------------------
+
+defines keybinds for rsltn's main operations; these use the
+<leader> key set in config.preferences
+
+-------------------------------------------------------------]]--
 
 return {
 
@@ -23,11 +24,11 @@ return {
     },
     ['e'] = {
         desc = 'File [e]xplorer',
-        cmd = ''
+        cmd = '<cmd> Neotree <cr>'
     },
     ['h'] = {
-        desc = '[h]elp and documentation',
-        cmd = ''
+        desc = '[h]elp and doc.',
+        cmd = '<cmd> e '..vim.fn.stdpath('config')..'/documentation.md <cr>'
     },
     ['j'] = {
         desc = '[j]ump list',
@@ -412,3 +413,4 @@ return {
 
 }
 
+-----------------------------------------------------------------

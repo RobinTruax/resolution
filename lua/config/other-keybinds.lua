@@ -1,9 +1,9 @@
---[[
-resolution v0.1.0
-this file defines the keybinds for secondary options
---]]
+--[[------------------- resolution v0.1.0 -----------------------
 
-------------------------- other keybinds ------------------------
+defines keybinds for rsltn's secondary operations; no prefix
+
+-------------------------------------------------------------]]--
+
 return {
     ['<Alt-h>'] = {
         desc = 'Move left',
@@ -96,3 +96,5 @@ return {
         cmd = false,
     },
 }
+
+-----------------------------------------------------------------

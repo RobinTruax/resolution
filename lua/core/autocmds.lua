@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd(
     'FileType',
     {
-        desc = 'Hide spellcheck',
+        desc = 'Startup',
         pattern = 'startup',
         callback = function()
             vim.cmd('setlocal nospell')

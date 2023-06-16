@@ -1,20 +1,8 @@
 return {
-    -- noice.nvim: a number of changes
-    -- {
-    --     "folke/noice.nvim",
-    --     event = "VeryLazy",
-    --     opts = {
-    --     },
-    --     dependencies = {
-    --         "MunifTanjim/nui.nvim",
-    --         "rcarriga/nvim-notify",
-    --     }
-    -- },
-
     -- startup-nvim: startup screen
     {
         'startup-nvim/startup.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        dependencies = { 'nvim-lua/plenary.nvim', 'folke/which-key.nvim', 'nvim-lualine/lualine.nvim', 'akinsho/bufferline.nvim'},
         config = function()
             local vertical_content = function(text, proportion)
                 local height = math.floor(vim.o.lines * proportion) - #text
@@ -52,12 +40,6 @@ return {
                 '',
                 'ｂｙ ｒｏｂｉｎ',
             }
-            local footer = {
-                '',
-                b_ul .. '───────────────────────' .. b_ur,
-                '│ ｐｒｅｓｓ ｓｐａｃｅ │',
-                b_bl .. '───────────────────────' .. b_br,
-            }
 
             require('startup').setup({
                 header = {
@@ -78,22 +60,24 @@ return {
                     type = 'text',
                     align = 'center',
                     margin = 0,
-                    content = vertical_content(footer, 0.6),
+                    content = vertical_content({ '.' }, 10),
                     highlight = 'StartupFooter'
                 },
-                extra = {
-                    type = 'text',
-                    align = 'center',
-                    margin = 0,
-                    content = vertical_content({ '.' }, 10),
-                    highlight = 'Normal'
-                },
                 options = {
+                    after = function()
+                        vim.api.nvim_exec2([[
+                            function! WhichKeyLeader(timer)
+                                WhichKey <leader>
+                            endfunction
+
+                            call timer_start(1, 'WhichKeyLeader')
+                        ]], {})
+                    end,
                     cursor_column = 0.5,
                     disable_statuslines = true,
                     paddings = { 0, 0, 0, 0 },
                 },
-                parts = { 'header', 'center', 'footer', 'extra', },
+                parts = { 'header', 'center', 'footer', },
             })
         end
     },

@@ -61,7 +61,14 @@ return {
             end
 
             local wk = require('which-key')
-            wk.setup()
+            wk.setup({
+                layout = {
+                    height = {min = 4, max = 10},
+                    width = {min = 20, max = 40},
+                    spacing = 3,
+                    align = 'center',
+                }
+            })
             wk.register(flat_other_keybinds)
             wk.register(flat_leader_keybinds)
         end,

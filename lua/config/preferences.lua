@@ -1,8 +1,8 @@
---[[
-resolution v0.1.0
-this file contains options provided by resolution
-other than keybinds and aesthetics
---]]
+--[[------------------- resolution v0.1.0 -----------------------
+
+all non-aesthetic non-keybind options (including vim options)
+
+-------------------------------------------------------------]]--
 
 local prefs = {}
 
@@ -38,10 +38,10 @@ opt.updatetime     = 1000  -- time before keybind menu opens
 
 -------------------- snippets and completion --------------------
 
-prefs.autosnippets      = true -- default behavior of auto-expanding snippets
-prefs.automath_snippets = true -- default behavior of auto-mathing snippets
-prefs.autocomplete      = true -- default behavior of autocompletion
-opt.spell               = true -- spell checker
+prefs.autosnippets      = true  -- default behavior of auto-expanding snippets
+prefs.automath_snippets = true  -- default behavior of auto-mathing snippets
+prefs.autocomplete      = true  -- default behavior of autocompletion
+opt.spell               = false -- spell checker
 
 ---------------------- tabs and indentation ---------------------
 
@@ -74,4 +74,8 @@ opt.swapfile              = false                          -- enable swapfiles
 
 vim.opt.clipboard = 'unnamedplus' -- unify system & vim clipboard
 
+-----------------------------------------------------------------
+
 return prefs
+
+-----------------------------------------------------------------

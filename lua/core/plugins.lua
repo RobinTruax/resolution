@@ -23,8 +23,13 @@ vim.opt.rtp:prepend(lazynvimpath)
 
 -- include plugins
 require('lazy').setup(
-    "plugins", {
+    "plugins", 
     -- options
+    {
+    change_detection = {
+        enabled = false, 
+        notify = false
+    },
     root = lazypluginpath,
     lockfile = lazylockfile,
     performance = {
