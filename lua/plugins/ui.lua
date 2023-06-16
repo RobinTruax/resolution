@@ -40,18 +40,30 @@ return {
     -- which-key.nvim: keybind-based menus
     {
         'folke/which-key.nvim',
-        keys = '<Space>',
-        event = { "BufReadPost", "BufNewFile" },
+        event = { 'BufReadPost', 'BufNewFile' },
         config = function()
             vim.o.timeout = true
-            local border = require('config.aesthetics').ui_borderless and 'none' or 'single'
-            require('which-key').setup({
-                window = {
-                    border = border,
-                    margin = {1, 0, 0, 0},
-                },
-                triggers_nowait = {},
-            })
+
+            local flat_other_keybinds = {}
+            local other_keybinds = require('config.other-keybinds')
+            for k, v in pairs(other_keybinds) do
+                if v.cmd == false then
+                    flat_other_keybinds[k] = { name = v.desc }
+                end
+            end
+
+            local flat_leader_keybinds = {}
+            local leader_keybinds = require('config.leader-keybinds')
+            for k, v in pairs(leader_keybinds) do
+                if v.cmd == false then
+                    flat_leader_keybinds['<leader>' .. k] = { name = v.desc }
+                end
+            end
+
+            local wk = require('which-key')
+            wk.setup()
+            wk.register(flat_other_keybinds)
+            wk.register(flat_leader_keybinds)
         end,
     },
 }

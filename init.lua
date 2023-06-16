@@ -4,14 +4,14 @@ this file runs on startup
 there is usually no reason to modify it
 --]]
 
+-- preferences
+require('config.preferences')
+
 -- set up plugins
 require('core.plugins')
 
--- set up keybinds main operations
-require('core.maps-leader')
-
--- set up other keybinds
-require('core.maps-other')
+-- set up keybinds
+require('core.maps')
 
 -- set autocmds
 require('core.autocmds')

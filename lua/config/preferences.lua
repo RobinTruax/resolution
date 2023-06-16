@@ -16,6 +16,11 @@ local cfg = vim.fn.stdpath('config')
 
 prefs.project_root_path = '/home/roshan/Documents/Mathematics/'
 
+-------------------------- leader keys --------------------------
+
+vim.g.mapleader = ' '       -- set leader key
+vim.g.maplocalleader = '\\' -- local leader key
+
 ------------------------ visual elements ------------------------
 
 opt.cursorline     = true  -- cursor line highlighting

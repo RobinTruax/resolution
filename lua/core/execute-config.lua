@@ -11,3 +11,4 @@ require('core.colors').set_colorscheme(
 
 -- other (options considered nonconfigurable)
 vim.o.showtabline = 2
+vim.o.laststatus = 3

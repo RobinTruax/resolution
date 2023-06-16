@@ -38,28 +38,28 @@ return {
     -- mini.align: aligns
     {
         'echasnovski/mini.align',
-        event = { "BufReadPost", "BufNewFile" },
+        event = { 'BufReadPost', 'BufNewFile' },
         config = true,
     },
 
     -- mini.move: aligns
     {
         'echasnovski/mini.move',
-        event = { "BufReadPost", "BufNewFile" },
+        event = { 'BufReadPost', 'BufNewFile' },
         config = true,
     },
 
     -- mini.ai: text objects
     {
         'echasnovski/mini.ai',
-        event = { "BufReadPost", "BufNewFile" },
+        event = { 'BufReadPost', 'BufNewFile' },
         config = true,
     },
 
     -- mini.surround: keybinds for surrounding
     {
         'echasnovski/mini.surround',
-        event = { "BufReadPost", "BufNewFile" },
+        event = { 'BufReadPost', 'BufNewFile' },
         config = true,
     },
 

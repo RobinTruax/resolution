@@ -25,15 +25,16 @@ return {
         cmd = '<Right>',
         mode = 'i',
     },
-    ['<Ctrl-s>'] = {
+    ['<C-s>'] = {
         desc = 'Save file',
         cmd = {'<cmd>w<cr>', '<Esc><cmd>w<cr>a'},
         mode = {'n', 'i'},
     },
     ['<cr>'] = {
         desc = 'Clear highlighting',
-        cmd = {'<Esc>:noh<cr><cr>'},
-        mode = {'n', 'i'},
+        cmd = '<Esc>:noh<cr><cr>',
+        mode = 'n',
+        opts = {silent = true},
     },
     ['<Esc>'] = {
         desc = 'Fixing escape in terminal',
@@ -66,33 +67,32 @@ return {
         cmd = '"_',
         mode = {'n', 'v'},
     },
-
     ['g'] = {
-        desc = 'Movement/comment/align (prefix)',
+        desc = '+Movement and other',
         cmd = false,
     },
     ['gb'] = {
-        desc = 'Comment block (prefix)',
+        desc = '+Comment block',
         cmd = false,
     },
     ['gc'] = {
-        desc = 'Commenting (prefix)',
+        desc = '+Comments',
         cmd = false,
     },
     ['['] = {
-        desc = 'Movement to prefix (prefix)',
+        desc = '+Movement (prev)',
         cmd = false,
     },
     [']'] = {
-        desc = 'Movement to next (prefix)',
+        desc = '+Movement (next)',
         cmd = false,
     },
     ['s'] = {
-        desc = 'Surround (prefix)',
+        desc = '+Surround',
         cmd = false,
     },
     ['z'] = {
-        desc = 'Folds and spelling (prefix)',
+        desc = '+Folds and spelling',
         cmd = false,
     },
 }

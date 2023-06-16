@@ -7,7 +7,7 @@ these use the <leader> key
 return {
 
     [''] = {
-        desc = 'Leader shortcuts (prefix)',
+        desc = 'resolution',
         cmd = false,
     },
 
@@ -31,7 +31,7 @@ return {
     },
     ['j'] = {
         desc = '[j]ump list',
-        cmd = require("nvim-navbuddy").open()
+        cmd = function() require("nvim-navbuddy").open() end
     },
     ['J'] = {
         desc = 'flat [J]ump list',
@@ -73,7 +73,7 @@ return {
 -------------------------- windows (w) --------------------------
 
     ['w'] = {
-        desc = '[w]indows (prefix)',
+        desc = '[w]indows',
         cmd = false,
     },
     ['w+'] = {
@@ -128,7 +128,7 @@ return {
 -------------------------- buffers (b) --------------------------
 
     ['b'] = {
-        desc = '[b]uffers (prefix)',
+        desc = '[b]uffers',
         cmd = false,
     },
     ['bp'] = {
@@ -156,7 +156,7 @@ return {
 
 
     ['p'] = {
-        desc = '[p]references (prefix)',
+        desc = '[p]references',
         cmd = false,
     },
     ['pc'] = {
@@ -207,7 +207,7 @@ return {
 -------------------------- search (s) ---------------------------
 
     ['s'] = {
-        desc = '[s]earch (prefix)',
+        desc = '[s]earch',
         cmd = false,
     },
     ['se'] = {
@@ -262,7 +262,7 @@ return {
 ---------------------- file management (f) ----------------------
 
     ['f'] = {
-        desc = '[f]ile management (prefix)',
+        desc = '[f]ile management',
         cmd = false,
     },
     ['fc'] = {
@@ -285,7 +285,7 @@ return {
 ----------------------- git and github (g) ----------------------
 
     ['g'] = {
-        desc = '[g]it and GitHub (prefix)',
+        desc = '[g]it and github',
         cmd = false,
     },
     ['ga'] = {
@@ -324,7 +324,7 @@ return {
 ---------------------- tex operations (t) -----------------------
 
     ['t'] = {
-        desc = '[t]eX operations (prefix)',
+        desc = '[t]ex operations',
         cmd = false,
     },
     ['tc'] = {
@@ -363,7 +363,7 @@ return {
 ---------------------- code operations (c) ----------------------
 
     ['c'] = {
-        desc = '[c]ode operations (prefix)',
+        desc = '[c]ode operations',
         cmd = false,
     },
     ['cf'] = {
@@ -378,35 +378,35 @@ return {
 ---------------------- tex extensions (x) -----------------------
 
     ['x'] = {
-        desc = 'TeX e[x]tensions (prefix)',
+        desc = 'tex e[x]tensions',
         cmd = false,
     },
     ['xo'] = {
-        desc = 'E[x]tension: [o]verleaf',
+        desc = 'e[x]tension: [o]verleaf',
         cmd = false
     },
     ['xc'] = {
-        desc = 'E[x]tension: [c]ommutative diagrams',
+        desc = 'e[x]tension: [c]ommutative diagrams',
         cmd = false
     },
     ['xq'] = {
-        desc = 'E[x]tension: [q]uantum circuits',
+        desc = 'e[x]tension: [q]uantum circuits',
         cmd = false
     },
     ['xk'] = {
-        desc = 'E[x]tension: [k]nots',
+        desc = 'e[x]tension: [k]nots',
         cmd = false
     },
     ['xg'] = {
-        desc = 'E[x]tension: [g]raphs',
+        desc = 'e[x]tension: [g]raphs',
         cmd = false
     },
     ['xt'] = {
-        desc = 'E[x]tension: [t]ikz editor',
+        desc = 'e[x]tension: [t]ikz editor',
         cmd = false
     },
     ['xi'] = {
-        desc = 'E[x]tension: [i]nkscape',
+        desc = 'e[x]tension: [i]nkscape',
         cmd = false
     },
 
