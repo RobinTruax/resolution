@@ -9,7 +9,7 @@ local aesthetics = {}
 ----------------------- aesthetic options -----------------------
 aesthetics.default_colorscheme = 'tokyonight'
 aesthetics.default_mode        = 'dark'
-aesthetics.ui_sharp            = false
+aesthetics.ui_sharp            = true
 aesthetics.ui_borderless       = true
 
 -----------------------------------------------------------------

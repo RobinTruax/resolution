@@ -22,10 +22,16 @@ return {
                 return finished_text
             end
 
-            local b_ul = '┌' and require('config.aesthetics').ui_sharp or '╭'
-            local b_ur = '┐' and require('config.aesthetics').ui_sharp or '╮'
-            local b_bl = '└' and require('config.aesthetics').ui_sharp or '╰'
-            local b_br = '┘' and require('config.aesthetics').ui_sharp or '╯'
+            local b_ul = '┌'
+            local b_ur = '┐'
+            local b_bl = '└'
+            local b_br = '┘'
+            if require('config.aesthetics').ui_sharp == false then
+                b_ul = '╭'
+                b_ur = '╮'
+                b_bl = '╰'
+                b_br = '╯'
+            end
 
             local header = {
                 '',
