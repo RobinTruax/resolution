@@ -68,7 +68,7 @@ return {
     },
     ['R'] = {
         desc = '[R]sltn start w/ split',
-        cmd = function() require("mini.starter").open() end
+        cmd = '<C-w>v <C-w>w <cmd> lua require("mini.starter").open() <cr>',
     },
     ['T'] = {
         desc = '[T]erminal',
