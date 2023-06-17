@@ -11,13 +11,10 @@ require('config.preferences')
 require('core.plugins')
 
 -- set up keybinds
-require('core.maps')
+require('core.keymaps')
 
 -- set autocmds
-require('core.autocmds')
-
--- miscellaneous
-require('core.misc')
+require('core.autocmds.all')
 
 -- set any lingering neovim options
 require('core.execute-config')

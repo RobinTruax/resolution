@@ -1,14 +1,17 @@
---[[
-resolution v0.1.0
-this file installs lazy.nvim and all plugins
---]]
+--[[------------------- resolution v0.1.0 -----------------------
 
--- directories
+this file installs and calls lazy.nvim on the plugins folder
+
+-------------------------------------------------------------]]--
+
+-------------------------- directories --------------------------
+
 local lazynvimpath = vim.fn.stdpath('config') .. '/lua/plugins/lazy.nvim'
 local lazypluginpath = vim.fn.stdpath('config') .. '/lua/plugins/plugins'
 local lazylockfile = vim.fn.stdpath('config') .. '/lua/plugins/lazy-lock.json'
 
--- install lazy.nvim
+----------------------- install lazy.nvim -----------------------
+
 if not vim.loop.fs_stat(lazynvimpath) then
     vim.fn.system({
         'git',
@@ -21,13 +24,15 @@ if not vim.loop.fs_stat(lazynvimpath) then
 end
 vim.opt.rtp:prepend(lazynvimpath)
 
--- include plugins
-require('lazy').setup(
-    "plugins", 
-    -- options
+------------------------ include plugins ------------------------
+
+require('lazy').setup("plugins",
+
+---------------------------- options ----------------------------
+
     {
     change_detection = {
-        enabled = false, 
+        enabled = false,
         notify = false
     },
     root = lazypluginpath,
@@ -58,3 +63,5 @@ require('lazy').setup(
         },
     },
 })
+
+-----------------------------------------------------------------

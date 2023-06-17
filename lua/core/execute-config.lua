@@ -1,14 +1,22 @@
--- preferences
-local preferences = require('config.preferences')
+--[[------------------- resolution v0.1.0 -----------------------
 
--- aesthetics
+execute all configuration options which need to be called
+
+-------------------------------------------------------------]]--
+
+local preferences = require('config.preferences')
 local aesthetics = require('config.aesthetics')
+
+------------------------ set colorscheme ------------------------
 
 require('core.colors').set_colorscheme(
     aesthetics.default_colorscheme,
     aesthetics.default_mode
 )
 
--- other (options considered nonconfigurable)
+------------------ set nonconfigurable options ------------------
+
 vim.o.showtabline = 2
 vim.o.laststatus = 3
+
+-----------------------------------------------------------------
