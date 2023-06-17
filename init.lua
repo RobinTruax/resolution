@@ -1,8 +1,8 @@
---[[
-resolution v0.1.0
-this file runs on startup
-there is usually no reason to modify it
---]]
+--[[------------------- resolution v0.1.0 -----------------------
+
+init file; nexus for all other files
+
+-------------------------------------------------------------]]--
 
 -- preferences
 require('config.preferences')
@@ -17,4 +17,4 @@ require('core.keymaps')
 require('core.autocmds.all')
 
 -- set any lingering neovim options
-require('core.execute-config')
+require('core.execute-cnfg')

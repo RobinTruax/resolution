@@ -62,6 +62,14 @@ return {
         desc = '[q]uit/save all',
         cmd = '<cmd> wqa <cr>'
     },
+    ['r'] = {
+        desc = '[r]sltn start',
+        cmd = '<cmd> lua require("mini.starter").open() <cr>'
+    },
+    ['R'] = {
+        desc = '[R]sltn start w/ split',
+        cmd = '<C-w>v<C-w>w <cmd> lua require("mini.starter").open() <cr>'
+    },
     ['T'] = {
         desc = '[T]erminal',
         cmd = '<cmd> ToggleTerm <cr>'

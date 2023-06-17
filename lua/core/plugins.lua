@@ -26,7 +26,7 @@ vim.opt.rtp:prepend(lazynvimpath)
 
 ------------------------ include plugins ------------------------
 
-require('lazy').setup("plugins",
+require('lazy').setup('plugins',
 
 ---------------------------- options ----------------------------
 

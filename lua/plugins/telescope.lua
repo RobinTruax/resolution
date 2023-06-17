@@ -1,28 +1,36 @@
--- configuration for telescope
+--[[------------------- resolution v0.1.0 -----------------------
+
+telescope and its many extensions
+
+-------------------------------------------------------------]]--
+
 return {
 
-    -- telescope-fzf-native.nvim: fzf syntax/faster search
+------ telescope-fzf-native.nvim: fzf syntax/faster search ------
     {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
         lazy = true,
     },
 
-    -- nvim-neoclip.lua: search yanks
+---------------- nvim-neoclip.lua: search yanks -----------------
     {
         'AckslD/nvim-neoclip.lua',
         lazy = true,
+
         config = true,
     },
 
-    -- auto-session: session manager
+----------------- auto-session: session manager -----------------
     {
         'rmagatti/auto-session',
-        event = { "BufReadPost", "BufNewFile" },
+
+        event = { 'BufReadPost', 'BufNewFile' },
+
         config = function()
-            require("auto-session").setup({
-                log_level = "error",
-                auto_session_suppress_dirs = { "~/", "/" },
+            require('auto-session').setup({
+                log_level = 'error',
+                auto_session_suppress_dirs = { '~/', '/' },
                 auto_session_enable_last_session = false,
                 auto_session_enabled = true,
                 auto_session_create_enabled = true,
@@ -30,20 +38,26 @@ return {
             })
         end
     },
-    -- session-lens: link to telescope
+
+---------------- session-lens: link to telescope ----------------
     {
         'rmagatti/session-lens',
+
+        lazy = true,
+
         dependencies = { 'rmagatti/auto-session' },
+
         config = function()
             require('session-lens').setup({})
         end,
-        lazy = true
     },
 
-    -- telescope.nvim
+------------------------ telescope.nvim -------------------------
     {
         'nvim-telescope/telescope.nvim',
+
         cmd = 'Telescope',
+
         dependencies = {
             'nvim-lualine/lualine.nvim',
             'akinsho/bufferline.nvim',
@@ -54,7 +68,7 @@ return {
             'debugloop/telescope-undo.nvim',
             'rmagatti/auto-session',
         },
-        -- configuration and ui standardization
+
         config = function()
             -- basic setup
             require('telescope').setup({
@@ -79,25 +93,25 @@ return {
             resolve.resolve_anchor_pos = function(anchor, p_width, p_height, max_columns, max_lines)
                 anchor = anchor:upper()
                 local pos = { 0, 0 }
-                if anchor == "CENTER" then
+                if anchor == 'CENTER' then
                     return pos
                 end
-                if anchor:find "W" then
+                if anchor:find 'W' then
                     pos[1] = math.ceil((p_width - max_columns) / 2) + 1
-                elseif anchor:find "E" then
+                elseif anchor:find 'E' then
                     pos[1] = math.ceil((max_columns - p_width) / 2) - 1
                 end
-                if anchor:find "N" then
+                if anchor:find 'N' then
                     pos[2] = math.ceil((p_height - max_lines) / 2) + 1
-                elseif anchor:find "S" then
+                elseif anchor:find 'S' then
                     pos[2] = math.ceil((max_lines - p_height) / 2)
                 end
                 return pos
             end
 
             -- wrapping
-            vim.api.nvim_create_autocmd("User", {
-                pattern = "TelescopePreviewerLoaded",
+            vim.api.nvim_create_autocmd('User', {
+                pattern = 'TelescopePreviewerLoaded',
                 callback = function(args)
                     vim.wo.wrap = true
                     vim.wo.number = true
@@ -110,3 +124,5 @@ return {
         end,
     },
 }
+
+-----------------------------------------------------------------

@@ -32,7 +32,7 @@ opt.list           = false -- no line breaks in middle of word
 
 opt.scrolloff      = 8     -- # of guaranteed lines at top & bottom
 opt.pumheight      = 5     -- maximum size of pop-up menu
-prefs.cmdheight    = 1     -- height of command line prompt
+opt.cmdheight      = 1     -- height of command line prompt
 opt.showmode       = false -- show INSERT MODE message in command line
 opt.updatetime     = 1000  -- time before keybind menu opens
 
@@ -70,9 +70,10 @@ opt.undofile              = true                           -- enable permanent u
 opt.backup                = true                           -- enable backups
 opt.swapfile              = false                          -- enable swapfiles
 
---------------------------- clipboard ---------------------------
+------------------------- miscellaneous -------------------------
 
 vim.opt.clipboard = 'unnamedplus' -- unify system & vim clipboard
+prefs.number_recent_files = 5
 
 -----------------------------------------------------------------
 

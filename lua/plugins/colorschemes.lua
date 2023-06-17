@@ -1,37 +1,52 @@
+--[[------------------- resolution v0.1.0 -----------------------
+
+colorscheme plugins
+
+-------------------------------------------------------------]]--
+
 return {
-    -- tokyonight
+
+-------------------------- tokyonight ---------------------------
     {
         'folke/tokyonight.nvim',
         lazy = true,
     },
-    -- gruvbox
+
+---------------------------- gruvbox ----------------------------
     {
         'morhetz/gruvbox',
         lazy = true,
     },
-    -- nord
+
+----------------------------- nord ------------------------------
     {
         'shaunsingh/nord.nvim',
         lazy = true,
     },
-    -- polar
+
+----------------------------- polar -----------------------------
     {
         'mtyn/polar',
         lazy = true,
     },
-    -- everforest
+
+-------------------------- everforest ---------------------------
     {
         'sainnhe/everforest',
         lazy = true,
     },
-    -- kanagawa
+
+--------------------------- kanagawa ----------------------------
     {
         'rebelot/kanagawa.nvim',
         lazy = true,
     },
-    -- catppuccin
+
+-------------------------- catppuccin ---------------------------
     {
         'catppuccin/nvim',
         lazy = true,
     },
 }
+
+-----------------------------------------------------------------

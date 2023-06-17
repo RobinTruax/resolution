@@ -1,98 +1,112 @@
+--[[------------------- resolution v0.1.0 -----------------------
+
+all ui elements which run on startup
+
+-------------------------------------------------------------]]--
+
 return {
-    -- startup-nvim: startup screen
+----------------- mini.starter: startup screen ------------------
     {
-        'startup-nvim/startup.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim', 'folke/which-key.nvim', 'nvim-lualine/lualine.nvim', 'akinsho/bufferline.nvim'},
+        'echasnovski/mini.starter',
+        version = '*',
+
+        dependencies = {'nvim-lualine/lualine.nvim', 'akinsho/bufferline.nvim' },
+
         config = function()
-            local vertical_content = function(text, proportion)
-                local height = math.floor(vim.o.lines * proportion) - #text
-                if height < 0 then
-                    height = 0
-                end
+            local prefs = require('config.preferences')
+            local starter = require('mini.starter')
 
-                local finished_text = {}
-                for i = 1, height, 1 do
-                    finished_text[i] = ''
-                end
+            local recent_files = function(n)
+                return function()
+                    local section = ('recent files')
 
-                for i, v in ipairs(text) do
-                    finished_text[height + i] = v
-                end
+                    local files = vim.tbl_filter(function(f) return vim.fn.filereadable(f) == 1 end, vim.v.oldfiles or {})
 
-                return finished_text
+                    if #files == 0 then return { { name = 'none', action = '', section = section } } end
+
+                    local items = {}
+                    local fmodify = vim.fn.fnamemodify
+
+                    for _, f in ipairs(vim.list_slice(files, 1, n)) do
+                        local path = (' (%s/%s)'):format(fmodify(f, ':p:h:h:t'), fmodify(f, ':p:h:t'))
+                        local name = ('%s%s'):format(fmodify(f, ':t'), path)
+                        table.insert(items,
+                            { action = ('cd %s | edit %s'):format(fmodify(f, ':p:h'), fmodify(f, ':p')), name = name, section = section })
+                    end
+
+                    return items
+                end
             end
 
-            local b_ul = '┌'
-            local b_ur = '┐'
-            local b_bl = '└'
-            local b_br = '┘'
-            if require('config.aesthetics').ui_sharp == false then
-                b_ul = '╭'
-                b_ur = '╮'
-                b_bl = '╰'
-                b_br = '╯'
-            end
-
-            local header = {
-                '',
-                b_ul .. '──────────── ∘°❉°∘ ───────────' .. b_ur,
-                '│                              │',
-                '│     ｒｅｓｏｌｕｔｉｏｎ     │',
-                '│          ｖ０.１.０          │',
-                '│                              │',
-                b_bl .. '──────────── °∘❉∘° ───────────' .. b_br,
+            config = {
+                evaluate_single = true,
+                silent = true,
+                header = 'resolution',
+                query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_-. ',
+                items = {
+                    {
+                        {
+                            action = 'enew',
+                            name = 'open math project',
+                            section = 'actions'
+                        },
+                        {
+                            action = 'enew',
+                            name = 'new math project',
+                            section = 'actions'
+                        },
+                        {
+                            action = 'Telescope find_files hidden=true',
+                            name = 'search for file',
+                            section = 'actions'
+                        },
+                        {
+                            action = 'Telescope find_files cwd=' .. vim.fn.stdpath('config'),
+                            name = 'configure rsltn',
+                            section = 'actions'
+                        },
+                        {
+                            action = 'Lazy',
+                            name = 'lazy.nvim (plugins)',
+                            section = 'actions'
+                        },
+                        {
+                            action = 'enew',
+                            name = 'documentation',
+                            section = 'actions'
+                        },
+                        {
+                            action = 'qall',
+                            name = 'quit',
+                            section = 'actions'
+                        },
+                        {
+                            action = 'WhichKey <leader>',
+                            name = ' ',
+                            section = 'actions'
+                        },
+                    },
+                    recent_files(prefs.number_recent_files),
+                },
+                content_hooks = {
+                    starter.gen_hook.adding_bullet(),
+                    starter.gen_hook.padding(3, 2),
+                },
+                footer = 'press space for more',
             }
-            local center = {
-                '',
-                'ｂｙ ｒｏｂｉｎ',
-            }
-
-            require('startup').setup({
-                header = {
-                    type = 'text',
-                    align = 'center',
-                    margin = 0,
-                    content = vertical_content(header, 0.25),
-                    highlight = 'StartupHeader'
-                },
-                center = {
-                    type = 'text',
-                    align = 'center',
-                    margin = 0,
-                    content = vertical_content(center, 0.05),
-                    highlight = 'StartupCenter'
-                },
-                footer = {
-                    type = 'text',
-                    align = 'center',
-                    margin = 0,
-                    content = vertical_content({ '.' }, 10),
-                    highlight = 'StartupFooter'
-                },
-                options = {
-                    after = function()
-                        vim.api.nvim_exec2([[
-                            function! WhichKeyLeader(timer)
-                                WhichKey <leader>
-                            endfunction
-
-                            call timer_start(1, 'WhichKeyLeader')
-                        ]], {})
-                    end,
-                    cursor_column = 0.5,
-                    disable_statuslines = true,
-                    paddings = { 0, 0, 0, 0 },
-                },
-                parts = { 'header', 'center', 'footer', },
-            })
+ 
+            starter.setup(config)
         end
     },
 
-    -- lualine.nvim: status line
+------------------- lualine.nvim: status line -------------------
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+
         event = { 'BufReadPost', 'BufNewFile' },
+
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+
         config = function()
             local section_separators = {}
             if require('config.aesthetics').ui_sharp == true then
@@ -107,8 +121,8 @@ return {
                     section_separators = section_separators,
                     component_separators = { left = '', right = '' },
                     disabled_filetypes = {
-                        statusline = { 'startup', 'TelescopePrompt', 'toggleterm' },
-                        winbar = { 'startup', 'TelescopePrompt', 'toggleterm' },
+                        statusline = { 'starter', 'startup', 'TelescopePrompt', 'toggleterm' },
+                        winbar = { 'starter', 'startup', 'TelescopePrompt', 'toggleterm' },
                     },
                     always_divide_middle = true,
                     globalstatus = true,
@@ -135,11 +149,14 @@ return {
         end
     },
 
-    -- bufferline.nvim: buffer line
+----------------- bufferline.nvim: buffer line ------------------
     {
         'akinsho/bufferline.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+
         event = { 'BufReadPost', 'BufNewFile' },
+
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+
         config = function()
             require('bufferline').setup({
                 options = {
@@ -163,3 +180,5 @@ return {
         end
     },
 }
+
+-----------------------------------------------------------------
