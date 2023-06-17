@@ -58,6 +58,7 @@ colorschemes.colorscheme_configs = {
                 MiniStarterSection = { fg = '#82aaff', bold = true },
                 MiniStarterFooter = { fg = '#c099ff', italic = true},
                 MiniStarterItemPrefix = { fg = '#4fd6be' },
+                MiniStarterItemBullet = { fg = '#222436', bg = '#222436' },
                 MiniStarterQuery = { fg = '#c3e88d' },
                 NormalMode    = { fg = '#82aaff' },
                 InsertMode    = { fg = '#c3e88d' },

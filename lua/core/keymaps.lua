@@ -14,13 +14,13 @@ local map = vim.keymap.set
 for k, v in pairs(other_keybinds) do
     local opts = v.opts or {}
     opts['desc'] = v.desc
-    if type(v.cmd) == 'string' then
-        local mode = v.mode or 'n'
-        map(mode, k, v.cmd, opts)
-    elseif type(v.cmd) == 'table' then
+    if type(v.cmd) == 'table' then
         for l, w in ipairs(v.cmd) do
             map(v.mode[l], k, w, opts)
         end
+    elseif type(v.cmd) ~= 'boolean' then
+        local mode = v.mode or 'n'
+        map(mode, k, v.cmd, opts)
     end
 end
 
@@ -29,7 +29,7 @@ end
 for k, v in pairs(leader_keybinds) do
     local opts = v.opts or {}
     opts['desc'] = v.desc
-    if type(v.cmd) == 'string' then
+    if type(v.cmd) ~= 'boolean' then
         local mode = v.mode or 'n'
         map(mode, vim.g.mapleader..k, v.cmd, opts)
     end

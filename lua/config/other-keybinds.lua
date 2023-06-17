@@ -67,6 +67,34 @@ return {
         cmd = '"_',
         mode = {'n', 'v'},
     },
+    ['gd'] = {
+        desc = '[g]oto [d]efinition',
+        cmd = vim.lsp.buf.definition,
+    },
+    ['gr'] = {
+        desc = '[g]oto [r]eferences',
+        cmd = require('telescope.builtin').lsp_references,
+    },
+    ['gI'] = {
+        desc = '[g]oto [I]mplementation',
+        cmd = vim.lsp.buf.implementation,
+    },
+    ['gD'] = {
+        desc = '[g]oto [D]eclaration',
+        cmd = vim.lsp.buf.declaration,
+    },
+    ['gp'] = {
+        desc = '[p]eek at definition',
+        cmd = '<cmd> Lspsaga peek_definition <cr>',
+    },
+    ['<C-k>'] = {
+        desc = 'hover documentation',
+        cmd = vim.lsp.buf.hover,
+    },
+    ['<C-j>'] = {
+        desc = 'signature documentation',
+        cmd = vim.lsp.buf.signature_help,
+    },
     ['g'] = {
         desc = '+Movement and other',
         cmd = false,

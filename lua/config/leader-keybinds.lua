@@ -32,7 +32,7 @@ return {
     },
     ['j'] = {
         desc = '[j]ump list',
-        cmd = function() require("nvim-navbuddy").open() end
+        cmd = function() require('nvim-navbuddy').open() end
     },
     ['J'] = {
         desc = 'flat [J]ump list',
@@ -56,7 +56,7 @@ return {
     },
     ['P'] = {
         desc = '[P]eek at definition',
-        cmd = ''
+        cmd = '<cmd> Lspsaga peek_definition <cr>',
     },
     ['q'] = {
         desc = '[q]uit/save all',
@@ -64,11 +64,11 @@ return {
     },
     ['r'] = {
         desc = '[r]sltn start',
-        cmd = '<cmd> lua require("mini.starter").open() <cr>'
+        cmd = function() require('mini.starter').open() end
     },
     ['R'] = {
         desc = '[R]sltn start w/ split',
-        cmd = '<C-w>v<C-w>w <cmd> lua require("mini.starter").open() <cr>'
+        cmd = function() require("mini.starter").open() end
     },
     ['T'] = {
         desc = '[T]erminal',
@@ -377,11 +377,11 @@ return {
     },
     ['cf'] = {
         desc = '[f]ormat code',
-        cmd = ''
+        cmd = vim.lsp.buf.format,
     },
     ['cr'] = {
         desc = '[r]ename',
-        cmd = ''
+        cmd = vim.lsp.buf.rename,
     },
 
 ---------------------- tex extensions (x) -----------------------
