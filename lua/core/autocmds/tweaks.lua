@@ -1,6 +1,6 @@
 --[[------------------- resolution v0.1.0 -----------------------
 
-autocommands for any tweaks
+autocommands for any tweaks (mostly taken from LazyVim)
 
 -------------------------------------------------------------]]--
 
@@ -32,6 +32,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>ToggleTerm<cr>",
         { buffer = event.buf, silent = true })
+  end,
+})
+
+-------------- resize splits if window got resized --------------
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  callback = function()
+    vim.cmd("tabdo wincmd =")
   end,
 })
 
