@@ -119,7 +119,9 @@ return {
 
         event = { 'BufReadPost', 'BufNewFile' },
 
-        config = true
+        config = function()
+            require('modicator').setup()
+        end
     }
 }
 

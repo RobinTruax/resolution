@@ -81,6 +81,7 @@ local c = colorschemes.universal_palette
 colorschemes.universal_config = {
     always = {
         MiniStarterItemBullet = { fg = c.bg, bg = c.bg },
+        EndOfBuffer           = { fg = c.bg, bg = c.bg },
         LeapBackdrop          = { link = 'Comment' },
         LeapMatch             = { fg = '#ff007c', bold = true, nocombine = true },
         LeapLabelPrimary      = { fg = '#ff007c', bold = true, nocombine = true },
@@ -105,6 +106,9 @@ colorschemes.universal_config = {
 ------------------- by-scheme configurations --------------------
 
 colorschemes.colorscheme_configs = {
+
+-------------------------- tokyonight ---------------------------
+
     tokyonight = {
         dark = 'tokyonight-moon',
         light = 'tokyonight-day',
@@ -140,15 +144,46 @@ colorschemes.colorscheme_configs = {
         },
         optional = {}
     },
+
+---------------------------- gruvbox ----------------------------
+
     gruvbox = {
         dark = 'gruvbox-material',
         light = 'gruvbox-material',
         always = {
-            dark = {},
-            light = {}
+            dark = {
+                MiniStarterHeader     = { fg = '#f2594b', bold = true },
+                MiniStarterSection    = { fg = '#f28534', bold = true },
+                MiniStarterFooter     = { fg = '#f2594b', italic = true },
+                MiniStarterItemPrefix = { fg = '#b0b846' },
+                NormalMode            = { fg = '#a89984' },
+                InsertMode            = { fg = '#b0b846' },
+                VisualMode            = { fg = '#db4740' },
+                CommandMode           = { fg = '#80aa9e' },
+                ReplaceMode           = { fg = '#e9b143' },
+                TerminalMode          = { fg = '#d3869b' },
+                SelectMode            = { fg = '#a89984' },
+            },
+            light = {
+                MiniStarterHeader     = { fg = '#af2528', bold = true },
+                MiniStarterSection    = { fg = '#b94c07', bold = true },
+                MiniStarterFooter     = { fg = '#af2528', italic = true },
+                MiniStarterItemPrefix = { fg = '#989e28' },
+                MiniStarterQuery      = { fg = '#5fa37a' },
+                NormalMode            = { fg = '#7c6f64' },
+                InsertMode            = { fg = '#6f8352' },
+                VisualMode            = { fg = '#ae5858' },
+                CommandMode           = { fg = '#266b79' },
+                ReplaceMode           = { fg = '#a96b2c' },
+                TerminalMode          = { fg = '#924f79' },
+                SelectMode            = { fg = '#7c6f64' },
+            }
         },
         optional = {}
     },
+
+-------------------------- everforest ---------------------------
+
     everforest = {
         dark = 'everforest',
         light = 'everforest',
@@ -184,9 +219,6 @@ colorschemes.colorscheme_configs = {
         },
         optional = {}
     }
-    -- #2d353b
-    -- #859289
-    -- #e69875
 }
 
 -----------------------------------------------------------------
