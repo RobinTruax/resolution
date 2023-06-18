@@ -2,7 +2,7 @@
 
 execute all configuration options which need to be called
 
--------------------------------------------------------------]]--
+-------------------------------------------------------------]]
 
 local preferences = require('config.preferences')
 local aesthetics = require('config.aesthetics')
@@ -16,12 +16,12 @@ require('core.colors').set_colorscheme(
 
 ------------------------- path settings -------------------------
 
-for _,v in ipairs(require('config.path')) do
-    vim.opt.path:append(':'..v)
+for _, v in ipairs(require('config.path')) do
+    vim.opt.path:append(':' .. v)
 end
 ------------------ set nonconfigurable options ------------------
 
-vim.o.showtabline = 2
+vim.o.showtabline = 0
 vim.o.laststatus = 3
 
 -----------------------------------------------------------------

@@ -42,6 +42,7 @@ return {
 
             -- config file
             local config = {
+                query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_-. ',
                 evaluate_single = true,
                 silent = true,
                 header = 'resolution',
@@ -135,62 +136,42 @@ return {
                 },
                 sections = {
                     lualine_a = { 'mode' },
-                    lualine_b = { 'branch', 'diff' },
-                    lualine_c = { 'filename' },
-                    lualine_x = { 'require("core.ui").macro_recording_sl()' },
-                    lualine_y = { 'searchcount', '%S' },
-                    lualine_z = { 'os.date("%H:%M")' },
+                    lualine_b = { 'searchcount', '%S' },
+                    lualine_c = { 'require("core.ui").macro_recording_sl()' },
+                    lualine_x = { 'diff' },
+                    lualine_y = { 'branch' },
+                    lualine_z = { 'location' },
                 },
-                winbar = {
-                    lualine_c = {
-                        'navic',
-                        color_correction = nil,
-                        navic_opts = nil
-                    },
-                    lualine_x = { 'location' },
-                },
-                inactive_winbar = {
-                    lualine_x = { 'location' },
-                },
+                -- winbar = {
+                --     lualine_c = {
+                --         'navic',
+                --         color_correction = nil,
+                --         navic_opts = nil
+                --     },
+                --     lualine_x = { 'location' },
+                -- },
+                -- inactive_winbar = {
+                --     lualine_x = { 'location' },
+                -- },
             })
         end
     },
 
-    ----------------- bufferline.nvim: buffer line ------------------
+    --------------- barbecue: winbar location system ----------------
     {
-        'akinsho/bufferline.nvim',
+        'utilyre/barbecue.nvim',
+        name = 'barbecue',
+        version = '*',
+        dependencies = {
+            'SmiteshP/nvim-navic',
+            'nvim-tree/nvim-web-devicons',
+        },
+        opts = {
+            show_dirname = false,
+            show_basename = true,
+            show_modified = true,
+        },
         event = 'VeryLazy',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-        config = function()
-            require('bufferline').setup({
-                highlights = {
-                    buffer_selected = {
-                        fg = nil,
-                        bg = nil,
-                        bold = true,
-                        italic = false
-                    },
-                },
-                options = {
-                    indicator = {
-                        style = 'none'
-                    },
-                    offsets = {
-                        {
-                            filetype = 'NvimTree',
-                            text = 'File Explorer',
-                            text_align = 'left',
-                            separator = true
-                        }
-                    },
-                    show_buffer_close_icons = false,
-                    show_close_icon = false,
-                    separator_style = 'thick',
-                    always_show_bufferline = false,
-                },
-            })
-        end
     },
 }
-
 -----------------------------------------------------------------

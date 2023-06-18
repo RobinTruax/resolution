@@ -91,22 +91,12 @@ return {
     ---------------------- manipulate buffers -----------------------
     ['H'] = {
         desc = 'Move to next buffer',
-        cmd = '<cmd>BufferLineCyclePrev<cr>',
+        cmd = '<cmd>bp<cr>',
         { silent = true, noremap = true },
     },
     ['L'] = {
         desc = 'Move to prev buffer',
-        cmd = '<cmd>BufferLineCycleNext<cr>',
-        { silent = true, noremap = true },
-    },
-    ['<C-H>'] = {
-        desc = 'Move buffer to prev',
-        cmd = '<cmd>BufferLineMovePrev<cr>',
-        { silent = true, noremap = true },
-    },
-    ['<C-L>'] = {
-        desc = 'Move buffer to next',
-        cmd = '<cmd>BufferLineMoveNext<cr>',
+        cmd = '<cmd>bn<cr>',
         { silent = true, noremap = true },
     },
 

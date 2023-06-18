@@ -3,16 +3,15 @@
 defines keybinds for rsltn's main operations; these use the
 <leader> key set in config.preferences
 
--------------------------------------------------------------]]--
+---------------------------------------------------------------]]
 
 return {
-
     [''] = {
         desc = 'resolution',
         cmd = false,
     },
 
---------------------------- top-level ---------------------------
+    --------------------------- top-level ---------------------------
 
     ['a'] = {
         desc = 'Toggle [a]utosnippets',
@@ -28,7 +27,7 @@ return {
     },
     ['h'] = {
         desc = '[h]elp and doc.',
-        cmd = '<cmd> e '..vim.fn.stdpath('config')..'/documentation.md <cr>'
+        cmd = '<cmd> e ' .. vim.fn.stdpath('config') .. '/documentation.md <cr>'
     },
     ['j'] = {
         desc = '[j]ump list',
@@ -83,7 +82,7 @@ return {
         cmd = ''
     },
 
--------------------------- windows (w) --------------------------
+    -------------------------- windows (w) --------------------------
 
     ['w'] = {
         desc = '[w]indows',
@@ -138,7 +137,7 @@ return {
         cmd = ''
     },
 
--------------------------- buffers (b) --------------------------
+    -------------------------- buffers (b) --------------------------
 
     ['b'] = {
         desc = '[b]uffers',
@@ -165,7 +164,7 @@ return {
         cmd = ''
     },
 
------------------------- preferences (p) ------------------------
+    ------------------------ preferences (p) ------------------------
 
 
     ['p'] = {
@@ -217,7 +216,7 @@ return {
         cmd = ''
     },
 
--------------------------- search (s) ---------------------------
+    -------------------------- search (s) ---------------------------
 
     ['s'] = {
         desc = '[s]earch',
@@ -272,7 +271,7 @@ return {
         cmd = ''
     },
 
----------------------- file management (f) ----------------------
+    ---------------------- file management (f) ----------------------
 
     ['f'] = {
         desc = '[f]ile management',
@@ -295,7 +294,7 @@ return {
         cmd = ''
     },
 
------------------------ git and github (g) ----------------------
+    ----------------------- git and github (g) ----------------------
 
     ['g'] = {
         desc = '[g]it and github',
@@ -338,7 +337,7 @@ return {
         cmd = ''
     },
 
----------------------- tex operations (t) -----------------------
+    ---------------------- tex operations (t) -----------------------
 
     ['t'] = {
         desc = '[t]ex operations',
@@ -377,7 +376,7 @@ return {
         cmd = ''
     },
 
----------------------- code operations (c) ----------------------
+    ---------------------- code operations (c) ----------------------
 
     ['c'] = {
         desc = '[c]ode operations',
@@ -392,7 +391,7 @@ return {
         cmd = vim.lsp.buf.rename,
     },
 
----------------------- tex extensions (x) -----------------------
+    ---------------------- tex extensions (x) -----------------------
 
     ['x'] = {
         desc = 'tex e[x]tensions',
