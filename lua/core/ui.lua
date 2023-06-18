@@ -3,10 +3,20 @@
 utility functions for rsltn's standardized ui interface
 
 -------------------------------------------------------------]]
-                                                                --
 
 local ui = {}
 local aesthetics = require('config.aesthetics')
+
+-------------------- macro recording snippet --------------------
+
+ui.macro_recording_sl = function()
+    local recording_register = vim.fn.reg_recording()
+    if recording_register == "" then
+        return ""
+    else
+        return "rec @" .. recording_register
+    end
+end
 
 ---------- get borders based on aesthetic preferences -----------
 
@@ -33,7 +43,7 @@ end
 -- count number of buffers
 ui.buf_count = function()
     local bufs_loaded = 0
-    for i,buf in ipairs(vim.api.nvim_list_bufs()) do
+    for _,buf in ipairs(vim.api.nvim_list_bufs()) do
         if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_name(buf) ~= '' then
             bufs_loaded = bufs_loaded + 1
         end

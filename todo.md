@@ -1,4 +1,4 @@
-0. UI uniformity
-1. Keybinds
-2. Spelling and math dictionary
-3. Snippets and Vimtex
+1. UI uniformity for LSP stuff
+2. Keybinds
+3. Spelling and math dictionary
+4. Snippets and Vimtex

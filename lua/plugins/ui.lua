@@ -82,7 +82,7 @@ return {
             local wk = require('which-key')
             wk.setup({
                 window = {
-                    winblend = 10,
+                    winblend = 18,
                     border = border,
                 },
                 layout = {

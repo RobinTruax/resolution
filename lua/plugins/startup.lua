@@ -2,47 +2,49 @@
 
 all ui elements which run on startup
 
--------------------------------------------------------------]]--
+-------------------------------------------------------------]]
 
 return {
------------------ mini.starter: startup screen ------------------
+    ----------------- mini.starter: startup screen ------------------
     {
         'echasnovski/mini.starter',
         version = '*',
-
-        -- dependencies = {'nvim-lualine/lualine.nvim', 'akinsho/bufferline.nvim' },
-
         config = function()
             local prefs = require('config.preferences')
             local starter = require('mini.starter')
 
+            -- better recent_files pop-up
             local recent_files = function(n)
                 return function()
-                    local section = ('recent files')
-
+                    -- get files
                     local files = vim.tbl_filter(function(f) return vim.fn.filereadable(f) == 1 end, vim.v.oldfiles or {})
 
-                    if #files == 0 then return { { name = 'none', action = '', section = section } } end
+                    -- return nothing if there are no recent files
+                    if #files == 0 then return { { name = 'none', action = '', section = 'recent files' } } end
 
+                    -- add items for each recent file up to the maximium number
                     local items = {}
                     local fmodify = vim.fn.fnamemodify
-
                     for _, f in ipairs(vim.list_slice(files, 1, n)) do
                         local path = (' (%s/%s)'):format(fmodify(f, ':p:h:h:t'), fmodify(f, ':p:h:t'))
                         local name = ('%s%s'):format(fmodify(f, ':t'), path)
                         table.insert(items,
-                            { action = ('cd %s | edit %s'):format(fmodify(f, ':p:h'), fmodify(f, ':p')), name = name, section = section })
+                            {
+                                action = ('cd %s | edit %s'):format(fmodify(f, ':p:h'), fmodify(f, ':p')),
+                                name = name,
+                                section = 'recent files'
+                            })
                     end
 
                     return items
                 end
             end
 
+            -- config file
             local config = {
                 evaluate_single = true,
                 silent = true,
                 header = 'resolution',
-                query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_-. ',
                 items = {
                     {
                         {
@@ -94,20 +96,17 @@ return {
                 },
                 footer = 'press space for more',
             }
- 
+
+            -- call setup
             starter.setup(config)
         end
     },
 
-------------------- lualine.nvim: status line -------------------
+    ------------------- lualine.nvim: status line -------------------
     {
         'nvim-lualine/lualine.nvim',
-
         event = 'VeryLazy',
-        -- event = { 'BufReadPost', 'BufNewFile' },
-
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-
         config = function()
             local section_separators = {}
             if require('config.aesthetics').ui_sharp == true then
@@ -115,6 +114,8 @@ return {
             else
                 section_separators = { left = '', right = '' }
             end
+
+            vim.opt.showcmdloc = 'statusline'
 
             require('lualine').setup({
                 options = {
@@ -124,7 +125,7 @@ return {
                     component_separators = { left = '', right = '' },
                     disabled_filetypes = {
                         statusline = { 'starter' },
-                        winbar = { 'starter', 'toggleterm' },
+                        winbar = { 'starter', 'toggleterm', 'NvimTree' },
                     },
                     always_divide_middle = true,
                     globalstatus = true,
@@ -136,40 +137,56 @@ return {
                     lualine_a = { 'mode' },
                     lualine_b = { 'branch', 'diff' },
                     lualine_c = { 'filename' },
-                    lualine_x = { 'os.date("%d %b")' },
-                    lualine_y = { 'os.date("%H:%M")' },
-                    lualine_z = { 'searchcount', 'location' },
+                    lualine_x = { 'require("core.ui").macro_recording_sl()' },
+                    lualine_y = { 'searchcount', '%S' },
+                    lualine_z = { 'os.date("%H:%M")' },
                 },
-                -- winbar = {
-                -- lualine_c = {
-                --     'navic',
-                --     color_correction = nil,
-                --     navic_opts = nil
-                -- }
-                -- },
+                winbar = {
+                    lualine_c = {
+                        'navic',
+                        color_correction = nil,
+                        navic_opts = nil
+                    },
+                    lualine_x = { 'location' },
+                },
+                inactive_winbar = {
+                    lualine_x = { 'location' },
+                },
             })
         end
     },
 
------------------ bufferline.nvim: buffer line ------------------
+    ----------------- bufferline.nvim: buffer line ------------------
     {
         'akinsho/bufferline.nvim',
-
         event = 'VeryLazy',
-
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-
         config = function()
             require('bufferline').setup({
+                highlights = {
+                    buffer_selected = {
+                        fg = nil,
+                        bg = nil,
+                        bold = true,
+                        italic = false
+                    },
+                },
                 options = {
-                    always_show_bufferline = false,
+                    indicator = {
+                        style = 'none'
+                    },
                     offsets = {
                         {
-                            filetype = 'neo-tree',
-                            highlight = 'Directory',
+                            filetype = 'NvimTree',
+                            text = 'File Explorer',
+                            text_align = 'left',
                             separator = true
                         }
-                    }
+                    },
+                    show_buffer_close_icons = false,
+                    show_close_icon = false,
+                    separator_style = 'thick',
+                    always_show_bufferline = false,
                 },
             })
         end

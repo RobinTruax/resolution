@@ -33,7 +33,7 @@ opt.list           = false -- no line breaks in middle of word
 
 opt.scrolloff      = 5     -- # of guaranteed lines at top & bottom
 opt.pumheight      = 5     -- maximum size of pop-up menu
-opt.cmdheight      = 1     -- height of command line prompt
+opt.cmdheight      = 0     -- height of command line prompt
 opt.showmode       = false -- show INSERT MODE message in command line
 opt.updatetime     = 1000  -- time before keybind menu opens
 
