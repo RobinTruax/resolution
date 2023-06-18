@@ -2,11 +2,11 @@
 
 all plugins relating to UI which are not called on startup
 
--------------------------------------------------------------]]--
---        event = { 'BufReadPost', 'BufNewFile' },
+-------------------------------------------------------------]]
+
 return {
 
--------------- toggleterm.nvim: a better terminal ---------------
+    -------------- toggleterm.nvim: a better terminal ---------------
     {
         'akinsho/toggleterm.nvim',
         version = '*',
@@ -14,31 +14,31 @@ return {
         config = true,
     },
 
------------------ neo-tree.nvim: file explorer ------------------
+    ----------------- neo-tree.nvim: file explorer ------------------
     {
         'nvim-tree/nvim-tree.lua',
         version = '*',
-        cmd = {'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile', 'NvimTreeFindFileToggle'},
+        cmd = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile', 'NvimTreeFindFileToggle' },
         dependencies = {
             'nvim-tree/nvim-web-devicons',
         },
         config = true,
     },
 
------------------ lazygit.nvim: git integration -----------------
+    ----------------- lazygit.nvim: git integration -----------------
     {
         'kdheepak/lazygit.nvim',
-        cmd = {'LazyGit', 'LazyGitCurrentFile'},
+        cmd = { 'LazyGit', 'LazyGitCurrentFile' },
         dependencies = {
             'nvim-lua/plenary.nvim',
         },
-        config = function ()
+        config = function()
             vim.g.lazygit_floating_window_border_chars = require('core.ui').get_borders_or_less()
             vim.g.lazygit_floating_window_scaling_factor = 0.8
         end
     },
 
------- nvim-spectre: search/replace across multiple files -------
+    ------ nvim-spectre: search/replace across multiple files -------
     {
         'nvim-pack/nvim-spectre',
         cmd = 'Spectre',
@@ -47,7 +47,7 @@ return {
         end,
     },
 
--------------- which-key.nvim: keybind-based menus --------------
+    -------------- which-key.nvim: keybind-based menus --------------
     {
         'folke/which-key.nvim',
         cmd = 'WhichKey',
@@ -86,8 +86,8 @@ return {
                     border = border,
                 },
                 layout = {
-                    height = {min = 4, max = 10},
-                    width = {min = 20, max = 40},
+                    height = { min = 4, max = 10 },
+                    width = { min = 20, max = 40 },
                     spacing = 3,
                     align = 'center',
                 }

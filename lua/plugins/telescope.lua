@@ -2,31 +2,28 @@
 
 telescope and its many extensions
 
--------------------------------------------------------------]]--
+-------------------------------------------------------------]]
 
 return {
 
------- telescope-fzf-native.nvim: fzf syntax/faster search ------
+    ------ telescope-fzf-native.nvim: fzf syntax/faster search ------
     {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
         lazy = true,
     },
 
----------------- nvim-neoclip.lua: search yanks -----------------
+    ---------------- nvim-neoclip.lua: search yanks -----------------
     {
         'AckslD/nvim-neoclip.lua',
         lazy = true,
-
         config = true,
     },
 
------------------ auto-session: session manager -----------------
+    ----------------- auto-session: session manager -----------------
     {
         'rmagatti/auto-session',
-
         event = { 'BufReadPost', 'BufNewFile' },
-
         config = function()
             require('auto-session').setup({
                 log_level = 'error',
@@ -39,25 +36,18 @@ return {
         end
     },
 
----------------- session-lens: link to telescope ----------------
+    ---------------- session-lens: link to telescope ----------------
     {
         'rmagatti/session-lens',
-
         lazy = true,
-
         dependencies = { 'rmagatti/auto-session' },
-
-        config = function()
-            require('session-lens').setup({})
-        end,
+        config = true
     },
 
------------------------- telescope.nvim -------------------------
+    ------------------------ telescope.nvim -------------------------
     {
         'nvim-telescope/telescope.nvim',
-
         cmd = 'Telescope',
-
         dependencies = {
             'nvim-lualine/lualine.nvim',
             'akinsho/bufferline.nvim',
@@ -112,7 +102,7 @@ return {
             -- wrapping
             vim.api.nvim_create_autocmd('User', {
                 pattern = 'TelescopePreviewerLoaded',
-                callback = function(args)
+                callback = function()
                     vim.wo.wrap = true
                     vim.wo.number = true
                 end,
