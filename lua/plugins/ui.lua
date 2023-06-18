@@ -18,16 +18,18 @@ return {
 
 ----------------- neo-tree.nvim: file explorer ------------------
     {
-        'nvim-neo-tree/neo-tree.nvim',
-        branch = 'v2.x',
+        'nvim-tree/nvim-tree.lua',
+        version = '*',
 
-        cmd = 'Neotree',
+        cmd = {'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile'},
 
         dependencies = {
-            'nvim-lua/plenary.nvim',
             'nvim-tree/nvim-web-devicons',
-            'MunifTanjim/nui.nvim',
         },
+
+        config = function()
+            require('nvim-tree').setup({})
+        end
     },
 
 ----------------- lazygit.nvim: git integration -----------------

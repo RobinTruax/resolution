@@ -23,6 +23,7 @@ vim.g.maplocalleader = '\\' -- local leader key
 
 ------------------------ visual elements ------------------------
 
+opt.termguicolors  = true  -- better colors, no reason to change this in 2023
 opt.cursorline     = true  -- cursor line highlighting
 opt.number         = true  -- line numbering
 opt.relativenumber = true  -- relative line numbering

@@ -14,7 +14,7 @@ return {
 
 ---------------------------- gruvbox ----------------------------
     {
-        'morhetz/gruvbox',
+        'sainnhe/gruvbox-material',
         lazy = true,
     },
 

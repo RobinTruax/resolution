@@ -20,11 +20,11 @@ return {
     },
     ['d'] = {
         desc = '[d]elete buffer',
-        cmd = '<cmd> bd <cr>'
+        cmd = require('core.ui').buf_del_wrapper
     },
     ['e'] = {
         desc = 'File [e]xplorer',
-        cmd = '<cmd> Neotree <cr>'
+        cmd = '<cmd> NvimTreeToggle <cr>'
     },
     ['h'] = {
         desc = '[h]elp and doc.',

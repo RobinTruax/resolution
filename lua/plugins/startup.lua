@@ -76,7 +76,7 @@ return {
                             section = 'actions'
                         },
                         {
-                            action = 'qall',
+                            action = 'q',
                             name = 'quit',
                             section = 'actions'
                         },
@@ -121,8 +121,8 @@ return {
                     section_separators = section_separators,
                     component_separators = { left = '', right = '' },
                     disabled_filetypes = {
-                        statusline = { 'starter', 'startup', 'TelescopePrompt', 'toggleterm' },
-                        winbar = { 'starter', 'startup', 'TelescopePrompt', 'toggleterm' },
+                        statusline = { 'starter' },
+                        winbar = { 'starter', 'toggleterm' },
                     },
                     always_divide_middle = true,
                     globalstatus = true,
