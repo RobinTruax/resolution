@@ -13,8 +13,8 @@ local colorschemes = require('config.colorschemes')
 local expand_universal = function(entry, scheme, mode)
     local expanded_entry = {}
     for k, v in pairs(entry) do
-        if k == 'fg' or k == 'bg' then
-            expanded_entry[k] = colorschemes.universal_palette[scheme][mode][v]
+        if type(v) == 'table' then
+            expanded_entry[k] = v[scheme][mode]
         else
             expanded_entry[k] = v
         end

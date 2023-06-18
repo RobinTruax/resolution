@@ -33,7 +33,8 @@ ui.buf_count = function()
     return bufs_loaded
 end
 
--- if there is just one valid buffer, reset to the start screen; otherwise, delete buffer in such a way that splits are respected.
+-- if there is just one valid buffer, reset to the start screen
+-- otherwise, delete buffer in such a way that splits are respected.
 ui.buf_del_execute = function()
     if ui.buf_count() == 1 then
         require('mini.starter').open()
