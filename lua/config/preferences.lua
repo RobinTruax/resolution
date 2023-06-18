@@ -73,8 +73,9 @@ opt.swapfile              = false                          -- enable swapfiles
 
 ------------------------- miscellaneous -------------------------
 
-vim.opt.clipboard = 'unnamedplus' -- unify system & vim clipboard
+opt.clipboard = 'unnamedplus' -- unify system & vim clipboard
 prefs.number_recent_files = 5
+opt.fillchars='eob: '
 
 -----------------------------------------------------------------
 

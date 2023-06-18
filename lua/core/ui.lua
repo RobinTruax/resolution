@@ -12,9 +12,17 @@ local aesthetics = require('config.aesthetics')
 
 ui.get_borders = function()
     if aesthetics.ui_sharp == true then
-        return { '┌', '┐', '┘', '└', '─', '│' }
+        return { '┌', '─', '┐', '│', '┘', '─', '└', '│' }
     else
-        return { '╭', '╮', '╯', '╰', '─', '│' }
+        return { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
+    end
+end
+
+ui.get_borders_or_less = function()
+    if aesthetics.ui_borderless == true then
+        return { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }
+    else
+        return ui.get_borders()
     end
 end
 

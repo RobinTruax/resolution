@@ -3,23 +3,16 @@
 all 'small tweak' plugins
 
 -------------------------------------------------------------]]
-                                                                --
 
 return {
 
     ----------- todo-comments: highlighted todo comments ------------
     {
         'folke/todo-comments.nvim',
-
         event = { 'BufReadPost', 'BufNewFile' },
-
-        dependencies = {
-            'nvim-lua/plenary.nvim'
-        },
-
+        dependencies = { 'nvim-lua/plenary.nvim' },
         opts = {
             keywords = {
-                -- rsltn codebase
                 FIX = {
                     icon = ' ',
                     color = 'error'
@@ -36,11 +29,8 @@ return {
                     icon = ' ',
                     color = 'hint'
                 },
-                FIGURES = {
-                    icon = ' ',
-                    color = 'info',
-                },
-                COMP = {
+                -- rsltn codebase
+                FUTURE = {
                     icon = ' ',
                     color = 'info',
                 },
@@ -77,9 +67,7 @@ return {
     -------------- nvim-colorizer: coloring hex codes ---------------
     {
         'NvChad/nvim-colorizer.lua',
-
         event = { 'BufReadPost', 'BufNewFile' },
-
         config = function()
             require('colorizer').setup({
                 user_default_options = {
@@ -104,21 +92,16 @@ return {
     -------- range-highlight.nvim: highlight cmdline ranges ---------
     {
         'winston0410/range-highlight.nvim',
-
         event = { 'BufReadPost', 'BufNewFile' },
-
-        dependencies = {
-            'winston0410/cmd-parser.nvim',
-        },
-
+        dependencies = { 'winston0410/cmd-parser.nvim' },
         config = true
     },
 
+    ------- highlight-undo.nvim: highlight undo/redo actions --------
+
     {
         'tzachar/highlight-undo.nvim',
-
         event = { 'BufReadPost', 'BufNewFile' },
-
         opts = {
             hlgroup = 'Visual',
             duration = 200,
@@ -132,12 +115,10 @@ return {
     ---------- modicator.nvim: color changing line number -----------
     {
         'mawkler/modicator.nvim',
-
         event = { 'BufReadPost', 'BufNewFile' },
-
-        config = function()
-            require('modicator').setup()
-        end
+        opts = {
+            show_warnings = false,
+        }
     }
 }
 

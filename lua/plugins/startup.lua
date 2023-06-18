@@ -10,7 +10,7 @@ return {
         'echasnovski/mini.starter',
         version = '*',
 
-        dependencies = {'nvim-lualine/lualine.nvim', 'akinsho/bufferline.nvim' },
+        -- dependencies = {'nvim-lualine/lualine.nvim', 'akinsho/bufferline.nvim' },
 
         config = function()
             local prefs = require('config.preferences')
@@ -38,7 +38,7 @@ return {
                 end
             end
 
-            config = {
+            local config = {
                 evaluate_single = true,
                 silent = true,
                 header = 'resolution',
@@ -62,7 +62,7 @@ return {
                         },
                         {
                             action = 'Telescope find_files cwd=' .. vim.fn.stdpath('config'),
-                            name = 'configure rsltn',
+                            name = 'customize rsltn',
                             section = 'actions'
                         },
                         {
@@ -103,7 +103,8 @@ return {
     {
         'nvim-lualine/lualine.nvim',
 
-        event = { 'BufReadPost', 'BufNewFile' },
+        event = 'VeryLazy',
+        -- event = { 'BufReadPost', 'BufNewFile' },
 
         dependencies = { 'nvim-tree/nvim-web-devicons' },
 
@@ -154,7 +155,7 @@ return {
     {
         'akinsho/bufferline.nvim',
 
-        event = { 'BufReadPost', 'BufNewFile' },
+        event = 'VeryLazy',
 
         dependencies = { 'nvim-tree/nvim-web-devicons' },
 
@@ -171,13 +172,6 @@ return {
                     }
                 },
             })
-
-            vim.keymap.set('n', '<C-Left>', '<Esc>:BufferLineCyclePrev<cr>', { silent = true, desc = 'Previous buffer' })
-            vim.keymap.set('n', '<C-Right>', '<Esc>:BufferLineCycleNext<cr>', { silent = true, desc = 'Next buffer' })
-            vim.keymap.set('n', '<C-S-Left>', '<Esc>:BufferLineMovePrev<cr>',
-                { silent = true, desc = 'Move buffer to previous' })
-            vim.keymap.set('n', '<C-S-Right>', '<Esc>:BufferLineMoveNext<cr>',
-                { silent = true, desc = 'Move buffer to next' })
         end
     },
 }

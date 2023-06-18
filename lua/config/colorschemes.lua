@@ -81,7 +81,7 @@ local c = colorschemes.universal_palette
 colorschemes.universal_config = {
     always = {
         MiniStarterItemBullet = { fg = c.bg, bg = c.bg },
-        EndOfBuffer           = { fg = c.bg, bg = c.bg },
+        -- EndOfBuffer           = { fg = c.bg, bg = c.bg },
         LeapBackdrop          = { link = 'Comment' },
         LeapMatch             = { fg = '#ff007c', bold = true, nocombine = true },
         LeapLabelPrimary      = { fg = '#ff007c', bold = true, nocombine = true },

@@ -14,6 +14,11 @@ require('core.colors').set_colorscheme(
     aesthetics.default_mode
 )
 
+------------------------- path settings -------------------------
+
+for _,v in ipairs(require('config.path')) do
+    vim.opt.path:append(':'..v)
+end
 ------------------ set nonconfigurable options ------------------
 
 vim.o.showtabline = 2

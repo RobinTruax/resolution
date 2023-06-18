@@ -24,7 +24,7 @@ return {
     },
     ['e'] = {
         desc = 'File [e]xplorer',
-        cmd = '<cmd> NvimTreeToggle <cr>'
+        cmd = '<cmd> NvimTreeFindFileToggle <cr>'
     },
     ['h'] = {
         desc = '[h]elp and doc.',
@@ -300,6 +300,10 @@ return {
     ['g'] = {
         desc = '[g]it and github',
         cmd = false,
+    },
+    ['gg'] = {
+        desc = 'lazygit.nvim',
+        cmd = '<cmd> LazyGitCurrentFile <cr>',
     },
     ['ga'] = {
         desc = 'Update [a]ll reg. repos',
