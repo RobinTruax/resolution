@@ -59,7 +59,7 @@ colorschemes.universal_palette = {
             light = '#E6E2CC',
         },
     },
-    ui_emphasized_text = {
+    ui_emph_text = {
         tokyonight = {
             dark = '#65BCFF',
             light = '#34548A',
@@ -93,8 +93,8 @@ colorschemes.universal_config = {
             TelescopeBorder        = { fg = c.ui_normal, bg = c.ui_normal },
             TelescopeSelection     = { bg = c.ui_special },
             TelescopePromptNormal  = { bg = c.ui_special },
-            TelescopePromptTitle   = { fg = c.ui_normal, bg = c.ui_emphasized_text },
-            TelescopePromptPrefix  = { fg = c.ui_emphasized_text, bg = c.ui_special },
+            TelescopePromptTitle   = { fg = c.ui_normal, bg = c.ui_emph_text },
+            TelescopePromptPrefix  = { fg = c.ui_emph_text, bg = c.ui_special },
             TelescopePromptBorder  = { fg = c.ui_special, bg = c.ui_special },
             TelescopePreviewTitle  = { fg = c.ui_normal, bg = c.ui_normal },
             TelescopePreviewBorder = { fg = c.ui_normal, bg = c.ui_normal },
@@ -116,9 +116,9 @@ colorschemes.colorscheme_configs = {
             dark = {
                 MiniStarterHeader     = { fg = '#65BCFF', bold = true },
                 MiniStarterSection    = { fg = '#82aaff', bold = true },
-                MiniStarterFooter     = { fg = '#c099ff', italic = true },
+                MiniStarterFooter     = { fg = '#65BCFF', italic = true },
                 MiniStarterItemPrefix = { fg = '#c3e88d' },
-                MiniStarterQuery      = { fg = '#4fd6be' },
+                MiniStarterQuery      = { fg = '#c099ff' },
                 NormalMode            = { fg = '#82aaff' },
                 InsertMode            = { fg = '#c3e88d' },
                 VisualMode            = { fg = '#c099ff' },
@@ -218,7 +218,7 @@ colorschemes.colorscheme_configs = {
             }
         },
         optional = {}
-    }
+    },
 }
 
 -----------------------------------------------------------------

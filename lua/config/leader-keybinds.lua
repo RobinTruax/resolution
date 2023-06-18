@@ -59,6 +59,10 @@ return {
         cmd = '<cmd> Lspsaga peek_definition <cr>',
     },
     ['q'] = {
+        desc = '[q]uit/save',
+        cmd = '<cmd> wq <cr>'
+    },
+    ['Q'] = {
         desc = '[q]uit/save all',
         cmd = '<cmd> wqa <cr>'
     },

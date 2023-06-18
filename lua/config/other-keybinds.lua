@@ -2,71 +2,115 @@
 
 defines keybinds for rsltn's secondary operations; no prefix
 
--------------------------------------------------------------]]--
+-------------------------------------------------------------]]
 
 return {
-    ['<Alt-h>'] = {
+
+    --------------------- manipulating windows ----------------------
+    ['<C-h>'] = {
         desc = 'Move left',
-        cmd = '<Left>',
-        mode = 'i',
-    },
-    ['<Alt-j>'] = {
-        desc = 'Move down',
-        cmd = '<Down>',
-        mode = 'i',
-    },
-    ['<Alt-k>'] = {
-        desc = 'Move up',
-        cmd = '<Up>',
-        mode = 'i',
-    },
-    ['<Alt-l>'] = {
-        desc = 'Move right',
-        cmd = '<Right>',
-        mode = 'i',
-    },
-    ['<C-s>'] = {
-        desc = 'Save file',
-        cmd = {'<cmd>w<cr>', '<Esc><cmd>w<cr>a'},
-        mode = {'n', 'i'},
-    },
-    ['<cr>'] = {
-        desc = 'Clear highlighting',
-        cmd = '<Esc>:noh<cr><cr>',
+        cmd = require('smart-splits').move_cursor_left,
         mode = 'n',
-        opts = {silent = true},
     },
-    ['<Esc>'] = {
-        desc = 'Fixing escape in terminal',
-        cmd = {'<C-\\><C-n>'},
-        mode = {'t'},
-        opts = {silent = true, noremap = true},
+    ['<C-j>'] = {
+        desc = 'Move down',
+        cmd = require('smart-splits').move_cursor_down,
+        mode = 'n',
     },
+    ['<C-k>'] = {
+        desc = 'Move up',
+        cmd = require('smart-splits').move_cursor_up,
+        mode = 'n',
+    },
+    ['<C-l>'] = {
+        desc = 'Move right',
+        cmd = require('smart-splits').move_cursor_right,
+        mode = 'n',
+    },
+    ['<A-h>'] = {
+        desc = 'Move left',
+        cmd = { require('smart-splits').resize_left, '<Left>' },
+        mode = { 'n', 'i' },
+    },
+    ['<A-j>'] = {
+        desc = 'Move down',
+        cmd = { require('smart-splits').resize_down, '<Down>' },
+        mode = { 'n', 'i' },
+    },
+    ['<A-k>'] = {
+        desc = 'Move up',
+        cmd = { require('smart-splits').resize_up, '<Up>' },
+        mode = { 'n', 'i' },
+    },
+    ['<A-l>'] = {
+        desc = 'Move right',
+        cmd = { require('smart-splits').resize_right, '<Right>' },
+        mode = { 'n', 'i' },
+    },
+    ['<C-Left>'] = {
+        desc = 'Move left',
+        cmd = require('smart-splits').move_cursor_left,
+        mode = 'n',
+    },
+    ['<C-Down>'] = {
+        desc = 'Move down',
+        cmd = require('smart-splits').move_cursor_down,
+        mode = 'n',
+    },
+    ['<C-Up>'] = {
+        desc = 'Move up',
+        cmd = require('smart-splits').move_cursor_up,
+        mode = 'n',
+    },
+    ['<C-Right>'] = {
+        desc = 'Move right',
+        cmd = require('smart-splits').move_cursor_right,
+        mode = 'n',
+    },
+    ['<A-Left>'] = {
+        desc = 'Move left',
+        cmd = { require('smart-splits').resize_left, '<Left>' },
+        mode = { 'n', 'i' },
+    },
+    ['<A-Down>'] = {
+        desc = 'Move down',
+        cmd = { require('smart-splits').resize_down, '<Down>' },
+        mode = { 'n', 'i' },
+    },
+    ['<A-Up>'] = {
+        desc = 'Move up',
+        cmd = { require('smart-splits').resize_up, '<Up>' },
+        mode = { 'n', 'i' },
+    },
+    ['<A-Right>'] = {
+        desc = 'Move right',
+        cmd = { require('smart-splits').resize_right, '<Right>' },
+        mode = { 'n', 'i' },
+    },
+
+    ---------------------- manipulate buffers -----------------------
     ['H'] = {
-        desc = 'Move to left window',
-        cmd = '<C-w>h',
-        {silent = true, noremap = true},
-    },
-    ['J'] = {
-        desc = 'Move to below window',
-        cmd = '<C-w>j',
-        {silent = true, noremap = true},
-    },
-    ['K'] = {
-        desc = 'Move to above window',
-        cmd = '<C-w>k',
-        {silent = true, noremap = true},
+        desc = 'Move to next buffer',
+        cmd = '<cmd>BufferLineCyclePrev<cr>',
+        { silent = true, noremap = true },
     },
     ['L'] = {
-        desc = 'Move to right window',
-        cmd = '<C-w>l',
-        {silent = true, noremap = true},
+        desc = 'Move to prev buffer',
+        cmd = '<cmd>BufferLineCycleNext<cr>',
+        { silent = true, noremap = true },
     },
-    ["'"] = {
-        desc = 'Blackhole delete',
-        cmd = '"_',
-        mode = {'n', 'v'},
+    ['<C-H>'] = {
+        desc = 'Move buffer to prev',
+        cmd = '<cmd>BufferLineMovePrev<cr>',
+        { silent = true, noremap = true },
     },
+    ['<C-L>'] = {
+        desc = 'Move buffer to next',
+        cmd = '<cmd>BufferLineMoveNext<cr>',
+        { silent = true, noremap = true },
+    },
+
+    --------------------------- LSP gotos ---------------------------
     ['gd'] = {
         desc = '[g]oto [d]efinition',
         cmd = vim.lsp.buf.definition,
@@ -87,14 +131,43 @@ return {
         desc = '[p]eek at definition',
         cmd = '<cmd> Lspsaga peek_definition <cr>',
     },
-    ['<C-k>'] = {
+
+    --------------------------- LSP other ---------------------------
+    ['K'] = {
         desc = 'hover documentation',
         cmd = vim.lsp.buf.hover,
     },
-    ['<C-j>'] = {
+    ['J'] = {
         desc = 'signature documentation',
         cmd = vim.lsp.buf.signature_help,
     },
+
+    ----------------------------- other -----------------------------
+
+    ["'"] = {
+        desc = 'Blackhole delete',
+        cmd = '"_',
+        mode = { 'n', 'v' },
+    },
+    ['<C-s>'] = {
+        desc = 'Save file',
+        cmd = { '<cmd>w<cr>', '<Esc><cmd>w<cr>a' },
+        mode = { 'n', 'i' },
+    },
+    ['<cr>'] = {
+        desc = 'Clear highlighting',
+        cmd = '<Esc>:noh<cr><cr>',
+        mode = 'n',
+        opts = { silent = true },
+    },
+    ['<Esc>'] = {
+        desc = 'Fixing escape in terminal',
+        cmd = { '<C-\\><C-n>' },
+        mode = { 't' },
+        opts = { silent = true, noremap = true },
+    },
+
+    --------------------------- prefixes ----------------------------
     ['g'] = {
         desc = '+Movement and other',
         cmd = false,

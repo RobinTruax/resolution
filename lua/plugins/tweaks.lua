@@ -2,11 +2,12 @@
 
 all 'small tweak' plugins
 
--------------------------------------------------------------]]--
+-------------------------------------------------------------]]
+                                                                --
 
 return {
 
------------ todo-comments: highlighted todo comments ------------
+    ----------- todo-comments: highlighted todo comments ------------
     {
         'folke/todo-comments.nvim',
 
@@ -73,7 +74,7 @@ return {
         }
     },
 
--------------- nvim-colorizer: coloring hex codes ---------------
+    -------------- nvim-colorizer: coloring hex codes ---------------
     {
         'NvChad/nvim-colorizer.lua',
 
@@ -100,7 +101,7 @@ return {
         end
     },
 
--------- range-highlight.nvim: highlight cmdline ranges ---------
+    -------- range-highlight.nvim: highlight cmdline ranges ---------
     {
         'winston0410/range-highlight.nvim',
 
@@ -113,7 +114,22 @@ return {
         config = true
     },
 
----------- modicator.nvim: color changing line number -----------
+    {
+        'tzachar/highlight-undo.nvim',
+
+        event = { 'BufReadPost', 'BufNewFile' },
+
+        opts = {
+            hlgroup = 'Visual',
+            duration = 200,
+            keymaps = {
+                { 'n', 'u',     'undo', {} },
+                { 'n', '<C-r>', 'redo', {} },
+            }
+        }
+    },
+
+    ---------- modicator.nvim: color changing line number -----------
     {
         'mawkler/modicator.nvim',
 

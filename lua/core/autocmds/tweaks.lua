@@ -4,10 +4,13 @@ autocommands for any tweaks (mostly taken from LazyVim)
 
 -------------------------------------------------------------]]--
 
------------------------ highlight on yank -----------------------
+-- ----------------------- highlight on yank -----------------------
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
-    vim.highlight.on_yank()
+    vim.highlight.on_yank({
+        timeout = 200, 
+        higroup = 'Visual'
+    })
   end,
 })
 
@@ -20,7 +23,10 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "q", "<cmd>close<cr>", {
+        buffer = event.buf, 
+        silent = true
+    })
   end,
 })
 
@@ -30,8 +36,10 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>ToggleTerm<cr>",
-        { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "q", "<cmd>ToggleTerm<cr>", {
+        buffer = event.buf, 
+        silent = true
+    })
   end,
 })
 

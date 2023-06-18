@@ -31,7 +31,7 @@ opt.wrap           = true  -- soft line wrapping
 opt.linebreak      = true  -- no line breaks in the middle of words
 opt.list           = false -- no line breaks in middle of word
 
-opt.scrolloff      = 8     -- # of guaranteed lines at top & bottom
+opt.scrolloff      = 5     -- # of guaranteed lines at top & bottom
 opt.pumheight      = 5     -- maximum size of pop-up menu
 opt.cmdheight      = 1     -- height of command line prompt
 opt.showmode       = false -- show INSERT MODE message in command line
