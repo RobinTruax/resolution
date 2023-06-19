@@ -142,17 +142,6 @@ return {
                     lualine_y = { 'branch' },
                     lualine_z = { 'location' },
                 },
-                -- winbar = {
-                --     lualine_c = {
-                --         'navic',
-                --         color_correction = nil,
-                --         navic_opts = nil
-                --     },
-                --     lualine_x = { 'location' },
-                -- },
-                -- inactive_winbar = {
-                --     lualine_x = { 'location' },
-                -- },
             })
         end
     },
@@ -166,12 +155,30 @@ return {
             'SmiteshP/nvim-navic',
             'nvim-tree/nvim-web-devicons',
         },
-        opts = {
-            show_dirname = false,
-            show_basename = true,
-            show_modified = true,
-        },
         event = 'VeryLazy',
+        config = function()
+            vim.opt.updatetime = 200
+
+            require('barbecue').setup({
+                create_autocmd = false,
+                show_dirname = false,
+                show_basename = true,
+                show_modified = true,
+            })
+
+            vim.api.nvim_create_autocmd({
+                'WinScrolled',
+                'BufWinEnter',
+                'CursorHold',
+                'InsertLeave',
+                'BufModifiedSet',
+            }, {
+                group = vim.api.nvim_create_augroup('barbecue.updater', {}),
+                callback = function()
+                    require('barbecue.ui').update()
+                end,
+            })
+        end
     },
 }
 -----------------------------------------------------------------

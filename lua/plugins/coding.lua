@@ -2,44 +2,27 @@
 
 all plugins relating to LSP, autocompletion, snippets, etc.
 
--------------------------------------------------------------]]--
+-------------------------------------------------------------]]
 
 return {
 
---------- nvim-lspconfig: configuration of built-in lsp ---------
+    --------- nvim-lspconfig: configuration of built-in lsp ---------
     {
         'neovim/nvim-lspconfig',
-
         ft = { 'tex', 'py', 'lua' },
-
         dependencies = {
-            {
-                'williamboman/mason.nvim',
-                config = true
-            },
-            {
-                'williamboman/mason-lspconfig.nvim'
-            },
-            {
-                'j-hui/fidget.nvim',
-                opts = {},
-                pin = true,
-                tag = 'legacy',
-            },
-            {
-                'folke/neodev.nvim',
-            },
-            {
-                'SmiteshP/nvim-navbuddy',
-            }
+            { 'williamboman/mason.nvim', config = true },
+            { 'williamboman/mason-lspconfig.nvim' },
+            { 'j-hui/fidget.nvim', opts = {}, pin = true, tag = 'legacy' },
+            { 'folke/neodev.nvim' },
+            { 'SmiteshP/nvim-navbuddy' }
         },
-
         config = function()
             -- list of servers to install
             local servers = {
                 lua_ls = {
                     Lua = {
-                        workspace = { checkThirdParty = false },
+                        workspace = {  },
                         telemetry = { enable = false },
                     },
                 },
@@ -62,7 +45,7 @@ return {
 
             -- installing lsps
             local mason_lspconfig = require('mason-lspconfig')
-            mason_lspconfig.setup({ensure_installed = vim.tbl_keys(servers)})
+            mason_lspconfig.setup({ ensure_installed = vim.tbl_keys(servers) })
             mason_lspconfig.setup_handlers({
                 function(server_name)
                     require('lspconfig')[server_name].setup {
@@ -75,16 +58,13 @@ return {
 
             -- neodev for neovim development
             require('neodev').setup()
-
         end
     },
 
-------------------- nvim-cmp: autocompletion --------------------
+    ------------------- nvim-cmp: autocompletion --------------------
     {
         'hrsh7th/nvim-cmp',
-
         event = 'InsertEnter',
-
         dependencies = {
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
@@ -93,9 +73,7 @@ return {
             'uga-rosa/cmp-dictionary',
             'rafamadriz/friendly-snippets',
         },
-
         config = function()
-
             -- setup for completion
             local cmp = require('cmp')
             local luasnip = require('luasnip')
@@ -128,21 +106,21 @@ return {
             local dict = require('cmp_dictionary')
             dict.switcher({
                 filetype = {
-                    tex = { vim.fn.stdpath('config')..'/lua/tex/dictionary/basic.txt' }
+                    tex = { vim.fn.stdpath('config') .. '/lua/tex/dictionary/basic.txt' }
                 },
             })
         end
     },
 
 
------------------ nvim-navic: winbar navigation -----------------
+    ----------------- nvim-navic: winbar navigation -----------------
     {
         'SmiteshP/nvim-navic',
         dependencies = 'neovim/nvim-lspconfig',
         lazy = true
     },
 
-------------- nvim-navbuddy: navigation pop-up menu -------------
+    ------------- nvim-navbuddy: navigation pop-up menu -------------
     {
         'SmiteshP/nvim-navbuddy',
         dependencies = {
@@ -152,23 +130,26 @@ return {
         },
         lazy = true,
         config = function()
+            local border = 'single'
+            if require('config.aesthetics').ui_borderless == true then
+                border = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+            end
             require('nvim-navbuddy').setup({
                 window = {
-                    -- border = 'none',
-                    size = {height = '50%', width = '100%'},
+                    size = { height = '30%', width = '100%' },
                     position = '100%',
                     sections = {
                         left = {
                             size = '33.33%',
-                            border = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                            border = border
                         },
                         mid = {
                             size = '33.33%',
-                            border = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                            border = border
                         },
                         right = {
                             preview = 'never',
-                            border = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                            border = border
                         }
                     },
                 },
@@ -176,7 +157,7 @@ return {
         end
     },
 
----------------- lspsaga.nvim: more lsp features ----------------
+    ---------------- lspsaga.nvim: more lsp features ----------------
     {
         'glepnir/lspsaga.nvim',
         event = 'LspAttach',
