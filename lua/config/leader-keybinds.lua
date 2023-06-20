@@ -13,9 +13,9 @@ return {
 
     --------------------------- top-level ---------------------------
 
-    ['a'] = {
-        desc = 'Toggle [a]utosnippets',
-        cmd = ''
+    ['b'] = {
+        desc = 'search [b]uffers',
+        cmd = '<cmd> Telescope buffers <cr>'
     },
     ['d'] = {
         desc = '[d]elete buffer',
@@ -81,6 +81,10 @@ return {
         desc = '[v]iew file in project',
         cmd = ''
     },
+    ['V'] = {
+        desc = '[V]iew project',
+        cmd = require('core.menus.projects').project_menu
+    },
 
     -------------------------- windows (w) --------------------------
 
@@ -134,33 +138,6 @@ return {
     },
     ['ws'] = {
         desc = 'Swap windows',
-        cmd = ''
-    },
-
-    -------------------------- buffers (b) --------------------------
-
-    ['b'] = {
-        desc = '[b]uffers',
-        cmd = false,
-    },
-    ['bp'] = {
-        desc = 'Pin buffer',
-        cmd = ''
-    },
-    ['bs'] = {
-        desc = 'Pick buffer',
-        cmd = ''
-    },
-    ['bd'] = {
-        desc = 'Pick and delete buffer',
-        cmd = ''
-    },
-    ['br'] = {
-        desc = 'Remember session',
-        cmd = ''
-    },
-    ['bS'] = {
-        desc = 'Search sessions',
         cmd = ''
     },
 
@@ -285,12 +262,16 @@ return {
         desc = '[a]rchive project',
         cmd = ''
     },
+    ['fu'] = {
+        desc = '[u]narchive project',
+        cmd = ''
+    },
     ['fe'] = {
         desc = '[e]dit project',
         cmd = ''
     },
     ['fn'] = {
-        desc = '[n]ew file in project',
+        desc = '[n]ew file from template',
         cmd = ''
     },
 

@@ -47,7 +47,7 @@ return {
     ------------------------ telescope.nvim -------------------------
     {
         'nvim-telescope/telescope.nvim',
-        cmd = 'Telescope',
+        cmd = { 'Telescope', 'TelescopeLoad' },
         dependencies = {
             'nvim-lualine/lualine.nvim',
             'akinsho/bufferline.nvim',
@@ -60,10 +60,14 @@ return {
         },
 
         config = function()
+            -- command for manual loading
+            vim.api.nvim_create_user_command('TelescopeLoad', '', {})
+
             -- basic setup
             require('telescope').setup({
                 defaults = {
                     path_display = { truncate = 0 },
+                    sorting_strategy = 'ascending',
                     layout_strategy = 'horizontal',
                     prompt_prefix = '  ',
                     selection_caret = '  ',
@@ -76,28 +80,25 @@ return {
                         preview_width = 0.5,
                     },
                 },
+                pickers = {
+                    buffers = {
+                    },
+                    lsp_document_symbols = {
+                        prompt_title = 'Jump in Document',
+                        ignore_symbols = { 'enum', 'enummember', 'constant' },
+                    },
+                    lsp_workspace_symbols = {
+                        prompt_title = 'Jump in Project',
+                    }
+                }
             })
 
-            -- proper placement
-            local resolve = require('telescope.config.resolve')
-            resolve.resolve_anchor_pos = function(anchor, p_width, p_height, max_columns, max_lines)
-                anchor = anchor:upper()
-                local pos = { 0, 0 }
-                if anchor == 'CENTER' then
-                    return pos
-                end
-                if anchor:find 'W' then
-                    pos[1] = math.ceil((p_width - max_columns) / 2) + 1
-                elseif anchor:find 'E' then
-                    pos[1] = math.ceil((max_columns - p_width) / 2) - 1
-                end
-                if anchor:find 'N' then
-                    pos[2] = math.ceil((p_height - max_lines) / 2) + 1
-                elseif anchor:find 'S' then
-                    pos[2] = math.ceil((max_lines - p_height) / 2)
-                end
-                return pos
-            end
+            -- overwrite various entry makers
+            require('core.menus.buffers')
+            require('core.menus.lsp_symbols')
+
+            -- fix placement
+            require('core.menus.fix_anchor')
 
             -- wrapping
             vim.api.nvim_create_autocmd('User', {
@@ -108,6 +109,7 @@ return {
                 end,
             })
 
+            -- extensions
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('neoclip')
             require('telescope').load_extension('undo')

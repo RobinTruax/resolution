@@ -12,7 +12,7 @@ local aesthetics = require('config.aesthetics')
 ui.macro_recording_sl = function()
     local recording_register = vim.fn.reg_recording()
     if recording_register == "" then
-        return ""
+        return "      "
     else
         return "rec @" .. recording_register
     end
