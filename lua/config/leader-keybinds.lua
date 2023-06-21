@@ -21,40 +21,43 @@ return {
         desc = '[d]elete buffer',
         cmd = require('core.ui').buf_del_wrapper
     },
+    ['D'] = {
+        desc = '[D]elete all buffers',
+        cmd = function()
+            vim.cmd('bufdo :Bdelete')
+            require('mini.starter').open()
+        end
+    },
     ['e'] = {
-        desc = 'File [e]xplorer',
+        desc = '[e]xplore document',
+        cmd = require('nvim-navbuddy').open
+    },
+    ['E'] = {
+        desc = '[E]xplore files',
         cmd = '<cmd> NvimTreeFindFileToggle <cr>'
+    },
+    ['F'] = {
+        desc = '[F]ormat code',
+        cmd = vim.lsp.buf.format,
     },
     ['h'] = {
         desc = '[h]elp and doc.',
         cmd = '<cmd> e ' .. vim.fn.stdpath('config') .. '/documentation.md <cr>'
     },
     ['j'] = {
-        desc = '[j]ump list',
-        cmd = function() require('nvim-navbuddy').open() end
+        desc = '[j]ump in document',
+        cmd = '<cmd> Telescope lsp_document_symbols <cr>'
     },
     ['J'] = {
-        desc = 'flat [J]ump list',
-        cmd = ''
+        desc = '[J]ump in project',
+        cmd = '<cmd> Telescope lsp_workspace_symbols <cr>'
     },
-    ['l'] = {
-        desc = '[l]atex compilation',
+    ['L'] = {
+        desc = '[L]atex compilation',
         cmd = '<cmd> VimtexCompile <cr>'
     },
-    ['m'] = {
-        desc = 'Open [m]ath project',
-        cmd = ''
-    },
-    ['n'] = {
-        desc = 'The [n]apkin',
-        cmd = ''
-    },
-    ['N'] = {
-        desc = 'The [N]otebook',
-        cmd = ''
-    },
-    ['P'] = {
-        desc = '[P]eek at definition',
+    ['p'] = {
+        desc = '[p]eek at reference',
         cmd = '<cmd> Lspsaga peek_definition <cr>',
     },
     ['q'] = {
@@ -65,25 +68,21 @@ return {
         desc = '[q]uit/save all',
         cmd = '<cmd> wqa <cr>'
     },
-    ['r'] = {
-        desc = '[r]sltn start',
-        cmd = function() require('mini.starter').open() end
+    ['S'] = {
+        desc = '[S]tart screen',
+        cmd = require('mini.starter').open
     },
-    ['R'] = {
-        desc = '[R]sltn start w/ split',
-        cmd = '<C-w>v <C-w>w <cmd> lua require("mini.starter").open() <cr>',
-    },
-    ['T'] = {
-        desc = '[T]erminal',
+    ['t'] = {
+        desc = '[t]erminal',
         cmd = '<cmd> ToggleTerm <cr>'
     },
     ['v'] = {
         desc = '[v]iew file in project',
-        cmd = ''
+        cmd = require('filesys.project_menu').file_menu_wrapper
     },
     ['V'] = {
         desc = '[V]iew project',
-        cmd = require('core.menus.projects').project_menu
+        cmd = require('filesys.project_menu').project_menu
     },
 
     -------------------------- windows (w) --------------------------
@@ -128,14 +127,6 @@ return {
         desc = 'Close other windows',
         cmd = ''
     },
-    ['wh'] = {
-        desc = 'Horizontal split',
-        cmd = ''
-    },
-    ['wv'] = {
-        desc = 'Vertical split',
-        cmd = ''
-    },
     ['ws'] = {
         desc = 'Swap windows',
         cmd = ''
@@ -144,12 +135,12 @@ return {
     ------------------------ preferences (p) ------------------------
 
 
-    ['p'] = {
-        desc = '[p]references',
+    ['o'] = {
+        desc = '[o]ptions',
         cmd = false,
     },
-    ['pc'] = {
-        desc = 'Choose colorscheme',
+    ['oc'] = {
+        desc = '[c]olorscheme',
         cmd = ''
     },
     ['pd'] = {
@@ -201,51 +192,51 @@ return {
     },
     ['se'] = {
         desc = 'System file [e]xplorer',
-        cmd = ''
+        cmd = '<cmd> call system("xdg-open "..expand("%:p:h"))<cr>'
     },
     ['sf'] = {
         desc = '[s]earch [f]iles (root)',
-        cmd = ''
+        cmd = '<cmd> Telescope find_files cwd=~ <cr>'
     },
     ['sh'] = {
         desc = '[s]earch [h]idden files (root)',
-        cmd = ''
+        cmd = '<cmd> Telescope find_files cwd=~ hidden=true <cr>'
     },
     ['sc'] = {
         desc = '[s]earch [c]ommand history',
-        cmd = ''
+        cmd = '<cmd> Telescope command_history <cr>'
     },
     ['ss'] = {
         desc = '[s]earch [s]earch history',
-        cmd = ''
+        cmd = '<cmd> Telescope search_history <cr>'
     },
     ['sm'] = {
         desc = '[s]earch/rep. [m]ulti. files',
-        cmd = ''
+        cmd = '<cmd> Spectre <cr>'
     },
     ['sg'] = {
         desc = '[g]rep in file',
-        cmd = ''
+        cmd = function()
+            require('telescope.builtin').live_grep({search_dirs = {vim.fn.expand('%:p')}})
+        end,
     },
     ['sG'] = {
         desc = '[G]rep in project',
-        cmd = ''
+        cmd = function()
+            require('telescope.builtin').live_grep({entry_maker = require('plugins.telescope.grep_entry_maker')({path_hidden = false})})
+        end,
     },
-    ['sr'] = {
-        desc = '[r]esume search',
-        cmd = ''
-    },
-    ['sb'] = {
-        desc = '[s]earch [b]ookmarks',
-        cmd = ''
+    ['sw'] = {
+        desc = 'grep [w]ord project',
+        cmd = require('telescope.builtin').grep_string
     },
     ['sy'] = {
         desc = '[s]earch [y]anks',
-        cmd = ''
+        cmd = '<cmd> Telescope neoclip <cr>'
     },
     ['su'] = {
         desc = '[s]earch [u]ndo tree',
-        cmd = ''
+        cmd = '<cmd> Telescope undo <cr>'
     },
 
     ---------------------- file management (f) ----------------------
@@ -256,23 +247,23 @@ return {
     },
     ['fc'] = {
         desc = '[c]reate project',
-        cmd = ''
+        cmd = false,
     },
     ['fa'] = {
         desc = '[a]rchive project',
-        cmd = ''
+        cmd = false,
     },
     ['fu'] = {
         desc = '[u]narchive project',
-        cmd = ''
+        cmd = false,
     },
     ['fe'] = {
         desc = '[e]dit project',
-        cmd = ''
+        cmd = false,
     },
     ['fn'] = {
         desc = '[n]ew file from template',
-        cmd = ''
+        cmd = false,
     },
 
     ----------------------- git and github (g) ----------------------
@@ -281,95 +272,76 @@ return {
         desc = '[g]it and github',
         cmd = false,
     },
-    ['gg'] = {
-        desc = 'lazygit.nvim',
+    ['gl'] = {
+        desc = '[l]azy[g]it',
         cmd = '<cmd> LazyGitCurrentFile <cr>',
     },
     ['ga'] = {
         desc = 'Update [a]ll reg. repos',
-        cmd = ''
+        cmd = false,
     },
     ['gb'] = {
         desc = 'Update [b]uilt-in repos',
-        cmd = ''
+        cmd = false,
     },
     ['gu'] = {
         desc = 'Update [u]ser repos',
-        cmd = ''
+        cmd = false,
     },
     ['gr'] = {
         desc = 'Create [r]epo from project',
-        cmd = ''
+        cmd = false,
     },
     ['gc'] = {
         desc = '[c]reate project from repo',
-        cmd = ''
+        cmd = false,
     },
     ['gp'] = {
         desc = 'Toggle file [p]ublicity',
-        cmd = ''
+        cmd = false,
     },
     ['gP'] = {
         desc = 'Toggle project [p]ublicity',
-        cmd = ''
+        cmd = false,
     },
     ['gh'] = {
         desc = 'Configure [g]it[h]ub user',
-        cmd = ''
+        cmd = false,
     },
 
     ---------------------- tex operations (t) -----------------------
 
-    ['t'] = {
+    ['l'] = {
         desc = '[t]ex operations',
         cmd = false,
     },
-    ['tc'] = {
-        desc = 'La[t]ex [c]ite',
-        cmd = ''
-    },
-    ['tm'] = {
-        desc = 'La[t]ex [m]atrices',
-        cmd = ''
-    },
-    ['tt'] = {
-        desc = 'La[t]ex [t]tables',
-        cmd = ''
-    },
-    ['td'] = {
-        desc = 'La[t]ex new [d]efinition',
-        cmd = ''
-    },
-    ['tr'] = {
-        desc = 'La[t]ex [r]eferences',
-        cmd = ''
-    },
-    ['te'] = {
-        desc = 'La[t]ex [e]rrors',
-        cmd = ''
-    },
-    ['ts'] = {
-        desc = 'La[t]ex sync[t]ex',
-        cmd = ''
-    },
-    ['tx'] = {
-        desc = 'La[t]ex clean au[x]',
-        cmd = ''
-    },
-
-    ---------------------- code operations (c) ----------------------
-
-    ['c'] = {
-        desc = '[c]ode operations',
+    ['lc'] = {
+        desc = '[l]atex [c]ite',
         cmd = false,
     },
-    ['cf'] = {
-        desc = '[f]ormat code',
-        cmd = vim.lsp.buf.format,
+    ['lm'] = {
+        desc = '[l]atex [m]atrices',
+        cmd = false,
     },
-    ['cr'] = {
-        desc = '[r]ename',
-        cmd = vim.lsp.buf.rename,
+    ['lt'] = {
+        desc = '[l]atex [t]tables',
+        cmd = false,
+    },
+    ['lr'] = {
+        desc = '[l]atex [r]eferences',
+        cmd = false,
+    },
+    ['le'] = {
+        desc = '[l]atex [e]rrors',
+        cmd = false,
+    },
+    ['ls'] = {
+        desc = '[l]atex sync[t]ex',
+        cmd = false,
+    },
+    ['lx'] = {
+        desc = '[l]atex clean au[x]',
+        cmd = false,
     },
 
     ---------------------- tex extensions (x) -----------------------

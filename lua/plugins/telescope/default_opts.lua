@@ -7,7 +7,7 @@ return {
     layout_config = {
         anchor = 's',
         height = 0.5,
-        width = 0.9999,
+        width = 1000,
         prompt_position = 'top',
         preview_cutoff = 0,
         preview_width = 0.5,

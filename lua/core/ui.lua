@@ -36,8 +36,6 @@ ui.get_borders_or_less = function()
     end
 end
 
------------------------------------------------------------------
-
 -------------- better buffer delete functionality ---------------
 
 ui.buf_del_wrapper = function()
@@ -50,4 +48,19 @@ ui.buf_del_wrapper = function()
         vim.cmd('Bdelete')
     end
 end
+
+ui.buf_del_all_wrapper = function()
+    if require('nvim-tree.view').is_visible() then
+        vim.cmd('NvimTreeToggle')
+        vim.cmd('bufdo :Bdelete')
+        vim.cmd('NvimTreeToggle')
+        vim.cmd('wincmd w')
+    else
+        vim.cmd('bufdo :Bdelete')
+        require('mini.starter').open()
+    end
+end
+
+-----------------------------------------------------------------
+
 return ui
