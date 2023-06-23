@@ -4,7 +4,9 @@ autocommands for any tweaks (mostly taken from LazyVim)
 
 -------------------------------------------------------------]]--
 
--- ----------------------- highlight on yank -----------------------
+local prefs = require('config.preferences')
+
+-------------------------- highlight on yank -----------------------
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank({
@@ -43,5 +45,18 @@ vim.api.nvim_create_autocmd('FileType', {
     })
   end,
 })
+
+---------------------- backup autocommand -----------------------
+
+if prefs.timestamp_backup then
+    vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup('timestamp_backupext', { clear = true }),
+        desc = 'Add timestamp to backup extension',
+        pattern = '*',
+        callback = function()
+            vim.opt.backupext = '-' .. vim.fn.strftime('%Y%m%d%H%M')
+        end,
+    })
+end
 
 -----------------------------------------------------------------

@@ -17,6 +17,22 @@ return {
         desc = 'search [b]uffers',
         cmd = '<cmd> Telescope buffers <cr>'
     },
+    -- ['c'] = {
+    --     desc = '[c]omputational pop-up',
+    --     mode = { 'n', 'v' },
+    --     cmd = {
+    --         require('computation.popup').mount,
+    --         require('computation.popup').mount_from_visual
+    --     },
+    -- },
+    ['c'] = {
+        desc = '',
+        mode = { 'n', 'v' },
+        cmd = {
+            require('computation.popup').mount,
+            require('computation.popup').mount_from_visual
+        },
+    },
     ['d'] = {
         desc = '[d]elete buffer',
         cmd = require('core.ui').buf_del_wrapper
@@ -85,55 +101,7 @@ return {
         cmd = require('filesys.project_menu').project_menu
     },
 
-    -------------------------- windows (w) --------------------------
-
-    ['w'] = {
-        desc = '[w]indows',
-        cmd = false,
-    },
-    ['w+'] = {
-        desc = 'Increase win. height',
-        cmd = ''
-    },
-    ['w-'] = {
-        desc = 'Decrease win. height',
-        cmd = ''
-    },
-    ['w>'] = {
-        desc = 'Increase win. width',
-        cmd = ''
-    },
-    ['w<'] = {
-        desc = 'Decrease win. height',
-        cmd = ''
-    },
-    ['w_'] = {
-        desc = 'Maximize win. height',
-        cmd = ''
-    },
-    ['w|'] = {
-        desc = 'Maximize win. width',
-        cmd = ''
-    },
-    ['w='] = {
-        desc = 'Equalize windows',
-        cmd = ''
-    },
-    ['wq'] = {
-        desc = 'Close window',
-        cmd = ''
-    },
-    ['wo'] = {
-        desc = 'Close other windows',
-        cmd = ''
-    },
-    ['ws'] = {
-        desc = 'Swap windows',
-        cmd = ''
-    },
-
     ------------------------ preferences (p) ------------------------
-
 
     ['o'] = {
         desc = '[o]ptions',
@@ -143,43 +111,43 @@ return {
         desc = '[c]olorscheme',
         cmd = ''
     },
-    ['pd'] = {
+    ['od'] = {
         desc = 'Toggle dark mode',
         cmd = ''
     },
-    ['pw'] = {
+    ['ow'] = {
         desc = 'Toggle word wrap',
         cmd = ''
     },
-    ['pn'] = {
+    ['on'] = {
         desc = 'Toggle numbering',
         cmd = ''
     },
-    ['pr'] = {
+    ['or'] = {
         desc = 'Toggle relative numbering',
         cmd = ''
     },
-    ['pv'] = {
+    ['ov'] = {
         desc = 'Toggle virtual editing',
         cmd = ''
     },
-    ['ps'] = {
+    ['os'] = {
         desc = 'Toggle autosnippets',
         cmd = ''
     },
-    ['pm'] = {
+    ['om'] = {
         desc = 'Toggle autocomplete',
         cmd = ''
     },
-    ['pi'] = {
+    ['oi'] = {
         desc = 'Toggle autoindent',
         cmd = ''
     },
-    ['pl'] = {
+    ['ol'] = {
         desc = 'Toggle conceal',
         cmd = ''
     },
-    ['pz'] = {
+    ['oz'] = {
         desc = 'Toggle spell-checker',
         cmd = ''
     },
@@ -217,13 +185,14 @@ return {
     ['sg'] = {
         desc = '[g]rep in file',
         cmd = function()
-            require('telescope.builtin').live_grep({search_dirs = {vim.fn.expand('%:p')}})
+            require('telescope.builtin').live_grep({ search_dirs = { vim.fn.expand('%:p') } })
         end,
     },
     ['sG'] = {
         desc = '[G]rep in project',
         cmd = function()
-            require('telescope.builtin').live_grep({entry_maker = require('plugins.telescope.grep_entry_maker')({path_hidden = false})})
+            require('telescope.builtin').live_grep({
+                entry_maker = require('plugins.telescope.grep_entry_maker')({ path_hidden = false }) })
         end,
     },
     ['sw'] = {

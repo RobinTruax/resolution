@@ -139,8 +139,7 @@ end, {})
 --------------------------- main menu ---------------------------
 
 projects.project_menu = function(opts)
-    vim.cmd('TelescopeLoad')
-    local opts = require('core.menus.default_opts')
+    local opts = opts or {}
     pickers.new(opts, {
         prompt_title = "Open Project",
         finder = finders.new_table {
@@ -172,7 +171,6 @@ end
 ------------------- wrapper for choosing file -------------------
 
 projects.file_menu_wrapper = function()
-    vim.cmd('TelescopeLoad')
     if states.active_project_path == 'EMPTY' or vim.fn.getcwd() ~= states.active_project_path then
         vim.cmd('echo "Diverting to project selection."')
         projects.project_menu()

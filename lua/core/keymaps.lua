@@ -29,7 +29,11 @@ end
 for k, v in pairs(leader_keybinds) do
     local opts = v.opts or {}
     opts['desc'] = v.desc
-    if type(v.cmd) ~= 'boolean' then
+    if type(v.cmd) == 'table' then
+        for l, w in ipairs(v.cmd) do
+            map(v.mode[l], vim.g.mapleader..k, w, opts)
+        end
+    elseif type(v.cmd) ~= 'boolean' then
         local mode = v.mode or 'n'
         map(mode, vim.g.mapleader..k, v.cmd, opts)
     end

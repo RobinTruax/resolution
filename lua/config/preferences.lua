@@ -75,6 +75,7 @@ opt.swapfile              = false                          -- enable swapfiles
 
 opt.clipboard = 'unnamedplus' -- unify system & vim clipboard
 prefs.number_recent_files = 5
+prefs.timestamp_backup = true
 opt.fillchars='eob: '
 
 -----------------------------------------------------------------

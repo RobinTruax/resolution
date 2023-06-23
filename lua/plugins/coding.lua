@@ -62,6 +62,27 @@ return {
         end
     },
 
+    {
+        'L3MON4D3/LuaSnip',
+        version = '*',
+        build = 'make install_jsregexp',
+        dependencies = {
+            'rafamadriz/friendly-snippets',
+        },
+        config = function ()
+            local ls = require('luasnip')
+            require('luasnip.loaders.from_lua').load({ paths = './lua/snippets' })
+
+            ls.config.set_config({
+                history = false,
+                updateevents = 'TextChangedI',
+                enable_autosnippets = true,
+            })
+
+            vim.cmd("imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'")
+        end
+    },
+
     ------------------- nvim-cmp: autocompletion --------------------
     {
         'hrsh7th/nvim-cmp',
