@@ -9,6 +9,8 @@ local f = ls.function_node
 local d = ls.dynamic_node
 local fmta = require("luasnip.extras.fmt").fmta
 
+local ts_utils = require('snippets.treesitter-utils')
+
 ----------------------- utility functions -----------------------
 
 local function parse_label(input)
@@ -34,7 +36,9 @@ local function create_environment_snippet_theorem(name, trigger, environment, ab
             trig = trigger,
             name = name,
             hidden = true,
-            condition = line_begin,
+            -- condition = function()
+            --     ts_utils.in_text(true)
+            -- end,
         },
         fmta(string.format([[
     \begin{%s}[<>]\label{%s:<>}
@@ -64,7 +68,7 @@ local function create_environment_snippet_basic(name, trigger, environment)
 end
 
 local function create_environment_snippet_enumerate(name, trigger, environment, label)
-    local label = label or ''
+    label = label or ''
     if label ~= '' then
         label = '[label=('..label..')]'
     end
