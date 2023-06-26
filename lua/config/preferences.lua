@@ -15,6 +15,7 @@ local cfg = vim.fn.stdpath('config')
 ----------------------- necessary settings ----------------------
 
 prefs.project_root_path = '/home/roshan/Documents/Mathematics/'
+prefs.format_style_file = vim.fn.stdpath('config')..'/tex/format-style.yaml'
 
 -------------------------- leader keys --------------------------
 
@@ -70,6 +71,7 @@ opt.undolevels            = 1000                           -- max number of undo
 opt.undofile              = true                           -- enable permanent undo file
 opt.backup                = true                           -- enable backups
 opt.swapfile              = false                          -- enable swapfiles
+opt.autoread              = true                           -- automatically reread buffers
 
 ------------------------- miscellaneous -------------------------
 

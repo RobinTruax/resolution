@@ -11,9 +11,9 @@ return {
         'neovim/nvim-lspconfig',
         ft = { 'tex', 'py', 'lua' },
         dependencies = {
-            { 'williamboman/mason.nvim', config = true },
+            { 'williamboman/mason.nvim',          config = true },
             { 'williamboman/mason-lspconfig.nvim' },
-            { 'j-hui/fidget.nvim', opts = {}, pin = true, tag = 'legacy' },
+            { 'j-hui/fidget.nvim',                opts = {},    pin = true, tag = 'legacy' },
             { 'folke/neodev.nvim' },
             { 'SmiteshP/nvim-navbuddy' },
             { 'utilyre/barbecue.nvim' },
@@ -23,11 +23,9 @@ return {
             local servers = {
                 lua_ls = {
                     Lua = {
-                        workspace = {  },
+                        workspace = {},
                         telemetry = { enable = false },
                     },
-                },
-                pyright = {
                 },
                 texlab = {
                 },
@@ -69,7 +67,7 @@ return {
         dependencies = {
             'rafamadriz/friendly-snippets',
         },
-        config = function ()
+        config = function()
             local ls = require('luasnip')
             require('luasnip.loaders.from_lua').load({ paths = './lua/snippets' })
 
@@ -80,6 +78,7 @@ return {
             })
 
             vim.cmd("imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'")
+            vim.cmd("inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>")
         end
     },
 
@@ -154,7 +153,7 @@ return {
         config = function()
             local border = 'single'
             if require('config.aesthetics').ui_borderless == true then
-                border = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+                border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }
             end
             require('nvim-navbuddy').setup({
                 window = {

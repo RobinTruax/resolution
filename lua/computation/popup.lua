@@ -159,6 +159,7 @@ end
 
 popup.mount_from_visual = function()
     local visi = popup.get_visual_selection():match('^%s*(.*)')
+    visi = visi:gsub('%s%s+', ' ')
     popup.layout:mount()
     vim.api.nvim_buf_set_lines(popup.input_tex.bufnr, 0, -1, false,
         { visi })

@@ -7,6 +7,19 @@ all plugins relating to UI which are not called on startup
 return {
 
     {
+        'metakirby5/codi.vim',
+        init = function()
+            vim.cmd([[
+            let g:codi#interpreters = {
+                \ 'python': {
+                \ 'bin': 'python3',
+                \ 'prompt': '^\(>>>\|\.\.\.\) ',
+                \ },
+                \ }
+            ]])
+        end
+    },
+    {
         'milanglacier/yarepl.nvim',
         config = function()
             local yarepl = require 'yarepl'
@@ -18,7 +31,7 @@ return {
                 wincmd = 'belowright 15 split',
                 metas = {
                     ipython = { cmd = 'ipython', formatter = yarepl.formatter.bracketed_pasting },
-                    python = { cmd = 'python', formatter = yarepl.formatter.trim_empty_lines },
+                    python = { cmd = 'python3', formatter = yarepl.formatter.trim_empty_lines },
                     R = { cmd = 'R', formatter = yarepl.formatter.trim_empty_lines },
                     bash = { cmd = 'bash', formatter = yarepl.formatter.trim_empty_lines },
                     zsh = { cmd = 'zsh', formatter = yarepl.formatter.bracketed_pasting },
@@ -33,7 +46,7 @@ return {
             }
         end
     },
-    -------------- toggleterm.nvim: a better terminal ---------------
+    -- -------------- toggleterm.nvim: a better terminal ---------------
     {
         'akinsho/toggleterm.nvim',
         version = '*',

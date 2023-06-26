@@ -5,6 +5,8 @@ defines keybinds for rsltn's main operations; these use the
 
 ---------------------------------------------------------------]]
 
+local prefs = require('config.preferences')
+
 return {
     [''] = {
         desc = 'resolution',
@@ -54,7 +56,19 @@ return {
     },
     ['F'] = {
         desc = '[F]ormat code',
-        cmd = vim.lsp.buf.format,
+        cmd = function()
+            if vim.bo.filetype == 'tex' then
+                vim.cmd('write')
+                print('Prettying with latexindent.')
+                local filename = vim.fn.expand('%:p')
+                local format_style_file = prefs.format_style_file
+                vim.fn.system('latexindent -l '..format_style_file..' -m '..filename..' > '..filename..'-prettied')
+                vim.fn.system('mv '..filename..'-prettied '..filename)
+                vim.cmd('edit')
+            else
+                vim.lsp.buf.format()
+            end
+        end
     },
     ['h'] = {
         desc = '[h]elp and doc.',
