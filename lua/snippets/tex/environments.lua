@@ -9,9 +9,34 @@ local f = ls.function_node
 local d = ls.dynamic_node
 local fmta = require("luasnip.extras.fmt").fmta
 
--- local ts_utils = require('snippets.treesitter-utils')
-
 ----------------------- utility functions -----------------------
+
+------------------------ snippet creator ------------------------
+
+local environment_snippet = function(params)
+    -- sanitize information
+    local environment = params.environment
+    local trigger     = params.trigger
+    local description = params.description or environment:gsub('^%l', string.upper)..' Environment'
+    local options     = params.options or ''
+    local content     = params.content or '    <>'
+    local mathmode    = params.mathmode or false
+    local line        = params.line or 0
+    local label       = params.label or 0
+    local priority    = params.priority or 100
+    local snippets    = params.snippets or {}
+
+    -- create format
+
+    -- create list of nodes
+
+    -- create snippet(s) to return
+
+    -- create sub-snippet(s) to return
+
+    -- return
+end
+
 
 local function parse_label(input)
     return (string.gsub(string.gsub(string.lower(input), '[%s-]+', '_'), '[^%w_]', ''))

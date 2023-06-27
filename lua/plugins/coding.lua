@@ -74,6 +74,7 @@ return {
             ls.config.set_config({
                 history = false,
                 updateevents = 'TextChangedI',
+                store_selection_keys = "<Tab>",
                 enable_autosnippets = true,
             })
 
