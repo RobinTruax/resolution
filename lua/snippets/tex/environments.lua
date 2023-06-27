@@ -1,3 +1,9 @@
+--[[------------------- resolution v0.1.0 -----------------------
+
+environment snippets as configured in config.snippets.environment
+
+---------------------------------------------------------------]]
+
 --------------------- luasnip abbreviations ---------------------
 
 local ls = require("luasnip")
@@ -9,188 +15,102 @@ local f = ls.function_node
 local d = ls.dynamic_node
 local fmta = require("luasnip.extras.fmt").fmta
 
+local utilities = require('snippets.tex.utilities')
+
 ----------------------- utility functions -----------------------
+
+-- strips commands, spaces, and symbols (in that order) from the entered text
+local parse_label = function(input)
+    return (input:gsub('%\\[%a]+%{', ''):gsub('[%s-]+', '_'):gsub('[^%w_]', ''))
+end
+
+-- function to be passed to function snippet
+local label_func = function (arg, _)
+    return parse_label(arg[1][1])
+end
 
 ------------------------ snippet creator ------------------------
 
 local environment_snippet = function(params)
     -- sanitize information
+    -- necessary
     local environment = params.environment
     local trigger     = params.trigger
-    local description = params.description or environment:gsub('^%l', string.upper)..' Environment'
-    local options     = params.options or ''
+    -- format construction
     local content     = params.content or '    <>'
-    local mathmode    = params.mathmode or false
-    local line        = params.line or 0
+    local options     = params.options or ''
     local label       = params.label or 0
+    -- snippet options
+    local line        = params.line or 0
+    local mathmode    = params.mathmode or false
+    local description = params.description or environment:gsub('^%l', string.upper)..' Environment'
     local priority    = params.priority or 100
+    -- other
     local snippets    = params.snippets or {}
 
     -- create format
+    -- label string if necessary
+    local label_string = ''
+    local label_added = 1
+    if label ~= 0 then
+        label_string = '\\label{'..trigger..':<>}'
+        label_added = 0
+    end
+
+    -- format itself
+    local format = string.format([[
+    \begin{%s}%s%s
+    %s
+    \end{%s}
+    ]], environment, options, label_string, content, environment)
 
     -- create list of nodes
+    -- option nodes
+    local nodes = {}
+    for j in options:gmatch('<>') do
+        table.insert(nodes, i(#nodes+1))
+    end
+    -- label node if necessary
+    if label ~= 0 then
+        table.insert(nodes, f(label_func, label))
+    end
+    -- content nodes (including visual capture)
+    local visual_inserted = false
+    for j in content:gmatch('<>') do
+        if visual_inserted == false then
+            table.insert(nodes, d(#nodes+label_added, utilities.extend_visual))
+            visual_inserted = true
+        else
+            table.insert(nodes, i(#nodes+label_added))
+        end
+    end
+
+    -- get condition for expansion
+    local cond = function()
+        return true
+    end
+    if line == 0 and mathmode == false then
+        cond = utilities.in_text_line_begin
+    end
 
     -- create snippet(s) to return
+    -- print(format)
+    return s({
+        trig = trigger,
+        name = description,
+        -- hidden = false,
+        -- condition = cond,
+    }, fmta(format, nodes))
 
     -- create sub-snippet(s) to return
 
     -- return
 end
-
-
-local function parse_label(input)
-    return (string.gsub(string.gsub(string.lower(input), '[%s-]+', '_'), '[^%w_]', ''))
-end
-
-local function extend_visual(_, parent)
-    return sn(nil, { t(parent.snippet.env.SELECT_RAW), i(1) })
-end
-
-local function line_begin(line_to_cursor, matched_trigger)
-    return line_to_cursor:sub(1, -(#matched_trigger + 1)):match("^%s*$")
-end
-
-local function label(arg, _)
-    return parse_label(arg[1][1])
-end
-
------------------- environment snippet creator ------------------
-
-local function create_environment_snippet_theorem(name, trigger, environment, abbreviation)
-    return s({
-            trig = trigger,
-            name = name,
-            hidden = true,
-            -- condition = function()
-            --     ts_utils.in_text(true)
-            -- end,
-        },
-        fmta(string.format([[
-    \begin{%s}[<>]\label{%s:<>}
-        <>
-    \end{%s}
-    ]], environment, abbreviation, environment), {
-            i(1), f(label, 1), d(2, extend_visual)
-        })
-    )
-end
-
-local function create_environment_snippet_basic(name, trigger, environment)
-    return s({
-            trig = trigger,
-            name = name,
-            hidden = false,
-            condition = line_begin,
-        },
-        fmta(string.format([[
-    \begin{%s}
-        <>
-    \end{%s}
-    ]], environment, environment), {
-            d(1, extend_visual)
-        })
-    )
-end
-
-local function create_environment_snippet_enumerate(name, trigger, environment, label)
-    label = label or ''
-    if label ~= '' then
-        label = '[label=('..label..')]'
-    end
-    return s({
-            trig = trigger,
-            name = name,
-            hidden = false,
-            condition = line_begin,
-        },
-        fmta(string.format([[
-    \begin{%s}%s
-        \\item <>
-    \end{%s}
-    ]], environment, label, environment), {
-            i(1)
-        })
-    )
-end
-
-local function create_environment_snippet_custom(name, trigger, environment, extras)
-    local options = extras.options or ''
-    local content = extras.content or ''
-    local suffix = extras.suffix or ''
-
-    local string = string.format([[
-    \begin{%s}%s
-        %s
-    \end{%s}%s
-    ]], environment, options, content, environment, suffix)
-
-    local _, count_nodes = string.gsub(string, "<>", "")
-    local nodes = {}
-    for j = 1, count_nodes, 1 do
-        nodes[j] = i(j)
-    end
-
-    return s({
-            trig = trigger,
-            name = name,
-            hidden = false,
-            condition = line_begin,
-        },
-        fmta(string, nodes)
-    )
-end
------------------ actual snippet specification ------------------
-
-local cest = create_environment_snippet_theorem
-local cesb = create_environment_snippet_basic
-local cese = create_environment_snippet_enumerate
-local cesc = create_environment_snippet_custom
-
 return {
-    -- Creating environment snippets of the form
-    -- \begin{environment}[Name][env:name]
-    --     Content
-    -- \end{environment}
-    -- Usage: cest(name, trigger, environment, label abbreviation)
-    cest('Definition',    'def',    'definition',    'def'),
-    cest('Theorem',       'thm',    'theorem',       'thm'),
-    cest('Proposition',   'prop',   'proposition',   'prop'),
-    cest('Lemma',         'lem',    'lemma',         'lem'),
-    cest('Corollary',     'cor',    'corollary',     'cor'),
-    cest('Conjecture',    'conj',   'conjecture',    'con'),
-    cest('Example',       'exam',   'example',       'ex'),
-    cest('Problem',       'prob',   'problem',       'pr'),
-    cest('Solution',      'sol',    'solution',      'sol'),
-
-    -- Creating environment snippets of the form
-    -- \begin{environment}
-    --    Content
-    -- \end{environment}
-    -- Usage: cesb(name, trigger, environment)
-    cesb('Proof', 'prf', 'proof'),
-    cesb('Center', 'ctr', 'center'),
-    cesb('Align', 'ali', 'align*'),
-
-    -- Creating environment snippets of the form
-    -- \begin{environment}[label=(label)]
-    --     \item 
-    -- \end{environment}
-    -- Usage: cese(name, trigger, environment, [OPTIONAL] label)
-    cese('Unordered List', 'itm', 'itemize'),
-    cese('Enumerated List', 'enm', 'enumerate'),
-    cese('Alphabetical List', 'aenm', 'enumerate', '\\alph*'),
-    cese('Roman-Numbered List', 'renm', 'enumerate', '\\roman*'),
-
-    -- Custom environment snippets
-    -- Creating environment snippets of the form
-    -- \begin{environment}[options]
-    --     content
-    -- \end{environment}suffix
-    -- Usage: cesc(name, trigger, environment, [OPTIONAL] {OPTIONAL options, OPTIONAL content, OPTIONAL suffix})
-    cesc('Code Listing', 'lst', 'lstlisting',
-        {options = '[language = <>]', content = '<>'}
-    ),
-}, {
-    cesb('Equation', 'mk', 'equation*'),
-    cesb('Equation', 'km', 'equation*'),
+    environment_snippet({
+        environment = 'definition',
+        trigger = 'dof',
+        options = '[<>]',
+        label = 1,
+    })
 }
