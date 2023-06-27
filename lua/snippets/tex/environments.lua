@@ -9,7 +9,7 @@ local f = ls.function_node
 local d = ls.dynamic_node
 local fmta = require("luasnip.extras.fmt").fmta
 
-local ts_utils = require('snippets.treesitter-utils')
+-- local ts_utils = require('snippets.treesitter-utils')
 
 ----------------------- utility functions -----------------------
 
