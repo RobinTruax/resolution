@@ -26,11 +26,11 @@ utilities.line_begin = function(line_to_cursor, matched_trigger)
 end
 
 utilities.in_math = function()
-    return (vim.api.nvim.eval('vimtex#syntax#in_mathzone()') == 1)
+    return (vim.fn['vimtex#syntax#in_mathzone']() == 1)
 end
 
 utilities.in_text = function()
-    return (vim.api.nvim.eval('vimtex#syntax#in_mathzone()') == 0)
+    return (vim.fn['vimtex#syntax#in_mathzone']() == 0)
 end
 
 utilities.in_math_line_begin = function(line_to_cursor, matched_trigger)
@@ -71,6 +71,32 @@ end
 
 utilities.extend_visual = function(_, parent)
     return sn(nil, { t(parent.snippet.env.SELECT_RAW), i(1) })
+end
+
+utilities.extend_visual_labeled = function(label)
+    return function(_, parent)
+        if (#parent.snippet.env.SELECT_RAW > 0) then
+            return sn(nil, {t(parent.snippet.env.SELECT_RAW), i(1)})
+        else
+            return sn(nil, i(1, label))
+        end
+    end
+end
+
+utilities.visual = function(_, parent)
+    if (#parent.snippet.env.SELECT_RAW > 0) then
+        return sn(nil, t(parent.snippet.env.SELECT_RAW))
+    else
+        return sn(nil, i(1))
+    end
+end
+
+utilities.cap = function(j)
+    if j >= 0 then
+        return f(function(_, snip) return snip.captures[j] end)
+    else
+        return f(function(_, snip) return snip.captures[#snip.captures + 1 + j] end)
+    end
 end
 
 ---------------------------- return -----------------------------

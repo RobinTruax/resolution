@@ -221,6 +221,14 @@ return {
         desc = '[s]earch [u]ndo tree',
         cmd = '<cmd> Telescope undo <cr>'
     },
+    ['sr'] = {
+        desc = '[s]earch rsltn files',
+        cmd = '<cmd> Telescope find_files cwd=' .. vim.fn.stdpath('config')..' <cr>'
+    },
+    ['sk'] = {
+        desc = '[s]earch keybinds',
+        cmd = '<cmd> Telescope keybinds <cr>'
+    },
 
     ---------------------- file management (f) ----------------------
 

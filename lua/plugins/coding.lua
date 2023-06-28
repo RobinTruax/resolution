@@ -69,7 +69,7 @@ return {
         },
         config = function()
             local ls = require('luasnip')
-            require('luasnip.loaders.from_lua').load({ paths = './lua/snippets' })
+            require('luasnip.loaders.from_lua').lazy_load({ paths = './lua/snippets' })
 
             ls.config.set_config({
                 history = false,

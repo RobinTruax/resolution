@@ -3,11 +3,12 @@ local config           = {}
 --------------------------- settings ----------------------------
 config.automath        = false
 config.autoscript      = false
-config.prefix_patterns = {
-    space_only = '',
-    generic    = '',
-    no_dots    = '',
-    no_dashes  = '',
+config.patterns = {
+    space_only       = '([%s])',
+    generic          = '([%:%p%s])', -- ([%:%s!"#$%&\'()*+,-./[\\%]^_`{|}~])
+    exclude_commands = '([%:%s!"#$%&\'()*+,-./[%]^_`{|}~])',
+    no_dots          = '([%:%s!"#$%&\'()+,%-/[\\%]^_`{|}~])',
+    no_dashes        = '([%:%s!"#$%&\'()*+,./[\\%]^_`{|}~])',
 }
 config.greek_letters   = {
     [';a']  = '\\alpha',
@@ -59,7 +60,7 @@ config.greek_vs_pat    = '[efco]'
 --      trigger      (string)  : trigger for snippet                     (required)
 --      description  (string)  : description of snippet                  (optional)
 --      options      (string)  : follows \begin{environment}             (optional)
---      content      (table)   : default body content                    (optional)
+--      content      (string)  : default body content                    (optional)
 --      auto         (boolean) : automatically expand w/o <Tab> press    (optional)
 --      mathmode     (boolean) : snippet is defined in math mode         (optional)
 --      line         (integer) : 0 (line begin), 1 (anywhere), 2 (break) (optional)
@@ -69,7 +70,7 @@ config.greek_vs_pat    = '[efco]'
 --          trigger  (string)  : trigger for expansion                   (required)
 --          expanded (string)  : expanded version of snippet             (required)
 --          auto     (boolean) : automatically expand w/o <Tab> press    (optional)
--- nodes are auto-generated: 
+-- nodes are auto-generated:
 --      the first content node (if there are any) captures any stored visual input
 --      the rest are insert nodes
 
@@ -149,7 +150,7 @@ config.environments    = {
     {
         environment = 'equation*',
         description = 'Equation',
-        trigger     = 'mk',
+        trigger     = 'km',
         auto        = true,
         line        = 2,
     },
@@ -158,7 +159,7 @@ config.environments    = {
         description = 'Numbered Equation',
         trigger     = 'refeq',
         options     = '\\label{eq:<>}',
-        line        = 2,
+        line        = 1,
     },
     {
         environment = 'align*',
@@ -171,11 +172,13 @@ config.environments    = {
         trigger     = 'itm',
         description = 'Unordered List',
         options     = '',
-        content     = { '    \\item <>' },
+        content     = '    \\item <>',
         snippets    = {
-            trigger  = '    ii ',
-            expanded = '\\item ',
-            auto     = true,
+            {
+                trigger  = '    ii ',
+                expanded = '\\item ',
+                auto     = true,
+            }
         },
     },
     {
@@ -183,11 +186,13 @@ config.environments    = {
         trigger     = 'enm',
         description = 'Numbered List',
         options     = '',
-        content     = { '    \\item ' },
+        content     = '    \\item ',
         snippets    = {
-            trigger  = '    ii ',
-            expanded = '\\item ',
-            auto     = true,
+            {
+                trigger  = '    ii ',
+                expanded = '\\item ',
+                auto     = true,
+            }
         },
     },
     {
@@ -195,11 +200,13 @@ config.environments    = {
         trigger     = 'aenm',
         description = 'Alphabetical List',
         options     = '[label=(\\alph*)]',
-        content     = { '    \\item <>' },
+        content     = '    \\item <>',
         snippets    = {
-            trigger  = '    ii ',
-            expanded = '\\item ',
-            auto     = true,
+            {
+                trigger  = '    ii ',
+                expanded = '\\item ',
+                auto     = true,
+            }
         },
     },
     {
@@ -207,11 +214,13 @@ config.environments    = {
         trigger     = 'renm',
         description = 'Roman-Numbered List',
         options     = '[label=(\\roman*)]',
-        content     = { '    \\item <>' },
+        content     = '    \\item <>',
         snippets    = {
-            trigger  = '    ii ',
-            expanded = '\\item ',
-            auto     = true,
+            {
+                trigger  = '    ii ',
+                expanded = '\\item ',
+                auto     = true,
+            }
         },
     },
 
@@ -228,11 +237,7 @@ config.environments    = {
         trigger     = 'fig',
         description = 'Centered Figure',
         options     = '[H<>]',
-        content     = {
-            '    \\caption{<>}',
-            '    \\centering',
-            '    \\includegraphics[width=<>\\textwidth]{<>}'
-        },
+        content     = '    \\caption{<>}\n    \\centering\n    \\includegraphics[width=<>\\textwidth]{<>}',
         label       = 2,
     },
     {
@@ -240,11 +245,7 @@ config.environments    = {
         trigger     = 'wfig',
         description = 'Wrapped Figure',
         options     = '{<>}{<>\\textwidth}',
-        content     = {
-            '    \\caption{<>}',
-            '    \\centering',
-            '    \\includegraphics[width=<>\\textwidth]{<>}'
-        },
+        content     = '    \\caption{<>}\n    \\centering\n    \\includegraphics[width=<>\\textwidth]{<>}',
         label       = 3,
         priority    = 101,
     },
@@ -253,11 +254,7 @@ config.environments    = {
         trigger     = 'tabl',
         description = 'Table Environment',
         options     = '[H<>]',
-        content     = {
-            '    \\caption{<>}',
-            '    \\centering',
-            '    tab<>x<>'
-        },
+        content     = '    \\caption{<>}\n    \\centering\n    tab<>x<>',
         label       = 2,
     },
 }
@@ -265,13 +262,13 @@ config.environments    = {
 -- a command snippet is defined as a table in the following array
 --     expanded    (string)  : LaTeX expression                     (required)
 --     trigger     (string)  : trigger for snippet                  (required)
---     description (string)  : description of snippet               (optional => autogenerated)
---     mathmode    (boolean) : snippet is defined in math mode      (optional => false)
---     auto        (boolean) : automatically expand w/o <Tab> press (optional => false)
---     priority    (integer) : snippet priority                     (optional => 100)
---     defaults    (table)   : default entries for each insert node (optional => nil)
---     visual      (integer) : place to set visual input            (optional => 1)
--- nodes are auto-generated: the first node captures any stored visual input, and the rest are insert nodes
+--     description (string)  : description of snippet               (optional)
+--     mathmode    (boolean) : snippet is defined in math mode      (optional)
+--     auto        (boolean) : automatically expand w/o <Tab> press (optional)
+--     priority    (integer) : snippet priority                     (optional)
+--     defaults    (table)   : default entries for each insert node (optional)
+--     visual      (integer) : place to set visual input            (optional)
+-- nodes are auto-generated
 config.commands        = {
     ------------------------- entering math -------------------------
     {
@@ -414,12 +411,17 @@ config.commands        = {
 config.math_commands   = {
     ----------------------------- fonts -----------------------------
     {
-        expanded    = '\\textbf{<>}',
+        expanded    = '\\text{<>}',
+        trigger     = 'tx',
+        description = 'Text (Font)',
+    },
+    {
+        expanded    = '\\bm{<>}',
         trigger     = 'bf',
         description = 'Bold (Font)',
     },
     {
-        expanded    = '\\emph{<>}',
+        expanded    = '\\textit{<>}',
         trigger     = 'it',
         description = 'Italicize (Font)',
     },
@@ -489,34 +491,37 @@ config.math_commands   = {
         expanded    = '\\sum',
         trigger     = 'sum',
         description = 'Sum',
+        auto        = true,
+        prefix      = config.patterns.generic,
+        suffix      = config.patterns.generic
     },
     {
         expanded    = '\\sum_{<>}',
         trigger     = 'suml',
         description = 'Sum (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\sum_{<>}^{<>}',
         trigger     = 'sumb',
         description = 'Sum (Both Limits)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\sum_{<> = <>}^{\\infty}',
         trigger     = 'sumi',
         description = 'Sum (To Infinity)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\sum_{\\substack{<>}}^{<>}',
         trigger     = 'sums',
         description = 'Sum (Substack Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
 
     --------------------------- products ----------------------------
@@ -524,34 +529,37 @@ config.math_commands   = {
         expanded    = '\\prod',
         trigger     = 'prod',
         description = 'Product',
+        auto        = true,
+        prefix      = config.patterns.generic,
+        suffix      = config.patterns.generic
     },
     {
         expanded    = '\\prod_{<>}',
         trigger     = 'prodl',
         description = 'Product (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\prod_{<>}^{<>}',
         trigger     = 'prodb',
         description = 'Product (Both Limits)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\prod_{<> = <>}^{\\infty}',
         trigger     = 'prodi',
         description = 'Product (To Infinity)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\prod_{\\substack{<>}}^{<>}',
         trigger     = 'prods',
         description = 'Product (Substack Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
 
     ---------------------------- unions -----------------------------
@@ -559,34 +567,37 @@ config.math_commands   = {
         expanded    = '\\bigcup',
         trigger     = 'cup',
         description = 'Union',
+        auto        = true,
+        prefix      = config.patterns.generic,
+        suffix      = config.patterns.generic
     },
     {
         expanded    = '\\bigcup_{<>}',
         trigger     = 'cupl',
         description = 'Union (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\bigcup_{<>}^{<>}',
         trigger     = 'cupb',
         description = 'Union (Both Limits)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\bigcup_{<> = <>}^{\\infty}',
         trigger     = 'cupi',
         description = 'Union (To Infinity)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\bigcup_{\\substack{<>}}^{<>}',
         trigger     = 'cups',
         description = 'Union (Substack Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
 
     ------------------------- intersections -------------------------
@@ -594,34 +605,37 @@ config.math_commands   = {
         expanded    = '\\bigcap',
         trigger     = 'cap',
         description = 'Intersection',
+        auto        = true,
+        prefix      = config.patterns.generic,
+        suffix      = config.patterns.generic
     },
     {
         expanded    = '\\bigcap_{<>}',
         trigger     = 'capl',
         description = 'Intersection (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\bigcap_{<>}^{<>}',
         trigger     = 'capb',
         description = 'Intersection (Both Limits)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\bigcap_{<> = <>}^{\\infty}',
         trigger     = 'capi',
         description = 'Intersection (To Infinity)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\bigcap_{\\substack{<>}}^{<>}',
         trigger     = 'caps',
         description = 'Intersection (Substack Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
 
     ---------------------------- limits -----------------------------
@@ -629,27 +643,30 @@ config.math_commands   = {
         expanded    = '\\lim',
         trigger     = 'lim',
         description = 'Limit',
+        auto        = true,
+        prefix      = config.patterns.generic,
+        suffix      = config.patterns.generic
     },
     {
         expanded    = '\\lim_{<>}',
         trigger     = 'liml',
         description = 'Limit (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\limsup_{<>}',
         trigger     = 'lims',
         description = 'Limit Supremum (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\liminf_{<>}',
         trigger     = 'limi',
         description = 'Limit Infimum (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
 
     --------------------------- integrals ---------------------------
@@ -657,27 +674,30 @@ config.math_commands   = {
         expanded    = '\\int',
         trigger     = 'int',
         description = 'Integral',
+        auto        = true,
+        prefix      = config.patterns.generic,
+        suffix      = config.patterns.generic
     },
     {
         expanded    = '\\int_{<>}',
         trigger     = 'intl',
         description = 'Integral (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\int_{<>}^{<>}',
         trigger     = 'intb',
         description = 'Integral (Both Limits)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\int_{-\\infty}^{\\infty}',
         trigger     = 'inti',
         description = 'Integral (Infinite Limits)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
 
     --------------- minimum/maximum/supremum/infimum ----------------
@@ -685,49 +705,61 @@ config.math_commands   = {
         expanded    = '\\min',
         trigger     = 'min',
         description = 'Minimum',
+        auto        = true,
+        prefix      = config.patterns.generic,
+        suffix      = config.patterns.generic
     },
     {
         expanded    = '\\min_{<>}',
         trigger     = 'minl',
         description = 'Minimum (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\max',
         trigger     = 'max',
         description = 'Maximum',
+        auto        = true,
+        prefix      = config.patterns.generic,
+        suffix      = config.patterns.generic
     },
     {
         expanded    = '\\max_{<>}',
         trigger     = 'maxl',
         description = 'Maximum (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\inf',
         trigger     = 'inf',
         description = 'Infimum',
+        auto        = true,
+        prefix      = config.patterns.generic,
+        suffix      = config.patterns.generic
     },
     {
         expanded    = '\\inf_{<>}',
         trigger     = 'infl',
         description = 'Infimum (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\sup',
         trigger     = 'sup',
         description = 'Supremum',
+        auto        = true,
+        prefix      = config.patterns.generic,
+        suffix      = config.patterns.generic
     },
     {
         expanded    = '\\sup_{<>}',
         trigger     = 'supl',
         description = 'Supremum (Lower Limit)',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
 
     ------------------------ over/undersets -------------------------
@@ -760,7 +792,7 @@ config.math_commands   = {
         trigger     = '//',
         description = 'Fraction',
         auto        = true,
-        prefix      = config.prefix_patterns.generic
+        prefix      = config.patterns.generic
     },
     {
         expanded    = '\\frac{\\diff <>}{\\diff <>}',
@@ -826,7 +858,7 @@ config.math_commands   = {
 --     modifier     (string)  : the modifier itself                (required)
 --     description  (string)  : description of snippet             (optional => autogen-ed)
 --     english_only (boolean) : english only (as opposed to Greek) (optional => false)
-config.modifiers = {
+config.modifiers       = {
     {
         trigger = 'cal',
         modifier = 'cal',
@@ -905,7 +937,7 @@ config.modifiers = {
 
 -- this system is specialized for delimiters
 --     { left, right }
-config.delimiters = {
+config.delimiters      = {
     { '(', ')' },
     { '{', '}' },
     { '[', ']' },
@@ -944,183 +976,183 @@ config.math_symbols    = {
         trigger = '%|%>',
         program = '\\mapsto',
         auto    = true,
-        prefix  = config.prefix_patterns.no_dashes,
-        suffix  = config.prefix_patterns.no_dashes
+        prefix  = config.patterns.no_dashes,
+        suffix  = config.patterns.no_dashes
     },
     {
         trigger = '%-%>',
         program = '\\rightarrow',
         auto    = true,
-        prefix  = config.prefix_patterns.no_dashes,
-        suffix  = config.prefix_patterns.no_dashes
+        prefix  = config.patterns.no_dashes,
+        suffix  = config.patterns.no_dashes
 
     },
     {
         trigger = '%<%-',
         program = '\\leftarrow',
         auto    = true,
-        prefix  = config.prefix_patterns.no_dashes,
-        suffix  = config.prefix_patterns.no_dashes
+        prefix  = config.patterns.no_dashes,
+        suffix  = config.patterns.no_dashes
 
     },
     {
         trigger = '%=%=%>',
         program = '\\Rightarrow',
         auto    = true,
-        prefix  = config.prefix_patterns.no_dashes,
-        suffix  = config.prefix_patterns.no_dashes
+        prefix  = config.patterns.no_dashes,
+        suffix  = config.patterns.no_dashes
 
     },
     {
         trigger = '%<%=%=',
         program = '\\Leftarrow',
         auto    = true,
-        prefix  = config.prefix_patterns.no_dashes,
-        suffix  = config.prefix_patterns.no_dashes
+        prefix  = config.patterns.no_dashes,
+        suffix  = config.patterns.no_dashes
 
     },
     {
         trigger = '%|%^',
         program = '\\uparrow',
         auto    = true,
-        prefix  = config.prefix_patterns.no_dashes,
-        suffix  = config.prefix_patterns.no_dashes
+        prefix  = config.patterns.no_dashes,
+        suffix  = config.patterns.no_dashes
 
     },
     {
         trigger = '%^%|',
         program = '\\uparrow',
         auto    = true,
-        prefix  = config.prefix_patterns.no_dashes,
-        suffix  = config.prefix_patterns.no_dashes
+        prefix  = config.patterns.no_dashes,
+        suffix  = config.patterns.no_dashes
 
     },
     {
         trigger = '%|%v',
         program = '\\downarrow',
         auto    = true,
-        prefix  = config.prefix_patterns.no_dashes,
-        suffix  = config.prefix_patterns.no_dashes
+        prefix  = config.patterns.no_dashes,
+        suffix  = config.patterns.no_dashes
 
     },
     {
         trigger = '%v%|',
         program = '\\downarrow',
         auto    = true,
-        prefix  = config.prefix_patterns.no_dashes,
-        suffix  = config.prefix_patterns.no_dashes
+        prefix  = config.patterns.no_dashes,
+        suffix  = config.patterns.no_dashes
 
     },
     {
         trigger  = '%<%-%>',
         program  = '\\leftrightarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 101
     },
     {
         trigger  = '%-%-%>',
         program  = '\\longrightarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 101
     },
     {
         trigger  = '%<%=%=%=',
         program  = '\\Longleftarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 101
     },
     {
         trigger  = '%=%=%=%>',
         program  = '\\Longrightarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 101
     },
     {
         trigger  = '%<%-%>',
         program  = '\\leftrightarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 101
     },
     {
         trigger  = '%<%=%=%>',
         program  = '\\Leftrightarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
         trigger  = '%-%>%-%>',
         program  = '\\rightrightarrows',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
         trigger  = '%<%-%<%-',
         program  = '\\leftleftarrows',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
         trigger  = '%|%-%>',
         program  = '\\hookrightarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
         trigger  = '%<%-%|',
         program  = '\\hookleftarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
         trigger  = '%-%>%>',
         program  = '\\twoheadrightarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
         trigger  = '%<%<%-',
         program  = '\\twoheadleftarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
         trigger  = '%<%-%-%>',
         program  = '\\longleftrightarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
         trigger  = '%<%=%=%=%>',
         program  = '\\Longleftrightarrow',
         auto     = true,
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
@@ -1128,8 +1160,8 @@ config.math_symbols    = {
         program  = '\\xrightarrow[<>]{<>}',
         auto     = true,
         defaults = { 'sub', 'sup' },
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
@@ -1137,8 +1169,8 @@ config.math_symbols    = {
         program  = '\\xleftarrow[<>]{<>}',
         auto     = true,
         defaults = { 'sub', 'sup' },
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
@@ -1146,8 +1178,8 @@ config.math_symbols    = {
         program  = '\\xleftrightarrow[<>]{<>}',
         auto     = true,
         defaults = { 'sub', 'sup' },
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
@@ -1155,8 +1187,8 @@ config.math_symbols    = {
         program  = '\\xRightarrow[<>]{<>}',
         auto     = true,
         defaults = { 'sub', 'sup' },
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
@@ -1164,8 +1196,8 @@ config.math_symbols    = {
         program  = '\\xLeftarrow[<>]{<>}',
         auto     = true,
         defaults = { 'sub', 'sup' },
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
     {
@@ -1173,8 +1205,8 @@ config.math_symbols    = {
         program  = '\\xLeftrightarrow[<>]{<>}',
         auto     = true,
         defaults = { 'sub', 'sup' },
-        prefix   = config.prefix_patterns.no_dashes,
-        suffix   = config.prefix_patterns.no_dashes,
+        prefix   = config.patterns.no_dashes,
+        suffix   = config.patterns.no_dashes,
         priority = 102
     },
 
@@ -1183,64 +1215,64 @@ config.math_symbols    = {
         trigger  = 'cc',
         program  = '\\subseteq',
         auto     = true,
-        prefix   = config.prefix_patterns.generic,
-        suffix   = config.prefix_patterns.generic,
+        prefix   = config.patterns.generic,
+        suffix   = config.patterns.generic,
         priority = 102
     },
     {
         trigger  = 'ccc',
         program  = '\\subset',
         auto     = true,
-        prefix   = config.prefix_patterns.generic,
-        suffix   = config.prefix_patterns.generic,
+        prefix   = config.patterns.generic,
+        suffix   = config.patterns.generic,
         priority = 102
     },
     {
         trigger  = 'ncc',
         program  = '\\subsetneq',
         auto     = true,
-        prefix   = config.prefix_patterns.generic,
-        suffix   = config.prefix_patterns.generic,
+        prefix   = config.patterns.generic,
+        suffix   = config.patterns.generic,
         priority = 102
     },
     {
         trigger  = 'dd',
         program  = '\\supseteq',
         auto     = true,
-        prefix   = config.prefix_patterns.generic,
-        suffix   = config.prefix_patterns.generic,
+        prefix   = config.patterns.generic,
+        suffix   = config.patterns.generic,
         priority = 102
     },
     {
         trigger  = 'ddd',
         program  = '\\supset',
         auto     = true,
-        prefix   = config.prefix_patterns.generic,
-        suffix   = config.prefix_patterns.generic,
+        prefix   = config.patterns.generic,
+        suffix   = config.patterns.generic,
         priority = 102
     },
     {
         trigger  = 'ndd',
         program  = '\\supsetneq',
         auto     = true,
-        prefix   = config.prefix_patterns.generic,
-        suffix   = config.prefix_patterns.generic,
+        prefix   = config.patterns.generic,
+        suffix   = config.patterns.generic,
         priority = 102
     },
     {
         trigger  = 'oo',
         program  = '\\varnothing',
         auto     = true,
-        prefix   = config.prefix_patterns.generic,
-        suffix   = config.prefix_patterns.generic,
+        prefix   = config.patterns.generic,
+        suffix   = config.patterns.generic,
         priority = 102
     },
     {
         trigger  = ';\\',
         program  = '\\setminus',
         auto     = true,
-        prefix   = config.prefix_patterns.generic,
-        suffix   = config.prefix_patterns.generic,
+        prefix   = config.patterns.generic,
+        suffix   = config.patterns.generic,
         priority = 102
     },
 
@@ -1286,64 +1318,64 @@ config.math_symbols    = {
         trigger = '%=%=',
         program = '&=',
         auto    = true,
-        prefix  = config.prefix_patterns.generic,
-        suffix  = config.prefix_patterns.generic,
+        prefix  = config.patterns.generic,
+        suffix  = config.patterns.generic,
     },
     {
         trigger = '%!%=',
         program = '\\neq',
         auto    = true,
-        prefix  = config.prefix_patterns.generic,
-        suffix  = config.prefix_patterns.generic,
+        prefix  = config.patterns.generic,
+        suffix  = config.patterns.generic,
     },
     {
         trigger = '%=%<',
         program = '\\leq',
         auto    = true,
-        prefix  = config.prefix_patterns.generic,
-        suffix  = config.prefix_patterns.generic,
+        prefix  = config.patterns.generic,
+        suffix  = config.patterns.generic,
     },
     {
         trigger = '%<%=',
         program = '\\leq',
         auto    = true,
-        prefix  = config.prefix_patterns.generic,
-        suffix  = config.prefix_patterns.generic,
+        prefix  = config.patterns.generic,
+        suffix  = config.patterns.generic,
     },
     {
         trigger = '%>%=',
         program = '\\geq',
         auto    = true,
-        prefix  = config.prefix_patterns.generic,
-        suffix  = config.prefix_patterns.generic,
+        prefix  = config.patterns.generic,
+        suffix  = config.patterns.generic,
     },
     {
         trigger = '%=%>',
         program = '\\geq',
         auto    = true,
-        prefix  = config.prefix_patterns.generic,
-        suffix  = config.prefix_patterns.generic,
+        prefix  = config.patterns.generic,
+        suffix  = config.patterns.generic,
     },
     {
         trigger = '%>%>',
         program = '\\gg',
         auto    = true,
-        prefix  = config.prefix_patterns.generic,
-        suffix  = config.prefix_patterns.generic,
+        prefix  = config.patterns.generic,
+        suffix  = config.patterns.generic,
     },
     {
         trigger = '%<%<',
         program = '\\ll',
         auto    = true,
-        prefix  = config.prefix_patterns.generic,
-        suffix  = config.prefix_patterns.generic,
+        prefix  = config.patterns.generic,
+        suffix  = config.patterns.generic,
     },
     {
         trigger = '%~%~',
         program = '\\approx',
         auto    = true,
-        prefix  = config.prefix_patterns.generic,
-        suffix  = config.prefix_patterns.generic,
+        prefix  = config.patterns.generic,
+        suffix  = config.patterns.generic,
     },
 
 
