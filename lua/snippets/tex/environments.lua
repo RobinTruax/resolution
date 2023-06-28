@@ -15,6 +15,8 @@ local f = ls.function_node
 local d = ls.dynamic_node
 local fmta = require('luasnip.extras.fmt').fmta
 
+---------------------- other dependencies -----------------------
+
 local utilities = require('snippets.tex.utilities')
 
 ----------------------- utility functions -----------------------
@@ -172,5 +174,7 @@ for _, v in ipairs(require('config.snippets').environments) do
         table.insert(auto_snippets, w)
     end
 end
+
+-----------------------------------------------------------------
 
 return manual_snippets, auto_snippets
