@@ -2,6 +2,7 @@ local popup = {}
 
 local Popup = require("nui.popup")
 local Layout = require("nui.layout")
+local NuiText = require("nui.text")
 local Event = require("nui.utils.autocmd").event
 local Job = require('plenary.job')
 
@@ -10,19 +11,31 @@ popup.input_tex = Popup({
     enter = true,
     border = {
         style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        text = {top = ' LaTeX Input '},
+    },
+    win_options = {
+        winhighlight = "Normal:Normal,Normal:Normal",
     },
 })
 popup.sympy = Popup({
     border = {
         style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        text = {top = ' Sympy Input '},
     },
     focusable = true,
+    win_options = {
+        winhighlight = "Normal:Normal,Normal:Normal",
+    },
 })
 popup.output_tex = Popup({
     border = {
         style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        text = {top = NuiText(' LaTeX Output ', 'Error')},
     },
-    focusable = false
+    focusable = false,
+    win_options = {
+        winhighlight = "Normal:Normal,FloatBorder:Normal",
+    },
 })
 popup.all = {
     popup.input_tex,

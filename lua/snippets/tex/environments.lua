@@ -138,12 +138,12 @@ local environment_snippet = function(params)
     if line == 2 then
         table.insert(
             snippets_to_return[switch(auto)],
-            s({ trig = trigger, name = description, condition = cond[1], priority = priority }, fmta('\n\n' .. format,
+            s({ trig = trigger, name = description, condition = cond[1], priority = priority }, fmta('\n\n' .. format .. '\n',
                 generate_nodes(options, label, content)))
         )
         table.insert(
             snippets_to_return[switch(auto)],
-            s({ trig = trigger, name = description, condition = cond[2], priority = priority }, fmta(format, generate_nodes(options, label, content)))
+            s({ trig = trigger, name = description, condition = cond[2], priority = priority + 1 }, fmta(format, generate_nodes(options, label, content)))
         )
     end
 
