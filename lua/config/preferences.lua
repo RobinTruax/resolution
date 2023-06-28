@@ -55,10 +55,10 @@ opt.autoindent  = true -- enable autoindentation
 
 ------------------------ search settings -------------------------
 
-vim.opt.hlsearch   = true -- highlight search results
-vim.opt.incsearch  = true -- incremental searching
-vim.opt.ignorecase = true -- searching is not case-sensitive
-vim.opt.smartcase  = true -- searching is smartly case-sensitive
+opt.hlsearch   = true -- highlight search results
+opt.incsearch  = true -- incremental searching
+opt.ignorecase = true -- searching is not case-sensitive
+opt.smartcase  = true -- searching is smartly case-sensitive
 
 ---------------- undo/backups/swapfiles/sessions ----------------
 
@@ -76,6 +76,7 @@ opt.autoread              = true                           -- automatically rere
 ------------------------- miscellaneous -------------------------
 
 opt.clipboard = 'unnamedplus' -- unify system & vim clipboard
+opt.foldmethod = 'marker'
 prefs.number_recent_files = 5
 prefs.timestamp_backup = true
 opt.fillchars='eob: '
