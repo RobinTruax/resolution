@@ -19,14 +19,6 @@ return {
         desc = 'search [b]uffers',
         cmd = '<cmd> Telescope buffers <cr>'
     },
-    -- ['c'] = {
-    --     desc = '[c]omputational pop-up',
-    --     mode = { 'n', 'v' },
-    --     cmd = {
-    --         require('computation.popup').mount,
-    --         require('computation.popup').mount_from_visual
-    --     },
-    -- },
     ['c'] = {
         desc = '',
         mode = { 'n', 'v' },
@@ -41,7 +33,9 @@ return {
     },
     ['d'] = {
         desc = '[d]elete buffer',
-        cmd = require('core.ui').buf_del_wrapper
+        cmd = function()
+            require('core.ui').buf_del_wrapper()
+        end,
     },
     ['D'] = {
         desc = '[D]elete all buffers',
@@ -52,14 +46,16 @@ return {
     },
     ['e'] = {
         desc = '[e]xplore document',
-        cmd = require('nvim-navbuddy').open
+        cmd = function()
+            require('nvim-navbuddy').open()
+        end
     },
     ['E'] = {
         desc = '[E]xplore files',
         cmd = '<cmd> NvimTreeFindFileToggle <cr>'
     },
     ['F'] = {
-        desc = '[F]ormat code',
+        desc = '[F]ormat TeX or code',
         cmd = function()
             if vim.bo.filetype == 'tex' then
                 vim.cmd('write')
@@ -111,7 +107,9 @@ return {
     },
     ['S'] = {
         desc = '[S]tart screen',
-        cmd = require('mini.starter').open
+        cmd = function()
+            require('mini.starter').open()
+        end
     },
     ['t'] = {
         desc = '[t]erminal',
@@ -119,11 +117,15 @@ return {
     },
     ['v'] = {
         desc = '[v]iew file in project',
-        cmd = require('filesys.project_menu').file_menu_wrapper
+        cmd = function()
+            require('filesys.project_menu').file_menu_wrapper()
+        end
     },
     ['V'] = {
         desc = '[V]iew project',
-        cmd = require('filesys.project_menu').project_menu
+        cmd = function()
+            require('filesys.project_menu').project_menu()
+        end
     },
 
     ------------------------ preferences (p) ------------------------
@@ -311,6 +313,14 @@ return {
         desc = 'Configure [g]it[h]ub user',
         cmd = false,
     },
+    ['go'] = {
+        desc = 'Pull from [o]verleaf via [g]ithub',
+        cmd = false,
+    },
+    ['gO'] = {
+        desc = 'Push to [O]verleaf via [g]ithub',
+        cmd = false,
+    },
 
     ---------------------- tex operations (t) -----------------------
 
@@ -340,15 +350,19 @@ return {
     },
     ['le'] = {
         desc = '[l]atex [e]rrors',
-        cmd = false,
+        cmd = '<cmd> VimtexErrors <cr>',
     },
     ['ls'] = {
         desc = '[l]atex sync[t]ex',
-        cmd = false,
+        cmd = '<cmd> VimtexView <cr>',
+    },
+    ['lw'] = {
+        desc = '[l]atex [w]ord count',
+        cmd = '<cmd> VimtexCountWords <cr>',
     },
     ['lx'] = {
         desc = '[l]atex clean au[x]',
-        cmd = false,
+        cmd = '<cmd> VimtexClean <cr>',
     },
 
     ---------------------- tex extensions (x) -----------------------

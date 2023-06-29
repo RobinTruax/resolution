@@ -14,7 +14,8 @@ return {
     {
         'L3MON4D3/LuaSnip',
         ft = { 'tex', 'py', 'lua' },
-        version = '*',
+        pin = true,
+        commit = '4964cd11e19de4671189b97de37f3c4930d43191',
         dependencies = {
             'rafamadriz/friendly-snippets',
         },

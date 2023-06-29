@@ -107,6 +107,7 @@ return {
     ------------------- lualine.nvim: status line -------------------
     {
         'nvim-lualine/lualine.nvim',
+        event = 'VeryLazy',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             -- set up separators based on ui sharpness

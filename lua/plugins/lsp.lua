@@ -41,6 +41,8 @@ return {
             -- UIs aded on LSP attach
             { 'SmiteshP/nvim-navbuddy' },
             { 'utilyre/barbecue.nvim' },
+            -- autocompletion connection
+            { 'hrsh7th/cmp-nvim-lsp' },
         },
         config = function()
             -- navic and navbuddy's attachment
