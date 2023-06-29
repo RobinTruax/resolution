@@ -7,13 +7,10 @@ utility functions for tex snippets
 --------------------- luasnip abbreviations ---------------------
 
 local ls = require("luasnip")
-local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
-local d = ls.dynamic_node
-local fmta = require("luasnip.extras.fmt").fmta
 
 -----------------------------------------------------------------
 
@@ -67,7 +64,15 @@ utilities.in_environment_line_begin = function(name)
     end
 end
 
------------------------------ other -----------------------------
+------------------------ visual snippets ------------------------
+
+utilities.visual = function(_, parent)
+    if (#parent.snippet.env.SELECT_RAW > 0) then
+        return sn(nil, t(parent.snippet.env.SELECT_RAW))
+    else
+        return sn(nil, i(1))
+    end
+end
 
 utilities.extend_visual = function(_, parent)
     return sn(nil, { t(parent.snippet.env.SELECT_RAW), i(1) })
@@ -83,13 +88,35 @@ utilities.extend_visual_labeled = function(label)
     end
 end
 
-utilities.visual = function(_, parent)
-    if (#parent.snippet.env.SELECT_RAW > 0) then
-        return sn(nil, t(parent.snippet.env.SELECT_RAW))
+------------------------- get condition -------------------------
+
+utilities.get_condition = function(mathmode)
+    if mathmode == false then
+        return utilities.in_text
     else
-        return sn(nil, i(1))
+        return utilities.in_math
     end
 end
+
+utilities.get_condition_line_behav = function(line, mathmode)
+    if line == 0 and mathmode == false then
+        return utilities.in_text_line_begin
+    elseif line == 0 and mathmode == true then
+        return utilities.in_math_line_begin
+    elseif line == 1 and mathmode == false then
+        return utilities.in_text
+    elseif line == 1 and mathmode == true then
+        return utilities.in_math
+    elseif line == 2 and mathmode == false then
+        return { utilities.in_text, utilities.in_text_line_begin }
+    elseif line == 2 and mathmode == true then
+        return { utilities.in_math, utilities.in_math_line_begin }
+    else
+        return function() return true end
+    end
+end
+
+----------------------------- other -----------------------------
 
 utilities.cap = function(j)
     if j >= 0 then

@@ -47,6 +47,26 @@ return {
         cmd = { require('smart-splits').resize_right, '<Right>' },
         mode = { 'n', 'i' },
     },
+    ['<C-A-h>'] = {
+        desc = 'Move left',
+        cmd = { require('smart-splits').swap_buf_left, '<Left>' },
+        mode = { 'n', 'i' },
+    },
+    ['<C-A-j>'] = {
+        desc = 'Move down',
+        cmd = { require('smart-splits').swap_buf_down, '<Down>' },
+        mode = { 'n', 'i' },
+    },
+    ['<C-A-k>'] = {
+        desc = 'Move up',
+        cmd = { require('smart-splits').swap_buf_up, '<Up>' },
+        mode = { 'n', 'i' },
+    },
+    ['<C-A-l>'] = {
+        desc = 'Move right',
+        cmd = { require('smart-splits').swap_buf_right, '<Right>' },
+        mode = { 'n', 'i' },
+    },
     ['<C-Left>'] = {
         desc = 'Move left',
         cmd = require('smart-splits').move_cursor_left,

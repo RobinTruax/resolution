@@ -1,19 +1,26 @@
+--[[------------------- resolution v0.1.0 -----------------------
+
+all configuration for snippets in LaTeX
+
+---------------------------------------------------------------]]
+
 local config = {}
 
 --------------------------- settings ----------------------------
-
 --{{{
+config.autoscript = true -- automatic sub- and super-scripting with numbers and *
 
-config.automath        = false
-config.autoscript      = false
+-- patterns for later referencing
 config.patterns = {
-    space_only       = '([%s])',
-    generic          = '([%:%p%s])', -- ([%:%s!"#$%&\'()*+,-./[\\%]^_`{|}~])
+    space_only = '([%s])',
+    generic = '([%:%p%s])', -- ([%:%s!"#$%&\'()*+,-./[\\%]^_`{|}~])
     exclude_commands = '([%:%s!"#$%&\'()*+,-./[%]^_`{|}~])',
-    no_dots          = '([%:%s!"#$%&\'()+,%-/[\\%]^_`{|}~])',
-    no_dashes        = '([%:%s!"#$%&\'()*+,./[\\%]^_`{|}~])',
+    no_dots = '([%:%s!"#$%&\'()+,%-/[\\%]^_`{|}~])',
+    no_dashes = '([%:%s!"#$%&\'()*+,./[\\%]^_`{|}~])',
 }
-config.greek_letters   = {
+
+-- configuring greek letters
+config.greek_letters    = {
     [';a']  = '\\alpha',
     [';b']  = '\\beta',
     [';g']  = '\\gamma',
@@ -53,36 +60,36 @@ config.greek_letters   = {
     [';C']  = '\\Psi',
     [';W']  = '\\Omega',
 }
-config.greek_st_pat    = '[a-ik-uwxzCDFGLNOPSWX]'
-config.greek_vs_pat    = '[efco]'
+config.greek_st_pat = '(;[a-ik-uwxzCDFGLNOPSWX])'
+config.greek_vs_pat = '(;[efco])'
 
 --}}}
 
---------------------------- non-math ----------------------------
+--========================= NON-MATH ==========================--
 
--- environments
+------------------------- environments --------------------------
 --{{{
 
--- an environment snippet is defined as a table in the following array
---      environment  (string)  : LaTeX name of environment               (required)
---      trigger      (string)  : trigger for snippet                     (required)
---      description  (string)  : description of snippet                  (optional)
---      options      (string)  : follows \begin{environment}             (optional)
---      content      (string)  : default body content                    (optional)
---      auto         (boolean) : automatically expand w/o <Tab> press    (optional)
---      mathmode     (boolean) : snippet is defined in math mode         (optional)
---      line         (integer) : 0 (line begin), 1 (anywhere), 2 (break) (optional)
---      label        (integer) : include label generated from nth i-node (optional)
---      priority     (integer) : snippet priority                        (optional)
---      snippets     (table)   : snippets defined for this env only      (optional)
---          trigger  (string)  : trigger for expansion                   (required)
---          expanded (string)  : expanded version of snippet             (required)
---          auto     (boolean) : automatically expand w/o <Tab> press    (optional)
--- nodes are auto-generated:
---      the first content node (if there are any) captures any stored visual input
---      the rest are insert nodes
+--[[
+DEFINING ENVIRONMENT SNIPPETS: 
 
-config.environments    = {
+environment  (string)  : LaTeX name of environment               (required)
+trigger      (string)  : trigger for snippet                     (required)
+description  (string)  : description of snippet                  (optional)
+options      (string)  : follows \begin{environment}             (optional)
+content      (string)  : default body content                    (optional)
+auto         (boolean) : automatically expand w/o <Tab> press    (optional)
+mathmode     (boolean) : snippet is defined in math mode         (optional)
+line         (integer) : 0 (line begin), 1 (anywhere), 2 (break) (optional)
+label        (integer) : include label generated from nth i-node (optional)
+priority     (integer) : snippet priority                        (optional)
+snippets     (table)   : snippets defined for this env only      (optional)
+    trigger  (string)  : trigger for expansion                   (required)
+    expanded (string)  : expanded version of snippet             (required)
+    auto     (boolean) : automatically expand w/o <Tab> press    (optional)
+--]]
+
+config.environments     = {
     ------------------------- theorem-style -------------------------
     {
         environment = 'definition',
@@ -268,22 +275,24 @@ config.environments    = {
 }
 --}}}
 
--- commands
+--------------------------- commands ----------------------------
 --{{{
 
--- a (non-math) command snippet is defined as a table in the following array
---     expanded    (string)  : LaTeX expression                     (required)
---     trigger     (string)  : trigger for snippet                  (required)
---     description (string)  : description of snippet               (optional)
---     auto        (boolean) : automatically expand w/o <Tab> press (optional)
---     prefix      (string)  : required prefix for expansion        (optional)
---     suffix      (string)  : required suffix for expansion        (optional)
---     priority    (integer) : snippet priority                     (optional)
---     defaults    (table)   : default entries for each insert node (optional)
---     visual      (integer) : place to set visual input            (optional)
--- nodes are auto-generated
+--[[
+DEFINING NON-MATH COMMAND SNIPPETS: 
 
-config.commands        = {
+expanded    (string)  : LaTeX expression                     (required)
+trigger     (string)  : trigger for snippet                  (required)
+description (string)  : description of snippet               (optional)
+auto        (boolean) : automatically expand w/o <Tab> press (optional)
+prefix      (string)  : required prefix for expansion        (optional)
+suffix      (string)  : required suffix for expansion        (optional)
+priority    (integer) : snippet priority                     (optional)
+defaults    (table)   : default entries for each insert node (optional)
+visual      (integer) : place to set visual input            (optional)
+--]]
+
+config.nonmath_commands = {
     ------------------------- entering math -------------------------
     {
         expanded    = '$<>$',
@@ -409,24 +418,26 @@ config.commands        = {
 }
 --}}}
 
------------------------------ math ------------------------------
+--=========================== MATH ============================--
 
--- commands
+--------------------------- commands ----------------------------
 -- {{{
 
--- a (math) command snippet is defined as a table in the following array
---     expanded    (string)  : LaTeX expression                     (required)
---     trigger     (string)  : trigger for snippet                  (required)
---     description (string)  : description of snippet               (optional => autogenerated)
---     auto        (boolean) : automatically expand w/o <Tab> press (optional => false)
---     prefix      (string)  : required prefix for expansion        (optional => nil)
---     suffix      (string)  : required suffix for expansion        (optional => nil)
---     priority    (integer) : snippet priority                     (optional => 100)
---     defaults    (table)   : default entries for each insert node (optional => nil)
---     visual      (integer) : place to set visual input            (optional => 1)
--- nodes are auto-generated: the first node captures any stored visual input, and the rest are insert nodes
+--[[
+DEFINING MATH COMMAND SNIPPETS: 
 
-config.math_commands   = {
+expanded    (string)  : LaTeX expression                     (required)
+trigger     (string)  : trigger for snippet                  (required)
+description (string)  : description of snippet               (optional)
+auto        (boolean) : automatically expand w/o <Tab> press (optional)
+prefix      (string)  : required prefix for expansion        (optional)
+suffix      (string)  : required suffix for expansion        (optional)
+priority    (integer) : snippet priority                     (optional)
+defaults    (table)   : default entries for each insert node (optional)
+visual      (integer) : place to set visual input            (optional)
+--]]
+
+config.math_commands    = {
     ----------------------------- fonts -----------------------------
     {
         expanded    = '\\text{<>}',
@@ -807,7 +818,7 @@ config.math_commands   = {
     --------------------------- fractions ---------------------------
     {
         expanded    = '\\frac{<>}{<>}',
-        trigger     = '//',
+        trigger     = '%/%/',
         description = 'Fraction',
         auto        = true,
         prefix      = config.patterns.generic
@@ -826,25 +837,25 @@ config.math_commands   = {
     --------------------- sub and superscripts ----------------------
     {
         expanded    = '^{<>}',
-        trigger     = '.;',
+        trigger     = '%.%;',
         description = 'Superscript',
         auto        = true,
     },
     {
         expanded    = '_{<>}',
-        trigger     = ';.',
+        trigger     = '%;%.',
         description = 'Subscript',
         auto        = true,
     },
     {
         expanded    = '^',
-        trigger     = '.\'',
+        trigger     = '%.%\'',
         description = 'Superscript (Simple)',
         auto        = true,
     },
     {
         expanded    = '_{<>}',
-        trigger     = '\'.',
+        trigger     = '%\'%.',
         description = 'Subscript (Simple)',
         auto        = true,
     },
@@ -872,16 +883,19 @@ config.math_commands   = {
 }
 --}}}
 
--- modifiers
+--------------------------- modifiers ---------------------------
 -- {{{
 
--- a modifier snippet is defined as an entry in the following table
---     trigger      (string)  : regex trigger for snippet          (required)
---     modifier     (string)  : the modifier itself                (required)
---     description  (string)  : description of snippet             (optional => autogen-ed)
---     english_only (boolean) : english only (as opposed to Greek) (optional => false)
+--[[
+DEFINING MODIFIER SNIPPETS: 
 
-config.modifiers       = {
+trigger      (string)  : regex trigger for snippet          (required)
+modifier     (string)  : the modifier itself                (required)
+description  (string)  : description of snippet             (optional)
+english_only (boolean) : english only (as opposed to Greek) (optional)
+--]]
+
+config.modifiers        = {
     {
         trigger = 'cal',
         modifier = 'cal',
@@ -959,55 +973,87 @@ config.modifiers       = {
 }
 --}}}
 
--- delimiters
+-------------------------- delimiters ---------------------------
 --{{{
 
--- this system is simple since it's specialized for delimiters:
---     { left, right }
+--[[
+DEFINING DELIMITER SNIPPETS: 
 
-config.delimiters      = {
-    { '(', ')' },
-    { '{', '}' },
-    { '[', ']' },
-    { '<', '>' },
-    { '|', '|' },
+left         (string)  : left delimiter                     (required)
+right        (string)  : right delimiter                    (required)
+cmd_left     (string)  : left delimiter (command form)      (optional)
+cmd_right    (string)  : right delimiter (command form)     (optional)
+english_only (boolean) : english only (as opposed to Greek) (optional)
+--]]
+
+config.delimiters       = {
+    {
+        left = '(',
+        right = ')',
+        description = 'Parentheses'
+    },
+    {
+        left = '{',
+        right = '}',
+        cmd_left = '\\{',
+        cmd_right = '\\}',
+        description = 'Curly Brackets'
+    },
+    {
+        left = '[',
+        right = ']',
+        description = 'Square Brackets'
+    },
+    {
+        left = '<',
+        right = '>',
+        description = 'Angle Brackets'
+    },
+    {
+        left = '|',
+        right = '|',
+        description = 'Absolute Value'
+    },
 }
 
 --}}}
 
--- math symbols
+------------------------- math symbols --------------------------
 --{{{
 
--- a symbol snippet is defined as a table in the following array
---     trigger     (string)                  : regex trigger for snippet            (required)
---     program     (string/function/integer) : how to get string                    (required)
---     description (string)                  : description of snippet               (optional => autogen-ed)
---     prefix      (string)                  : required prefix for expansion        (optional => nil)
---     suffix      (string)                  : required suffix for expansion        (optional => nil)
---     mathmode    (boolean)                 : snippet is defined in math mode      (optional => true)
---     defaults    (table)                   : default entries for each insert node (optional => nil)
---     auto        (boolean)                 : automatically expand                 (optional => false)
--- nodes are auto-generated: the first node captures any stored visual input, and the rest are insert nodes
+--[[
+DEFINING MODIFIER SNIPPETS: 
 
-config.math_symbols    = {
+trigger     (string)          : regex trigger for snippet       (required)
+program     (string/function) : how to get string               (required)
+description (string)          : description of snippet          (optional)
+prefix      (string)          : required prefix for expansion   (optional)
+suffix      (string)          : required suffix for expansion   (optional)
+mathmode    (boolean)         : snippet is defined in math mode (optional)
+auto        (boolean)         : automatically expand            (optional)
+--]]
+
+config.math_symbols     = {
     ------------------------- greek letters -------------------------
     {
-        trigger = '(%;' .. config.greek_st_pat .. ')',
+        trigger = config.greek_st_pat,
         program = function(captures)
             return config.greek_letters[captures[1]]
         end,
         description = 'Greek Letters',
+        auto = true,
     },
     {
-        trigger = '(%;v' .. config.greek_vs_pat .. ')',
+        trigger = config.greek_vs_pat,
         program = function(captures)
             return config.greek_letters[captures[1]]
         end,
         description = 'Greek Letters (Special)',
+        auto = true,
     },
     ---------------------------- arrows -----------------------------
     {
-        trigger = '%|%>',
+        trigger = '%\\%>',
         program = '\\mapsto',
         auto    = true,
         prefix  = config.patterns.no_dashes,
@@ -1312,29 +1358,29 @@ config.math_symbols    = {
 
     ----------------------------- dots ------------------------------
     {
-        trigger = '.',
+        trigger = '%.',
         program = '\\cdot',
     },
     {
-        trigger = '**',
+        trigger = '%*%*',
         program = '\\cdots',
     },
     {
-        trigger = ':',
+        trigger = '%:',
         program = '\\vdots',
     },
     {
-        trigger  = '..',
+        trigger  = '%.%.',
         program  = '\\ldots',
         priority = 101,
     },
     {
-        trigger  = '.:',
+        trigger  = '%.%:',
         program  = '\\ddots',
         priority = 101,
     },
     {
-        trigger  = ':.',
+        trigger  = '%:%.',
         program  = '\\iddots',
         priority = 101,
     },
@@ -1435,22 +1481,23 @@ config.math_symbols    = {
 }
 --}}}
 
----------------------------- special ----------------------------
+--========================== SPECIAL ==========================--
 
--- m by n snippets
+------------------------ m by n snippets ------------------------
 --{{{
 
--- an m_by_n snippet is defined as a table in the following array
---     environment (string)  : environment name                     (required)
---     trigger     (string)  : regex trigger for snippet            (required)
---     program     (table)   : how to compute prefix, m, n, suffix  (required)
---     description (string)  : description of snippet               (optional => autogenerated)
---     mathmode    (boolean) : snippet is defined in math mode      (optional => false)
---     auto        (boolean) : automatically expand w/o <Tab> press (optional => false)
---     default     (table)   : default entry for each insert node   (optional => nil)
--- nodes are auto-generated: the first node captures any stored visual input, and the rest are insert nodes
+--[[
+DEFINING M BY N SNIPPETS:
 
-config.m_by_n_objects  = {
+environment (string)  : environment name                     (required)
+trigger     (string)  : regex trigger for snippet            (required)
+program     (table)   : how to compute prefix, m, n, suffix  (required)
+description (string)  : description of snippet               (optional)
+mathmode    (boolean) : snippet is defined in math mode      (optional)
+auto        (boolean) : automatically expand w/o <Tab> press (optional)
+--]]
+
+config.m_by_n_objects   = {
     ---------------------------- matrix -----------------------------
     {
         environment = 'matrix',
@@ -1462,7 +1509,7 @@ config.m_by_n_objects  = {
         },
         description = 'Matrix',
         mathmode    = true,
-        default     = 0,
+        default     = '0',
     },
     ----------------------------- table -----------------------------
     {
@@ -1471,15 +1518,15 @@ config.m_by_n_objects  = {
         program     = {
             m      = 1,
             n      = 2,
-            suffix = function(m, n)
+            suffix = function(_, n)
                 return '{ ' .. string.rep('c', n, ' ') .. ' }'
             end
         },
         description = 'Tabular',
         mathmode    = false,
-        default     = 0,
     },
 }
 --}}}
 
+-----------------------------------------------------------------
 return config

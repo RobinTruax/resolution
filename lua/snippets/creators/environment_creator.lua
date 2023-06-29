@@ -1,10 +1,10 @@
 --[[------------------- resolution v0.1.0 -----------------------
 
-environment snippets as configured in config.snippets.environment
+environment snippet creator
 
 ---------------------------------------------------------------]]
 
---------------------- luasnip abbreviations ---------------------
+------------------------- dependencies --------------------------
 
 local ls = require('luasnip')
 local s = ls.snippet
@@ -14,22 +14,25 @@ local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
 local fmta = require('luasnip.extras.fmt').fmta
-
----------------------- other dependencies -----------------------
-
 local utilities = require('snippets.tex.utilities')
 
 ----------------------- utility functions -----------------------
 
--- strips commands, spaces, and symbols from the entered text
-local parse_label = function(input)
-    return (input:gsub('%\\[%a]+%{', ''):gsub('[%s-]+', '_'):gsub('[^%w_]', ''))
+-- label-generating function
+local label_func = function(arg, _)
+    return (arg[1][1]:gsub('%\\[%a]+%{', ''):gsub('[%s-]+', '_'):gsub('[^%w_]', ''))
 end
 
--- function to be passed to function snippet
-local label_func = function(arg, _)
-    return parse_label(arg[1][1])
+-- mini function for sorting snippets
+local switch = function(auto)
+    if auto == true then
+        return 'auto'
+    else
+        return 'manual'
+    end
 end
+
+------------------- snippet creator functions -------------------
 
 -- generate nodes automatically for environment snippets
 local generate_nodes = function(options, label, content)
@@ -61,53 +64,23 @@ local generate_nodes = function(options, label, content)
     return nodes
 end
 
--- get expansion condition for environment snippets
-local get_condition = function(line, mathmode)
-    if line == 0 and mathmode == false then
-        return utilities.in_text_line_begin
-    elseif line == 0 and mathmode == true then
-        return utilities.in_math_line_begin
-    elseif line == 1 and mathmode == false then
-        return utilities.in_text
-    elseif line == 1 and mathmode == true then
-        return utilities.in_math
-    elseif line == 2 and mathmode == false then
-        return { utilities.in_text, utilities.in_text_line_begin }
-    elseif line == 2 and mathmode == true then
-        return { utilities.in_math, utilities.in_math_line_begin }
-    else
-        return function() return true end
-    end
-end
-
--- mini function for sorting snippets
-local switch = function(auto)
-    if auto == true then
-        return 'auto'
-    else
-        return 'manual'
-    end
-end
-
------------------------- snippet creator ------------------------
-
-local environment_snippet = function(params)
+local environment_creator = function(params)
     -- sanitize information
     -- necessary
-    local environment  = params.environment
-    local trigger      = params.trigger
+    local environment = params.environment
+    local trigger = params.trigger
     -- format construction
-    local content      = params.content or '    <>'
-    local options      = params.options or ''
-    local label        = params.label or 0
+    local content = params.content or '    <>'
+    local options = params.options or ''
+    local label = params.label or 0
     -- snippet options
-    local line         = params.line or 0
-    local mathmode     = params.mathmode or false
-    local description  = params.description or environment:gsub('^%l', string.upper) .. ' Environment'
-    local priority     = params.priority or 100
+    local line = params.line or 0
+    local mathmode = params.mathmode or false
+    local description = params.description or environment:gsub('^%l', string.upper) .. ' Environment'
+    local priority = params.priority or 100
     -- other
-    local auto         = params.auto or false
-    local snippets     = params.snippets or {}
+    local auto = params.auto or false
+    local snippets = params.snippets or {}
 
     -- create format
     -- label string if necessary
@@ -124,7 +97,7 @@ local environment_snippet = function(params)
     ]], environment, options, label_string, content, environment)
 
     -- get condition for expansion
-    local cond = get_condition(line, mathmode)
+    local cond = utilities.get_condition_line_behav(line, mathmode)
 
     -- create snippet(s) to return
     local snippets_to_return = {
@@ -159,22 +132,6 @@ local environment_snippet = function(params)
 
     return snippets_to_return
 end
-
------------------------ snippet addition ------------------------
-
-local manual_snippets = {}
-local auto_snippets = {}
-
-for _, v in ipairs(require('config.snippets').environments) do
-    local all_snippets = environment_snippet(v)
-    for _, w in ipairs(all_snippets.manual) do
-        table.insert(manual_snippets, w)
-    end
-    for _, w in ipairs(all_snippets.auto) do
-        table.insert(auto_snippets, w)
-    end
-end
-
 -----------------------------------------------------------------
 
-return manual_snippets, auto_snippets
+return environment_creator
