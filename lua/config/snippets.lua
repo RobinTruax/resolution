@@ -2,6 +2,16 @@
 
 all configuration for snippets in LaTeX
 
+there are eight categories: 
+ - (non-math) environments
+ - non-math commands
+ - math commands
+ - math modifiers
+ - math delimiters
+ - math symbols
+ - m by n snippets
+ - unique-type
+
 ---------------------------------------------------------------]]
 
 local config = {}
@@ -70,6 +80,17 @@ config.greek_vs_pat = '(;[efco])'
 ------------------------- environments --------------------------
 --{{{
 
+-- the first two environment snippets are of a different type
+config.display_math = {
+    trigger = 'mj', -- set to nil or false to disable
+    auto = true,
+}
+config.generic_environment = {
+    trigger = 'beg', -- set to nil or false to disable
+    auto = false,
+}
+-- however, the rest have the same \begin{env}\end{env} format
+-- thus, they are defined using the following generic builder
 --[[
 DEFINING ENVIRONMENT SNIPPETS: 
 
@@ -1526,6 +1547,13 @@ config.m_by_n_objects   = {
         mathmode    = false,
     },
 }
+--}}}
+
+-------------------------- unique type --------------------------
+
+--{{{
+
+
 --}}}
 
 -----------------------------------------------------------------

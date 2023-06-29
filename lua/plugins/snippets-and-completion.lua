@@ -4,6 +4,10 @@ all plugins relating to LSP, autocompletion, snippets, etc.
 
 -------------------------------------------------------------]]
 
+local prefs = require('config.preferences')
+
+-----------------------------------------------------------------
+
 return {
 
     ----------------------- LuaSnip: snippets -----------------------
@@ -34,7 +38,7 @@ return {
                 ext_opts = {
                     [types.insertNode] = {
                         active = {
-                            virt_text = { { '●', 'InsertMode' } }
+                            virt_text = { { '●', 'Snippet' } }
                         }
                     }
                 },
@@ -54,11 +58,12 @@ return {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-buffer',
-            'uga-rosa/cmp-dictionary',
+            -- 'uga-rosa/cmp-dictionary',
             'rafamadriz/friendly-snippets',
             'kdheepak/cmp-latex-symbols',
             'FelipeLema/cmp-async-path',
             'hrsh7th/cmp-calc',
+            'uga-rosa/cmp-dynamic',
         },
         config = function()
             -- dependencies
@@ -115,6 +120,17 @@ return {
                 },
                 -- completion sources
                 sources = {
+                    -- math dictionary
+                    {
+                        name = 'dynamic',
+                        keyword_length = 2,
+                        priority = 10,
+                    },
+                    -- snippets
+                    {
+                        name = 'luasnip',
+                        priority = 9
+                    },
                     -- nvim lsp
                     {
                         name = 'nvim_lsp',
@@ -123,22 +139,6 @@ return {
                     {
                         name = 'nvim_lsp_signature_help',
                         priority = 8
-                    },
-                    -- text in buffer
-                    {
-                        name = 'buffer',
-                        priority = 5,
-                    },
-                    -- snippets
-                    {
-                        name = 'luasnip',
-                        priority = 9
-                    },
-                    -- math dictionary
-                    {
-                        name = 'dictionary',
-                        keyword_length = 2,
-                        priority = 7,
                     },
                     -- latex symbols
                     {
@@ -156,13 +156,19 @@ return {
                     -- simple-in system calculations
                     {
                         name = 'calc',
-                        priority = 5,
-                    }
+                        priority = 2,
+                    },
+                    -- text in buffer
+                    {
+                        name = 'buffer',
+                        priority = 1,
+                    },
                 },
                 -- sorting
                 sorting = {
-                    priority_weight = 1.0,
+                    priority_weight = 0.8,
                     comparators = {
+                        compare.exact,
                         compare.locality,
                         compare.recently_used,
                         compare.score,
@@ -172,13 +178,8 @@ return {
                 }
             })
 
-            -- configuration of math dictionary
-            local dict = require('cmp_dictionary')
-            dict.switcher({
-                filetype = {
-                    tex = { vim.fn.stdpath('config') .. '/lua/tex/dictionary/basic.txt' }
-                },
-            })
+            local dictionary_entries = require('tex.generate_dictionary')(prefs.dictionary_files)
+            require('cmp_dynamic').register(dictionary_entries)
         end
     },
 }

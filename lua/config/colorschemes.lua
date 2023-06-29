@@ -128,6 +128,7 @@ colorschemes.colorscheme_configs = {
                 ReplaceMode           = { fg = '#ff757f' },
                 TerminalMode          = { fg = '#4fd6be' },
                 SelectMode            = { fg = '#c099ff' },
+                Snippet               = { fg = '#c3e88d', bg = '#2f334d' },
             },
             light = {
                 MiniStarterHeader     = { fg = '#34548A', bold = true },
@@ -142,6 +143,7 @@ colorschemes.colorscheme_configs = {
                 ReplaceMode           = { fg = '#f52a65' },
                 TerminalMode          = { fg = '#118c74' },
                 SelectMode            = { fg = '#2e7de9' },
+                Snippet               = { fg = '#587539', bg = '#c4c8da' },
             },
         },
         optional = {}
@@ -165,6 +167,7 @@ colorschemes.colorscheme_configs = {
                 ReplaceMode           = { fg = '#e9b143' },
                 TerminalMode          = { fg = '#d3869b' },
                 SelectMode            = { fg = '#a89984' },
+                Snippet               = { fg = '#b0b846', bg = '#32302f' },
             },
             light = {
                 MiniStarterHeader     = { fg = '#af2528', bold = true },
@@ -179,6 +182,7 @@ colorschemes.colorscheme_configs = {
                 ReplaceMode           = { fg = '#a96b2c' },
                 TerminalMode          = { fg = '#924f79' },
                 SelectMode            = { fg = '#7c6f64' },
+                Snippet               = { fg = '#6f8352', bg = '#f4e8be' },
             }
         },
         optional = {}
@@ -203,6 +207,7 @@ colorschemes.colorscheme_configs = {
                 ReplaceMode           = { fg = '#e69875' },
                 TerminalMode          = { fg = '#d699b6' },
                 SelectMode            = { fg = '#a7c080' },
+                Snippet               = { fg = '#6f8352', bg = '#343f44' },
             },
             light = {
                 MiniStarterHeader     = { fg = '#35a77c', bold = true },
@@ -217,6 +222,7 @@ colorschemes.colorscheme_configs = {
                 ReplaceMode           = { fg = '#f67d26' },
                 TerminalMode          = { fg = '#df69ba' },
                 SelectMode            = { fg = '#93b259' },
+                Snippet               = { fg = '#6f8352', bg = '#f4f0d9' },
             }
         },
         optional = {}

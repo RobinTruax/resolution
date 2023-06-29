@@ -22,7 +22,15 @@ return {
         dependencies = {
             'nvim-tree/nvim-web-devicons',
         },
-        config = true,
+        config = function()
+            require('nvim-tree').setup({
+                view = {
+                    number = true,
+                    relativenumber = true,
+                    signcolumn = 'no',
+                },
+            })
+        end,
     },
 
     ----------------- lazygit.nvim: git integration -----------------

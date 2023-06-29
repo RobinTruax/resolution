@@ -23,6 +23,7 @@ return {
     --------------- lsp-powered lua development tools ---------------
     {
         'folke/neodev.nvim',
+        ft = { 'tex', 'py', 'lua' },
         dependencies = { 'neovim/nvim-lspconfig' },
         config = true,
     },

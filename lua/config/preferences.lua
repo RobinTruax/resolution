@@ -16,6 +16,9 @@ local cfg = vim.fn.stdpath('config')
 
 prefs.project_root_path = '/home/roshan/Documents/Mathematics/'
 prefs.format_style_file = vim.fn.stdpath('config')..'/tex/format-style.yaml'
+prefs.dictionary_files = {
+    vim.fn.stdpath('config')..'/tex/dictionary/proof-of-concept.txt'
+}
 
 -------------------------- leader keys --------------------------
 
