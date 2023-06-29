@@ -31,8 +31,12 @@ return {
         desc = '',
         mode = { 'n', 'v' },
         cmd = {
-            require('computation.popup').mount,
-            require('computation.popup').mount_from_visual
+            function()
+                require('computation.popup').mount()
+            end,
+            function()
+                require('computation.popup').mount_from_visual()
+            end,
         },
     },
     ['d'] = {
@@ -62,8 +66,9 @@ return {
                 print('Prettying with latexindent.')
                 local filename = vim.fn.expand('%:p')
                 local format_style_file = prefs.format_style_file
-                vim.fn.system('latexindent -l '..format_style_file..' -m '..filename..' > '..filename..'-prettied')
-                vim.fn.system('mv '..filename..'-prettied '..filename)
+                vim.fn.system('latexindent -l ' .. format_style_file .. ' -m ' .. filename ..
+                ' > ' .. filename .. '-prettied')
+                vim.fn.system('mv ' .. filename .. '-prettied ' .. filename)
                 vim.cmd('edit')
             else
                 vim.lsp.buf.format()
@@ -92,11 +97,17 @@ return {
     },
     ['q'] = {
         desc = '[q]uit/save',
-        cmd = '<cmd> wq <cr>'
+        cmd = function()
+            if vim.bo.buftype == '' then
+                vim.cmd('wq')
+            else
+                vim.cmd('q')
+            end
+        end
     },
     ['Q'] = {
         desc = '[q]uit/save all',
-        cmd = '<cmd> wqa <cr>'
+        cmd = '<cmd> silent wqa <cr>'
     },
     ['S'] = {
         desc = '[S]tart screen',
@@ -206,11 +217,12 @@ return {
         desc = '[G]rep in project',
         cmd = function()
             require('telescope.builtin').live_grep({
+                prompt_title = 'Grep in Project',
                 entry_maker = require('plugins.telescope.grep_entry_maker')({ path_hidden = false }) })
         end,
     },
     ['sw'] = {
-        desc = 'grep [w]ord project',
+        desc = 'grep [w]ord in project',
         cmd = require('telescope.builtin').grep_string
     },
     ['sy'] = {
@@ -223,7 +235,7 @@ return {
     },
     ['sr'] = {
         desc = '[s]earch rsltn files',
-        cmd = '<cmd> Telescope find_files cwd=' .. vim.fn.stdpath('config')..' <cr>'
+        cmd = '<cmd> Telescope find_files cwd=' .. vim.fn.stdpath('config') .. ' <cr>'
     },
     ['sk'] = {
         desc = '[s]earch keybinds',
@@ -309,6 +321,10 @@ return {
     ['lc'] = {
         desc = '[l]atex [c]ite',
         cmd = false,
+    },
+    ['lC'] = {
+        desc = '[l]atex [C]olor editor',
+        cmd = '<cmd> CccPick <cr>',
     },
     ['lm'] = {
         desc = '[l]atex [m]atrices',

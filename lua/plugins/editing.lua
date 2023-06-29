@@ -2,56 +2,10 @@
 
 plugins which offer small tweaks to the editing experience
 
--------------------------------------------------------------]]
---
+---------------------------------------------------------------]]
+
 
 return {
-    ------ bufresize.nvim: fixing split behavior with resizes -------
-
-    {
-        'kwkarlwang/bufresize.nvim',
-        event = { 'BufReadPost', 'BufNewFile' },
-        config = function()
-            require('bufresize').setup()
-        end
-    },
-
-    ------------ smart-splits.nvim: better window splits ------------
-    {
-        'mrjones2014/smart-splits.nvim',
-        event = { 'BufReadPost', 'BufNewFile' },
-        config = function()
-            require('smart-splits').setup({
-                ignored_filetypes = {
-                    'nofile',
-                    'prompt',
-                },
-                ignore_buftypes = {
-                    'NvimTree',
-                    'ToggleTerm'
-                },
-                at_edge = 'split',
-                default_amount = 3,
-                move_cursor_same_row = false,
-                cursor_follows_swapped_bufs = false,
-                resize_mode = {
-                    quit_key = '<Esc>',
-                    resize_keys = { 'h', 'j', 'k', 'l' },
-                    silent = false,
-                    hooks = {
-                        on_enter = nil,
-                        on_leave = require('bufresize').register,
-                    },
-                },
-                multiplexer_integration = false,
-                ignored_events = {
-                    'BufEnter',
-                    'WinEnter',
-                },
-            })
-        end
-    },
-
     ---------- leap.nvim: in-window movement with Alt-f/t -----------
     {
         'ggandor/leap.nvim',
@@ -97,14 +51,14 @@ return {
         event = { 'BufReadPost', 'BufNewFile' },
         opts = {
             mappings = {
-                left = '<M-h>',
-                right = '<M-l>',
-                down = '<M-j>',
-                up = '<M-k>',
-                line_left = '',
+                left       = '<M-h>',
+                right      = '<M-l>',
+                down       = '<M-j>',
+                up         = '<M-k>',
+                line_left  = '',
                 line_right = '',
-                line_down = '',
-                line_up = '',
+                line_down  = '',
+                line_up    = '',
             },
             options = {
                 reindent_linewise = true,

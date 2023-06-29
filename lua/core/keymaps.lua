@@ -55,23 +55,23 @@ map('', '<Up>',   function() return vcount('k') end, up_opts  )
 
 ----------- better search movement (vim galore) ------------
 
-map("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+map('n', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
+map('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
+map('o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
+map('n', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
+map('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
+map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
 
 ---------------- add undo break points (LazyVim) ----------------
 
-map("i", ",", ",<c-g>u")
-map("i", ".", ".<c-g>u")
-map("i", ";", ";<c-g>u")
+map('i', ',', ',<c-g>u')
+map('i', '.', '.<c-g>u')
+map('i', ';', ';<c-g>u')
 
 ------------------ chaining indents (LazyVim) -------------------
 
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+map('v', '<', '<gv')
+map('v', '>', '>gv')
 
 --------------- let horizontal movement line-wrap ---------------
 
@@ -79,5 +79,20 @@ vim.opt.whichwrap:append('<')
 vim.opt.whichwrap:append('>')
 vim.opt.whichwrap:append('h')
 vim.opt.whichwrap:append('l')
+
+---------------- simplifying various textobjects ----------------
+
+map('o', 'ap', 'a)') -- [p]arentheses
+map('o', 'ip', 'i)')
+map('v', 'ap', 'a)')
+map('v', 'ip', 'i)')
+map('o', 'ar', 'a]') -- [r]ectangular bracket
+map('o', 'ir', 'i]')
+map('v', 'ar', 'a]')
+map('v', 'ir', 'i]')
+map('o', 'ac', 'a}') -- [c]urly bracket
+map('o', 'ic', 'i}')
+map('v', 'ac', 'a}')
+map('v', 'ic', 'i}')
 
 -----------------------------------------------------------------

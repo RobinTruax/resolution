@@ -11,12 +11,28 @@ return {
         'neovim/nvim-lspconfig',
         ft = { 'tex', 'py', 'lua' },
         dependencies = {
-            { 'williamboman/mason.nvim',          config = true },
-            { 'williamboman/mason-lspconfig.nvim' },
-            { 'j-hui/fidget.nvim',                opts = {},    pin = true, tag = 'legacy' },
-            { 'folke/neodev.nvim' },
-            { 'SmiteshP/nvim-navbuddy' },
-            { 'utilyre/barbecue.nvim' },
+            {
+                'williamboman/mason.nvim',
+                config = true
+            },
+            {
+                'williamboman/mason-lspconfig.nvim'
+            },
+            {
+                'j-hui/fidget.nvim',
+                opts = {},
+                pin = true,
+                tag = 'legacy'
+            },
+            {
+                'folke/neodev.nvim'
+            },
+            {
+                'SmiteshP/nvim-navbuddy'
+            },
+            {
+                'utilyre/barbecue.nvim'
+            },
         },
         config = function()
             -- list of servers to install
@@ -38,7 +54,7 @@ return {
                 require('nvim-navbuddy').attach(client, bufnr)
             end
 
-            -- autocompletion capabilties
+            -- broadcast autocompletion capabilties to servers
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
@@ -62,8 +78,8 @@ return {
 
     {
         'L3MON4D3/LuaSnip',
+        ft = { 'tex', 'py', 'lua' },
         version = '*',
-        build = 'make install_jsregexp',
         dependencies = {
             'rafamadriz/friendly-snippets',
         },
@@ -91,6 +107,7 @@ return {
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-buffer',
             'uga-rosa/cmp-dictionary',
             'rafamadriz/friendly-snippets',
@@ -118,8 +135,9 @@ return {
                 },
                 sources = {
                     { name = 'nvim_lsp' },
+                    { name = 'nvim_lsp_signature_help' },
                     { name = 'buffer' },
-                    { name = 'dictionary', keyword_length = 2 },
+                    { name = 'dictionary',             keyword_length = 2 },
                     { name = 'luasnip' },
                 },
             })
@@ -134,11 +152,10 @@ return {
         end
     },
 
-
     ----------------- nvim-navic: winbar navigation -----------------
     {
         'SmiteshP/nvim-navic',
-        dependencies = 'neovim/nvim-lspconfig',
+        -- dependencies = 'neovim/nvim-lspconfig',
         lazy = true
     },
 
@@ -146,7 +163,7 @@ return {
     {
         'SmiteshP/nvim-navbuddy',
         dependencies = {
-            'neovim/nvim-lspconfig',
+            -- 'neovim/nvim-lspconfig',
             'SmiteshP/nvim-navic',
             'MunifTanjim/nui.nvim',
         },

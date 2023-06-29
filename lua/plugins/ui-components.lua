@@ -1,52 +1,12 @@
 --[[------------------- resolution v0.1.0 -----------------------
 
-all plugins relating to UI which are not called on startup
+all ui components which are not called on startup
 
 -------------------------------------------------------------]]
 
 return {
 
-    {
-        'metakirby5/codi.vim',
-        init = function()
-            vim.cmd([[
-            let g:codi#interpreters = {
-                \ 'python': {
-                \ 'bin': 'python3',
-                \ 'prompt': '^\(>>>\|\.\.\.\) ',
-                \ },
-                \ }
-            ]])
-        end
-    },
-    {
-        'milanglacier/yarepl.nvim',
-        config = function()
-            local yarepl = require 'yarepl'
-
-            yarepl.setup {
-                buflisted = true,
-                scratch = false,
-                ft = 'REPL',
-                wincmd = 'belowright 15 split',
-                metas = {
-                    ipython = { cmd = 'ipython', formatter = yarepl.formatter.bracketed_pasting },
-                    python = { cmd = 'python3', formatter = yarepl.formatter.trim_empty_lines },
-                    R = { cmd = 'R', formatter = yarepl.formatter.trim_empty_lines },
-                    bash = { cmd = 'bash', formatter = yarepl.formatter.trim_empty_lines },
-                    zsh = { cmd = 'zsh', formatter = yarepl.formatter.bracketed_pasting },
-                },
-                close_on_exit = true,
-                scroll_to_bottom_after_sending = true,
-                os = {
-                    windows = {
-                        send_delayed_cr_after_sending = true,
-                    },
-                },
-            }
-        end
-    },
-    -- -------------- toggleterm.nvim: a better terminal ---------------
+    -------------- toggleterm.nvim: a better terminal ---------------
     {
         'akinsho/toggleterm.nvim',
         version = '*',
@@ -54,7 +14,7 @@ return {
         config = true,
     },
 
-    ----------------- neo-tree.nvim: file explorer ------------------
+    ----------------- nvim-tree.nvim: file explorer -----------------
     {
         'nvim-tree/nvim-tree.lua',
         version = '*',
@@ -78,21 +38,13 @@ return {
         end
     },
 
-    ------ nvim-spectre: search/replace across multiple files -------
-    {
-        'nvim-pack/nvim-spectre',
-        cmd = 'Spectre',
-        config = function()
-            require('spectre').setup()
-        end,
-    },
-
     -------------- which-key.nvim: keybind-based menus --------------
     {
         'folke/which-key.nvim',
         cmd = 'WhichKey',
         event = { 'BufReadPost', 'BufNewFile' },
         config = function()
+            -- necessary for which-key to function
             vim.o.timeout = true
 
             -- register "other"-type keybinds

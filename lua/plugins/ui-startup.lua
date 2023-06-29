@@ -1,6 +1,6 @@
 --[[------------------- resolution v0.1.0 -----------------------
 
-all ui elements which run on startup
+all ui components which run on startup
 
 -------------------------------------------------------------]]
 
@@ -10,6 +10,7 @@ return {
         'echasnovski/mini.starter',
         version = '*',
         config = function()
+            -- get preferences and necessary functions
             local prefs = require('config.preferences')
             local starter = require('mini.starter')
 
@@ -40,7 +41,7 @@ return {
                 end
             end
 
-            -- config file
+            -- configure the startup screen
             local config = {
                 query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_-. ',
                 evaluate_single = true,
@@ -49,7 +50,7 @@ return {
                 items = {
                     {
                         {
-                            action = 'enew',
+                            action = require('filesys.project_menu').project_menu,
                             name = 'open math project',
                             section = 'actions'
                         },
@@ -98,7 +99,7 @@ return {
                 footer = 'press space for more',
             }
 
-            -- call setup
+            -- finish setup
             starter.setup(config)
         end
     },
@@ -106,9 +107,9 @@ return {
     ------------------- lualine.nvim: status line -------------------
     {
         'nvim-lualine/lualine.nvim',
-        event = 'VeryLazy',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
+            -- set up separators based on ui sharpness
             local section_separators = {}
             if require('config.aesthetics').ui_sharp == true then
                 section_separators = { left = '', right = '' }
@@ -116,8 +117,10 @@ return {
                 section_separators = { left = '', right = '' }
             end
 
+            -- required setting for showcmd to function
             vim.opt.showcmdloc = 'statusline'
 
+            -- set up statusline
             require('lualine').setup({
                 options = {
                     theme = 'auto',

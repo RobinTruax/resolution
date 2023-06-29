@@ -54,7 +54,7 @@ local modifier_creator = function(modifier)
     if english_only == false then
         -- greek (standard)
         table.insert(auto, symbol_creator({
-            trigger = trigger .. config.greek_standard_pattern,
+            trigger = trigger .. config.greek_st_pat,
             program = function(captures)
                 return '\\' .. modifier_command .. '{' .. config.greek_letters[captures[1]] .. '}'
             end,
@@ -65,7 +65,7 @@ local modifier_creator = function(modifier)
 
         -- greek (special)
         table.insert(auto, symbol_creator({
-            trigger = trigger .. config.greek_special_pattern,
+            trigger = trigger .. config.greek_vs_pat,
             program = function(captures)
                 return '\\' .. modifier_command .. '{' .. config.greek_letters[captures[1]] .. '}'
             end,

@@ -1,3 +1,9 @@
+--[[------------------- resolution v0.1.0 -----------------------
+
+default options for telescope
+
+---------------------------------------------------------------]]
+
 return {
     path_display = { truncate = 0 },
     sorting_strategy = 'ascending',
@@ -13,3 +19,5 @@ return {
         preview_width = 0.5,
     },
 }
+
+-----------------------------------------------------------------

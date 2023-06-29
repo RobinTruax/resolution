@@ -4,7 +4,7 @@ configuration for all colorscheme assignments
 this includes specially assigned colors for rsltn
 
 -------------------------------------------------------------]]
-                                                                --
+--
 
 local colorschemes = {}
 
@@ -81,11 +81,12 @@ local c = colorschemes.universal_palette
 colorschemes.universal_config = {
     always = {
         MiniStarterItemBullet = { fg = c.bg, bg = c.bg },
-        -- EndOfBuffer           = { fg = c.bg, bg = c.bg },
         LeapBackdrop          = { link = 'Comment' },
         LeapMatch             = { fg = '#ff007c', bold = true, nocombine = true },
         LeapLabelPrimary      = { fg = '#ff007c', bold = true, nocombine = true },
         LeapLabelSecondary    = { fg = '#4fd6be', bold = true, nocombine = true },
+        CccFloatNormal        = { bg = c.bg },
+        CccFloatBorder        = { link = 'SpecialChar' },
     },
     optional = {
         ui_borderless = {
@@ -100,14 +101,15 @@ colorschemes.universal_config = {
             TelescopePreviewBorder = { fg = c.ui_normal, bg = c.ui_normal },
             TelescopeResultsTitle  = { fg = c.ui_normal, bg = c.ui_normal },
             TelescopeResultsBorder = { fg = c.ui_normal, bg = c.ui_normal },
+            -- CccFloatNormal         = { bg = c.ui_normal },
+            -- CccFloatBorder         = { bg = c.ui_normal, fg = c.ui_normal },
         }
     }
 }
 ------------------- by-scheme configurations --------------------
 
 colorschemes.colorscheme_configs = {
-
--------------------------- tokyonight ---------------------------
+    -------------------------- tokyonight ---------------------------
 
     tokyonight = {
         dark = 'tokyonight-moon',
@@ -145,7 +147,7 @@ colorschemes.colorscheme_configs = {
         optional = {}
     },
 
----------------------------- gruvbox ----------------------------
+    ---------------------------- gruvbox ----------------------------
 
     gruvbox = {
         dark = 'gruvbox-material',
@@ -182,7 +184,7 @@ colorschemes.colorscheme_configs = {
         optional = {}
     },
 
--------------------------- everforest ---------------------------
+    -------------------------- everforest ---------------------------
 
     everforest = {
         dark = 'everforest',

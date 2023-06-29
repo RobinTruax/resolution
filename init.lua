@@ -4,6 +4,9 @@ init file; nexus for all other files
 
 -------------------------------------------------------------]]--
 
+-- detect windows or unix
+vim.g.windows = (vim.loop.os_uname().sysname == "Windows")
+
 -- preferences
 require('config.preferences')
 

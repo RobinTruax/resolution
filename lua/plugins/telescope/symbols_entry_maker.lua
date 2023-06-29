@@ -4,12 +4,15 @@ a prettier entry maker for lsp symbol-type telescopes
 
 ---------------------------------------------------------------]]
 
--- some telescope libraries used in the entry maker
+-------------------- telescope dependencies ---------------------
+
 local make_entry    = require('telescope.make_entry')
 local entry_display = require('telescope.pickers.entry_display')
 local utils         = require('telescope.utils')
 
--- some locally defined telescope functions used in the entry maker
+-------------------- local utility functions --------------------
+
+-- a function for robustly obtaining filenames
 local get_filename_fn = function()
     local bufnr_name_cache = {}
     return function(bufnr)
@@ -96,4 +99,8 @@ local function symbols_entry_maker(opts)
     end
 end
 
+-----------------------------------------------------------------
+
 return symbols_entry_maker
+
+-----------------------------------------------------------------

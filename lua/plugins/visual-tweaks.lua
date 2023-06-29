@@ -64,27 +64,25 @@ return {
         }
     },
 
-    -------------- nvim-colorizer: coloring hex codes ---------------
+    ---------------------- ccc.nvim: colorizer ----------------------
     {
-        'NvChad/nvim-colorizer.lua',
+        'uga-rosa/ccc.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
         config = function()
-            require('colorizer').setup({
-                user_default_options = {
-                    RGB = true,
-                    RRGGBB = true,
-                    names = false,
-                    RRGGBBAA = false,
-                    AARRGGBB = false,
-                    rgb_fn = false,
-                    hsl_fn = false,
-                    css = false,
-                    css_fn = false,
-                    mode = 'background',
-                    tailwind = false,
-                    sass = { enable = false, parsers = { 'css' }, },
-                    always_update = false
-                }
+            local ccc = require('ccc')
+            local aesthetics = require('config.aesthetics')
+            local border = 'single'
+            if aesthetics.ui_sharp == false then
+                border = 'rounded'
+            end
+            ccc.setup({
+                win_opts = {
+                    border = border,
+                },
+                highlighter = {
+                    auto_enable = true,
+                    lsp = true,
+                },
             })
         end
     },
@@ -119,12 +117,6 @@ return {
         opts = {
             show_warnings = false,
         }
-    },
-
-    -------------------- better buffer deletion ---------------------
-    {
-        'moll/vim-bbye',
-        event = 'VeryLazy',
     },
 }
 

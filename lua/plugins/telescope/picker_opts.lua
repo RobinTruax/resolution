@@ -1,3 +1,9 @@
+--[[------------------- resolution v0.1.0 -----------------------
+
+setting the default options for individual telescope pickers
+
+---------------------------------------------------------------]]
+
 return {
     live_grep = {
         prompt_title = 'Grep in Buffer',
@@ -20,3 +26,5 @@ return {
         entry_maker = require('plugins.telescope.symbols_entry_maker')({path_hidden = false, fname_width = 20})
     }
 }
+
+-----------------------------------------------------------------

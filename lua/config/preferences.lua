@@ -75,11 +75,14 @@ opt.autoread              = true                           -- automatically rere
 
 ------------------------- miscellaneous -------------------------
 
-opt.clipboard = 'unnamedplus' -- unify system & vim clipboard
-opt.foldmethod = 'marker'
-prefs.number_recent_files = 5
-prefs.timestamp_backup = true
-opt.fillchars='eob: '
+-- don't edit these unless you're at least an intermediate user
+
+opt.clipboard             = 'unnamedplus' -- unify system & vim clipboard
+opt.foldmethod            = 'marker'      -- folding using triple curly brackets
+prefs.number_recent_files = 5             -- number of recent files in startup screen
+prefs.timestamp_backup    = true          -- timestamped backups (leave this ON in alpha)
+opt.fillchars             = { eob = ' ' } -- remove end-of-file characters
+opt.ea                    = false         -- let rsltn handle window resizing
 
 -----------------------------------------------------------------
 

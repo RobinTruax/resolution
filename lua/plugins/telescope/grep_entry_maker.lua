@@ -5,6 +5,7 @@ a prettier entry maker for grep functionality
 ---------------------------------------------------------------]]
 
 -------------------- telescope dependencies ---------------------
+
 local utils = require('telescope.utils')
 local Path = require('plenary.path')
 
