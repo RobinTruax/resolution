@@ -18,7 +18,7 @@ return {
             -- dependencies
             local ls = require('luasnip')
             local loaders = require('luasnip.loaders.from_lua')
-            local types = require("luasnip.util.types")
+            local types = require('luasnip.util.types')
 
             -- lazy load functions
             loaders.lazy_load({ paths = './lua/snippets' })
@@ -47,25 +47,31 @@ return {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
+            -- luasnip (so mappings can be unified)
             'L3MON4D3/LuaSnip',
+            -- completion sources
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-buffer',
             'uga-rosa/cmp-dictionary',
             'rafamadriz/friendly-snippets',
+            'kdheepak/cmp-latex-symbols',
+            'FelipeLema/cmp-async-path',
+            'hrsh7th/cmp-calc',
         },
         config = function()
             -- dependencies
             local cmp = require('cmp')
             local luasnip = require('luasnip')
+            local compare = require('cmp.config.compare')
 
             -- utility function
             local has_words_before = function()
                 unpack = unpack or table.unpack
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
                 return col ~= 0 and
-                vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
             end
 
             -- configuration of autocompletion and snippet mappings
@@ -82,7 +88,7 @@ return {
                     ['<C-p>'] = cmp.mapping.select_prev_item(),
                     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
                     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                    ['<C-Space>'] = cmp.mapping.confirm({
+                    ['<CR>'] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Replace,
                         select = true,
                     }),
@@ -110,15 +116,60 @@ return {
                 -- completion sources
                 sources = {
                     -- nvim lsp
-                    { name = 'nvim_lsp' },
-                    { name = 'nvim_lsp_signature_help' },
+                    {
+                        name = 'nvim_lsp',
+                        priority = 8
+                    },
+                    {
+                        name = 'nvim_lsp_signature_help',
+                        priority = 8
+                    },
                     -- text in buffer
-                    { name = 'buffer' },
+                    {
+                        name = 'buffer',
+                        priority = 5,
+                    },
                     -- snippets
-                    { name = 'luasnip' },
+                    {
+                        name = 'luasnip',
+                        priority = 9
+                    },
                     -- math dictionary
-                    { name = 'dictionary', keyword_length = 2 },
+                    {
+                        name = 'dictionary',
+                        keyword_length = 2,
+                        priority = 7,
+                    },
+                    -- latex symbols
+                    {
+                        name = 'latex_symbols',
+                        option = {
+                            strategy = 2,
+                        },
+                        priority = 4,
+                    },
+                    -- path completion
+                    {
+                        name = 'async_path',
+                        priority = 3,
+                    },
+                    -- simple-in system calculations
+                    {
+                        name = 'calc',
+                        priority = 5,
+                    }
                 },
+                -- sorting
+                sorting = {
+                    priority_weight = 1.0,
+                    comparators = {
+                        compare.locality,
+                        compare.recently_used,
+                        compare.score,
+                        compare.offset,
+                        compare.order,
+                    },
+                }
             })
 
             -- configuration of math dictionary
