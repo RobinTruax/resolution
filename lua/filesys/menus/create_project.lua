@@ -1,3 +1,11 @@
+--[[------------------- resolution v0.1.0 -----------------------
+
+menu for creating new project
+
+---------------------------------------------------------------]]
+
+------------------------- dependencies --------------------------
+
 local pickers = require('telescope.pickers')
 local finders = require('telescope.finders')
 local conf = require('telescope.config').values
@@ -5,16 +13,17 @@ local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 local previewers = require('telescope.previewers')
 
+local prefs = require('config.preferences')
+local config_filesys = require('config.advanced.filesys')
+local states = require('core.states')
 local utilities = require('filesys.menus.utilities')
 local choose_template = require('filesys.menus.choose_template')
-local cfg_filesys = require('config.advanced.filesys')
-local prefs = require('config.preferences')
+
+----------------------- get project name ------------------------
 
 local template_directory = vim.fn.stdpath('config') .. '/tex/templates/'
-
 local create_project = {}
 
--- Project Name
 create_project.name = function(name, opts)
     vim.ui.input({
         prompt = name or 'Project Name: ',
@@ -31,9 +40,10 @@ create_project.name = function(name, opts)
     end)
 end
 
--- Project Type
+----------------------- get project type ------------------------
+
 create_project.type = function(name, opts)
-    vim.ui.select(cfg_filesys.project_icons, {
+    vim.ui.select(config_filesys.project_icons, {
         prompt = 'Type of Project "' .. name .. '"',
         format_item = function(item)
             return ' ' .. item[2] .. '  ' .. item[1]
@@ -45,7 +55,8 @@ create_project.type = function(name, opts)
     end)
 end
 
--- Project Location
+--------------------- get project location ----------------------
+
 create_project.location = function(name, proj_type, opts)
     vim.ui.select(utilities.get_subdirs_in_directory(prefs.project_root_path), {
         prompt = 'Folder for Project "' .. name .. '"',
@@ -55,7 +66,7 @@ create_project.location = function(name, proj_type, opts)
     }, function(choice)
         if choice ~= nil then
             local dir_name = choice .. '/' .. name:gsub('[%s-]+', '_'):gsub('[^%w_]', ''):lower()
-            local file_name = dir_name .. '/' .. cfg_filesys.project_info_name
+            local file_name = dir_name .. '/' .. config_filesys.project_info_name
             -- make directory
             utilities.make_dir(dir_name)
             -- make json file
@@ -64,8 +75,14 @@ create_project.location = function(name, proj_type, opts)
             vim.cmd('cd ' .. dir_name)
             -- create file template
             choose_template({ prompt_title = 'Create Starter File' })
+            -- let the system know to recompile projects
+            states.project_info_compiled = false
         end
     end)
 end
 
-return create_project
+-----------------------------------------------------------------
+
+return create_project.name
+
+-----------------------------------------------------------------

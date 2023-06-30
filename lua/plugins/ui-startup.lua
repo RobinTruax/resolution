@@ -50,12 +50,16 @@ return {
                 items = {
                     {
                         {
-                            action = require('filesys.project_menu').project_menu,
+                            action = function()
+                                require('filesys.menus.choose_project')()
+                            end,
                             name = 'open math project',
                             section = 'actions'
                         },
                         {
-                            action = 'enew',
+                            action = function()
+                                require('filesys.menus.create_project')()
+                            end,
                             name = 'new math project',
                             section = 'actions'
                         },

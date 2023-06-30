@@ -1,3 +1,11 @@
+--[[------------------- resolution v0.1.0 -----------------------
+
+menu for choosing template for new file
+
+---------------------------------------------------------------]]
+
+------------------------- dependencies --------------------------
+
 local pickers = require('telescope.pickers')
 local finders = require('telescope.finders')
 local conf = require('telescope.config').values
@@ -6,6 +14,9 @@ local action_state = require('telescope.actions.state')
 local previewers = require('telescope.previewers')
 
 local utilities = require('filesys.menus.utilities')
+
+-------------------------- menu itself --------------------------
+
 local template_directory = vim.fn.stdpath('config')..'/tex/templates/'
 
 local choose_template_menu = function(opts)
@@ -45,4 +56,8 @@ local choose_template_menu = function(opts)
     }):find()
 end
 
+-----------------------------------------------------------------
+
 return choose_template_menu
+
+-----------------------------------------------------------------

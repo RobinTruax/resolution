@@ -1,4 +1,12 @@
+--[[------------------- resolution v0.1.0 -----------------------
+
+utilities for filesystem menus
+
+---------------------------------------------------------------]]
+
 local utilities = {}
+
+-----------------------------------------------------------------
 
 local pickers = require('telescope.pickers')
 local finders = require('telescope.finders')
@@ -9,21 +17,34 @@ local previewers = require('telescope.previewers')
 
 local prefs = require('config.preferences')
 local cfg_filesys = require('config.advanced.filesys')
+local states = require('core.states')
 
-utilities.file_exists = function(file)
-    local f = io.open(file, "rb")
+------------------- low-level file utilities --------------------
+
+utilities.file_exists = function(path)
+    local f = io.open(path, "rb")
     if f then f:close() end
     return f ~= nil
 end
 
-utilities.string_from_file = function(file)
-    if not utilities.file_exists(file) then return '' end
+utilities.string_from_file = function(path)
+    if not utilities.file_exists(path) then return '' end
     local lines = ''
-    for line in io.lines(file) do
+    for line in io.lines(path) do
         lines = lines .. ' ' .. line
     end
     return lines
 end
+
+utilities.read_file = function(path)
+    local file = io.open(path, "rb")
+    if not file then return nil end
+    local content = file:read "*a"
+    file:close()
+    return content
+end
+
+--------------------- search in directories ---------------------
 
 utilities.get_files_in_directory = function(dir)
     local files = {}
@@ -57,6 +78,8 @@ utilities.get_subdirs_in_directory = function(dir)
     return files
 end
 
+------------------- system calls split by os --------------------
+
 utilities.copy_file = function(oldfile, newfile)
     if vim.g.windows == false then
         vim.fn.system(string.format('cp %s %s', oldfile, newfile))
@@ -76,6 +99,8 @@ utilities.make_dir = function(location)
         error('Windows variable has unrecognized value in function which makes system call.')
     end
 end
+
+--------------------- manipulate file path ----------------------
 
 utilities.trim_path_dir = function(path)
     return vim.fn.fnamemodify(path, ':h')
@@ -104,9 +129,11 @@ utilities.cut_path_to_project = function(path)
     if path:sub(x, x) == '/' then
         return path:sub(1, x)
     else
-        return path:sub(1, x)..'/'
+        return path:sub(1, x) .. '/'
     end
 end
+
+----------------------------- other -----------------------------
 
 utilities.get_project_name = function(path)
     local cut_path = utilities.cut_path_to_project(path)
@@ -119,6 +146,56 @@ utilities.get_project_name = function(path)
         return 'Project Name Not Found'
     end
     return vim.json.decode(proj_info_string).title
+end
+
+utilities.most_recent_file = function(path, force)
+    if states.most_recent_files[path] == nil or force == true then
+        local cmd = 'ls -t ' .. path .. '/*.tex | head -n1'
+        local untrimmed = vim.fn.system(cmd)
+        states.most_recent_files[path] = untrimmed:sub(1, -2)
+    end
+    return states.most_recent_files[path]
+end
+
+------------------ searching for project info -------------------
+
+utilities.get_all_project_infos = function()
+    local files = {}
+    local string_of_files = ''
+    if vim.g.windows == false then
+        string_of_files = io.popen('find ' ..
+        prefs.project_root_path .. ' -name ' .. "'" .. cfg_filesys.project_info_name .. "'")
+    elseif vim.g.windows == true then
+        error('Not implemented yet.')
+    else
+        error('Windows variable has unrecognized value in function which makes system call.')
+    end
+    for filename in string_of_files:lines() do
+        local root = prefs.project_root_path:gsub('(.-)[\\/]+$', '%1')
+        local archive = root .. '/' .. cfg_filesys.archive_project_folder
+        if filename:find(archive) == nil then
+            files[#files + 1] = filename
+        end
+    end
+    string_of_files:close()
+    return files
+end
+
+utilities.compile_project_infos = function(force)
+    if force == true then
+        states.project_info_compiled = false
+    end
+    if states.project_info_compiled == false or force == true then
+        local table_of_project_infos = {}
+        for _, project_info in pairs(utilities.get_all_project_infos()) do
+            local decoded_project_info = vim.json.decode(utilities.read_file(project_info))
+            decoded_project_info['filepath'] = project_info
+            table_of_project_infos[#table_of_project_infos + 1] = decoded_project_info
+        end
+        states.table_of_project_infos = table_of_project_infos
+        states.project_info_compiled = true
+    end
+    return states.table_of_project_infos
 end
 
 return utilities

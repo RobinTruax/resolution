@@ -10,4 +10,6 @@ filesys.project_icons = {
     { 'Code',       '' },
 }
 
+filesys.archive_project_folder = 'Archive'
+
 return filesys

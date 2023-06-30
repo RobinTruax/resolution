@@ -12,6 +12,10 @@ return {
         desc = 'resolution',
         cmd = false,
     },
+    ['<leader>'] = {
+        desc = 'keybinds',
+        cmd = '<cmd> WhichKey <cr>',
+    },
 
     --------------------------- top-level ---------------------------
 
