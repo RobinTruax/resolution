@@ -6,6 +6,70 @@ all ui tweaks and improvements which rsltn adds
 
 return {
 
+
+    ----------------- dressing.nvim: better vim ui ------------------
+    {
+        'stevearc/dressing.nvim',
+        event = 'VeryLazy',
+        config = function()
+            local border = 'rounded'
+            if require('config.aesthetics').ui_sharp == true then
+                border = 'single'
+            end
+            require('dressing').setup({
+                input = {
+                    insert_only = false,
+                    start_in_insert = true,
+                    border = border,
+                    relative = 'cursor',
+                    mappings = {
+                        n = {
+                            ['<q>'] = 'Close',
+                            ['<CR>'] = 'Confirm',
+                        },
+                        i = {
+                            ['<C-c>'] = 'Close',
+                            ['<CR>'] = 'Confirm',
+                            ['<Up>'] = 'HistoryPrev',
+                            ['<Down>'] = 'HistoryNext',
+                        },
+                    },
+                    get_config = function(opts)
+                        if opts.relative ~= nil then
+                            return {
+                                relative = opts.relative
+                            }
+                        end
+                    end
+                },
+                select = {
+                    backend = { 'nui' },
+                    nui = {
+                        border = {
+                            style = border,
+                        },
+                    },
+                }
+            })
+        end
+    },
+
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add any options here
+        },
+        dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "MunifTanjim/nui.nvim",
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            "rcarriga/nvim-notify",
+        }
+    },
+
     --------------- vim-bbye: better buffer deletion ----------------
     {
         'moll/vim-bbye',

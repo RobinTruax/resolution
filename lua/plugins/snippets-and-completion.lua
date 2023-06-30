@@ -160,14 +160,14 @@ return {
                         priority = 2,
                     },
                     -- text in buffer
-                    {
-                        name = 'buffer',
-                        priority = 1,
-                    },
+                    -- {
+                    --     name = 'buffer',
+                    --     priority = 1,
+                    -- },
                 },
                 -- sorting
                 sorting = {
-                    priority_weight = 0.8,
+                    priority_weight = 1.0,
                     comparators = {
                         compare.exact,
                         compare.locality,

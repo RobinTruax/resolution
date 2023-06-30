@@ -140,10 +140,32 @@ return {
                 },
                 sections = {
                     lualine_a = { 'mode' },
-                    lualine_b = { 'searchcount', '%S' },
-                    lualine_c = { 'require("core.ui").macro_recording_sl()' },
-                    lualine_x = { 'diff' },
-                    lualine_y = { 'branch' },
+                    lualine_b = { '%S' },
+                    lualine_c = {
+                        {
+                            require("noice").api.status.message.get_hl,
+                            cond = function()
+                                if require("noice").api.status.search.has() == true then
+                                    return false
+                                else
+                                    return require("noice").api.status.message.has()
+                                end
+                            end
+                        },
+                        {
+                            require("noice").api.status.mode.get,
+                            cond = require("noice").api.status.mode.has,
+                            color = 'CommandMode',
+                        },
+                        {
+                            require("noice").api.status.search.get,
+                            cond = require("noice").api.status.search.has,
+                            color = 'CommandMode',
+                        },
+                    },
+                    lualine_x = { 'diff', 'branch' },
+                    lualine_y = {
+                        function() return require("filesys.menus.utilities").get_project_name(vim.fn.getcwd()) end },
                     lualine_z = { 'location' },
                 },
             })

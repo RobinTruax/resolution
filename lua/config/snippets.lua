@@ -18,7 +18,7 @@ local config = {}
 
 --------------------------- settings ----------------------------
 --{{{
-config.autoscript = true -- automatic sub- and super-scripting with numbers and *
+config.autoscript = false -- automatic sub- and super-scripting with numbers and *
 
 -- patterns for later referencing
 config.patterns = {
@@ -82,7 +82,7 @@ config.greek_vs_pat = '(;[efco])'
 
 -- the first two environment snippets are of a different type
 config.display_math = {
-    trigger = 'mj', -- set to nil or false to disable
+    trigger = 'jk', -- set to nil or false to disable
     auto = true,
 }
 config.generic_environment = {
@@ -317,13 +317,13 @@ config.nonmath_commands = {
     ------------------------- entering math -------------------------
     {
         expanded    = '$<>$',
-        trigger     = 'jk',
+        trigger     = 'mj',
         description = 'Inline Math',
         auto        = true,
     },
     {
         expanded    = '$<>$',
-        trigger     = 'kj',
+        trigger     = 'jm',
         description = 'Inline Math',
         auto        = true,
     },
@@ -353,22 +353,22 @@ config.nonmath_commands = {
     },
     {
         expanded    = '\\texttt{<>}',
-        trigger     = 'tt',
+        trigger     = 'ttt',
         description = 'Teletype (Font)',
     },
     {
         expanded    = '\\textsc{<>}',
-        trigger     = 'sc',
+        trigger     = 'tsc',
         description = 'Small Caps (Font)',
     },
     {
         expanded    = '\\textsf{<>}',
-        trigger     = 'sf',
+        trigger     = 'tsf',
         description = 'Sans Serif (Font)',
     },
     {
         expanded    = '\\textrm{<>}',
-        trigger     = 'rm',
+        trigger     = 'trm',
         description = 'Roman (Font)',
     },
 
@@ -477,22 +477,22 @@ config.math_commands    = {
     },
     {
         expanded    = '\\texttt{<>}',
-        trigger     = 'tt',
+        trigger     = 'ttt',
         description = 'Teletype (Font)',
     },
     {
         expanded    = '\\textsc{<>}',
-        trigger     = 'sc',
+        trigger     = 'tsc',
         description = 'Small Caps (Font)',
     },
     {
         expanded    = '\\textsf{<>}',
-        trigger     = 'sf',
+        trigger     = 'tsf',
         description = 'Sans Serif (Font)',
     },
     {
         expanded    = '\\textrm{<>}',
-        trigger     = 'rm',
+        trigger     = 'trm',
         description = 'Roman (Font)',
     },
     {
@@ -1379,21 +1379,26 @@ config.math_symbols     = {
 
     ----------------------------- dots ------------------------------
     {
-        trigger = '%.',
+        trigger = '%.%.',
         program = '\\cdot',
+        auto    = true,
+        prefix  = config.patterns.no_dots,
+        suffix  = config.patterns.no_dots,
     },
     {
-        trigger = '%*%*',
+        trigger = '%*%*%*',
         program = '\\cdots',
+        auto    = true,
     },
     {
         trigger = '%:',
         program = '\\vdots',
     },
     {
-        trigger  = '%.%.',
+        trigger  = '%.%.%.',
         program  = '\\ldots',
         priority = 101,
+        auto     = true,
     },
     {
         trigger  = '%.%:',
@@ -1406,11 +1411,11 @@ config.math_symbols     = {
         priority = 101,
     },
     {
-        trigger = 'x',
+        trigger = 'xx',
         program = '\\times',
     },
     {
-        trigger = 'ox',
+        trigger = 'oxx',
         program = '\\otimes',
     },
 

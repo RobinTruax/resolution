@@ -23,7 +23,7 @@ return {
     --------------- lsp-powered lua development tools ---------------
     {
         'folke/neodev.nvim',
-        ft = { 'tex', 'py', 'lua' },
+        ft = { 'lua' },
         dependencies = { 'neovim/nvim-lspconfig' },
         config = true,
     },
@@ -31,13 +31,11 @@ return {
     --------- nvim-lspconfig: configuration of built-in lsp ---------
     {
         'neovim/nvim-lspconfig',
-        ft = { 'tex', 'py', 'lua' },
+        ft = { 'tex', 'py', 'lua', 'json' },
         dependencies = {
             -- mason (installing and configuring LSPs)
             { 'williamboman/mason.nvim',          config = true, build = ":MasonUpdate" },
             { 'williamboman/mason-lspconfig.nvim' },
-            -- fidget (LSP UI)
-            { 'j-hui/fidget.nvim',                opts = {},     pin = true,            tag = 'legacy' },
             -- UIs aded on LSP attach
             { 'SmiteshP/nvim-navbuddy' },
             { 'utilyre/barbecue.nvim' },
@@ -60,8 +58,8 @@ return {
                         telemetry = { enable = false },
                     },
                 },
-                texlab = {
-                },
+                texlab = {},
+                jsonls = {},
             }
 
             -- broadcast autocompletion capabilties to servers

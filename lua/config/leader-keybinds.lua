@@ -364,6 +364,12 @@ return {
         desc = '[l]atex clean au[x]',
         cmd = '<cmd> VimtexClean <cr>',
     },
+    ['lR'] = {
+        desc = '[l]atex [R]ename',
+        cmd = function()
+            vim.lsp.buf.rename()
+        end
+    },
 
     ---------------------- tex extensions (x) -----------------------
 

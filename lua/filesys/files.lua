@@ -8,4 +8,7 @@ files.file_menu = function(opts)
     require('telescope.builtin').find_files(opts)
 end
 
+files.create_new_from_template = function(opts)
+end
+
 return files

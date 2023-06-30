@@ -96,6 +96,18 @@ return {
             wk.register(flat_leader_keybinds)
         end,
     },
+
+    ---------------------- markdown previewing ----------------------
+    {
+        'iamcco/markdown-preview.nvim',
+        ft = 'md',
+        build = function()
+            vim.fn['mkdp#util#install']()
+        end,
+        config = function()
+            vim.g.mkdp_auto_close = 0
+        end
+    },
 }
 
 -----------------------------------------------------------------
