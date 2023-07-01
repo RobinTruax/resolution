@@ -23,6 +23,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'lazygit',
     'startuptime',
     'checkhealth',
+    'NvimTree',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -45,6 +46,8 @@ vim.api.nvim_create_autocmd('FileType', {
     })
   end,
 })
+
+vim.cmd([[autocmd User VimtexEventView sleep 750m | call b:vimtex.viewer.xdo_focus_vim()]])
 
 ---------------------- backup autocommand -----------------------
 

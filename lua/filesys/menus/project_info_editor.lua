@@ -1,14 +1,15 @@
 --[[------------------- resolution v0.1.0 ---------------------
 
-a menu for choosing a project
+a menu for choosing a project to edit the project info for
 
 -------------------------------------------------------------]]
 
 ------------------------- dependencies --------------------------
 
 local config_filesys = require('config.advanced.filesys')
+local states = require('core.states')
 local utilities = require('filesys.menus.utilities')
-local previewer = require('filesys.menus.project_previewer')
+local previewer = require('filesys.menus.project_info_previewer')
 local pickers = require('telescope.pickers')
 local finders = require('telescope.finders')
 local conf = require('telescope.config').values
@@ -17,13 +18,10 @@ local action_state = require('telescope.actions.state')
 
 --------------------------- main menu ---------------------------
 
-local choose_project = function(opts)
+local edit_project = function(opts)
     opts = opts or {}
-    if opts.pick_files_after == nil then
-        opts.pick_files_after = true
-    end
     pickers.new(opts, {
-        prompt_title = "Open Project",
+        prompt_title = "Edit Project Information",
         finder = finders.new_table {
             results = utilities.compile_project_infos(),
             entry_maker = function(entry)
@@ -46,22 +44,22 @@ local choose_project = function(opts)
             actions.select_default:replace(function()
                 actions.close(prompt_bufnr)
                 local selection = action_state.get_selected_entry()
-                if selection ~= nil then
-                    vim.cmd('cd ' .. utilities.trim_path_dir(selection['value']['filepath']))
-                    if opts.pick_files_after == true then
-                        require('filesys.menus.choose_files')()
-                    elseif opts.callback_function ~= nil then
-                        opts.callback_function({filepath = utilities.trim_path_dir(selection['value']['filepath'])})
-                    end
-                end
+                local to_edit = utilities.trim_path_dir(selection['value']['filepath']) .. '/' .. config_filesys.project_info_name
+                vim.notify(string.format('Project %s Information Opened', selection['value']['title']), vim.log.levels.INFO)
+                vim.cmd('edit '..to_edit)
+                vim.lsp.buf.format()
+                vim.cmd('write')
+                states.project_info_compiled = false
             end)
             return true
         end,
     }):find()
 end
 
+edit_project()
+
 -----------------------------------------------------------------
 
-return choose_project
+return edit_project
 
 -----------------------------------------------------------------

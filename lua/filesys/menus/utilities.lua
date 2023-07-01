@@ -100,6 +100,16 @@ utilities.make_dir = function(location)
     end
 end
 
+utilities.mv_folder = function(oldloc, newloc)
+    if vim.g.windows == false then
+        vim.fn.system(string.format('mv %s %s', oldloc, newloc))
+    elseif vim.g.windows == true then
+        error('Not implemented yet.')
+    else
+        error('Windows variable has unrecognized value in function which makes system call.')
+    end
+end
+
 --------------------- manipulate file path ----------------------
 
 utilities.trim_path_dir = function(path)

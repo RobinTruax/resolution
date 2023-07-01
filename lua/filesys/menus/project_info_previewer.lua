@@ -1,6 +1,6 @@
 --[[------------------- resolution v0.1.0 -----------------------
 
-previewer for project-based pickers
+file info previewer
 
 ---------------------------------------------------------------]]
 
@@ -9,6 +9,7 @@ previewer for project-based pickers
 local utilities = require('filesys.menus.utilities')
 local conf = require('telescope.config').values
 local previewers = require('telescope.previewers')
+local config_filesys = require('config.advanced.filesys')
 
 --------------------- previewer components ----------------------
 
@@ -42,15 +43,15 @@ local previewer = defaulter(function(opts)
     return previewers.new_buffer_previewer {
         title = "File Preview",
         dyn_title = function(_, entry)
-            return utilities.most_recent_file(utilities.trim_path_dir(entry['value']['filepath']))
+            return utilities.trim_path_dir(entry['value']['filepath']) .. '/' .. config_filesys.project_info_name
         end,
 
         get_buffer_by_name = function(_, entry)
-            return utilities.most_recent_file(utilities.trim_path_dir(entry['value']['filepath']))
+            return utilities.trim_path_dir(entry['value']['filepath']) .. '/' .. config_filesys.project_info_name
         end,
 
         define_preview = function(self, entry)
-            local p = utilities.most_recent_file(utilities.trim_path_dir(entry['value']['filepath']))
+            local p = utilities.trim_path_dir(entry['value']['filepath']) .. '/' .. config_filesys.project_info_name
             if p == nil or p == "" then
                 return
             end

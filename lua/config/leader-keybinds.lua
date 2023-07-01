@@ -122,13 +122,13 @@ return {
     ['v'] = {
         desc = '[v]iew file in project',
         cmd = function()
-            require('filesys.project_menu').file_menu_wrapper()
+            require('filesys.menus.choose_project_and_file')()
         end
     },
     ['V'] = {
         desc = '[V]iew project',
         cmd = function()
-            require('filesys.project_menu').project_menu()
+            require('filesys.menus.choose_project')()
         end
     },
 
@@ -256,23 +256,27 @@ return {
     },
     ['fc'] = {
         desc = '[c]reate project',
-        cmd = false,
+        cmd = function()
+            require('filesys.menus.create_project')()
+        end,
     },
     ['fa'] = {
         desc = '[a]rchive project',
-        cmd = false,
-    },
-    ['fu'] = {
-        desc = '[u]narchive project',
-        cmd = false,
+        cmd = function()
+            require('filesys.menus.archive_project')()
+        end,
     },
     ['fe'] = {
-        desc = '[e]dit project',
-        cmd = false,
+        desc = '[e]dit project info',
+        cmd = function()
+            require('filesys.menus.project_info_editor')()
+        end,
     },
     ['fn'] = {
         desc = '[n]ew file from template',
-        cmd = false,
+        cmd = function()
+            require('filesys.menus.choose_template')()
+        end,
     },
 
     ----------------------- git and github (g) ----------------------
