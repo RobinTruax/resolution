@@ -198,9 +198,17 @@ utilities.compile_project_infos = function(force)
     if states.project_info_compiled == false or force == true then
         local table_of_project_infos = {}
         for _, project_info in pairs(utilities.get_all_project_infos()) do
-            local decoded_project_info = vim.json.decode(utilities.read_file(project_info))
-            decoded_project_info['filepath'] = project_info
-            table_of_project_infos[#table_of_project_infos + 1] = decoded_project_info
+            local success, decoded_project_info = pcall(function()
+                return vim.json.decode(utilities.read_file(project_info))
+            end)
+            if success == true then
+                decoded_project_info['filepath'] = project_info
+                table_of_project_infos[#table_of_project_infos + 1] = decoded_project_info
+            elseif success == false then
+                local category = vim.fn.fnamemodify(project_info, ':p:h:h:t')
+                local project = vim.fn.fnamemodify(project_info, ':h:t')
+                vim.notify('Warning: Project Information for "'.. category ..'/' .. project ..'" is Corrupted', vim.log.levels.WARN)
+            end
         end
         states.table_of_project_infos = table_of_project_infos
         states.project_info_compiled = true

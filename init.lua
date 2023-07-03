@@ -20,4 +20,4 @@ require('core.keymaps')
 require('core.autocmds.all')
 
 -- set any lingering neovim options
-require('core.execute-cnfg')
+require('core.config')

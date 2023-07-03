@@ -28,10 +28,10 @@ return {
         mode = { 'n', 'v' },
         cmd = {
             function()
-                require('computation.popup').mount()
+                require('computation.popup-layout').mount()
             end,
             function()
-                require('computation.popup').mount_from_visual()
+                require('computation.popup-layout').mount_from_visual()
             end,
         },
     },

@@ -1,3 +1,9 @@
+--[[------------------- resolution v0.1.0 -----------------------
+
+this file provides the layout necessary for the pop-up.
+
+---------------------------------------------------------------]]
+
 local popup = {}
 
 local Popup = require("nui.popup")
@@ -11,30 +17,30 @@ popup.input_tex = Popup({
     enter = true,
     border = {
         style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        text = {top = ' LaTeX Input '},
+        text = { top = NuiText(' TeX ', 'SpecialChar'), bottom = NuiText(' tab: move ', 'SpecialChar') },
     },
     win_options = {
-        winhighlight = "Normal:Normal,Normal:Normal",
+        winhighlight = "Normal:Normal,FloatBorder:SpecialChar",
     },
 })
 popup.sympy = Popup({
     border = {
         style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        text = {top = ' Sympy Input '},
+        text = { top = NuiText(' SymPy ', 'SpecialChar'), bottom = NuiText(' \\s,\\S: send ', 'SpecialChar') },
     },
     focusable = true,
     win_options = {
-        winhighlight = "Normal:Normal,Normal:Normal",
+        winhighlight = "Normal:Normal,FloatBorder:SpecialChar",
     },
 })
 popup.output_tex = Popup({
     border = {
         style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        text = {top = NuiText(' LaTeX Output ', 'Error')},
+        text = { top = NuiText(' Output ', 'CommandMode'), bottom = NuiText(' q: quit, \\y: yank/quit ', 'CommandMode') },
     },
-    focusable = false,
+    focusable = true,
     win_options = {
-        winhighlight = "Normal:Normal,FloatBorder:Normal",
+        winhighlight = "Normal:Normal,FloatBorder:CommandMode",
     },
 })
 popup.all = {
@@ -51,15 +57,17 @@ popup.layout = Layout(
         },
         anchor = 'NW',
         size = {
-            width = 40,
-            height = 11,
+            width = 45,
+            height = 12,
         },
     },
     Layout.Box({
-        Layout.Box(popup.input_tex, { size = 3 }),
-        Layout.Box(popup.sympy, { size = 3 }),
-        Layout.Box(popup.output_tex, { size = 5 }),
-    }, { dir = 'col' })
+        Layout.Box({
+            Layout.Box(popup.input_tex, { size = 6 }),
+            Layout.Box(popup.sympy, { size = 6 }),
+        }, { dir = 'col', size = '35%' }),
+        Layout.Box(popup.output_tex, { size = '65%' })
+    }, { dir = 'row' })
 )
 
 --------------------------- keybinds ----------------------------
@@ -91,12 +99,27 @@ popup.keymaps = function()
     end)
     popup.input_tex:map('n', '<Tab>', function()
         vim.api.nvim_set_current_win(popup.sympy.winid)
+        require('cmp').setup.buffer({ enabled = false })
     end)
     popup.sympy:map('n', '<Tab>', function()
         vim.api.nvim_set_current_win(popup.output_tex.winid)
+        require('cmp').setup.buffer({ enabled = false })
     end)
     popup.output_tex:map('n', '<Tab>', function()
         vim.api.nvim_set_current_win(popup.input_tex.winid)
+        require('cmp').setup.buffer({ enabled = false })
+    end)
+    popup.input_tex:map('i', '<Tab>', function()
+        vim.api.nvim_set_current_win(popup.sympy.winid)
+        require('cmp').setup.buffer({ enabled = false })
+    end)
+    popup.sympy:map('i', '<Tab>', function()
+        vim.api.nvim_set_current_win(popup.output_tex.winid)
+        require('cmp').setup.buffer({ enabled = false })
+    end)
+    popup.output_tex:map('i', '<Tab>', function()
+        vim.api.nvim_set_current_win(popup.input_tex.winid)
+        require('cmp').setup.buffer({ enabled = false })
     end)
 end
 
@@ -129,7 +152,10 @@ popup.updater = function()
                 on_exit = function(j, exit_code)
                     local res = table.concat(j:result(), ' ')
                     if exit_code ~= 0 then
-                        print('Error: Exit Code', exit_code)
+                        vim.schedule(function()
+                            vim.api.nvim_buf_set_lines(popup.sympy.bufnr, 0, -1, false, { 'Error' })
+                            NuiText('Error', 'Error'):render(popup.sympy.bufnr, -1, 1, 0)
+                        end)
                     else
                         vim.schedule(function()
                             vim.api.nvim_buf_set_lines(popup.sympy.bufnr, 0, -1, false, { res })
@@ -144,7 +170,10 @@ popup.updater = function()
                 on_exit = function(j, exit_code)
                     local res = table.concat(j:result(), ' ')
                     if exit_code ~= 0 then
-                        print('Error: Exit Code', exit_code)
+                        vim.schedule(function()
+                            vim.api.nvim_buf_set_lines(popup.output_tex.bufnr, 0, -1, false, { 'Error' })
+                            NuiText('Error', 'Error'):render(popup.output_tex.bufnr, -1, 1, 0)
+                        end)
                     else
                         vim.schedule(function()
                             vim.api.nvim_buf_set_lines(popup.output_tex.bufnr, 0, -1, false, { res })
@@ -186,6 +215,7 @@ popup.mount = function()
     popup.layout:mount()
     popup.keymaps()
     popup.updater()
+    require('cmp').setup.buffer({ enabled = false })
 end
 
 popup.unmount = function()

@@ -1,77 +1,35 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[------------------- resolution  q0.1.0 -----------------------
 
 configuration for all colorscheme assignments
 this includes specially assigned colors for rsltn
 
--------------------------------------------------------------]]
---
+---------------------------------------------------------------]]
+
 
 local colorschemes = {}
-
-------------------------- colorscheme options -------------------------
-
-vim.g.gruvbox_material_better_performance = 1
-vim.g.gruvbox_material_background = 'medium'
-vim.g.gruvbox_material_foreground = 'mix'
 
 ------------------------- basic palette -------------------------
 
 colorschemes.universal_palette = {
     bg = {
-        tokyonight = {
-            dark = '#222436',
-            light = '#E1E2E7',
-        },
-        gruvbox = {
-            dark = '#282828',
-            light = '#fbf1c7',
-        },
-        everforest = {
-            dark = '#2D353B',
-            light = '#FDF6E3',
-        },
+        tokyonight = { dark = '#222436', light = '#E1E2E7' },
+        gruvbox    = { dark = '#282828', light = '#fbf1c7' },
+        everforest = { dark = '#2D353B', light = '#FDF6E3' },
     },
     ui_normal = {
-        tokyonight = {
-            dark = '#1F2335',
-            light = '#E9E9EC',
-        },
-        gruvbox = {
-            dark = '#1b1b1b',
-            light = '#eee0b7',
-        },
-        everforest = {
-            dark = '#232A2E',
-            light = '#EFEBD4',
-        },
+        tokyonight = { dark = '#1F2335', light = '#E9E9EC' },
+        gruvbox    = { dark = '#1b1b1b', light = '#eee0b7' },
+        everforest = { dark = '#232A2E', light = '#EFEBD4' },
     },
     ui_special = {
-        tokyonight = {
-            dark = '#2D3149',
-            light = '#D2D1D6',
-        },
-        gruvbox = {
-            dark = '#32302f',
-            light = '#ddccab',
-        },
-        everforest = {
-            dark = '#343F44',
-            light = '#E6E2CC',
-        },
+        tokyonight = { dark = '#2D3149', light = '#D2D1D6' },
+        gruvbox    = { dark = '#32302f', light = '#ddccab' },
+        everforest = { dark = '#343F44', light = '#E6E2CC' },
     },
     ui_emph_text = {
-        tokyonight = {
-            dark = '#65BCFF',
-            light = '#34548A',
-        },
-        gruvbox = {
-            dark = '#b0b846',
-            light = '#6f8352',
-        },
-        everforest = {
-            dark = '#A7C080',
-            light = '#8DA101',
-        },
+        tokyonight = { dark = '#65BCFF', light = '#34548A' },
+        gruvbox    = { dark = '#b0b846', light = '#6f8352' },
+        everforest = { dark = '#A7C080', light = '#8DA101' },
     },
 }
 
@@ -101,8 +59,6 @@ colorschemes.universal_config = {
             TelescopePreviewBorder = { fg = c.ui_normal, bg = c.ui_normal },
             TelescopeResultsTitle  = { fg = c.ui_normal, bg = c.ui_normal },
             TelescopeResultsBorder = { fg = c.ui_normal, bg = c.ui_normal },
-            -- CccFloatNormal         = { bg = c.ui_normal },
-            -- CccFloatBorder         = { bg = c.ui_normal, fg = c.ui_normal },
         }
     }
 }
@@ -228,6 +184,12 @@ colorschemes.colorscheme_configs = {
         optional = {}
     },
 }
+
+----------------- assorted colorscheme options ------------------
+
+vim.g.gruvbox_material_better_performance = 1
+vim.g.gruvbox_material_background = 'medium'
+vim.g.gruvbox_material_foreground = 'mix'
 
 -----------------------------------------------------------------
 
