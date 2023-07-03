@@ -147,16 +147,6 @@ return {
                     lualine_b = { '%S' },
                     lualine_c = {
                         {
-                            require("noice").api.status.message.get_hl,
-                            cond = function()
-                                if require("noice").api.status.search.has() == true then
-                                    return false
-                                else
-                                    return require("noice").api.status.message.has()
-                                end
-                            end
-                        },
-                        {
                             require("noice").api.status.mode.get,
                             cond = require("noice").api.status.mode.has,
                             color = 'CommandMode',

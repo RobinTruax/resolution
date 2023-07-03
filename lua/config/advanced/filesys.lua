@@ -1,7 +1,6 @@
 --[[------------------- resolution v0.1.0 -----------------------
 
 this config file services the filesys module
-there is no reason to edit it unless one is a developer
 
 ---------------------------------------------------------------]]
 

@@ -7,4 +7,5 @@ global state variables
 return {
     project_info_compiled = false,
     most_recent_files = {},
+    computation_popup = false,
 }
