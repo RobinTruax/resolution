@@ -15,21 +15,25 @@ colorschemes.universal_palette = {
         tokyonight = { dark = '#222436', light = '#E1E2E7' },
         gruvbox    = { dark = '#282828', light = '#fbf1c7' },
         everforest = { dark = '#2D353B', light = '#FDF6E3' },
+        tundra     = { dark = '#111827', light = '#111827' },
     },
     ui_normal = {
         tokyonight = { dark = '#1F2335', light = '#E9E9EC' },
         gruvbox    = { dark = '#1b1b1b', light = '#eee0b7' },
         everforest = { dark = '#232A2E', light = '#EFEBD4' },
+        tundra     = { dark = '#081021', light = '#081021' },
     },
     ui_special = {
         tokyonight = { dark = '#2D3149', light = '#D2D1D6' },
         gruvbox    = { dark = '#32302f', light = '#ddccab' },
         everforest = { dark = '#343F44', light = '#E6E2CC' },
+        tundra     = { dark = '#121d35', light = '#121f3a' },
     },
     ui_emph_text = {
         tokyonight = { dark = '#65BCFF', light = '#34548A' },
         gruvbox    = { dark = '#b0b846', light = '#6f8352' },
         everforest = { dark = '#A7C080', light = '#8DA101' },
+        tundra     = { dark = '#fecdd3', light = '#fecdd3' },
     },
 }
 
@@ -59,6 +63,7 @@ colorschemes.universal_config = {
             TelescopePreviewBorder = { fg = c.ui_normal, bg = c.ui_normal },
             TelescopeResultsTitle  = { fg = c.ui_normal, bg = c.ui_normal },
             TelescopeResultsBorder = { fg = c.ui_normal, bg = c.ui_normal },
+            TelescopePromptCounter = { fg = c.ui_emph_text },
         }
     }
 }
@@ -163,7 +168,7 @@ colorschemes.colorscheme_configs = {
                 ReplaceMode           = { fg = '#e69875' },
                 TerminalMode          = { fg = '#d699b6' },
                 SelectMode            = { fg = '#a7c080' },
-                Snippet               = { fg = '#6f8352', bg = '#343f44' },
+                Snippet               = { fg = '#d3c6aa', bg = '#343f44' },
             },
             light = {
                 MiniStarterHeader     = { fg = '#35a77c', bold = true },
@@ -178,11 +183,49 @@ colorschemes.colorscheme_configs = {
                 ReplaceMode           = { fg = '#f67d26' },
                 TerminalMode          = { fg = '#df69ba' },
                 SelectMode            = { fg = '#93b259' },
-                Snippet               = { fg = '#6f8352', bg = '#f4f0d9' },
+                Snippet               = { fg = '#708089', bg = '#f4f0d9' },
             }
         },
         optional = {}
     },
+
+    tundra = {
+        dark = 'tundra',
+        light = 'tundra',
+        always = {
+            dark = {
+                MiniStarterHeader     = { fg = '#bae6fd', bold = true },
+                MiniStarterFooter     = { fg = '#bae6fd', italic = true },
+                MiniStarterSection    = { fg = '#a5b4fc' },
+                MiniStarterItemPrefix = { fg = '#fbc19d', bold = true },
+                MiniStarterQuery      = { fg = '#ddd6fe' },
+                NormalMode            = { fg = '#3c4759' },
+                InsertMode            = { fg = '#c7ffc1' },
+                VisualMode            = { fg = '#ccfdff' },
+                -- CommandMode           = { fg = '#80aa9e' },
+                ReplaceMode           = { fg = '#ffd4ac' },
+                TerminalMode          = { fg = '#444c5c' },
+                SelectMode            = { fg = '#3c4759' },
+                Snippet               = { fg = '#c7ffc1', bg = '#1f2937' },
+            },
+            light = {
+                MiniStarterHeader     = { fg = '#bae6fd', bold = true },
+                MiniStarterFooter     = { fg = '#bae6fd', italic = true },
+                MiniStarterSection    = { fg = '#a5b4fc' },
+                MiniStarterItemPrefix = { fg = '#fbc19d', bold = true },
+                MiniStarterQuery      = { fg = '#ddd6fe' },
+                NormalMode   = { fg = '#3c4759' },
+                InsertMode   = { fg = '#c7ffc1' },
+                VisualMode   = { fg = '#ccfdff' },
+                -- CommandMode           = { fg = '#80aa9e' },
+                ReplaceMode  = { fg = '#ffd4ac' },
+                TerminalMode = { fg = '#444c5c' },
+                SelectMode   = { fg = '#3c4759' },
+                Snippet      = { fg = '#c7ffc1', bg = '#1f2937' },
+            }
+        },
+        optional = {}
+    }
 }
 
 ----------------- assorted colorscheme options ------------------

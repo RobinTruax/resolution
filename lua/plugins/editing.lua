@@ -72,6 +72,15 @@ return {
         'echasnovski/mini.ai',
         event = { 'BufReadPost', 'BufNewFile' },
         config = true,
+        -- config = function()
+        --     local nn = require("notebook-navigator")
+        --     local ai = require("mini.ai")
+        --     ai.setup({
+        --         custom_textobjects = {
+        --             h = nn.miniai_spec,
+        --         },
+        --     })
+        -- end,
     },
 
     ------------ mini.surround: keybinds for surrounding ------------

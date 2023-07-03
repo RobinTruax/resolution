@@ -17,9 +17,6 @@ local Layout = require('nui.layout')
 local NuiText = require('nui.text')
 local Event = require('nui.utils.autocmd').event
 
--- plenary.nvim
-local Job = require('plenary.job')
-
 ----------------- individual windows for popup ------------------
 
 -- window for LaTeX input
@@ -32,8 +29,11 @@ popup.input_tex = Popup({
             bottom = NuiText(' tab: move ', 'SpecialChar')
         },
     },
+    buf_options = {
+        filetype = 'tex',
+    },
     win_options = {
-        winhighlight = 'Normal:Normal, FloatBorder:SpecialChar',
+        winhighlight = 'Normal:Normal,FloatBorder:SpecialChar',
     },
 })
 
@@ -47,8 +47,11 @@ popup.sympy = Popup({
         },
     },
     focusable = true,
+    buf_options = {
+        filetype = 'py',
+    },
     win_options = {
-        winhighlight = 'Normal:Normal, FloatBorder:SpecialChar',
+        winhighlight = 'Normal:Normal,FloatBorder:SpecialChar',
     },
 })
 
@@ -62,6 +65,9 @@ popup.output_tex = Popup({
         },
     },
     focusable = true,
+    buf_options = {
+        filetype = 'tex',
+    },
     win_options = {
         winhighlight = 'Normal:Normal,FloatBorder:CommandMode',
         wrap = false,

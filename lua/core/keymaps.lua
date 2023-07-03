@@ -82,6 +82,10 @@ vim.opt.whichwrap:append('l')
 
 ---------------- simplifying various textobjects ----------------
 
+map('o', 'aP', 'ap') -- [P]aragraphs
+map('o', 'iP', 'ip')
+map('v', 'aP', 'ap')
+map('v', 'iP', 'ip')
 map('o', 'ap', 'a)') -- [p]arentheses
 map('o', 'ip', 'i)')
 map('v', 'ap', 'a)')
