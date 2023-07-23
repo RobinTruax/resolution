@@ -36,32 +36,32 @@ colors.set_colorscheme = function(scheme, mode)
         vim.cmd('colorscheme ' .. colorschemes.colorscheme_configs[scheme][mode])
 
         -- 'always' settings in universal_config
-        for k, v in pairs(colorschemes.universal_config.always) do
+        for k, v in pairs(colorschemes.universal_config) do
             vim.api.nvim_set_hl(0, k, expand_universal(v, scheme, mode))
         end
 
-        -- 'optional' settings in universal_config
-        for k, v in pairs(colorschemes.universal_config.optional) do
-            if aesthetics[k] == true then
-                for l, w in pairs(v) do
-                    vim.api.nvim_set_hl(0, l, expand_universal(w, scheme, mode))
-                end
-            end
-        end
+        -- -- 'optional' settings in universal_config
+        -- for k, v in pairs(colorschemes.universal_config.optional) do
+        --     if aesthetics[k] == true then
+        --         for l, w in pairs(v) do
+        --             vim.api.nvim_set_hl(0, l, expand_universal(w, scheme, mode))
+        --         end
+        --     end
+        -- end
 
         -- 'always' settings in colorscheme_configs
-        for k, v in pairs(colorschemes.colorscheme_configs[scheme].always[mode]) do
+        for k, v in pairs(colorschemes.colorscheme_configs[scheme].colors[mode]) do
             vim.api.nvim_set_hl(0, k, v)
         end
 
-        -- 'optional' settings in colorscheme_configs
-        for k, v in pairs(colorschemes.colorscheme_configs[scheme].optional) do
-            if aesthetics[k] == true then
-                for l, w in pairs(v[mode]) do
-                    vim.api.nvim_set_hl(0, l, w)
-                end
-            end
-        end
+        -- -- 'optional' settings in colorscheme_configs
+        -- for k, v in pairs(colorschemes.colorscheme_configs[scheme].optional) do
+        --     if aesthetics[k] == true then
+        --         for l, w in pairs(v[mode]) do
+        --             vim.api.nvim_set_hl(0, l, w)
+        --         end
+        --     end
+        -- end
     end
 end
 

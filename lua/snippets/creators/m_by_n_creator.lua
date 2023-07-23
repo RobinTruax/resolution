@@ -67,6 +67,7 @@ local m_by_n_dynamic_node = function(m_by_n_object)
     end
 end
 
+-- main m by n creator
 local m_by_n_creator = function(m_by_n_object)
     -- required parameters
     local environment = m_by_n_object.environment
@@ -91,3 +92,5 @@ end
 -----------------------------------------------------------------
 
 return m_by_n_creator
+
+-----------------------------------------------------------------

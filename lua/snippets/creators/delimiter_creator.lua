@@ -52,6 +52,7 @@ local function check_if_bounded_by_delims(string, left, right)
 
 end
 
+-- rewrite iterator over letters to string
 local iterator_to_string = function(iter)
     s = ''
     for _,j in pairs(iter) do
@@ -60,6 +61,7 @@ local iterator_to_string = function(iter)
     return s:sub(1,#s-1)
 end
 
+-- generate function for delimiter nodes
 local visual_delims_generator = function(left, right)
     return function(_, parent)
         -- get the selected string
@@ -109,3 +111,5 @@ end
 -----------------------------------------------------------------
 
 return delimiter_creator
+
+-----------------------------------------------------------------

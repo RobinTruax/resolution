@@ -72,4 +72,8 @@ local symbol_creator = function(symbol)
     }, fmta(format, nodes))
 end
 
+-----------------------------------------------------------------
+
 return symbol_creator
+
+-----------------------------------------------------------------

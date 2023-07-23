@@ -98,10 +98,7 @@ return {
         lazy = true,
         config = function()
             -- configure borders
-            local border = 'single'
-            if require('config.aesthetics').ui_borderless == true then
-                border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }
-            end
+            local border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }
             -- configure ui
             require('nvim-navbuddy').setup({
                 window = {

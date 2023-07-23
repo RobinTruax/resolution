@@ -74,10 +74,6 @@ return {
             end
 
             local border = 'none'
-            if require('config.aesthetics').ui_borderless == false then
-                border = 'single'
-            end
-
             -- ui customization and setup
             local wk = require('which-key')
             wk.setup({

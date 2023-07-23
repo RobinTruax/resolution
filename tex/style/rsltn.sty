@@ -174,40 +174,44 @@
 % Theorem
 \rsltntheoremstyle{theorem}{rsltnTheorem}{\itshape}
 \declaretheorem[
-    style   = theorem box,
-    name    = Theorem,
-    parent  = section,
-    sibling = definition,
+    style       = theorem box,
+    name        = Theorem,
+    parent      = section,
+    sibling     = definition,
+    preheadhook = \global\def\recentProof{theorem proof}
 ]{theorem}
 \rsltntheoremproof{theorem}{rsltnTheorem}
 
 % Proposition
 \rsltntheoremstyle{proposition}{rsltnProposition}{\itshape}
 \declaretheorem[
-    style   = proposition box,
-    name    = Proposition,
-    parent  = section,
-    sibling = definition,
+    style       = proposition box,
+    name        = Proposition,
+    parent      = section,
+    sibling     = definition,
+    preheadhook = \global\def\recentProof{proposition proof}
 ]{proposition}
 \rsltntheoremproof{proposition}{rsltnProposition}
 
 % Lemma
 \rsltntheoremstyle{lemma}{rsltnLemma}{\itshape}
 \declaretheorem[
-    style   = lemma box,
-    name    = Lemma,
-    parent  = section,
-    sibling = definition,
+    style       = lemma box,
+    name        = Lemma,
+    parent      = section,
+    sibling     = definition,
+    preheadhook = \global\def\recentProof{lemma proof}
 ]{lemma}
 \rsltntheoremproof{lemma}{rsltnLemma}
 
 % Corollary
 \rsltntheoremstyle{corollary}{rsltnCorollary}{\itshape}
 \declaretheorem[
-    style   = corollary box,
-    name    = Corollary,
-    parent  = section,
-    sibling = definition,
+    style       = corollary box,
+    name        = Corollary,
+    parent      = section,
+    sibling     = definition,
+    preheadhook = \global\def\recentProof{corollary proof}
 ]{corollary}
 \rsltntheoremproof{corollary}{rsltnCorollary}
 

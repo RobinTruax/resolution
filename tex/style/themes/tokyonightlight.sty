@@ -1,30 +1,29 @@
 % --------------------- resolution v0.1.0 ----------------------
 %
-% This file provides the theme tokyonightdark.
+% This file provides the theme tokyonightlight.
 %
 % --------------------------------------------------------------
 
 \RequirePackage[usenames,dvipsnames,svgnames]{xcolor}
 
-% Theme Colors
-\definecolor{TBackground}{HTML}{222436}
-\definecolor{TForeground}{HTML}{cfd1e6}
-\definecolor{TRed}{HTML}{f7768e}
+% Code
+\definecolor{TRed}{HTML}{f84a4d}
 \definecolor{TOrange}{HTML}{ff9e64}
 \definecolor{TYellow}{HTML}{e0af68}
 \definecolor{TGreen}{HTML}{9ece6a}
-\definecolor{TAqua}{HTML}{73daca}
+\definecolor{TAqua}{HTML}{2ac3de}
 \definecolor{TBlue}{HTML}{7aa2f7}
 \definecolor{TPurple}{HTML}{bb9af7}
-\definecolor{TGrey}{HTML}{565f89}
+\definecolor{TIndigo}{HTML}{565f89}
+\definecolor{TGrey}{HTML}{808080}
 
 % Base
-\colorlet{rsltnPage}{TBackground}
-\colorlet{rsltnText}{TForeground}
+\definecolor{rsltnPage}{HTML}{ffffff}
+\definecolor{rsltnText}{HTML}{000000}
 
 % Environments
-\colorlet{rsltnDefinition}{TGreen}
-\colorlet{rsltnTheorem}{TRed}
+\colorlet{rsltnDefinition}{TRed}
+\colorlet{rsltnTheorem}{TIndigo}
 \colorlet{rsltnProposition}{TPurple}
 \colorlet{rsltnLemma}{TPurple}
 \colorlet{rsltnCorollary}{TBlue}
@@ -34,11 +33,11 @@
 \colorlet{rsltnSolution}{TRed}
 
 % Code
-\colorlet{rsltnComment}{TGrey}
+\colorlet{rsltnComment}{TIndigo}
 \colorlet{rsltnKeyword}{TPurple}
 \colorlet{rsltnString}{TGreen}
 \colorlet{rsltnNumbers}{TGrey}
-\colorlet{rsltnLinebreak}{TRed}
+\colorlet{rsltnLinebreak}{TAqua}
 
 % Reset page and text color
 \color{rsltnText}

@@ -64,6 +64,7 @@ local generate_nodes = function(options, label, content)
     return nodes
 end
 
+-- environment creator
 local environment_creator = function(params)
     -- sanitize information
     -- necessary
@@ -132,6 +133,9 @@ local environment_creator = function(params)
 
     return snippets_to_return
 end
+
 -----------------------------------------------------------------
 
 return environment_creator
+
+-----------------------------------------------------------------

@@ -266,7 +266,6 @@ config.environments     = {
         trigger     = 'lst',
         description = 'Code Listing',
         options     = '[language = <>, caption = <>]',
-        label       = 2,
     },
     {
         environment = 'figure',
@@ -1101,7 +1100,8 @@ config.math_symbols     = {
         program = '\\Rightarrow',
         auto    = true,
         prefix  = config.patterns.no_dashes,
-        suffix  = config.patterns.no_dashes
+        suffix  = config.patterns.no_dashes,
+        priority = 101,
 
     },
     {
@@ -1109,7 +1109,8 @@ config.math_symbols     = {
         program = '\\Leftarrow',
         auto    = true,
         prefix  = config.patterns.no_dashes,
-        suffix  = config.patterns.no_dashes
+        suffix  = config.patterns.no_dashes,
+        priority = 101,
 
     },
     {
@@ -1424,8 +1425,8 @@ config.math_symbols     = {
         trigger = '%=%=',
         program = '&=',
         auto    = true,
-        prefix  = config.patterns.generic,
-        suffix  = config.patterns.generic,
+        prefix  = config.patterns.no_dashes,
+        suffix  = config.patterns.no_dashes,
     },
     {
         trigger = '%!%=',
@@ -1555,11 +1556,11 @@ config.m_by_n_objects   = {
 --}}}
 
 -------------------------- unique type --------------------------
-
 --{{{
 
 
 --}}}
 
 -----------------------------------------------------------------
+
 return config

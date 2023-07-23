@@ -115,12 +115,7 @@ return {
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             -- set up separators based on ui sharpness
-            local section_separators = {}
-            if require('config.aesthetics').ui_sharp == true then
-                section_separators = { left = '', right = '' }
-            else
-                section_separators = { left = '', right = '' }
-            end
+            local section_separators = { left = '', right = '' }
 
             -- required setting for showcmd to function
             vim.opt.showcmdloc = 'statusline'

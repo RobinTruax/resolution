@@ -21,19 +21,11 @@ end
 ---------- get borders based on aesthetic preferences -----------
 
 ui.get_borders = function()
-    if aesthetics.ui_sharp == true then
-        return { '┌', '─', '┐', '│', '┘', '─', '└', '│' }
-    else
-        return { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
-    end
+    return { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
 end
 
-ui.get_borders_or_less = function()
-    if aesthetics.ui_borderless == true then
-        return { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }
-    else
-        return ui.get_borders()
-    end
+ui.get_borderless = function()
+    return { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }
 end
 
 -------------- better buffer delete functionality ---------------

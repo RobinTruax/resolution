@@ -10,14 +10,14 @@
 
 ## Demonstrations
 
-#### The typing experience
+#### Typing a Definition
 
-#### Creating and opening a project
+#### Creating and Opening a Project
 
-#### Built-in tools for computation and formatting
+#### Computation and Formatting
 
-#### Navigating and manipulating complex files
+#### Navigation and Organization
 
-#### Connecting to Overleaf
+#### Connecting to GitHub and Overleaf
 
 ## Getting Started

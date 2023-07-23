@@ -69,4 +69,8 @@ local command_snippet = function(command, mathmode)
         }, fmta(format, nodes))
 end
 
+-----------------------------------------------------------------
+
 return command_snippet
+
+-----------------------------------------------------------------

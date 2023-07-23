@@ -41,41 +41,37 @@ colorschemes.universal_palette = {
 
 local c = colorschemes.universal_palette
 colorschemes.universal_config = {
-    always = {
-        MiniStarterItemBullet = { fg = c.bg, bg = c.bg },
-        LeapBackdrop          = { link = 'Comment' },
-        LeapMatch             = { fg = '#ff007c', bold = true, nocombine = true },
-        LeapLabelPrimary      = { fg = '#ff007c', bold = true, nocombine = true },
-        LeapLabelSecondary    = { fg = '#4fd6be', bold = true, nocombine = true },
-        CccFloatNormal        = { bg = c.bg },
-        CccFloatBorder        = { link = 'SpecialChar' },
-    },
-    optional = {
-        ui_borderless = {
-            TelescopeNormal        = { bg = c.ui_normal },
-            TelescopeBorder        = { fg = c.ui_normal, bg = c.ui_normal },
-            TelescopeSelection     = { bg = c.ui_special },
-            TelescopePromptNormal  = { bg = c.ui_special },
-            TelescopePromptTitle   = { fg = c.ui_normal, bg = c.ui_emph_text },
-            TelescopePromptPrefix  = { fg = c.ui_emph_text, bg = c.ui_special },
-            TelescopePromptBorder  = { fg = c.ui_special, bg = c.ui_special },
-            TelescopePreviewTitle  = { fg = c.ui_normal, bg = c.ui_normal },
-            TelescopePreviewBorder = { fg = c.ui_normal, bg = c.ui_normal },
-            TelescopeResultsTitle  = { fg = c.ui_normal, bg = c.ui_normal },
-            TelescopeResultsBorder = { fg = c.ui_normal, bg = c.ui_normal },
-            TelescopePromptCounter = { fg = c.ui_emph_text },
-        }
-    }
+    -- always = {
+        MiniStarterItemBullet  = { fg = c.bg, bg = c.bg },
+        LeapBackdrop           = { link = 'Comment' },
+        LeapMatch              = { fg = '#ff007c', bold = true, nocombine = true },
+        LeapLabelPrimary       = { fg = '#ff007c', bold = true, nocombine = true },
+        LeapLabelSecondary     = { fg = '#4fd6be', bold = true, nocombine = true },
+        CccFloatNormal         = { bg = c.bg },
+        CccFloatBorder         = { link = 'SpecialChar' },
+        TelescopeNormal        = { bg = c.ui_normal },
+        TelescopeBorder        = { fg = c.ui_normal, bg = c.ui_normal },
+        TelescopeSelection     = { bg = c.ui_special },
+        TelescopePromptNormal  = { bg = c.ui_special },
+        TelescopePromptTitle   = { fg = c.ui_normal, bg = c.ui_emph_text },
+        TelescopePromptPrefix  = { fg = c.ui_emph_text, bg = c.ui_special },
+        TelescopePromptBorder  = { fg = c.ui_special, bg = c.ui_special },
+        TelescopePreviewTitle  = { fg = c.ui_normal, bg = c.ui_normal },
+        TelescopePreviewBorder = { fg = c.ui_normal, bg = c.ui_normal },
+        TelescopeResultsTitle  = { fg = c.ui_normal, bg = c.ui_normal },
+        TelescopeResultsBorder = { fg = c.ui_normal, bg = c.ui_normal },
+        TelescopePromptCounter = { fg = c.ui_emph_text },
 }
 ------------------- by-scheme configurations --------------------
 
 colorschemes.colorscheme_configs = {
+
     -------------------------- tokyonight ---------------------------
 
     tokyonight = {
         dark = 'tokyonight-moon',
         light = 'tokyonight-day',
-        always = {
+        colors = {
             dark = {
                 MiniStarterHeader     = { fg = '#65BCFF', bold = true },
                 MiniStarterSection    = { fg = '#82aaff', bold = true },
@@ -107,7 +103,6 @@ colorschemes.colorscheme_configs = {
                 Snippet               = { fg = '#587539', bg = '#c4c8da' },
             },
         },
-        optional = {}
     },
 
     ---------------------------- gruvbox ----------------------------
@@ -115,7 +110,7 @@ colorschemes.colorscheme_configs = {
     gruvbox = {
         dark = 'gruvbox-material',
         light = 'gruvbox-material',
-        always = {
+        colors = {
             dark = {
                 MiniStarterHeader     = { fg = '#f2594b', bold = true },
                 MiniStarterSection    = { fg = '#f28534', bold = true },
@@ -146,7 +141,6 @@ colorschemes.colorscheme_configs = {
                 Snippet               = { fg = '#6f8352', bg = '#f4e8be' },
             }
         },
-        optional = {}
     },
 
     -------------------------- everforest ---------------------------
@@ -154,7 +148,7 @@ colorschemes.colorscheme_configs = {
     everforest = {
         dark = 'everforest',
         light = 'everforest',
-        always = {
+        colors = {
             dark = {
                 MiniStarterHeader     = { fg = '#83c092', bold = true },
                 MiniStarterFooter     = { fg = '#83c092', italic = true },
@@ -186,13 +180,12 @@ colorschemes.colorscheme_configs = {
                 Snippet               = { fg = '#708089', bg = '#f4f0d9' },
             }
         },
-        optional = {}
     },
 
     tundra = {
         dark = 'tundra',
         light = 'tundra',
-        always = {
+        colors = {
             dark = {
                 MiniStarterHeader     = { fg = '#bae6fd', bold = true },
                 MiniStarterFooter     = { fg = '#bae6fd', italic = true },
@@ -202,7 +195,7 @@ colorschemes.colorscheme_configs = {
                 NormalMode            = { fg = '#3c4759' },
                 InsertMode            = { fg = '#c7ffc1' },
                 VisualMode            = { fg = '#ccfdff' },
-                -- CommandMode           = { fg = '#80aa9e' },
+                CommandMode           = { fg = '#80aa9e' },
                 ReplaceMode           = { fg = '#ffd4ac' },
                 TerminalMode          = { fg = '#444c5c' },
                 SelectMode            = { fg = '#3c4759' },
@@ -214,17 +207,16 @@ colorschemes.colorscheme_configs = {
                 MiniStarterSection    = { fg = '#a5b4fc' },
                 MiniStarterItemPrefix = { fg = '#fbc19d', bold = true },
                 MiniStarterQuery      = { fg = '#ddd6fe' },
-                NormalMode   = { fg = '#3c4759' },
-                InsertMode   = { fg = '#c7ffc1' },
-                VisualMode   = { fg = '#ccfdff' },
-                -- CommandMode           = { fg = '#80aa9e' },
-                ReplaceMode  = { fg = '#ffd4ac' },
-                TerminalMode = { fg = '#444c5c' },
-                SelectMode   = { fg = '#3c4759' },
-                Snippet      = { fg = '#c7ffc1', bg = '#1f2937' },
+                NormalMode            = { fg = '#3c4759' },
+                InsertMode            = { fg = '#c7ffc1' },
+                VisualMode            = { fg = '#ccfdff' },
+                CommandMode           = { fg = '#80aa9e' },
+                ReplaceMode           = { fg = '#ffd4ac' },
+                TerminalMode          = { fg = '#444c5c' },
+                SelectMode            = { fg = '#3c4759' },
+                Snippet               = { fg = '#c7ffc1', bg = '#1f2937' },
             }
         },
-        optional = {}
     }
 }
 

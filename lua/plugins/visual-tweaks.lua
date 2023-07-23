@@ -71,10 +71,7 @@ return {
         config = function()
             local ccc = require('ccc')
             local aesthetics = require('config.aesthetics')
-            local border = 'single'
-            if aesthetics.ui_sharp == false then
-                border = 'rounded'
-            end
+            local border = 'rounded'
             ccc.setup({
                 win_opts = {
                     border = border,

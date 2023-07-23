@@ -13,9 +13,6 @@ return {
         event = 'VeryLazy',
         config = function()
             local border = 'rounded'
-            if require('config.aesthetics').ui_sharp == true then
-                border = 'single'
-            end
             require('dressing').setup({
                 input = {
                     insert_only = false,
