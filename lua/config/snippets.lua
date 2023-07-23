@@ -222,7 +222,7 @@ config.environments     = {
         trigger     = 'enm',
         description = 'Numbered List',
         options     = '',
-        content     = '    \\item ',
+        content     = '    \\item <>',
         snippets    = {
             {
                 trigger  = '    ii ',
@@ -542,7 +542,7 @@ config.math_commands    = {
         trigger     = 'sum',
         description = 'Sum',
         auto        = true,
-        prefix      = config.patterns.generic,
+        prefix      = config.patterns.exclude_commands,
         suffix      = config.patterns.generic
     },
     {
@@ -550,28 +550,28 @@ config.math_commands    = {
         trigger     = 'suml',
         description = 'Sum (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\sum_{<>}^{<>}',
         trigger     = 'sumb',
         description = 'Sum (Both Limits)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\sum_{<> = <>}^{\\infty}',
         trigger     = 'sumi',
         description = 'Sum (To Infinity)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\sum_{\\substack{<>}}^{<>}',
         trigger     = 'sums',
         description = 'Sum (Substack Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
 
     --------------------------- products ----------------------------
@@ -580,7 +580,7 @@ config.math_commands    = {
         trigger     = 'prod',
         description = 'Product',
         auto        = true,
-        prefix      = config.patterns.generic,
+        prefix      = config.patterns.exclude_commands,
         suffix      = config.patterns.generic
     },
     {
@@ -588,28 +588,28 @@ config.math_commands    = {
         trigger     = 'prodl',
         description = 'Product (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\prod_{<>}^{<>}',
         trigger     = 'prodb',
         description = 'Product (Both Limits)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\prod_{<> = <>}^{\\infty}',
         trigger     = 'prodi',
         description = 'Product (To Infinity)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\prod_{\\substack{<>}}^{<>}',
         trigger     = 'prods',
         description = 'Product (Substack Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
 
     ---------------------------- unions -----------------------------
@@ -618,7 +618,7 @@ config.math_commands    = {
         trigger     = 'cup',
         description = 'Union',
         auto        = true,
-        prefix      = config.patterns.generic,
+        prefix      = config.patterns.exclude_commands,
         suffix      = config.patterns.generic
     },
     {
@@ -626,28 +626,28 @@ config.math_commands    = {
         trigger     = 'cupl',
         description = 'Union (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\bigcup_{<>}^{<>}',
         trigger     = 'cupb',
         description = 'Union (Both Limits)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\bigcup_{<> = <>}^{\\infty}',
         trigger     = 'cupi',
         description = 'Union (To Infinity)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\bigcup_{\\substack{<>}}^{<>}',
         trigger     = 'cups',
         description = 'Union (Substack Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
 
     ------------------------- intersections -------------------------
@@ -656,7 +656,7 @@ config.math_commands    = {
         trigger     = 'cap',
         description = 'Intersection',
         auto        = true,
-        prefix      = config.patterns.generic,
+        prefix      = config.patterns.exclude_commands,
         suffix      = config.patterns.generic
     },
     {
@@ -664,28 +664,28 @@ config.math_commands    = {
         trigger     = 'capl',
         description = 'Intersection (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\bigcap_{<>}^{<>}',
         trigger     = 'capb',
         description = 'Intersection (Both Limits)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\bigcap_{<> = <>}^{\\infty}',
         trigger     = 'capi',
         description = 'Intersection (To Infinity)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\bigcap_{\\substack{<>}}^{<>}',
         trigger     = 'caps',
         description = 'Intersection (Substack Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
 
     ---------------------------- limits -----------------------------
@@ -694,7 +694,7 @@ config.math_commands    = {
         trigger     = 'lim',
         description = 'Limit',
         auto        = true,
-        prefix      = config.patterns.generic,
+        prefix      = config.patterns.exclude_commands,
         suffix      = config.patterns.generic
     },
     {
@@ -702,21 +702,21 @@ config.math_commands    = {
         trigger     = 'liml',
         description = 'Limit (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\limsup_{<>}',
         trigger     = 'lims',
         description = 'Limit Supremum (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\liminf_{<>}',
         trigger     = 'limi',
         description = 'Limit Infimum (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
 
     --------------------------- integrals ---------------------------
@@ -725,7 +725,7 @@ config.math_commands    = {
         trigger     = 'int',
         description = 'Integral',
         auto        = true,
-        prefix      = config.patterns.generic,
+        prefix      = config.patterns.exclude_commands,
         suffix      = config.patterns.generic
     },
     {
@@ -733,21 +733,21 @@ config.math_commands    = {
         trigger     = 'intl',
         description = 'Integral (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\int_{<>}^{<>}',
         trigger     = 'intb',
         description = 'Integral (Both Limits)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\int_{-\\infty}^{\\infty}',
         trigger     = 'inti',
         description = 'Integral (Infinite Limits)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
 
     --------------- minimum/maximum/supremum/infimum ----------------
@@ -756,7 +756,7 @@ config.math_commands    = {
         trigger     = 'min',
         description = 'Minimum',
         auto        = true,
-        prefix      = config.patterns.generic,
+        prefix      = config.patterns.exclude_commands,
         suffix      = config.patterns.generic
     },
     {
@@ -764,14 +764,14 @@ config.math_commands    = {
         trigger     = 'minl',
         description = 'Minimum (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\max',
         trigger     = 'max',
         description = 'Maximum',
         auto        = true,
-        prefix      = config.patterns.generic,
+        prefix      = config.patterns.exclude_commands,
         suffix      = config.patterns.generic
     },
     {
@@ -779,14 +779,14 @@ config.math_commands    = {
         trigger     = 'maxl',
         description = 'Maximum (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\inf',
         trigger     = 'inf',
         description = 'Infimum',
         auto        = true,
-        prefix      = config.patterns.generic,
+        prefix      = config.patterns.exclude_commands,
         suffix      = config.patterns.generic
     },
     {
@@ -794,14 +794,14 @@ config.math_commands    = {
         trigger     = 'infl',
         description = 'Infimum (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
     {
         expanded    = '\\sup',
         trigger     = 'sup',
         description = 'Supremum',
         auto        = true,
-        prefix      = config.patterns.generic,
+        prefix      = config.patterns.exclude_commands,
         suffix      = config.patterns.generic
     },
     {
@@ -809,7 +809,7 @@ config.math_commands    = {
         trigger     = 'supl',
         description = 'Supremum (Lower Limit)',
         auto        = true,
-        prefix      = config.patterns.generic
+        prefix      = config.patterns.exclude_commands
     },
 
     ------------------------ over/undersets -------------------------
@@ -886,7 +886,7 @@ config.math_commands    = {
         expanded    = '\\expnode{<>}{$<>$}{<>}',
         trigger     = 'node',
         description = 'Expositionary Node',
-        defaults    = { 'math', 'label', 'color' },
+        defaults    = { 'label', 'math', 'color' },
         visual      = 2,
     },
 

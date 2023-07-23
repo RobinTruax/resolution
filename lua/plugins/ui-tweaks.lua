@@ -70,6 +70,16 @@ return {
         }
     },
 
+    {
+        "rcarriga/nvim-notify",
+        lazy = true,
+        opts = {
+            render = 'minimal',
+            stages = 'fade',
+            timeout = 100,
+        }
+    },
+
     --------------- vim-bbye: better buffer deletion ----------------
     {
         'moll/vim-bbye',

@@ -1,0 +1,185 @@
+% --------------------- resolution v0.1.0 ----------------------
+%
+% Shortcuts, commands, and operators.
+%
+% --------------------------------------------------------------
+
+% ----------------------- Dependencies --------------------------
+
+\RequirePackage{xspace} % fixing spacing
+
+% ---------------------- Custom Objects -------------------------
+
+% Grey line for separating problems
+\newcommand{\greyline}{
+    \medbreak
+    \textcolor[RGB]{100,100,100}{\rule{\linewidth}{0.3pt}}
+    \medbreak
+}
+
+% Box for definitions
+\newcommand{\defbox}[2]{
+    \begin{center}
+        \fbox{\parbox{#2\textwidth}{#1}}
+    \end{center}
+}
+
+
+% ------------------------- Modifiers ---------------------------
+
+\renewcommand{\bar}[1]{\overline{#1}}    % Bar
+\newcommand{\ubar}[1]{\underline{#1}}    % Underbar
+\renewcommand{\tilde}[1]{\widetilde{#1}} % Tilde
+\renewcommand{\hat}[1]{\widehat{#1}}     % Hat
+\renewcommand{\check}[1]{\widecheck{#1}} % Check
+\newcommand{\co}{{\mathsf{c}} }          % Complement
+
+% ------------------------ Delimiters ---------------------------
+
+\newcommand{\norm}[1]{\left\Vert{#1}\right\Vert}    % Norm
+\newcommand{\abs}[1]{\left|{#1}\right|}             % Modulus
+\newcommand{\flr}[1]{\left\lfloor{#1}\right\rfloor} % Floor
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}  % Ceil
+
+% ------------------------ Foundations --------------------------
+
+% Category Theory
+\DeclareMathOperator{\id}{id}              % Identity element
+\DeclareMathOperator{\Hom}{Hom}            % Hom-set
+\DeclareMathOperator{\Ob}{Ob}              % Objects of a category
+\DeclareMathOperator{\Mor}{Mor}            % Morphisms of a category
+\DeclareMathOperator{\dom}{dom}            % Domain of a morphism
+\DeclareMathOperator{\cod}{cod}            % Codomain of a morphism
+\newcommand{\op}{\text{op}}                % Opposite
+\DeclareMathOperator{\im}{im}              % Image (morphism)
+\let\Im\relax\DeclareMathOperator{\Im}{Im} % Image (object)
+\DeclareMathOperator{\coim}{coim}          % Coimage (morphism)
+\DeclareMathOperator{\Coim}{Coim}          % Coimage (object)
+\DeclareMathOperator{\Ker}{Ker}            % Kernel (object)
+\DeclareMathOperator{\coker}{coker}        % Cokernel (morphism)
+\DeclareMathOperator{\Coker}{Coker}        % Cokernel (object)
+\DeclareMathOperator{\Fun}{{\bf Fun}}      % Functor
+\DeclareMathOperator{\Nat}{Nat}            % Natural transformation
+\DeclareMathOperator{\adj}{adj}            % Adjoint
+
+% Logic
+\newcommand{\taut}{\vDash}                  % Tautology
+\newcommand{\tautr}{
+    \mathrel{\text{\reflectbox{$\vDash$}} }
+}                                           % Reversed Tautology
+\DeclareMathOperator{\Mod}{Mod}             % Set of models
+% }}}
+
+% -------------------------- Algebra ----------------------------
+
+% Group Theory
+\DeclareMathOperator{\Aut}{Aut}   % Automorphism (group)
+\DeclareMathOperator{\sgn}{sign}  % Sign (of a permutation)
+\DeclareMathOperator{\Sign}{sign} % Alternate "
+\DeclareMathOperator{\rank}{rank} % Rank
+\DeclareMathOperator{\Ab}{Ab}     % Rank
+
+% Linear Algebra
+\DeclareMathOperator{\spn}{span}  % Span (of a set of vectors)
+\DeclareMathOperator{\Span}{span} % Alternate "
+\DeclareMathOperator{\Ran}{Ran}   % Range (object)
+\DeclareMathOperator{\Perm}{Perm} % Permanent
+
+% Field Theory
+\DeclareMathOperator{\trdeg}{tr.deg} % Transcendence degree
+\DeclareMathOperator{\ch}{char}      % Characteristic (of a field)
+\DeclareMathOperator{\Char}{char}    % Alternate "
+\DeclareMathOperator{\Frac}{Frac}    % Fraction field
+\DeclareMathOperator{\codim}{codim}  % Codimension
+\DeclareMathOperator{\Frob}{Frob}    % Frobenius (morphism)
+\DeclareMathOperator{\Gal}{Gal}      % Galois (group)
+\DeclareMathOperator{\GL}{GL}        % General linear group
+\DeclareMathOperator{\SL}{SL}        % Special linear group
+\DeclareMathOperator{\SU}{SU}        % General linear group
+\DeclareMathOperator{\SO}{SO}        % Special linear group
+
+% Commutative Algebra
+\newcommand{\ideal}{\vartriangleleft}      % Ideal
+\newcommand{\maxideal}{
+    \vartriangleleft_{\operatorname{max} }
+}                                          % Maximal ideal
+\newcommand{\prideal}{
+    \vartriangleleft_{\operatorname{pr} }
+}                                          % Prime ideal
+\DeclareMathOperator{\Spec}{Spec}          % Spectrum (of a ring)
+\DeclareMathOperator{\MaxSpec}{MaxSpec}    % Maximal spectrum
+\DeclareMathOperator{\mSpec}{m-Spec}       % Also maximal spectrum
+\DeclareMathOperator{\End}{End}            % Endomorphism (algebra)
+\DeclareMathOperator{\tr}{tr}              % Trace
+\DeclareMathOperator{\ann}{ann}            % Annihilator of element
+\DeclareMathOperator{\Ann}{Ann}            % Annihilator of module
+\DeclareMathOperator{\Supp}{Supp}          % Support of module
+
+% Homological Algebra
+\DeclareMathOperator{\pd}{pd}   % Projective dimension
+\DeclareMathOperator{\Ext}{Ext} % Ext, derived functor of Hom
+\DeclareMathOperator{\Tor}{Tor} % Tor, derived functor of tensor product
+
+% Algebraic Geometry
+\DeclareMathOperator{\Open}{Open}   % Poset category of open sets
+\DeclareMathOperator{\PreSh}{PreSh} % The category of presheaves
+\DeclareMathOperator{\Sh}{Sh}       % The category of sheaves
+\DeclareMathOperator{\res}{res}     % Restriction map (of presheaf)
+
+% ------------------------- Analysis ----------------------------
+
+% Real Analysis
+\DeclareMathOperator{\dist}{dist} % Distance of sets
+\DeclareMathOperator{\supp}{supp} % Support
+\DeclareMathOperator{\vol}{vol}   % Volume
+\DeclareMathOperator{\BMO}{BMO}   % BMO
+\DeclareMathOperator{\Bohr}{Bohr} % Bohr set
+
+% Probability Theory
+\DeclareMathOperator{\Ber}{Ber}   % Bernoulli Distribution
+\DeclareMathOperator{\Bin}{Bin}   % Binomial Distribution
+\DeclareMathOperator{\Geo}{Geo}   % Geometric Distribution
+\DeclareMathOperator{\Poi}{Poi}   % Poisson Distribution
+\DeclareMathOperator{\Unif}{Unif} % Uniform Distribution
+\DeclareMathOperator{\Exp}{Exp}   % Uniform Distribution
+\DeclareMathOperator{\Var}{Var}   % Variance
+\DeclareMathOperator{\Cov}{Cov}   % Covariance
+\DeclareMathOperator{\TVD}{TVD}   % Total variation distance
+
+% Calculus
+\newcommand{\diff}{\ensuremath{\operatorname{d}\!}} % Differential
+\DeclareMathOperator{\curl}{\textrm{curl}}          % Curl
+\DeclareMathOperator{\divergence}{\textrm{div}}     % Divergence
+% }}}
+
+% ------------------------- Geometry ----------------------------
+
+% Topology
+\DeclareMathOperator{\Int}{Int}   % Interior
+\DeclareMathOperator{\diam}{diam} % Diameter
+
+% ------------------- Discrete Mathematics ----------------------
+
+% Number Theory
+\DeclareMathOperator{\ord}{ord} % Order (of a prime)
+
+% Algebraic Number Theory
+\DeclareMathOperator{\Cl}{Cl}     % Class group
+\DeclareMathOperator{\disc}{disc} % Discriminant
+
+% Additive Combinatorics
+\newcommand{\Gsum}{\overset{\scriptscriptstyle G}{+}} % Graph Sum
+
+% --------------- Theoretical Computer Science ------------------
+
+% Complexity Theory
+\DeclareMathOperator{\poly}{poly}                    % Polynomial
+\DeclareMathOperator{\polylog}{polylog}              % Polylogarithmic
+\newcommand{\cP}{\ensuremath{\mathsf{P}}\xspace}     % Complexity Class P
+\newcommand{\cNP}{\ensuremath{\mathsf{NP}}\xspace}   % Complexity Class NP
+\newcommand{\cBQP}{\ensuremath{\mathsf{BQP}}\xspace} % Complexity Class BQP
+\newcommand{\cO}{\ensuremath{\mathsf{O}}\xspace}     % Complexity Class O
+\newcommand{\YES}{\ensuremath{\texttt{YES}}\xspace}  % YES Answer
+\newcommand{\NO}{\ensuremath{\texttt{NO}}\xspace}    % NO Answer
+
+% ---------------------------------------------------------------

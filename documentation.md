@@ -1,8 +1,15 @@
 # `rsltn` Documentation
 
+## Introduction
+
+`rsltn` (pronounced, and usually typeset, *resolution*) is an environment for writing math built on Neovim.
+`rsltn` stands for **R**oshan's **S**ystem for **L**a**T**eX in **N**eovim, but the name also refers to the goal of the project, the *resolution* of the two main steps in the process of creating math: experimentation and exposition.
+For while *resolution* improves the experience of quickly writing beautiful math with LaTeX and provides tools for experimenting and computing in two interactive spaces (the Napkin and the Notebook), the unique and defining functionality of *resolution* is the seamless and efficient integration *between* the two processes.
+Using TeX, Lua, Vimscript, and Python, *resolution* is a complete implementation of a new way to write pure math.
+
 ## Table of Contents
  - [**Introduction**](#introduction)
- - [**Demonstrations**](#demonstrations)
+ - [**Why Resolution?**](#why-resolution%3F)
  - [**`rsltn` for Users**](#rsltn-for-users)
     - [**Installation**](#installation)
     - [**Navigation and Shortcuts**](#navigation-and-shortcuts)
@@ -21,16 +28,13 @@
     - [**`rsltn-figures`**](#rsltn-figures)
  - [**Appendix: Neovim in Detail**](#appendix%3A-neovim-in-detail)
 
-## Introduction
-
-`rsltn` (pronounced, and occasionally typeset, *resolution*) is an environment for writing math built on Neovim.
-`rsltn` stands for **R**oshan's **S**ystem for **L**a**T**eX in **N**eovim, but the name also refers to the goal of the project, the *resolution* of the two main steps in the process of creating math: experimentation and exposition.
-For while `rsltn` improves the experience of quickly writing beautiful math with LaTeX and provides tools for experimenting and computing in two interactive spaces (the Napkin and the Notebook), the unique and defining functionality of `rsltn` is the seamless and efficient integration *between* the two processes.
-Combining TeX, Lua, Vimscript, and Python, `rsltn` is a complete implementation of a new way of writing pure math.
-
-## Demonstrations
+## Why *resolution*?
 
 Following are some demonstrations of `rsltn`'s core functionality:
+
+##### Writing LaTeX Using Snippets
+##### Navigating and Manipulating a Complex Document
+##### Computation
 
 ##### Symbolic Matrix Manipulation
 ![A GIF of rlstn doing symbolic matrix manipulation (determinants, multiplication, etc.) without ever leaving the TeX document.](https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg)

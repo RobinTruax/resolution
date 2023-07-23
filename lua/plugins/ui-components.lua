@@ -100,7 +100,7 @@ return {
     ---------------------- markdown previewing ----------------------
     {
         'iamcco/markdown-preview.nvim',
-        ft = 'md',
+        event = 'VeryLazy',
         build = function()
             vim.fn['mkdp#util#install']()
         end,

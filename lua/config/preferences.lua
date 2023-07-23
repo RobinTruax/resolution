@@ -102,6 +102,7 @@ opt.autoread                       = true                           -- automatic
 
 -- don't edit these unless you're at least an intermediate user
 
+prefs.autosave                     = true          -- automatically compile LaTeX files
 opt.clipboard                      = 'unnamedplus' -- unify system & vim clipboard
 opt.foldmethod                     = 'marker'      -- folding using triple curly brackets
 prefs.number_recent_files          = 5             -- number of recent files in startup screen

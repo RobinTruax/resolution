@@ -31,7 +31,8 @@ return {
     --------- nvim-lspconfig: configuration of built-in lsp ---------
     {
         'neovim/nvim-lspconfig',
-        ft = { 'tex', 'py', 'lua', 'json' },
+        -- ft = { 'tex', 'py', 'lua', 'json' },
+        event = 'VeryLazy',
         dependencies = {
             -- mason (installing and configuring LSPs)
             { 'williamboman/mason.nvim',          config = true, build = ":MasonUpdate" },

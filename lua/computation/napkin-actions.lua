@@ -11,11 +11,11 @@ local actions = {}
 -- configuration
 local states = require('core.states')
 local preferences = require('config.preferences')
-local environment = require('computation.environment')
+local notebook = require('computation.notebook')
 local config_computation = require('config.advanced.computation')
 
 -- related files
-local popup = require('computation.popup-layout')
+local napkin_layout = require('computation.napkin-layout')
 
 -- nui.nvim
 local NuiText = require('nui.text')
@@ -41,10 +41,10 @@ actions.set_keybinds = function(popups)
     for k, v in ipairs(popups) do
         -- quit keymaps
         v:map('n', 'q', function()
-            popup.layout:unmount()
+            napkin_layout.layout:unmount()
         end)
         v:map('n', '<Esc>', function()
-            popup.layout:unmount()
+            napkin_layout.layout:unmount()
         end)
         -- iteration keymaps
         v:map('n', '<Tab>', function()
@@ -57,18 +57,18 @@ actions.set_keybinds = function(popups)
         end)
         -- yank and quit
         v:map('n', '<localleader>y', function()
-            vim.api.nvim_set_current_win(popup.output_tex.winid)
+            vim.api.nvim_set_current_win(napkin_layout.output_tex.winid)
             vim.cmd('norm VGy')
-            popup.layout:unmount()
+            napkin_layout.layout:unmount()
         end)
         -- send and named-send
         v:map('n', '<localleader>s', function()
-            local sympy = table.concat(vim.api.nvim_buf_get_lines(popup.sympy.bufnr, 0, -1, false), ' ')
-            environment.send_to_notebook(sympy)
+            local sympy = table.concat(vim.api.nvim_buf_get_lines(napkin_layout.sympy.bufnr, 0, -1, false), ' ')
+            notebook.send_to_notebook(sympy)
         end)
         v:map('n', '<localleader>S', function()
-            local sympy = table.concat(vim.api.nvim_buf_get_lines(popup.sympy.bufnr, 0, -1, false), ' ')
-            environment.send_to_notebook_named(sympy)
+            local sympy = table.concat(vim.api.nvim_buf_get_lines(napkin_layout.sympy.bufnr, 0, -1, false), ' ')
+            notebook.send_to_notebook_named(sympy)
         end)
     end
 end
@@ -103,7 +103,7 @@ actions.sympy_from_latex = function(input)
             -- if no error thrown, populate the second window
             if exit_code == 0 then
                 vim.schedule(function()
-                    vim.api.nvim_buf_set_lines(popup.sympy.bufnr, 0, -1, false, res)
+                    vim.api.nvim_buf_set_lines(napkin_layout.sympy.bufnr, 0, -1, false, res)
                 end)
             end
         end
@@ -131,14 +131,14 @@ actions.latex_from_latex = function(input, filename)
             -- if an error was thrown at this stage, notify user
             if exit_code ~= 0 then
                 vim.schedule(function()
-                    vim.api.nvim_buf_set_lines(popup.output_tex.bufnr, 0, -1, false, { 'Error in Computation' })
-                    NuiText('Error in Computation', 'Error'):render(popup.output_tex.bufnr, -1, 1, 0)
+                    vim.api.nvim_buf_set_lines(napkin_layout.output_tex.bufnr, 0, -1, false, { 'Error in Computation' })
+                    NuiText('Error in Computation', 'Error'):render(napkin_layout.output_tex.bufnr, -1, 1, 0)
                 end)
                 -- otherwise, send output to the buffer or to a formatter
             else
                 vim.schedule(function()
                     if filename == nil or config_computation.preformat == false then
-                        vim.api.nvim_buf_set_lines(popup.output_tex.bufnr, 0, -1, false, res)
+                        vim.api.nvim_buf_set_lines(napkin_layout.output_tex.bufnr, 0, -1, false, res)
                     else
                         local string = table.concat(res, ' '):gsub('\\', '\\\\')
                         vim.fn.system(string.format('echo "%s" > %s', string, filename))
@@ -177,14 +177,14 @@ actions.latex_from_sympy = function(input, filename)
             -- if an error was thrown at this stage, notify user
             if exit_code ~= 0 then
                 vim.schedule(function()
-                    vim.api.nvim_buf_set_lines(popup.output_tex.bufnr, 0, -1, false, { 'Error in Computation' })
-                    NuiText('Error in Computation', 'Error'):render(popup.output_tex.bufnr, -1, 1, 0)
+                    vim.api.nvim_buf_set_lines(napkin_layout.output_tex.bufnr, 0, -1, false, { 'Error in Computation' })
+                    NuiText('Error in Computation', 'Error'):render(napkin_layout.output_tex.bufnr, -1, 1, 0)
                 end)
                 -- otherwise, send output to the buffer or to a formatter
             else
                 vim.schedule(function()
                     if filename == nil or config_computation.preformat == false then
-                        vim.api.nvim_buf_set_lines(popup.output_tex.bufnr, 0, -1, false, res)
+                        vim.api.nvim_buf_set_lines(napkin_layout.output_tex.bufnr, 0, -1, false, res)
                     else
                         local string = table.concat(res, ' '):gsub('\\', '\\\\')
                         vim.fn.system(string.format('echo "%s" > %s', string, filename))
@@ -219,17 +219,17 @@ actions.latex_indent = function(filename)
             -- if an error was thrown at this stage, notify user
             if exit_code ~= 0 then
                 vim.schedule(function()
-                    vim.api.nvim_buf_set_lines(popup.output_tex.bufnr, 0, -1, false, { 'Error in Formatting' })
-                    NuiText('Error in Formatting', 'Error'):render(popup.output_tex.bufnr, -1, 1, 0)
+                    vim.api.nvim_buf_set_lines(napkin_layout.output_tex.bufnr, 0, -1, false, { 'Error in Formatting' })
+                    NuiText('Error in Formatting', 'Error'):render(napkin_layout.output_tex.bufnr, -1, 1, 0)
                 end)
                 -- otherwise, send output to the buffer or to a formatter
             else
                 vim.schedule(function()
                     -- set wrapping smartly
                     if #res <= config_computation.window_parameters.maximum_wrap then
-                        vim.api.nvim_win_set_option(popup.output_tex.winid, 'wrap', true)
+                        vim.api.nvim_win_set_option(napkin_layout.output_tex.winid, 'wrap', true)
                     end
-                    vim.api.nvim_buf_set_lines(popup.output_tex.bufnr, 0, -1, false, res)
+                    vim.api.nvim_buf_set_lines(napkin_layout.output_tex.bufnr, 0, -1, false, res)
                 end)
             end
         end
@@ -243,10 +243,10 @@ end
 -- create all computation jobs
 actions.computation_jobs = function()
     -- update the 2nd and 3rd windows on edits in the 1st window
-    popup.input_tex:on({ Event.TextChangedI, Event.TextChanged }, function()
+    napkin_layout.input_tex:on({ Event.TextChangedI, Event.TextChanged }, function()
         vim.schedule(function()
             -- scan and simplify input latex
-            local input_tex = table.concat(vim.api.nvim_buf_get_lines(popup.input_tex.bufnr, 0, -1, false), ' ')
+            local input_tex = table.concat(vim.api.nvim_buf_get_lines(napkin_layout.input_tex.bufnr, 0, -1, false), ' ')
             -- stop all jobs
             actions.stop_all_jobs()
             -- call new update jobs
@@ -256,10 +256,10 @@ actions.computation_jobs = function()
     end)
 
     -- update the 3rd window on edits in the 2nd window
-    popup.sympy:on({ Event.TextChangedI }, function()
+    napkin_layout.sympy:on({ Event.TextChangedI }, function()
         vim.schedule(function()
             -- scan and simplify input latex
-            local input_sympy = table.concat(vim.api.nvim_buf_get_lines(popup.sympy.bufnr, 0, -1, false), ' ')
+            local input_sympy = table.concat(vim.api.nvim_buf_get_lines(napkin_layout.sympy.bufnr, 0, -1, false), ' ')
             -- stop all jobs
             actions.stop_all_jobs()
             -- call a new update job
@@ -283,13 +283,13 @@ actions.closure_jobs = function(popups)
                         return
                     end
                 end
-                popup.layout:unmount()
+                napkin_layout.layout:unmount()
             end)
         end)
         -- on window leave, quit
         p:on({ Event.BufWinLeave }, function()
             vim.schedule(function()
-                popup.layout:unmount()
+                napkin_layout.layout:unmount()
                 states.computation_popup = false
             end)
         end)
@@ -299,9 +299,9 @@ end
 -- function for creating all jobs
 actions.jobs_creator = function(input)
     -- keybinds
-    actions.set_keybinds(popup.all)
+    actions.set_keybinds(napkin_layout.all)
     -- jobs for closure
-    actions.closure_jobs(popup.all)
+    actions.closure_jobs(napkin_layout.all)
     -- jobs for computation
     actions.computation_jobs()
 end
@@ -311,7 +311,7 @@ end
 -- mounting the pop-up window
 actions.mount = function()
     -- set up
-    popup.layout:mount()
+    napkin_layout.layout:mount()
     -- create jobs
     actions.jobs_creator()
     -- turn off autocompletion
@@ -342,7 +342,7 @@ end
 actions.mount_from_visual = function()
     local visi = actions.get_visual_selection()
     actions.mount()
-    vim.api.nvim_buf_set_lines(popup.input_tex.bufnr, 0, -1, false, { visi })
+    vim.api.nvim_buf_set_lines(napkin_layout.input_tex.bufnr, 0, -1, false, { visi })
 end
 
 -----------------------------------------------------------------

@@ -1,0 +1,233 @@
+% --------------------- resolution v0.1.0 ----------------------
+%
+% Expository arrows
+%
+% --------------------------------------------------------------
+
+% --------------------------- Setup -----------------------------
+
+% Add Options for Colors
+\PassOptionsToPackage{
+    usenames,
+    dvipsnames,
+    svgnames
+}{xcolor}
+
+% Necessary Packages
+\RequirePackage{xstring}
+\RequirePackage{xkcdcolors}
+\RequirePackage{calculator}
+\RequirePackage{ifthen}
+
+% Necessary Tikz Libraries
+\usetikzlibrary{
+    backgrounds,
+    arrows,
+    shapes,
+    tikzmark,
+    calc
+}
+
+% ------------------- Highlights and Nodes ----------------------
+
+\newcommand{\highlight}[2]{\colorbox{#2!17!rsltnPage}{#1}}
+\newcommand{\expnode}[3]{\tikzmarknode{#1}{\highlight{#2}{#3}} }
+\newcommand{\expnodeclr}[2]{\tikzmarknode{#1}{#2}}
+
+% -------------------------- Spacing ----------------------------
+
+\newcommand{\expspacing}{\vspace{2.5\baselineskip}}
+\newcommand{\expspacingadv}[1]{\MULTIPLY{#1}{2.5}{\a}\vspace{\a\baselineskip}}
+
+% One might also want to use \vphantom{} to align nodes if they are right next to one another; see the exparrows documentation.
+
+% ------------------------- exparrow ----------------------------
+
+\newcommand{\exparrow}[4]{
+    \IfEqCase{#4}{
+        {ul}{ % Arrow up and to the left
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.north) ++ (0,2.2em) node[anchor=south east,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.north) |- ([xshift=-0.3ex,yshift=-0.2em,color=#3]scalep.south west);
+            \end{tikzpicture}
+            }
+        {ur}{ % Arrow up and to the right
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.north) ++ (0,2.2em) node[anchor=south west,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.north) |- ([xshift=-0.3ex,yshift=-0.2em,color=#3]scalep.south east);
+            \end{tikzpicture}
+            }
+        {dl}{ % Arrow down and to the left
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.south) ++ (0,-1.7em) node[anchor=north east,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.south) |- ([xshift=-0.3ex,yshift=-0.2ex,color=#3]scalep.south west);
+            \end{tikzpicture}
+            }
+        {dr}{ % Arrow down and to the right
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.south) ++ (0,-1.7em) node[anchor=north west,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.south) |- ([xshift=-0.3ex,yshift=-0.2ex,color=#3]scalep.south east);
+            \end{tikzpicture}
+            }
+        {u-}{  % Arrow up with line under itself
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.north) ++ (0,2em) node[anchor=south,color=#3!67] (scalep){#2};
+                % Arrow 1
+                \draw [color=#3!87](#1.north) |- ([xshift=-0.3ex,yshift=-0.2ex,color=#3]scalep.south east);
+                % Arrow 2
+                \draw [color=#3!87](#1.north) |- ([xshift=-0.3ex,yshift=-0.2ex,color=#3]scalep.south west);
+            \end{tikzpicture}
+        }
+        {d-}{ % Arrow down with line under itself
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.south) ++ (0,-2.2em) node[anchor=north,color=#3!67] (scalep){#2};
+                % Arrow 1
+                \draw [color=#3!87](#1.south) |- ([xshift=-0.3ex,yshift=0.2ex,color=#3]scalep.north east);
+                % Arrow 2
+                \draw [color=#3!87](#1.south) |- ([xshift=-0.3ex,yshift=0.2ex,color=#3]scalep.north west);
+            \end{tikzpicture}
+        }
+        {u}{ % Arrow up with no line under itself
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.north) ++ (0,2.2em) node[anchor=south,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.north) |- ([yshift=0.2ex,color=#3]scalep.south);
+            \end{tikzpicture}
+        }
+        {d}{ % Arrow down with no line under itself
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.south) ++ (0,-2.2em) node[anchor=north,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.south) |- ([yshift=0.2ex,color=#3]scalep.north);
+            \end{tikzpicture}
+        }
+    }[\PackageError{exparrow}{Undefined option to exparrow: #4}{}] % Throw error if option does not exist
+}
+
+% ----------------------- exparrowdual --------------------------
+
+\newcommand{\exparrowdual}[5]{
+    \IfEqCase{#5}{
+        {u}{ % Arrows up
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path ($(#1.north)!0.5!(#2.north)$) ++ (0em,2.7em) node[anchor=north,color=#4!67] (scalep){#3};
+                % Arrow
+                \draw[<->,color=#4!57] (#1.north) -- ++(0,0.67)  -| node[] {} (#2.north);
+            \end{tikzpicture}
+            }
+        {d}{ % Arrows down
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path ($(#1.south)!0.5!(#2.south)$) ++ (0em,-2.7em) node[anchor=south,color=#4!67] (scalep){#3};
+                % Arrow
+                \draw[<->,color=#4!57] (#1.south) -- ++(0,-0.67)  -| node[] {} (#2.south);
+            \end{tikzpicture}
+            }
+    }[\PackageError{exparrow}{Undefined option to exparrow: #5}{}] % Throw error if option does not exist
+}
+
+% ------------------------ exparrowadv --------------------------
+
+\newcommand{\exparrowadv}[5]{
+    \IfEqCase{#4}{
+        {ul}{ % Arrow up and to the left
+            % Calculating height
+            \MULTIPLY{2.2}{#5}{\a}
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.north) ++ (0,\a em) node[anchor=south east,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.north) |- ([xshift=-0.3ex,yshift=-0.2em,color=#3]scalep.south west);
+            \end{tikzpicture}
+            }
+        {ur}{ % Arrow up and to the right
+            % Calculating height
+            \MULTIPLY{2.2}{#5}{\a}
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Test
+                \path (#1.north) ++ (0,\a em) node[anchor=south west,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.north) |- ([xshift=-0.3ex,yshift=-0.2em,color=#3]scalep.south east);
+            \end{tikzpicture}
+            }
+        {dl}{ % Arrow down and to the left
+            % Calculating height
+            \MULTIPLY{-1.7}{#5}{\a}
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.south) ++ (0,\a em) node[anchor=north east,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.south) |- ([xshift=-0.3ex,yshift=-0.2ex,color=#3]scalep.south west);
+            \end{tikzpicture}
+            }
+        {dr}{ % Arrow down and to the right
+            % Calculating height
+            \MULTIPLY{-1.7}{#5}{\a}
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.south) ++ (0,\a em) node[anchor=north west,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.south) |- ([xshift=-0.3ex,yshift=-0.2ex,color=#3]scalep.south east);
+            \end{tikzpicture}
+            }
+        {u-}{ % Arrow up with line under itself
+            % Calculating height
+            \MULTIPLY{2.2}{#5}{\a}
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.north) ++ (0,\a em) node[anchor=south,color=#3!67] (scalep){#2};
+                % Arrow 1
+                \draw [color=#3!87](#1.north) |- ([xshift=-0.3ex,yshift=-0.2ex,color=#3]scalep.south east);
+                % Arrow 2
+                \draw [color=#3!87](#1.north) |- ([xshift=-0.3ex,yshift=-0.2ex,color=#3]scalep.south west);
+            \end{tikzpicture}
+        }
+        {d-}{ % Arrow down with line under itself
+            % Calculating height
+            \MULTIPLY{-2.2}{#5}{\a}
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.south) ++ (0,\a em) node[anchor=north,color=#3!67] (scalep){#2};
+                % Arrow 1
+                \draw [color=#3!87](#1.south) |- ([xshift=-0.3ex,yshift=0.2ex,color=#3]scalep.north east);
+                % Arrow 2
+                \draw [color=#3!87](#1.south) |- ([xshift=-0.3ex,yshift=0.2ex,color=#3]scalep.north west);
+            \end{tikzpicture}
+        }
+        {u}{ % Arrow up with no line under itself
+            % Calculating height
+            \MULTIPLY{2.2}{#5}{\a}
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.north) ++ (0,\a em) node[anchor=south,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.north) |- ([yshift=0.2ex,color=#3]scalep.south);
+            \end{tikzpicture}
+        }
+        {d}{ % Arrow down with no line under itself
+            % Calculating height
+            \MULTIPLY{-2.2}{#5}{\a}
+            \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+                % Text
+                \path (#1.south) ++ (0,\a em) node[anchor=north,color=#3!67] (scalep){#2};
+                % Arrow
+                \draw [color=#3!87](#1.south) |- ([yshift=0.2ex,color=#3]scalep.north);
+            \end{tikzpicture}
+        }
+    }[\PackageError{exparrow}{Undefined option to exparrow: #4}{}] % Throw an error if the option does not exist
+}
+
+% ---------------------------------------------------------------

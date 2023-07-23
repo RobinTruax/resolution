@@ -1,0 +1,204 @@
+% --------------------- resolution v0.1.0 ----------------------
+%
+% Alternate file (when nexus is not being used) for environments.
+%
+% --------------------------------------------------------------
+
+% ----------------------- Basic Colors --------------------------
+
+\RequirePackage[usenames,dvipsnames,svgnames]{xcolor}
+
+% Theme Colors
+\definecolor{TBackground}{HTML}{ffffff}
+\definecolor{TForeground}{HTML}{000000}
+\definecolor{TRed}{HTML}{ed1b23}
+\definecolor{TOrange}{HTML}{f58137}
+\definecolor{TYellow}{HTML}{fff200}
+\definecolor{TGreen}{HTML}{00a64f}
+\definecolor{TAqua}{HTML}{00b5be}
+\definecolor{TBlue}{HTML}{2d2f92}
+\definecolor{TPurple}{HTML}{99479b}
+\definecolor{TGrey}{HTML}{949698}
+
+% Base
+\definecolor{rsltnPage}{HTML}{ffffff}
+\definecolor{rsltnText}{HTML}{000000}
+
+% Environments
+\definecolor{rsltnDefinition}{HTML}{000000}
+\definecolor{rsltnTheorem}{HTML}{000000}
+\definecolor{rsltnProposition}{HTML}{000000}
+\definecolor{rsltnLemma}{HTML}{000000}
+\definecolor{rsltnCorollary}{HTML}{000000}
+\definecolor{rsltnExample}{HTML}{000000}
+\definecolor{rsltnConjecture}{HTML}{000000}
+\definecolor{rsltnProblem}{HTML}{000000}
+\definecolor{rsltnSolution}{HTML}{000000}
+
+% Code
+\definecolor{rsltnComment}{HTML}{808080}
+\definecolor{rsltnKeyword}{HTML}{ff00ff}
+\definecolor{rsltnString}{HTML}{009900}
+\definecolor{rsltnNumbers}{HTML}{808080}
+\definecolor{rsltnLinebreak}{HTML}{ff0000}
+
+% ------------------- Theorem Environments ----------------------
+
+\usepackage{thmtools}                    % Theorem tools
+\usepackage[skins, breakable]{tcolorbox} % Theorem box
+
+% ---------------- Color-Changing Proof Setup -------------------
+
+\global\def\recentProof{theorem proof}
+\renewenvironment{proof}[1][\proofname]{
+    \begin{\recentProof}
+}{
+    \end{\recentProof}
+}
+
+% ----------- Commands for Theorem and Proof Style --------------
+
+% Theorem Style
+\newcommand{\rsltntheoremstyle}[3]{
+
+    % Create theorem style
+    \declaretheoremstyle[
+        headfont=\bfseries\color{#2!80!black},
+        bodyfont=#3\color{rsltnText}
+    ]{#1 box}
+
+    % Create theorem box
+    \tcolorboxenvironment{#1}{
+        blanker, breakable, use color stack,
+        left=5mm, top=2mm, bottom=2mm,
+        before skip=10pt, after skip=10pt,
+        pad before break = 2pt, pad after break = 2pt,
+        borderline west={1pt}{0pt}{#2},
+    }
+
+}
+
+% Proof Style
+\newcommand{\rsltntheoremproof}[2]{
+
+    % Create proof style
+    \declaretheoremstyle[
+        headfont=\itshape\color{#2!80!black},
+        bodyfont=\normalfont\color{rsltnText},
+        qed=\qedsymbol,
+    ]{#1 proof box}
+    
+    % Create proof box
+    \tcolorboxenvironment{#1 proof}{
+        blanker, breakable, use color stack,
+        left=5mm, top=2mm, bottom=2mm,
+        before skip=10pt, after skip=10pt,
+        pad before break = 2pt, pad after break = 2pt,
+        borderline west={1pt}{0pt}{#2},
+    }
+
+    \declaretheorem[
+        style = #1 proof box,
+        numbered = no,
+        name = Proof
+    ]{#1 proof}
+}
+
+% --------------- Definition-Style Environments -----------------
+
+% Definition
+\rsltntheoremstyle{definition}{rsltnDefinition}{}
+\declaretheorem[
+    style   = definition box,
+    name    = Definition,
+    parent  = section,
+]{definition}
+
+% Conjecture
+\rsltntheoremstyle{conjecture}{rsltnConjecture}{}
+\declaretheorem[
+    style   = conjecture box,
+    name    = Conjecture,
+    parent  = section,
+    sibling = definition,
+]{conjecture}
+
+% Example
+\rsltntheoremstyle{example}{rsltnExample}{}
+\declaretheorem[
+    style   = example box,
+    name    = Example,
+    parent  = section,
+    sibling = definition,
+]{example}
+
+% Note
+\rsltntheoremstyle{note}{rsltnNote}{}
+\declaretheorem[
+    style   = note box,
+    name    = Note,
+    parent  = section,
+    sibling = definition,
+]{note}
+
+% Problem
+\rsltntheoremstyle{problem}{rsltnProblem}{}
+\declaretheorem[
+    style   = problem box,
+    name    = Problem,
+    parent  = section,
+    sibling = definition,
+]{problem}
+
+% Solution
+\rsltntheoremstyle{solution}{rsltnSolution}{}
+\declaretheorem[
+    style   = solution box,
+    name    = Solution,
+    parent  = section,
+    sibling = definition,
+]{solution}
+
+% ---------------- Theorem-Style Environments -------------------
+
+% Theorem
+\rsltntheoremstyle{theorem}{rsltnTheorem}{\itshape}
+\declaretheorem[
+    style   = theorem box,
+    name    = Theorem,
+    parent  = section,
+    sibling = definition,
+]{theorem}
+\rsltntheoremproof{theorem}{rsltnTheorem}
+
+% Proposition
+\rsltntheoremstyle{proposition}{rsltnProposition}{\itshape}
+\declaretheorem[
+    style   = proposition box,
+    name    = Proposition,
+    parent  = section,
+    sibling = definition,
+]{proposition}
+\rsltntheoremproof{proposition}{rsltnProposition}
+
+% Lemma
+\rsltntheoremstyle{lemma}{rsltnLemma}{\itshape}
+\declaretheorem[
+    style   = lemma box,
+    name    = Lemma,
+    parent  = section,
+    sibling = definition,
+]{lemma}
+\rsltntheoremproof{lemma}{rsltnLemma}
+
+% Corollary
+\rsltntheoremstyle{corollary}{rsltnCorollary}{\itshape}
+\declaretheorem[
+    style   = corollary box,
+    name    = Corollary,
+    parent  = section,
+    sibling = definition,
+]{corollary}
+\rsltntheoremproof{corollary}{rsltnCorollary}
+
+% ---------------------------------------------------------------

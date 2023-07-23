@@ -28,10 +28,10 @@ return {
         mode = { 'n', 'v' },
         cmd = {
             function()
-                require('computation.popup-actions').mount()
+                require('computation.napkin-actions').mount()
             end,
             function()
-                require('computation.popup-actions').mount_from_visual()
+                require('computation.napkin-actions').mount_from_visual()
             end,
         },
     },
@@ -63,7 +63,7 @@ return {
         cmd = function()
             if vim.bo.filetype == 'tex' then
                 vim.cmd('write')
-                print('Prettying with latexindent.')
+                vim.notify('Formatting with latexindent.', vim.log.levels.INFO)
                 local filename = vim.fn.expand('%:p')
                 local format_style_file = prefs.format_style_file
                 vim.fn.system('latexindent -l ' .. format_style_file .. ' -m ' .. filename ..
