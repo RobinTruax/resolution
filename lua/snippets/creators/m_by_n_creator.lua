@@ -1,10 +1,23 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-m_by_n object creator
+resolution is a Neovim config for writing TeX and doing computation math.
 
----------------------------------------------------------------]]
+This file implements an m by n snippet creator.
 
-------------------------- dependencies --------------------------
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+--------------------------------- dependencies ---------------------------------
 
 local ls = require("luasnip")
 local s = ls.snippet
@@ -14,7 +27,7 @@ local i = ls.insert_node
 local d = ls.dynamic_node
 local utilities = require('snippets.tex.utilities')
 
------------------------- snippet creator ------------------------
+------------------------------- snippet creator --------------------------------
 
 -- dynamic node creator
 local m_by_n_dynamic_node = function(m_by_n_object)
@@ -89,8 +102,8 @@ local m_by_n_creator = function(m_by_n_object)
     )
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return m_by_n_creator
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

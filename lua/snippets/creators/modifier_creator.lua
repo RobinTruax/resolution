@@ -1,19 +1,32 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-modifier snippet creator
+resolution is a Neovim config for writing TeX and doing computation math.
 
----------------------------------------------------------------]]
+This file implements a snippet creator for modifiers.
 
-------------------------- dependencies --------------------------
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+--------------------------------- dependencies ---------------------------------
 
 local config = require('config.snippets')
 
-------------------------- used creators -------------------------
+-------------------------------- used creators ---------------------------------
 
 local command_creator = require('snippets.creators.command_creator')
 local symbol_creator = require('snippets.creators.symbol_creator')
 
------------------------- snippet creator ------------------------
+------------------------------- snippet creator --------------------------------
 
 -- modifier creator
 local modifier_creator = function(modifier)
@@ -82,8 +95,8 @@ local modifier_creator = function(modifier)
     }
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return modifier_creator
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

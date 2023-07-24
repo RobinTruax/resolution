@@ -1,10 +1,23 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-delimiter snippet creator
+resolution is a Neovim config for writing TeX and doing computation math.
 
----------------------------------------------------------------]]
+This file implements a snippet creator for delimiters.
 
-------------------------- dependencies --------------------------
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+--------------------------------- dependencies ---------------------------------
 
 local ls = require('luasnip')
 local s = ls.snippet
@@ -15,7 +28,7 @@ local d = ls.dynamic_node
 local fmta = require('luasnip.extras.fmt').fmta
 local utilities = require('snippets.tex.utilities')
 
------------------ visual node creation function -----------------
+------------------------ visual node creation function -------------------------
 
 -- check if string is bounded by delimiters
 local function check_if_bounded_by_delims(string, left, right)
@@ -82,7 +95,7 @@ local visual_delims_generator = function(left, right)
     end
 end
 
------------------------- snippet creator ------------------------
+------------------------------- snippet creator --------------------------------
 
 -- delimiter creator
 local delimiter_creator = function(delimiter)
@@ -108,8 +121,8 @@ local delimiter_creator = function(delimiter)
     }, fmta(format, nodes))
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return delimiter_creator
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

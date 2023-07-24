@@ -1,7 +1,26 @@
+--[[--------------------------- resolution v0.1.0 ------------------------------
+
+resolution is a Neovim config for writing TeX and doing computation math.
+
+This file adds snippets as specified in /config/snippets.lua.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
 local manual_snippets = {}
 local auto_snippets = {}
 
---------------------------- creators ----------------------------
+----------------------------------- creators -----------------------------------
 
 local command_creator = require('snippets.creators.command_creator')
 local environment_creator = require('snippets.creators.environment_creator')
@@ -10,7 +29,7 @@ local modifier_creator = require('snippets.creators.modifier_creator')
 local delimiter_creator = require('snippets.creators.delimiter_creator')
 local m_by_n_creator = require('snippets.creators.m_by_n_creator')
 
------------------------- adding snippets ------------------------
+------------------------------- adding snippets --------------------------------
 
 -- add environment snippets
 for _, v in ipairs(require('config.snippets').environments) do
@@ -75,8 +94,8 @@ for _, v in ipairs(require('config.snippets').m_by_n_objects) do
     end
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return manual_snippets, auto_snippets
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

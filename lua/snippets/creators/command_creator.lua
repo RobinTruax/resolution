@@ -1,10 +1,23 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-command snippet creator
+resolution is a Neovim config for writing TeX and doing computation math.
 
----------------------------------------------------------------]]
+This file implements a snippet creator for commands.
 
-------------------------- dependencies --------------------------
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+--------------------------------- dependencies ---------------------------------
 
 local ls = require('luasnip')
 local s = ls.snippet
@@ -13,7 +26,7 @@ local d = ls.dynamic_node
 local fmta = require('luasnip.extras.fmt').fmta
 local utilities = require('snippets.tex.utilities')
 
------------------------- snippet creator ------------------------
+------------------------------- snippet creator --------------------------------
 
 local command_snippet = function(command, mathmode)
     -- sanitize information
@@ -69,8 +82,8 @@ local command_snippet = function(command, mathmode)
         }, fmta(format, nodes))
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return command_snippet
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

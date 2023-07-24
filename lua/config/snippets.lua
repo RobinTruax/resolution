@@ -1,22 +1,28 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-all configuration for snippets in LaTeX
+resolution is a Neovim config for writing TeX and doing computation math.
 
-there are eight categories: 
- - (non-math) environments
- - non-math commands
- - math commands
- - math modifiers
- - math delimiters
- - math symbols
- - m by n snippets
- - unique-type
+All configuration for snippets in LaTeX. There are eight categories of snippets:
+Environments, non-math commands, math commands, math modifiers, math delimiters,
+math symbols, m by n snippets, and unique-type snippets.
 
----------------------------------------------------------------]]
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 local config = {}
 
---------------------------- settings ----------------------------
+----------------------------------- settings -----------------------------------
+
 --{{{
 config.autoscript = false -- automatic sub- and super-scripting with numbers and *
 
@@ -75,9 +81,9 @@ config.greek_vs_pat = '(;[efco])'
 
 --}}}
 
---========================= NON-MATH ==========================--
+----------------------------------- NON-MATH -----------------------------------
 
-------------------------- environments --------------------------
+--------------------------------- environments ---------------------------------
 --{{{
 
 -- the first two environment snippets are of a different type
@@ -295,7 +301,7 @@ config.environments     = {
 }
 --}}}
 
---------------------------- commands ----------------------------
+----------------------------------- commands -----------------------------------
 --{{{
 
 --[[
@@ -438,9 +444,9 @@ config.nonmath_commands = {
 }
 --}}}
 
---=========================== MATH ============================--
+------------------------------------- MATH -------------------------------------
 
---------------------------- commands ----------------------------
+----------------------------------- commands -----------------------------------
 -- {{{
 
 --[[
@@ -903,7 +909,7 @@ config.math_commands    = {
 }
 --}}}
 
---------------------------- modifiers ---------------------------
+---------------------------------- modifiers -----------------------------------
 -- {{{
 
 --[[
@@ -993,7 +999,7 @@ config.modifiers        = {
 }
 --}}}
 
--------------------------- delimiters ---------------------------
+---------------------------------- delimiters ----------------------------------
 --{{{
 
 --[[
@@ -1038,7 +1044,7 @@ config.delimiters       = {
 
 --}}}
 
-------------------------- math symbols --------------------------
+--------------------------------- math symbols ---------------------------------
 --{{{
 
 --[[
@@ -1508,9 +1514,9 @@ config.math_symbols     = {
 }
 --}}}
 
---========================== SPECIAL ==========================--
+----------------------------------- SPECIAL ------------------------------------
 
------------------------- m by n snippets ------------------------
+------------------------------- m by n snippets --------------------------------
 --{{{
 
 --[[
@@ -1555,12 +1561,14 @@ config.m_by_n_objects   = {
 }
 --}}}
 
--------------------------- unique type --------------------------
+--------------------------------- unique type ----------------------------------
 --{{{
 
 
 --}}}
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return config
+
+--------------------------------------------------------------------------------

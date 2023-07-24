@@ -1,10 +1,24 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-environment snippet creator
+resolution is a Neovim config for writing TeX and doing computation math.
 
----------------------------------------------------------------]]
+This file creates some unique environments that are not handled by the generic
+creator.
 
-------------------------- dependencies --------------------------
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+--------------------------------- dependencies ---------------------------------
 
 local ls = require('luasnip')
 local s = ls.snippet
@@ -19,7 +33,7 @@ local config = require('config.snippets')
 local auto = {}
 local manual = {}
 
------------------ special environment snippets ------------------
+------------------------- special environment snippets -------------------------
 
 if type(config.display_math.trigger) == 'string' then
     local display_math_snippet = s({
@@ -81,8 +95,8 @@ if type(config.generic_environment.trigger) == 'string' then
     end
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return manual, auto
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

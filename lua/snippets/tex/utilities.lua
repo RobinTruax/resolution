@@ -1,22 +1,32 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-utility functions for tex snippets
+resolution is a Neovim config for writing TeX and doing computation math.
 
----------------------------------------------------------------]]
+This file has various utility functions for snippet construction.
 
---------------------- luasnip abbreviations ---------------------
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+---------------------------- luasnip abbreviations -----------------------------
 
 local ls = require("luasnip")
 local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
-
------------------------------------------------------------------
-
 local utilities = {}
 
------------------------ context-detection -----------------------
+------------------------------ context-detection -------------------------------
 
 -- condition for line beginning
 utilities.line_begin = function(line_to_cursor, matched_trigger)
@@ -71,7 +81,7 @@ utilities.in_environment_line_begin = function(name)
     end
 end
 
------------------------- visual snippets ------------------------
+------------------------------- visual snippets --------------------------------
 
 -- tool for getting visual input
 utilities.visual = function(_, parent)
@@ -98,7 +108,7 @@ utilities.extend_visual_labeled = function(label)
     end
 end
 
-------------------------- get condition -------------------------
+-------------------------------- get condition ---------------------------------
 
 -- simple function for getting condition
 utilities.get_condition = function(mathmode)
@@ -128,7 +138,7 @@ utilities.get_condition_line_behav = function(line, mathmode)
     end
 end
 
------------------------------ other -----------------------------
+------------------------------------ other -------------------------------------
 
 -- get captured entry (for regex snippets)
 utilities.cap = function(j)
@@ -139,8 +149,8 @@ utilities.cap = function(j)
     end
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return utilities
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
