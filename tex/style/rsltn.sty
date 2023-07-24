@@ -1,20 +1,35 @@
-% --------------------- resolution v0.1.0 ----------------------
-%
-% Nexus file for rsltn's style.
-%
-% --------------------------------------------------------------
+% ----------------------------- resolution v0.1.0 ------------------------------
+% 
+% resolution is a Neovim config for writing TeX and doing computational math.
+% 
+% This is a nexus file for resolution's built-in LaTeX style files; it calls 
+% each individual style file (which can also be called individually by a user
+% desired more fine-grained control)
+% 
+% Copyright (C) 2023 Roshan Truax
+% 
+% This program is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free Software 
+% Foundation, either version 3 of the License, or (at your option) any later 
+% version.
+% 
+% This program is distributed in the hope that it will be useful, but WITHOUT ANY
+% WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+% PARTICULAR PURPOSE. See the GNU General Public License for more details.
+% 
+% ------------------------------------------------------------------------------
 
-% --------------------- Package Provision -----------------------
+% ---------------------------- Package Provision -------------------------------
 
 \ProvidesPackage{rsltn}
 
-% ---------------------- Basic Packages -------------------------
+% ------------------------------ Basic Packages --------------------------------
 
 \RequirePackage{amssymb}   % symbols
 \RequirePackage{amsthm}    % environments
 \RequirePackage{mathtools} % various tools inc. amsmath
 
-% ----------------------- Basic Colors --------------------------
+% ------------------------------- Basic Colors ---------------------------------
 
 \RequirePackage[usenames,dvipsnames,svgnames]{xcolor}
 
@@ -52,12 +67,12 @@
 \definecolor{rsltnNumbers}{HTML}{808080}
 \definecolor{rsltnLinebreak}{HTML}{ff0000}
 
-% ------------------- Theorem Environments ----------------------
+% --------------------------- Theorem Environments -----------------------------
 
 \usepackage{thmtools}                    % Theorem tools
 \usepackage[skins, breakable]{tcolorbox} % Theorem box
 
-% ---------------- Color-Changing Proof Setup -------------------
+% ------------------------ Color-Changing Proof Setup --------------------------
 
 \global\def\recentProof{theorem proof}
 \renewenvironment{proof}[1][\proofname]{
@@ -66,7 +81,7 @@
     \end{\recentProof}
 }
 
-% ----------- Commands for Theorem and Proof Style --------------
+% ------------------- Commands for Theorem and Proof Style ---------------------
 
 % Theorem Style
 \newcommand{\rsltntheoremstyle}[3]{
@@ -114,7 +129,7 @@
     ]{#1 proof}
 }
 
-% --------------- Definition-Style Environments -----------------
+% ---------------------- Definition-Style Environments -------------------------
 
 % Definition
 \rsltntheoremstyle{definition}{rsltnDefinition}{}
@@ -169,7 +184,7 @@
     sibling = definition,
 ]{solution}
 
-% ---------------- Theorem-Style Environments -------------------
+% ------------------------ Theorem-Style Environments --------------------------
 
 % Theorem
 \rsltntheoremstyle{theorem}{rsltnTheorem}{\itshape}
@@ -215,7 +230,7 @@
 ]{corollary}
 \rsltntheoremproof{corollary}{rsltnCorollary}
 
-% --------------------- Subsidiary Files ------------------------
+% ----------------------------- Subsidiary Files -------------------------------
 
 \RequirePackage{style/rsltn/packages}
 \RequirePackage{style/rsltn/fonts}
@@ -223,4 +238,4 @@
 \RequirePackage{style/rsltn/decorations}
 \RequirePackage{style/rsltn/exparrows}
 
-% ---------------------------------------------------------------
+% ------------------------------------------------------------------------------

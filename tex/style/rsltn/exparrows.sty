@@ -1,10 +1,23 @@
-% --------------------- resolution v0.1.0 ----------------------
-%
-% Expository arrows
-%
-% --------------------------------------------------------------
+% ----------------------------- resolution v0.1.0 ------------------------------
+% 
+% resolution is a Neovim config for writing TeX and doing computational math.
+% 
+% This is a file which provides simple commands for creating expository arrows.
+% 
+% Copyright (C) 2023 Roshan Truax
+% 
+% This program is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free Software 
+% Foundation, either version 3 of the License, or (at your option) any later 
+% version.
+% 
+% This program is distributed in the hope that it will be useful, but WITHOUT ANY
+% WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+% PARTICULAR PURPOSE. See the GNU General Public License for more details.
+% 
+% ------------------------------------------------------------------------------
 
-% --------------------------- Setup -----------------------------
+% ---------------------------------- Setup -------------------------------------
 
 % Add Options for Colors
 \PassOptionsToPackage{
@@ -28,20 +41,21 @@
     calc
 }
 
-% ------------------- Highlights and Nodes ----------------------
+% --------------------------- Highlights and Nodes -----------------------------
 
 \newcommand{\highlight}[2]{\colorbox{#2!17!rsltnPage}{#1}}
 \newcommand{\expnode}[3]{\tikzmarknode{#1}{\highlight{#2}{#3}} }
 \newcommand{\expnodeclr}[2]{\tikzmarknode{#1}{#2}}
 
-% -------------------------- Spacing ----------------------------
+% --------------------------------- Spacing ------------------------------------
 
 \newcommand{\expspacing}{\vspace{2.5\baselineskip}}
 \newcommand{\expspacingadv}[1]{\MULTIPLY{#1}{2.5}{\a}\vspace{\a\baselineskip}}
 
-% One might also want to use \vphantom{} to align nodes if they are right next to one another; see the exparrows documentation.
+% One might also want to use \vphantom{} to align nodes if they are right next 
+% to one another; see the exparrows documentation.
 
-% ------------------------- exparrow ----------------------------
+% --------------------------------- exparrow -----------------------------------
 
 \newcommand{\exparrow}[4]{
     \IfEqCase{#4}{
@@ -116,7 +130,7 @@
     }[\PackageError{exparrow}{Undefined option to exparrow: #4}{}] % Throw error if option does not exist
 }
 
-% ----------------------- exparrowdual --------------------------
+% ------------------------------- exparrowdual ---------------------------------
 
 \newcommand{\exparrowdual}[5]{
     \IfEqCase{#5}{
@@ -139,7 +153,7 @@
     }[\PackageError{exparrow}{Undefined option to exparrow: #5}{}] % Throw error if option does not exist
 }
 
-% ------------------------ exparrowadv --------------------------
+% ------------------------------- exparrowadv ----------------------------------
 
 \newcommand{\exparrowadv}[5]{
     \IfEqCase{#4}{
@@ -230,4 +244,4 @@
     }[\PackageError{exparrow}{Undefined option to exparrow: #4}{}] % Throw an error if the option does not exist
 }
 
-% ---------------------------------------------------------------
+% ------------------------------------------------------------------------------

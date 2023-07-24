@@ -75,5 +75,8 @@ for _, v in ipairs(require('config.snippets').m_by_n_objects) do
     end
 end
 
+-----------------------------------------------------------------
 
 return manual_snippets, auto_snippets
+
+-----------------------------------------------------------------

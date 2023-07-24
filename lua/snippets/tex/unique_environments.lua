@@ -8,7 +8,6 @@ environment snippet creator
 
 local ls = require('luasnip')
 local s = ls.snippet
-local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
@@ -19,6 +18,8 @@ local config = require('config.snippets')
 
 local auto = {}
 local manual = {}
+
+----------------- special environment snippets ------------------
 
 if type(config.display_math.trigger) == 'string' then
     local display_math_snippet = s({
@@ -80,4 +81,8 @@ if type(config.generic_environment.trigger) == 'string' then
     end
 end
 
+-----------------------------------------------------------------
+
 return manual, auto
+
+-----------------------------------------------------------------

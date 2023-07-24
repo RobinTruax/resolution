@@ -1,10 +1,26 @@
-% --------------------- resolution v0.1.0 ----------------------
-%
-% Alternate file (when nexus is not being used) for environments.
-%
-% --------------------------------------------------------------
+% ----------------------------- resolution v0.1.0 ------------------------------
+% 
+% resolution is a Neovim config for writing TeX and doing computational math.
+% 
+% This is an alternate file which provides just styling for environments. If
+% one is using the nexus file (which, for LSP reasons, includes the
+% environments code rather than a reference to the environments code) this is
+% unnecessary.
+% 
+% Copyright (C) 2023 Roshan Truax
+% 
+% This program is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free Software 
+% Foundation, either version 3 of the License, or (at your option) any later 
+% version.
+% 
+% This program is distributed in the hope that it will be useful, but WITHOUT ANY
+% WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+% PARTICULAR PURPOSE. See the GNU General Public License for more details.
+% 
+% ------------------------------------------------------------------------------
 
-% ----------------------- Basic Colors --------------------------
+% ------------------------------- Basic Colors ---------------------------------
 
 \RequirePackage[usenames,dvipsnames,svgnames]{xcolor}
 
@@ -42,12 +58,12 @@
 \definecolor{rsltnNumbers}{HTML}{808080}
 \definecolor{rsltnLinebreak}{HTML}{ff0000}
 
-% ------------------- Theorem Environments ----------------------
+% --------------------------- Theorem Environments -----------------------------
 
 \usepackage{thmtools}                    % Theorem tools
 \usepackage[skins, breakable]{tcolorbox} % Theorem box
 
-% ---------------- Color-Changing Proof Setup -------------------
+% ------------------------ Color-Changing Proof Setup --------------------------
 
 \global\def\recentProof{theorem proof}
 \renewenvironment{proof}[1][\proofname]{
@@ -56,7 +72,7 @@
     \end{\recentProof}
 }
 
-% ----------- Commands for Theorem and Proof Style --------------
+% ------------------- Commands for Theorem and Proof Style ---------------------
 
 % Theorem Style
 \newcommand{\rsltntheoremstyle}[3]{
@@ -104,7 +120,7 @@
     ]{#1 proof}
 }
 
-% --------------- Definition-Style Environments -----------------
+% ---------------------- Definition-Style Environments -------------------------
 
 % Definition
 \rsltntheoremstyle{definition}{rsltnDefinition}{}
@@ -159,7 +175,7 @@
     sibling = definition,
 ]{solution}
 
-% ---------------- Theorem-Style Environments -------------------
+% ------------------------ Theorem-Style Environments --------------------------
 
 % Theorem
 \rsltntheoremstyle{theorem}{rsltnTheorem}{\itshape}
@@ -205,4 +221,4 @@
 ]{corollary}
 \rsltntheoremproof{corollary}{rsltnCorollary}
 
-% ---------------------------------------------------------------
+% ------------------------------------------------------------------------------

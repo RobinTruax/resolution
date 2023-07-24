@@ -18,18 +18,22 @@ local utilities = {}
 
 ----------------------- context-detection -----------------------
 
+-- condition for line beginning
 utilities.line_begin = function(line_to_cursor, matched_trigger)
     return line_to_cursor:sub(1, -(#matched_trigger + 1)):match("^%s*$")
 end
 
+-- condition for in math mode
 utilities.in_math = function()
     return (vim.fn['vimtex#syntax#in_mathzone']() == 1)
 end
 
+-- condition for in non-math mode
 utilities.in_text = function()
     return (vim.fn['vimtex#syntax#in_mathzone']() == 0)
 end
 
+-- condition for in math mode and line begin
 utilities.in_math_line_begin = function(line_to_cursor, matched_trigger)
     if utilities.line_begin(line_to_cursor, matched_trigger) then
         return utilities.in_math()
@@ -38,6 +42,7 @@ utilities.in_math_line_begin = function(line_to_cursor, matched_trigger)
     end
 end
 
+-- condition for in non-math mode and line begin
 utilities.in_text_line_begin = function(line_to_cursor, matched_trigger)
     if utilities.line_begin(line_to_cursor, matched_trigger) then
         return utilities.in_text()
@@ -46,6 +51,7 @@ utilities.in_text_line_begin = function(line_to_cursor, matched_trigger)
     end
 end
 
+-- condition for in environment
 utilities.in_environment = function(name)
     return function()
         local is_inside = vim.fn['vimtex#env#is_inside'](name)
@@ -53,6 +59,7 @@ utilities.in_environment = function(name)
     end
 end
 
+-- condition for in environment and line begin
 utilities.in_environment_line_begin = function(name)
     return function(line_to_cursor, matched_trigger)
         if utilities.line_begin(line_to_cursor, matched_trigger) then
@@ -66,6 +73,7 @@ end
 
 ------------------------ visual snippets ------------------------
 
+-- tool for getting visual input
 utilities.visual = function(_, parent)
     if (#parent.snippet.env.SELECT_RAW > 0) then
         return sn(nil, t(parent.snippet.env.SELECT_RAW))
@@ -74,10 +82,12 @@ utilities.visual = function(_, parent)
     end
 end
 
+-- alternate tool for getting visual input
 utilities.extend_visual = function(_, parent)
     return sn(nil, { t(parent.snippet.env.SELECT_RAW), i(1) })
 end
 
+-- tool for getting visual input for labeled entries
 utilities.extend_visual_labeled = function(label)
     return function(_, parent)
         if (#parent.snippet.env.SELECT_RAW > 0) then
@@ -90,6 +100,7 @@ end
 
 ------------------------- get condition -------------------------
 
+-- simple function for getting condition
 utilities.get_condition = function(mathmode)
     if mathmode == false then
         return utilities.in_text
@@ -98,6 +109,7 @@ utilities.get_condition = function(mathmode)
     end
 end
 
+-- detailed function for getting condition
 utilities.get_condition_line_behav = function(line, mathmode)
     if line == 0 and mathmode == false then
         return utilities.in_text_line_begin
@@ -118,6 +130,7 @@ end
 
 ----------------------------- other -----------------------------
 
+-- get captured entry (for regex snippets)
 utilities.cap = function(j)
     if j >= 0 then
         return f(function(_, snip) return snip.captures[j] end)
@@ -126,6 +139,8 @@ utilities.cap = function(j)
     end
 end
 
----------------------------- return -----------------------------
+-----------------------------------------------------------------
 
 return utilities
+
+-----------------------------------------------------------------

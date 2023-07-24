@@ -8,6 +8,7 @@ local config = require('config.snippets')
 local symbol_creator = require('snippets.creators.symbol_creator')
 local auto = {}
 
+-- autoscript functionality (disabled by default)
 if config.autoscript == true then
     -- Letter Digit
     table.insert(auto, symbol_creator({
@@ -61,4 +62,8 @@ if config.autoscript == true then
     }))
 end
 
+-----------------------------------------------------------------
+
 return {}, auto
+
+-----------------------------------------------------------------

@@ -1,14 +1,27 @@
-% --------------------- resolution v0.1.0 ----------------------
-%
-% Shortcuts, commands, and operators.
-%
-% --------------------------------------------------------------
+% ----------------------------- resolution v0.1.0 ------------------------------
+% 
+% resolution is a Neovim config for writing TeX and doing computational math.
+% 
+% This provides built-in shortcuts, command, and operators.
+% 
+% Copyright (C) 2023 Roshan Truax
+% 
+% This program is free software: you can redistribute it and/or modify it under 
+% the terms of the GNU General Public License as published by the Free Software 
+% Foundation, either version 3 of the License, or (at your option) any later 
+% version.
+% 
+% This program is distributed in the hope that it will be useful, but WITHOUT ANY
+% WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+% PARTICULAR PURPOSE. See the GNU General Public License for more details.
+% 
+% ------------------------------------------------------------------------------
 
-% ----------------------- Dependencies --------------------------
+% ------------------------------- Dependencies ---------------------------------
 
 \RequirePackage{xspace} % fixing spacing
 
-% ---------------------- Custom Objects -------------------------
+% ------------------------------ Custom Objects --------------------------------
 
 % Grey line for separating problems
 \newcommand{\greyline}{
@@ -24,8 +37,7 @@
     \end{center}
 }
 
-
-% ------------------------- Modifiers ---------------------------
+% -------------------------------- Modifiers -----------------------------------
 
 \renewcommand{\bar}[1]{\overline{#1}}    % Bar
 \newcommand{\ubar}[1]{\underline{#1}}    % Underbar
@@ -34,14 +46,14 @@
 \renewcommand{\check}[1]{\widecheck{#1}} % Check
 \newcommand{\co}{{\mathsf{c}} }          % Complement
 
-% ------------------------ Delimiters ---------------------------
+% -------------------------------- Delimiters ----------------------------------
 
 \newcommand{\norm}[1]{\left\Vert{#1}\right\Vert}    % Norm
 \newcommand{\abs}[1]{\left|{#1}\right|}             % Modulus
 \newcommand{\flr}[1]{\left\lfloor{#1}\right\rfloor} % Floor
 \newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}  % Ceil
 
-% ------------------------ Foundations --------------------------
+% ------------------------------- Foundations ----------------------------------
 
 % Category Theory
 \DeclareMathOperator{\id}{id}              % Identity element
@@ -70,7 +82,7 @@
 \DeclareMathOperator{\Mod}{Mod}             % Set of models
 % }}}
 
-% -------------------------- Algebra ----------------------------
+% --------------------------------- Algebra ------------------------------------
 
 % Group Theory
 \DeclareMathOperator{\Aut}{Aut}   % Automorphism (group)
@@ -126,7 +138,7 @@
 \DeclareMathOperator{\Sh}{Sh}       % The category of sheaves
 \DeclareMathOperator{\res}{res}     % Restriction map (of presheaf)
 
-% ------------------------- Analysis ----------------------------
+% --------------------------------- Analysis -----------------------------------
 
 % Real Analysis
 \DeclareMathOperator{\dist}{dist} % Distance of sets
@@ -152,13 +164,13 @@
 \DeclareMathOperator{\divergence}{\textrm{div}}     % Divergence
 % }}}
 
-% ------------------------- Geometry ----------------------------
+% --------------------------------- Geometry -----------------------------------
 
 % Topology
 \DeclareMathOperator{\Int}{Int}   % Interior
 \DeclareMathOperator{\diam}{diam} % Diameter
 
-% ------------------- Discrete Mathematics ----------------------
+% --------------------------- Discrete Mathematics -----------------------------
 
 % Number Theory
 \DeclareMathOperator{\ord}{ord} % Order (of a prime)
@@ -170,7 +182,7 @@
 % Additive Combinatorics
 \newcommand{\Gsum}{\overset{\scriptscriptstyle G}{+}} % Graph Sum
 
-% --------------- Theoretical Computer Science ------------------
+% ----------------------- Theoretical Computer Science -------------------------
 
 % Complexity Theory
 \DeclareMathOperator{\poly}{poly}                    % Polynomial
@@ -182,4 +194,4 @@
 \newcommand{\YES}{\ensuremath{\texttt{YES}}\xspace}  % YES Answer
 \newcommand{\NO}{\ensuremath{\texttt{NO}}\xspace}    % NO Answer
 
-% ---------------------------------------------------------------
+% ------------------------------------------------------------------------------
