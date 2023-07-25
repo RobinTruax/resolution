@@ -1,8 +1,21 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-proper placement of the telescope picker (removing a gap)
+resolution is a Neovim config for writing TeX and doing computational math.
 
----------------------------------------------------------------]]
+This file removes a gap in the telescope picker to ensure proper placement.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 -- overwriting the anchor position function
 local resolve = require('telescope.config.resolve')
@@ -25,4 +38,4 @@ resolve.resolve_anchor_pos = function(anchor, p_width, p_height, max_columns, ma
     return pos
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

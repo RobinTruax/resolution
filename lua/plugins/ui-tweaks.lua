@@ -1,23 +1,39 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-all ui tweaks and improvements which rsltn adds
+resolution is a Neovim config for writing TeX and doing computational math.
 
--------------------------------------------------------------]]
+This file includes and configures plugins that provide small UI tweaks.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 return {
 
+    ------------------------- dressing.nvim: better vim ui -------------------------
 
-    ----------------- dressing.nvim: better vim ui ------------------
     {
         'stevearc/dressing.nvim',
         event = 'VeryLazy',
+
+        -- configuration
         config = function()
-            local border = 'rounded'
             require('dressing').setup({
+
+                -- configuration of dressing's input UI
                 input = {
                     insert_only = false,
                     start_in_insert = true,
-                    border = border,
+                    border = 'rounded',
                     relative = 'cursor',
                     mappings = {
                         n = {
@@ -39,11 +55,13 @@ return {
                         end
                     end
                 },
+
+                -- configuration of dressing's selection UI
                 select = {
                     backend = { 'nui' },
                     nui = {
                         border = {
-                            style = border,
+                            style = 'rounded',
                         },
                     },
                 }
@@ -51,25 +69,13 @@ return {
         end
     },
 
-    {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        opts = {
-            -- add any options here
-        },
-        dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
-            -- OPTIONAL:
-            --   `nvim-notify` is only needed, if you want to use the notification view.
-            --   If not available, we use `mini` as the fallback
-            "rcarriga/nvim-notify",
-        }
-    },
+    ----------------- nvim-notify: an updated notification system ------------------
 
     {
-        "rcarriga/nvim-notify",
+        'rcarriga/nvim-notify',
         lazy = true,
+
+        -- configuration
         opts = {
             render = 'minimal',
             stages = 'fade',
@@ -77,26 +83,49 @@ return {
         }
     },
 
-    --------------- vim-bbye: better buffer deletion ----------------
+    ------------------ noice.nvim: a complete change to Neovim UI ------------------
+
+    {
+        'folke/noice.nvim',
+        event = 'VeryLazy',
+        dependencies = {
+            'MunifTanjim/nui.nvim',
+            'rcarriga/nvim-notify',
+        },
+
+        -- configuration
+        opts = {
+            cmdline = {
+                view = 'cmdline',
+            },
+        }
+    },
+
+    ----------------------- vim-bbye: better buffer deletion -----------------------
+
     {
         'moll/vim-bbye',
         event = { 'BufReadPost', 'BufNewFile' },
     },
 
-    ------ bufresize.nvim: fixing split behavior with resizes -------
+    -------------- bufresize.nvim: fixing split behavior with resizes --------------
 
     {
         'kwkarlwang/bufresize.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
+
+        -- configuration
         config = function()
             require('bufresize').setup()
         end
     },
 
-    ------------ smart-splits.nvim: better window splits ------------
+    ------------------- smart-splits.nvim: better window splits --------------------
     {
         'mrjones2014/smart-splits.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
+
+        -- configuration
         config = function()
             require('smart-splits').setup({
                 ignored_filetypes = {
@@ -131,4 +160,4 @@ return {
 
 }
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

@@ -9,8 +9,8 @@ return {
     ---------------- lspsaga.nvim: more lsp features ----------------
     {
         'glepnir/lspsaga.nvim',
-        event = 'LspAttach',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        event = 'VeryLazy',
+        dependencies = { 'nvim-tree/nvim-web-devicons', 'neovim/nvim-lspconfig' },
         config = function()
             require('lspsaga').setup({
                 symbol_in_winbar = {
@@ -79,6 +79,43 @@ return {
                     }
                 end,
             })
+
+            -- fixing lsp diagnostics
+            -- source: https://github.com/neovim/nvim-lspconfig/issues/726
+
+            -- filter
+            local function filter(arr, func)
+                local new_index = 1
+                local size_orig = #arr
+                for old_index, v in ipairs(arr) do
+                    if func(v, old_index) then
+                        arr[new_index] = v
+                        new_index = new_index + 1
+                    end
+                end
+                for i = new_index, size_orig do arr[i] = nil end
+            end
+
+            -- actual filter
+            local function filter_diagnostics(diagnostic)
+                if diagnostic.source ~= "Pyright" then
+                    return true
+                end
+                if string.find(diagnostic.message, 'is not defined') then
+                    return false
+                end
+                return true
+            end
+
+            -- new publish diagnostics function
+            local function custom_on_publish_diagnostics(a, params, client_id, c, config)
+                filter(params.diagnostics, filter_diagnostics)
+                vim.lsp.diagnostic.on_publish_diagnostics(a, params, client_id, c, config)
+            end
+
+            -- assert new publish diagnostics function
+            vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+                custom_on_publish_diagnostics, {})
         end
     },
 

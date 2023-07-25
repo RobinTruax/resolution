@@ -1,10 +1,24 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-telescope and its many extensions
+resolution is a Neovim config for writing TeX and doing computational math.
 
--------------------------------------------------------------]]
+This file installs and configures telescope.nvim and its many extensions.
 
--- fzf native telescope; can only be built on unix systems
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+------------- install a faster fuzzy searcher if on a unix system --------------
+
 local fzf = {}
 if vim.g.windows == false then
     fzf = {
@@ -14,19 +28,23 @@ if vim.g.windows == false then
     }
 end
 
+--------------------------------------------------------------------------------
+
 return {
 
-    ------ telescope-fzf-native.nvim: fzf syntax/faster search ------
+    ------------- telescope-fzf-native.nvim: fzf syntax/faster search --------------
     fzf,
 
-    ---------------- nvim-neoclip.lua: search yanks -----------------
+    ------------------------ nvim-neoclip.lua: search yanks ------------------------
     {
         'AckslD/nvim-neoclip.lua',
         lazy = true,
+
+        -- configuration
         config = true,
     },
 
-    ------------------------ telescope.nvim -------------------------
+    -------------------------------- telescope.nvim --------------------------------
     {
         'nvim-telescope/telescope.nvim',
         event = 'VeryLazy',
@@ -37,6 +55,8 @@ return {
             'AckslD/nvim-neoclip.lua',
             'debugloop/telescope-undo.nvim',
         },
+
+        -- configuration
         config = function()
             -- set up telescope
             require('telescope').setup({
@@ -64,6 +84,7 @@ return {
             require('telescope').load_extension('undo')
         end,
     },
+
 }
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

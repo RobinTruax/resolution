@@ -1,15 +1,29 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-a prettier entry maker for grep functionality
+resolution is a Neovim config for writing TeX and doing computation math.
 
----------------------------------------------------------------]]
+This file creates a prettier entry maker for grep-type telescopes. This is then
+used to overwrite the included entry maker for these calls.
 
--------------------- telescope dependencies ---------------------
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+---------------------------- telescope dependencies ----------------------------
 
 local utils = require('telescope.utils')
 local Path = require('plenary.path')
 
--------------------- local utility functions --------------------
+--------------------------- local utility functions ----------------------------
 
 local lookup_keys = {
     value = 1,
@@ -51,7 +65,7 @@ local parse_with_col = function(t)
     return { filename, lnum, col, text }
 end
 
--------------------------- entry maker --------------------------
+--------------------------------- entry maker ----------------------------------
 
 local function grep_entry_maker(opts)
     opts = opts or {}
@@ -126,8 +140,8 @@ local function grep_entry_maker(opts)
     end
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return grep_entry_maker
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

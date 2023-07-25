@@ -1,16 +1,30 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-a prettier entry maker for lsp symbol-type telescopes
+resolution is a Neovim config for writing TeX and doing computational math.
 
----------------------------------------------------------------]]
+This file creates a prettier entry maker to LSP symbol-type telescopes. This is
+then used to overwrite the included entry maker for these calls.
 
--------------------- telescope dependencies ---------------------
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+---------------------------- telescope dependencies ----------------------------
 
 local make_entry    = require('telescope.make_entry')
 local entry_display = require('telescope.pickers.entry_display')
 local utils         = require('telescope.utils')
 
--------------------- local utility functions --------------------
+--------------------------- local utility functions ----------------------------
 
 -- a function for robustly obtaining filenames
 local get_filename_fn = function()
@@ -40,7 +54,7 @@ local lsp_type_highlight = {
     ['Method'] = 'TelescopeResultsVariable',
 }
 
--------------------- overwriting entry maker --------------------
+--------------------------- overwriting entry maker ----------------------------
 
 local function symbols_entry_maker(opts)
     opts = opts or {}
@@ -99,8 +113,8 @@ local function symbols_entry_maker(opts)
     end
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return symbols_entry_maker
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

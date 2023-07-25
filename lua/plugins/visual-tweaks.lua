@@ -1,16 +1,32 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-all 'small tweak' plugins
+resolution is a Neovim config for writing TeX and doing computational math.
 
----------------------------------------------------------------]]
+This file includes and configures plugins that provide small visual tweaks.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 return {
 
-    ----------- todo-comments: highlighted todo comments ------------
+    ------------------- todo-comments: highlighted todo comments -------------------
+
     {
         'folke/todo-comments.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
         dependencies = { 'nvim-lua/plenary.nvim' },
+
+        -- configuration
         opts = {
             keywords = {
                 FIX = {
@@ -64,10 +80,13 @@ return {
         }
     },
 
-    ---------------------- ccc.nvim: colorizer ----------------------
+    ----------------------------- ccc.nvim: colorizer ------------------------------
+
     {
         'uga-rosa/ccc.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
+
+        -- configuration
         config = function()
             local ccc = require('ccc')
             local aesthetics = require('config.aesthetics')
@@ -84,19 +103,24 @@ return {
         end
     },
 
-    -------- range-highlight.nvim: highlight cmdline ranges ---------
+    ---------------- range-highlight.nvim: highlight cmdline ranges ----------------
+
     {
         'winston0410/range-highlight.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
         dependencies = { 'winston0410/cmd-parser.nvim' },
+
+        -- configuration
         config = true
     },
 
-    ------- highlight-undo.nvim: highlight undo/redo actions --------
+    --------------- highlight-undo.nvim: highlight undo/redo actions ---------------
 
     {
         'tzachar/highlight-undo.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
+
+        -- configuration
         opts = {
             hlgroup = 'Visual',
             duration = 200,
@@ -107,14 +131,18 @@ return {
         }
     },
 
-    ---------- modicator.nvim: color changing line number -----------
+    ------------------ modicator.nvim: color changing line number ------------------
+
     {
         'mawkler/modicator.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
+
+        -- configuration
         opts = {
             show_warnings = false,
         }
     },
+
 }
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

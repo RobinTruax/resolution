@@ -1,14 +1,31 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-all ui components which run on startup
+resolution is a Neovim config for writing TeX and doing computational math.
 
--------------------------------------------------------------]]
+This file includes and configures all UI components which run on startup.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 return {
-    ----------------- mini.starter: startup screen ------------------
+
+    ------------------------- mini.starter: startup screen -------------------------
+
     {
         'echasnovski/mini.starter',
         version = '*',
+
+        -- configuration
         config = function()
             -- get preferences and necessary functions
             local prefs = require('config.preferences')
@@ -18,10 +35,20 @@ return {
             local recent_files = function(n)
                 return function()
                     -- get files
-                    local files = vim.tbl_filter(function(f) return vim.fn.filereadable(f) == 1 end, vim.v.oldfiles or {})
+                    local files = vim.tbl_filter(function(f)
+                        return vim.fn.filereadable(f) == 1
+                    end, vim.v.oldfiles or {})
 
                     -- return nothing if there are no recent files
-                    if #files == 0 then return { { name = 'none', action = '', section = 'recent files' } } end
+                    if #files == 0 then
+                        return {
+                            {
+                                name = 'none',
+                                action = '',
+                                section = 'recent files'
+                            }
+                        }
+                    end
 
                     -- add items for each recent file up to the maximium number
                     local items = {}
@@ -108,11 +135,13 @@ return {
         end
     },
 
-    ------------------- lualine.nvim: status line -------------------
+    -------------------------- lualine.nvim: status line ---------------------------
     {
         'nvim-lualine/lualine.nvim',
         event = 'VeryLazy',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
+
+        -- configuration
         config = function()
             -- set up separators based on ui sharpness
             local section_separators = { left = '', right = '' }
@@ -142,23 +171,27 @@ return {
                     lualine_b = { '%S' },
                     lualine_c = {
                         {
-                            require("noice").api.status.mode.get,
-                            cond = require("noice").api.status.mode.has,
+                            require('noice').api.status.mode.get,
+                            cond = require('noice').api.status.mode.has,
                             color = 'CommandMode',
                         },
                         {
-                            require("noice").api.status.search.get,
-                            cond = require("noice").api.status.search.has,
+                            require('noice').api.status.search.get,
+                            cond = require('noice').api.status.search.has,
                             color = 'CommandMode',
                         },
                     },
                     lualine_x = { 'diff', 'branch' },
                     lualine_y = {
-                        function() return require("filesys.menus.utilities").get_project_name(vim.fn.getcwd()) end },
+                        function()
+                            local cwd = vim.fn.getcwd()
+                            return require('filesys.utilities').get_project_name(cwd)
+                        end },
                     lualine_z = { 'location' },
                 },
             })
         end
     },
 }
------------------------------------------------------------------
+
+--------------------------------------------------------------------------------

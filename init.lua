@@ -1,6 +1,6 @@
 --[[--------------------------- resolution v0.1.0 ------------------------------
 
-resolution is a Neovim config for writing TeX and doing computation math.
+resolution is a Neovim config for writing TeX and doing computational math.
 
 This is resolution's init file; it is called on Neovim's startup.
 

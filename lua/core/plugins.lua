@@ -1,16 +1,29 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-this file installs and calls lazy.nvim on the plugins folder
+resolution is a Neovim config for writing TeX and doing computation math.
 
--------------------------------------------------------------]]--
+This file installs and calls lazy.nvim on the plugins folder.
 
--------------------------- directories --------------------------
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+--------------------------------- directories ----------------------------------
 
 local lazynvimpath = vim.fn.stdpath('config') .. '/lua/plugins/lazy.nvim'
 local lazypluginpath = vim.fn.stdpath('config') .. '/lua/plugins/plugins'
 local lazylockfile = vim.fn.stdpath('config') .. '/lua/plugins/lazy-lock.json'
 
------------------------ install lazy.nvim -----------------------
+------------------------------ install lazy.nvim -------------------------------
 
 if not vim.loop.fs_stat(lazynvimpath) then
     vim.fn.system({
@@ -24,11 +37,11 @@ if not vim.loop.fs_stat(lazynvimpath) then
 end
 vim.opt.rtp:prepend(lazynvimpath)
 
------------------------- include plugins ------------------------
+------------------------------- include plugins --------------------------------
 
 require('lazy').setup('plugins',
 
----------------------------- options ----------------------------
+----------------------------------- options ------------------------------------
 
     {
     change_detection = {
@@ -64,4 +77,4 @@ require('lazy').setup('plugins',
     },
 })
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

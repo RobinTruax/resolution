@@ -1,12 +1,26 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-plugins which offer small tweaks to the editing experience
+resolution is a Neovim config for writing TeX and doing computational math.
 
----------------------------------------------------------------]]
+This file includes and configures plugins which offer small tweaks to editing.
 
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 return {
-    ---------- leap.nvim: in-window movement with Alt-f/t -----------
+
+    ------------------ leap.nvim: in-window movement with Alt-f/t ------------------
+
     {
         'ggandor/leap.nvim',
         keys = {
@@ -23,10 +37,13 @@ return {
             { '<M-F>', '<Esc><Plug>(leap-backward)',      mode = { 'i' },           desc = 'Leap backward' },
             { '<M-T>', '<Esc><Plug>(leap-backward-till)', mode = { 'i' },           desc = 'Leap backward till' },
         },
+
+        -- configuration
         config = true
     },
 
-    --------------- flit.nvim: extended f/t movement ----------------
+    ----------------------- flit.nvim: extended f/t movement -----------------------
+
     {
         'ggandor/flit.nvim',
         keys = {
@@ -35,20 +52,28 @@ return {
             { 'F', mode = { 'n', 'i', 'v', 'o', 'x' } },
             { 'T', mode = { 'n', 'i', 'v', 'o', 'x' } }
         },
+
+        -- configuration
         config = true,
     },
 
-    ---------------------- mini.align: aligns -----------------------
+    ------------------------------ mini.align: aligns ------------------------------
+
     {
         'echasnovski/mini.align',
         event = { 'BufReadPost', 'BufNewFile' },
+
+        -- configuration
         config = true,
     },
 
-    ----------------------- mini.move: aligns -----------------------
+    ----------------- mini.move: manipulation of visual selections -----------------
+
     {
         'echasnovski/mini.move',
         event = { 'BufReadPost', 'BufNewFile' },
+
+        -- configuration
         opts = {
             mappings = {
                 left       = '<M-h>',
@@ -64,33 +89,30 @@ return {
                 reindent_linewise = true,
             },
         }
-
     },
 
-    --------------------- mini.ai: text objects ---------------------
+    ---------------------------- mini.ai: text objects -----------------------------
+
     {
         'echasnovski/mini.ai',
         event = { 'BufReadPost', 'BufNewFile' },
+
+        -- configuration
         config = true,
-        -- config = function()
-        --     local nn = require("notebook-navigator")
-        --     local ai = require("mini.ai")
-        --     ai.setup({
-        --         custom_textobjects = {
-        --             h = nn.miniai_spec,
-        --         },
-        --     })
-        -- end,
     },
 
-    ------------ mini.surround: keybinds for surrounding ------------
+    ------------------- mini.surround: keybinds for surrounding --------------------
+
     {
         'echasnovski/mini.surround',
         event = { 'BufReadPost', 'BufNewFile' },
+
+        -- configuration
         config = true,
     },
 
-    ------------------- Comment.nvim: commenting --------------------
+    --------------------------- Comment.nvim: commenting ---------------------------
+
     {
         'numToStr/Comment.nvim',
         keys = {
@@ -102,8 +124,11 @@ return {
             { 'gc',  mode = { 'v', 'o', 'x' }, desc = 'Toggle comment (visual)' },
             { 'gb',  mode = { 'v', 'o', 'x' }, desc = 'Toggle block comment (visual)' },
         },
+
+        -- configuration
         config = true,
     },
+
 }
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
