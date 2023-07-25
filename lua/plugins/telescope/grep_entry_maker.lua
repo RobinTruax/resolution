@@ -22,6 +22,7 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 local utils = require('telescope.utils')
 local Path = require('plenary.path')
+local make_entry = require('telescope.make_entry')
 
 --------------------------- local utility functions ----------------------------
 
@@ -67,12 +68,16 @@ end
 
 --------------------------------- entry maker ----------------------------------
 
-local function grep_entry_maker(opts)
+-- overwriting the in-place file due to some behavioral inconsistencies
+function make_entry.gen_from_vimgrep(opts)
     opts = opts or {}
 
     local mt_vimgrep_entry
     local parse = parse_with_col
-    local path_hidden = opts.path_hidden
+
+    local disable_devicons = opts.disable_devicons
+    local disable_coordinates = opts.disable_coordinates
+    local only_sort_text = opts.only_sort_text
 
     local execute_keys = {
         path = function(t)
@@ -82,33 +87,58 @@ local function grep_entry_maker(opts)
                 return Path:new({ t.cwd, t.filename }):absolute(), false
             end
         end,
-        filename = function(t) return parse(t)[1], true end,
-        lnum = function(t) return parse(t)[2], true end,
-        col = function(t) return parse(t)[3], true end,
-        text = function(t) return parse(t)[4], true end,
+
+        filename = function(t)
+            return parse(t)[1], true
+        end,
+
+        lnum = function(t)
+            return parse(t)[2], true
+        end,
+
+        col = function(t)
+            return parse(t)[3], true
+        end,
+
+        text = function(t)
+            return parse(t)[4], true
+        end,
     }
 
-    local display_string = '%s%s%s'
+    -- For text search only, the ordinal value is actually the text.
+    if only_sort_text then
+        execute_keys.ordinal = function(t)
+            return t.text
+        end
+    end
+
+    local display_string = "%s%s%s"
 
     mt_vimgrep_entry = {
-        cwd = vim.fn.expand(vim.loop.cwd()),
+        cwd = vim.fn.expand(opts.cwd or vim.loop.cwd()),
 
         display = function(entry)
             local display_filename = ''
-            local coordinates = ''
-            if not path_hidden then
+            local coordinates = entry.lnum
+            if opts.hide_path == true then
+                local to_pad = math.max(0, 6 - string.len(coordinates))
+                coordinates = coordinates .. string.rep(' ', to_pad)
+            else
                 display_filename = utils.transform_path(opts, entry.filename)
-                coordinates = '  '
+                coordinates = ':' .. coordinates .. ' '
             end
 
-            local text = opts.file_encoding and vim.iconv(entry.text, opts.file_encoding, 'utf8') or entry.text
-            local display, _, _ = utils.transform_devicons(
+            local display, hl_group, icon = utils.transform_devicons(
                 entry.filename,
-                string.format(display_string, display_filename, coordinates, text),
-                true
+                string.format(display_string, display_filename, coordinates, string.gsub(entry.text, '^[%s]+', '')),
+                disable_devicons
             )
 
-            return display
+            if hl_group then
+                return display, { { { 0, #icon }, hl_group } }
+            else
+                return display
+            end
         end,
 
         __index = function(t, k)
@@ -139,9 +169,5 @@ local function grep_entry_maker(opts)
         return setmetatable({ line }, mt_vimgrep_entry)
     end
 end
-
---------------------------------------------------------------------------------
-
-return grep_entry_maker
 
 --------------------------------------------------------------------------------

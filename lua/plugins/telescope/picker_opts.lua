@@ -20,13 +20,10 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 return {
     live_grep = {
         prompt_title = 'Grep in Buffer',
-        entry_maker = require('plugins.telescope.grep_entry_maker')({
-            path_hidden = true
-        }),
+        hide_path = true,
     },
     grep_string = {
         prompt_title = 'Grep Visual Selection',
-        entry_maker = require('plugins.telescope.grep_entry_maker')(),
     },
     buffers = {
         prompt_title = 'Choose Buffer',

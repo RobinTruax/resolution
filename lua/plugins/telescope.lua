@@ -67,6 +67,9 @@ return {
             -- eliminate a gap in telescope's positioning
             require('plugins.telescope.fix_anchor')
 
+            -- overwrite the grep entry maker for telescope
+            require('plugins.telescope.grep_entry_maker')
+
             -- enable wrapping and disable numbering in preview windows
             vim.api.nvim_create_autocmd('User', {
                 pattern = 'TelescopePreviewerLoaded',
