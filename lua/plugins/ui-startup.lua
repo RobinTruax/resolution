@@ -75,6 +75,7 @@ return {
                 silent = true,
                 header = 'resolution',
                 items = {
+                    -- first section: default actions
                     {
                         {
                             action = function()
@@ -121,8 +122,10 @@ return {
                             section = 'actions'
                         },
                     },
+                    -- second section: default files
                     recent_files(prefs.number_recent_files),
                 },
+                -- changes to default visual settings
                 content_hooks = {
                     starter.gen_hook.adding_bullet(),
                     starter.gen_hook.padding(3, 2),
@@ -136,6 +139,7 @@ return {
     },
 
     -------------------------- lualine.nvim: status line ---------------------------
+
     {
         'nvim-lualine/lualine.nvim',
         event = 'VeryLazy',
@@ -151,6 +155,7 @@ return {
 
             -- set up statusline
             require('lualine').setup({
+                -- options
                 options = {
                     theme = 'auto',
                     icons_enabled = true,
@@ -166,6 +171,7 @@ return {
                         statusline = 1000,
                     },
                 },
+                -- sections of statusline
                 sections = {
                     lualine_a = { 'mode' },
                     lualine_b = { '%S' },

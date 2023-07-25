@@ -18,6 +18,10 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ------------------------------------------------------------------------------]]
 
+-- sorry, this file is also arcane to me. it's essentially all telescope's code
+-- which is added here so that it can be overwritten without including all of 
+-- telescope or interfering with updates
+
 ---------------------------- telescope dependencies ----------------------------
 
 local utils = require('telescope.utils')

@@ -121,6 +121,7 @@ return {
     },
 
     ------------------- smart-splits.nvim: better window splits --------------------
+
     {
         'mrjones2014/smart-splits.nvim',
         event = { 'BufReadPost', 'BufNewFile' },

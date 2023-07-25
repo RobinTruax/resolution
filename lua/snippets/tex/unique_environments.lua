@@ -35,7 +35,9 @@ local manual = {}
 
 ------------------------- special environment snippets -------------------------
 
+-- snippet for display math
 if type(config.display_math.trigger) == 'string' then
+    -- regular (start of line)
     local display_math_snippet = s({
         name = 'Display Math Snippet',
         trig = config.display_math.trigger,
@@ -46,6 +48,7 @@ if type(config.display_math.trigger) == 'string' then
     <>
 \]
         ]], { i(1) }))
+    -- line-breaking (anywhere else)
     local display_math_snippet_line_break = s({
         name = 'Display Math Snippet (Breaks Line)',
         trig = config.display_math.trigger,
@@ -67,6 +70,7 @@ if type(config.display_math.trigger) == 'string' then
     end
 end
 
+-- snippet for generic environment not included in the standard environment snippet catalog
 if type(config.generic_environment.trigger) == 'string' then
     local generic_environment_snippet = s(
         {

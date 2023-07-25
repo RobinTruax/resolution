@@ -19,7 +19,7 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 return {
 
-    ------------------ leap.nvim: in-window movement with Alt-f/t ------------------
+    ------------------ leap.nvim: in-window movement with alt-f/t ------------------
 
     {
         'ggandor/leap.nvim',
