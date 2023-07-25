@@ -1,6 +1,6 @@
 --[[--------------------------- resolution v0.1.0 ------------------------------
 
-resolution is a Neovim config for writing TeX and doing computation math.
+resolution is a Neovim config for writing TeX and doing computational math.
 
 This file installs and calls lazy.nvim on the plugins folder.
 

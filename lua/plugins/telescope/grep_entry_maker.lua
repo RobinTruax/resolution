@@ -1,6 +1,6 @@
 --[[--------------------------- resolution v0.1.0 ------------------------------
 
-resolution is a Neovim config for writing TeX and doing computation math.
+resolution is a Neovim config for writing TeX and doing computational math.
 
 This file creates a prettier entry maker for grep-type telescopes. This is then
 used to overwrite the included entry maker for these calls.

@@ -1,15 +1,26 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-autocommands for any tweaks (mostly taken from LazyVim)
+resolution is a Neovim config for writing TeX and doing computational math.
 
--------------------------------------------------------------]]
---
+Autocommands with a few tweaks; some are original, some are from LazyVim.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 local prefs = require('config.preferences')
 
---------------------------- autosave ----------------------------
+------------------------------ highlight on yank -------------------------------
 
--------------------------- highlight on yank -----------------------
 vim.api.nvim_create_autocmd('TextYankPost', {
     callback = function()
         vim.highlight.on_yank({
@@ -19,7 +30,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
-------------------- close some pop-ups with q -------------------
+-------------------------- close some pop-ups with q ---------------------------
+
 vim.api.nvim_create_autocmd('FileType', {
     pattern = {
         'spectre_panel',
@@ -49,9 +61,11 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
+---------------------- refocus on vim when using synctex -----------------------
+
 vim.cmd([[autocmd User VimtexEventView sleep 750m | call b:vimtex.viewer.xdo_focus_vim()]])
 
----------------------- backup autocommand -----------------------
+------------------------------ backup autocommand ------------------------------
 
 if prefs.timestamp_backup then
     vim.api.nvim_create_autocmd('BufWritePre', {
@@ -64,4 +78,4 @@ if prefs.timestamp_backup then
     })
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

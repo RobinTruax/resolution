@@ -2,7 +2,7 @@
 
 resolution is a Neovim config for writing TeX and doing computational math.
 
-This file contains some global state variables.
+This file calls all other files in this directory.
 
 Copyright (C) 2023 Roshan Truax
 
@@ -17,8 +17,7 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ------------------------------------------------------------------------------]]
 
-return {
-    project_info_compiled = false,
-    most_recent_files = {},
-    computation_popup = false,
-}
+require('core.autocmds.colorschemes')
+require('core.autocmds.tweaks')
+
+--------------------------------------------------------------------------------

@@ -1,24 +1,25 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-utility functions for rsltn's standardized ui interface
+resolution is a Neovim config for writing TeX and doing computational math.
 
--------------------------------------------------------------]]
+This file provides utility functions for resolution's standardized UI interface.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 local ui = {}
-local aesthetics = require('config.aesthetics')
 
--------------------- macro recording snippet --------------------
-
-ui.macro_recording_sl = function()
-    local recording_register = vim.fn.reg_recording()
-    if recording_register == "" then
-        return "      "
-    else
-        return "rec @" .. recording_register
-    end
-end
-
----------- get borders based on aesthetic preferences -----------
+--------------------------------- get borders ----------------------------------
 
 ui.get_borders = function()
     return { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
@@ -28,7 +29,7 @@ ui.get_borderless = function()
     return { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }
 end
 
--------------- better buffer delete functionality ---------------
+--------------------- better buffer deletion functionality ---------------------
 
 ui.buf_del_wrapper = function()
     if require('nvim-tree.view').is_visible() then
@@ -53,6 +54,8 @@ ui.buf_del_all_wrapper = function()
     end
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return ui
+
+--------------------------------------------------------------------------------

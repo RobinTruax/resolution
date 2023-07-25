@@ -17,22 +17,30 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ------------------------------------------------------------------------------]]
 
--- detect windows or unix and assign it to global variable
+---------------------------- detect windows or unix ----------------------------
+
 vim.g.windows = (vim.loop.os_uname().sysname == "Windows")
 
--- set preferences
-require('config.preferences')
+--------------------------------- set up path ----------------------------------
 
--- set up plugins
+for _, v in ipairs(require('config.path')) do
+    vim.opt.path:append(':' .. v)
+end
+
+-------------------------------- set up plugins --------------------------------
+
 require('core.plugins')
 
--- set up keybinds
+-------------------------------- set up keymaps --------------------------------
+
 require('core.keymaps')
 
--- set autocmds
-require('core.autocmds.all')
+------------------------------- set up autocmds --------------------------------
 
--- set up any specialized configuration options
+require('core.autocmds')
+
+-------------------------- set up user configuration ---------------------------
+
 require('core.config')
 
 --------------------------------------------------------------------------------

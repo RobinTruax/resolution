@@ -1,35 +1,48 @@
---[[------------------- resolution  q0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-configuration for all colorscheme assignments
-this includes specially assigned colors for rsltn
+resolution is a Neovim config for writing TeX and doing computational math.
 
----------------------------------------------------------------]]
+This file contains the configuration for all colorscheme assignments, including
+specially assigned colors for resolution.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 
 local colorschemes = {}
 
-------------------------- basic palette -------------------------
+-------------------------------- basic palette ---------------------------------
 
 colorschemes.universal_palette = {
-    bg = {
+    bg = { -- background
         tokyonight = { dark = '#222436', light = '#E1E2E7' },
         gruvbox    = { dark = '#282828', light = '#fbf1c7' },
         everforest = { dark = '#2D353B', light = '#FDF6E3' },
         tundra     = { dark = '#111827', light = '#111827' },
     },
-    ui_normal = {
+    ui_normal = { -- "normal" UI elements (e.g. background of telescope)
         tokyonight = { dark = '#1F2335', light = '#E9E9EC' },
         gruvbox    = { dark = '#1b1b1b', light = '#eee0b7' },
         everforest = { dark = '#232A2E', light = '#EFEBD4' },
         tundra     = { dark = '#081021', light = '#081021' },
     },
-    ui_special = {
+    ui_special = { -- "special" UI elements (e.g. preview window for telescope)
         tokyonight = { dark = '#2D3149', light = '#D2D1D6' },
         gruvbox    = { dark = '#32302f', light = '#ddccab' },
         everforest = { dark = '#343F44', light = '#E6E2CC' },
         tundra     = { dark = '#121d35', light = '#121f3a' },
     },
-    ui_emph_text = {
+    ui_emph_text = { -- emphasized text (e.g. title for telescope pop-up)
         tokyonight = { dark = '#65BCFF', light = '#34548A' },
         gruvbox    = { dark = '#b0b846', light = '#6f8352' },
         everforest = { dark = '#A7C080', light = '#8DA101' },
@@ -37,32 +50,32 @@ colorschemes.universal_palette = {
     },
 }
 
-------------------- universal configurations --------------------
+--------------------------- universal configurations ---------------------------
 
 local c = colorschemes.universal_palette
 colorschemes.universal_config = {
-    -- always = {
-        MiniStarterItemBullet  = { fg = c.bg, bg = c.bg },
-        LeapBackdrop           = { link = 'Comment' },
-        LeapMatch              = { fg = '#ff007c', bold = true, nocombine = true },
-        LeapLabelPrimary       = { fg = '#ff007c', bold = true, nocombine = true },
-        LeapLabelSecondary     = { fg = '#4fd6be', bold = true, nocombine = true },
-        CccFloatNormal         = { bg = c.bg },
-        CccFloatBorder         = { link = 'SpecialChar' },
-        TelescopeNormal        = { bg = c.ui_normal },
-        TelescopeBorder        = { fg = c.ui_normal, bg = c.ui_normal },
-        TelescopeSelection     = { bg = c.ui_special },
-        TelescopePromptNormal  = { bg = c.ui_special },
-        TelescopePromptTitle   = { fg = c.ui_normal, bg = c.ui_emph_text },
-        TelescopePromptPrefix  = { fg = c.ui_emph_text, bg = c.ui_special },
-        TelescopePromptBorder  = { fg = c.ui_special, bg = c.ui_special },
-        TelescopePreviewTitle  = { fg = c.ui_normal, bg = c.ui_normal },
-        TelescopePreviewBorder = { fg = c.ui_normal, bg = c.ui_normal },
-        TelescopeResultsTitle  = { fg = c.ui_normal, bg = c.ui_normal },
-        TelescopeResultsBorder = { fg = c.ui_normal, bg = c.ui_normal },
-        TelescopePromptCounter = { fg = c.ui_emph_text },
+    MiniStarterItemBullet  = { fg = c.bg, bg = c.bg },
+    LeapBackdrop           = { link = 'Comment' },
+    LeapMatch              = { fg = '#ff007c', bold = true, nocombine = true },
+    LeapLabelPrimary       = { fg = '#ff007c', bold = true, nocombine = true },
+    LeapLabelSecondary     = { fg = '#4fd6be', bold = true, nocombine = true },
+    CccFloatNormal         = { bg = c.bg },
+    CccFloatBorder         = { link = 'SpecialChar' },
+    TelescopeNormal        = { bg = c.ui_normal },
+    TelescopeBorder        = { fg = c.ui_normal, bg = c.ui_normal },
+    TelescopeSelection     = { bg = c.ui_special },
+    TelescopePromptNormal  = { bg = c.ui_special },
+    TelescopePromptTitle   = { fg = c.ui_normal, bg = c.ui_emph_text },
+    TelescopePromptPrefix  = { fg = c.ui_emph_text, bg = c.ui_special },
+    TelescopePromptBorder  = { fg = c.ui_special, bg = c.ui_special },
+    TelescopePreviewTitle  = { fg = c.ui_normal, bg = c.ui_normal },
+    TelescopePreviewBorder = { fg = c.ui_normal, bg = c.ui_normal },
+    TelescopeResultsTitle  = { fg = c.ui_normal, bg = c.ui_normal },
+    TelescopeResultsBorder = { fg = c.ui_normal, bg = c.ui_normal },
+    TelescopePromptCounter = { fg = c.ui_emph_text },
 }
-------------------- by-scheme configurations --------------------
+
+------------------------ scheme-by-scheme configuration ------------------------
 
 colorschemes.colorscheme_configs = {
 
@@ -182,6 +195,8 @@ colorschemes.colorscheme_configs = {
         },
     },
 
+    ------------------------------------ tundra ------------------------------------
+
     tundra = {
         dark = 'tundra',
         light = 'tundra',
@@ -220,14 +235,14 @@ colorschemes.colorscheme_configs = {
     }
 }
 
------------------ assorted colorscheme options ------------------
+------------------------- assorted colorscheme options -------------------------
 
 vim.g.gruvbox_material_better_performance = 1
 vim.g.gruvbox_material_background = 'medium'
 vim.g.gruvbox_material_foreground = 'mix'
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return colorschemes
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

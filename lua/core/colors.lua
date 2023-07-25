@@ -1,14 +1,28 @@
---[[------------------- resolution v0.1.0 ---------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-configuration for color assignments
+resolution is a Neovim config for writing TeX and doing computational math.
 
--------------------------------------------------------------]]
+This file contains the customization for color assignments done by resolution.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+--------------------------------- dependencies ---------------------------------
 
 local colors = {}
-local aesthetics = require('config.aesthetics')
 local colorschemes = require('config.colorschemes')
 
-------------- utility function for universal config -------------
+-------------------- utility function for universal config ---------------------
 
 local expand_universal = function(entry, scheme, mode)
     local expanded_entry = {}
@@ -22,7 +36,7 @@ local expand_universal = function(entry, scheme, mode)
     return expanded_entry
 end
 
------------------------- set colorscheme ------------------------
+------------------------------- set colorscheme --------------------------------
 
 colors.set_colorscheme = function(scheme, mode)
     -- first set mode
@@ -40,33 +54,15 @@ colors.set_colorscheme = function(scheme, mode)
             vim.api.nvim_set_hl(0, k, expand_universal(v, scheme, mode))
         end
 
-        -- -- 'optional' settings in universal_config
-        -- for k, v in pairs(colorschemes.universal_config.optional) do
-        --     if aesthetics[k] == true then
-        --         for l, w in pairs(v) do
-        --             vim.api.nvim_set_hl(0, l, expand_universal(w, scheme, mode))
-        --         end
-        --     end
-        -- end
-
         -- 'always' settings in colorscheme_configs
         for k, v in pairs(colorschemes.colorscheme_configs[scheme].colors[mode]) do
             vim.api.nvim_set_hl(0, k, v)
         end
-
-        -- -- 'optional' settings in colorscheme_configs
-        -- for k, v in pairs(colorschemes.colorscheme_configs[scheme].optional) do
-        --     if aesthetics[k] == true then
-        --         for l, w in pairs(v[mode]) do
-        --             vim.api.nvim_set_hl(0, l, w)
-        --         end
-        --     end
-        -- end
     end
 end
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return colors
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
