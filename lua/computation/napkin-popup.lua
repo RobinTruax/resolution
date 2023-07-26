@@ -1,12 +1,25 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-this file provides the layout necessary for the pop-up.
+resolution is a Neovim config for writing TeX and doing computational math.
 
----------------------------------------------------------------]]
+This file provides the layout necessary for the Napkin.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 local popup = {}
 
-------------------------- dependencies --------------------------
+--------------------------------- dependencies ---------------------------------
 
 -- configuration
 local config_computation = require('config.advanced.computation')
@@ -17,7 +30,7 @@ local Layout = require('nui.layout')
 local NuiText = require('nui.text')
 local Event = require('nui.utils.autocmd').event
 
------------------ individual windows for popup ------------------
+------------------------- individual windows for popup -------------------------
 
 -- window for LaTeX input
 popup.input_tex = Popup({
@@ -74,7 +87,7 @@ popup.output_tex = Popup({
     },
 })
 
------------------ layout of individual windows ------------------
+------------------------- layout of individual windows -------------------------
 
 -- collection of all windows for iteration
 popup.all = {
@@ -103,8 +116,8 @@ popup.layout = Layout(
     }, { dir = 'col' })
 )
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return popup
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

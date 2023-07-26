@@ -18,7 +18,6 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ------------------------------------------------------------------------------]]
 
-
 local colorschemes = {}
 
 -------------------------------- basic palette ---------------------------------
@@ -205,7 +204,7 @@ colorschemes.colorscheme_configs = {
                 MiniStarterHeader     = { fg = '#bae6fd', bold = true },
                 MiniStarterFooter     = { fg = '#bae6fd', italic = true },
                 MiniStarterSection    = { fg = '#a5b4fc' },
-                MiniStarterItemPrefix = { fg = '#fbc19d', bold = true },
+                MiniStarterItemPrefix = { fg = '#fecdd3', bold = true },
                 MiniStarterQuery      = { fg = '#ddd6fe' },
                 NormalMode            = { fg = '#3c4759' },
                 InsertMode            = { fg = '#c7ffc1' },
@@ -220,7 +219,7 @@ colorschemes.colorscheme_configs = {
                 MiniStarterHeader     = { fg = '#bae6fd', bold = true },
                 MiniStarterFooter     = { fg = '#bae6fd', italic = true },
                 MiniStarterSection    = { fg = '#a5b4fc' },
-                MiniStarterItemPrefix = { fg = '#fbc19d', bold = true },
+                MiniStarterItemPrefix = { fg = '#fecdd3', bold = true },
                 MiniStarterQuery      = { fg = '#ddd6fe' },
                 NormalMode            = { fg = '#3c4759' },
                 InsertMode            = { fg = '#c7ffc1' },
