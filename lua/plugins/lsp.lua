@@ -1,15 +1,31 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-all plugins relating to LSP, autocompletion, snippets, etc.
+resolution is a Neovim config for writing TeX and doing computation math.
 
--------------------------------------------------------------]]
+This file configures and installs all plugins relating to LSP.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 return {
 
-    ---------------- lspsaga.nvim: more lsp features ----------------
+    ----------------------- lspsaga.nvim: more lsp features ------------------------
+
     {
         'glepnir/lspsaga.nvim',
         event = 'VeryLazy',
+
+        -- configuration
         dependencies = { 'nvim-tree/nvim-web-devicons', 'neovim/nvim-lspconfig' },
         config = function()
             require('lspsaga').setup({
@@ -20,15 +36,19 @@ return {
         end,
     },
 
-    --------------- lsp-powered lua development tools ---------------
+    ---------------------- lsp-powered lua development tools -----------------------
+
     {
         'folke/neodev.nvim',
         ft = { 'lua' },
         dependencies = { 'neovim/nvim-lspconfig' },
+
+        -- configuration
         config = true,
     },
 
-    --------- nvim-lspconfig: configuration of built-in lsp ---------
+    ---------------- nvim-lspconfig: configuration of built-in lsp -----------------
+
     {
         'neovim/nvim-lspconfig',
         -- ft = { 'tex', 'py', 'lua', 'json' },
@@ -43,6 +63,8 @@ return {
             -- autocompletion connection
             { 'hrsh7th/cmp-nvim-lsp' },
         },
+
+        -- configuration
         config = function()
             -- navic and navbuddy's attachment
             local on_attach = function(client, bufnr)
@@ -119,13 +141,15 @@ return {
         end
     },
 
-    ----------------- nvim-navic: winbar navigation -----------------
+    ------------------------ nvim-navic: winbar navigation -------------------------
+
     {
         'SmiteshP/nvim-navic',
         lazy = true
     },
 
-    ------------- nvim-navbuddy: navigation pop-up menu -------------
+    -------------------- nvim-navbuddy: navigation pop-up menu ---------------------
+
     {
         'SmiteshP/nvim-navbuddy',
         dependencies = {
@@ -133,6 +157,8 @@ return {
             'MunifTanjim/nui.nvim',
         },
         lazy = true,
+
+        -- configuration
         config = function()
             -- configure borders
             local border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }
@@ -160,7 +186,8 @@ return {
         end
     },
 
-    --------------- barbecue: winbar location system ----------------
+    ----------------------- barbecue: winbar location system -----------------------
+
     {
         'utilyre/barbecue.nvim',
         name = 'barbecue',
@@ -197,4 +224,7 @@ return {
             })
         end
     },
+
 }
+
+--------------------------------------------------------------------------------

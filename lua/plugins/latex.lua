@@ -1,13 +1,30 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-vimtex configuration
+resolution is a Neovim config for writing TeX and doing computation math.
 
----------------------------------------------------------------]]
+This file installs and configures plugins key for LaTeX: vimtex and magma.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 return {
-    ------------- vimtex: the best tex plugin there is --------------
+
+    --------------------- vimtex: the best tex plugin there is ---------------------
+
     {
         'lervag/vimtex',
+
+        -- configuration
         config = function()
             -- Vimtex settings
             vim.g.tex_flavor = 'latex'
@@ -40,15 +57,19 @@ return {
         end,
     },
 
-    ------------------ magma-nvim: computational backend ---------------
+    ---------------------- magma-nvim: computational backend -----------------------
+
     {
         'dccsillag/magma-nvim',
         version = "*",
         event = 'VeryLazy',
+
+        -- configuration
         config = function()
             vim.g.magma_image_provider = 'none'
         end
     },
+
 }
 
 -----------------------------------------------------------------
