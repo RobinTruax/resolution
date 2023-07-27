@@ -94,7 +94,7 @@ end
 notebook.write_to_notebook = function(string)
     local path = notebook.get_notebook_filename()
     notebook.initialize()
-    utilities.append_to_file('\n' .. string, path)
+    utilities.append_string_to_file('\n' .. string, path)
 end
 
 -- name something and send some text to the notebook
