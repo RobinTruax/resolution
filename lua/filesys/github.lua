@@ -176,13 +176,13 @@ end
 
 ------------------------- project from [g]ithub [R]epo -------------------------
 
-git.git_to_project = function()
-    -- SKIPPING FOR NOW
+git.github_to_project = function()
+    require('filesys.create_project')('github')
 end
 
 ------------------------- [g]ithub [r]epo from project -------------------------
 
-git.project_to_git = function()
+git.project_to_github = function()
     local project_path = core_utils.current_project_path()
     if project_path == nil then
         vim.notify('Not in Project Directory', vim.log.levels.ERROR)
