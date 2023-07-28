@@ -2,7 +2,8 @@
 
 resolution is a Neovim config for writing TeX and doing computational math.
 
-This file implements a file picker for projects.
+This implements a wrapper for whether or not one should choose both project
+and file or just project.
 
 Copyright (C) 2023 Roshan Truax
 
@@ -19,22 +20,22 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 --------------------------------- dependencies ---------------------------------
 
-local config_filesys = require('config.advanced.filesys')
 local core_utils = require('core.utilities')
+local choose_files = require('filesys.actions.choose_files')
+local choose_project = require('filesys.actions.choose_project')
 
 ------------------------------------- main -------------------------------------
 
-local choose_files = function(opts)
-    -- set options
-    opts = opts or {}
-    opts.cwd = core_utils.current_project_path()
-    opts.file_ignore_patterns = { '%.pdf', config_filesys.project_info_name }
-    -- call searcher
-    require('telescope.builtin').find_files(opts)
+local choose_project_and_file = function()
+    if core_utils.current_project_path() == nil then
+        choose_project({pick_files_after = true})
+    else
+        choose_files()
+    end
 end
 
 --------------------------------------------------------------------------------
 
-return choose_files
+return choose_project_and_file
 
 --------------------------------------------------------------------------------

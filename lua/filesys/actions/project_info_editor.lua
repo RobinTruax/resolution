@@ -2,7 +2,7 @@
 
 resolution is a Neovim config for writing TeX and doing computational math.
 
-This file implements a file picker for projects.
+This file implements a menu for choosing a project to edit the project info for.
 
 Copyright (C) 2023 Roshan Truax
 
@@ -21,20 +21,33 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 local config_filesys = require('config.advanced.filesys')
 local core_utils = require('core.utilities')
+local project_info_previewer = require('filesys.project_info_previewer')
+local project_picker = require('filesys.project_picker')
 
-------------------------------------- main -------------------------------------
+------------------------------- action function --------------------------------
 
-local choose_files = function(opts)
-    -- set options
-    opts = opts or {}
-    opts.cwd = core_utils.current_project_path()
-    opts.file_ignore_patterns = { '%.pdf', config_filesys.project_info_name }
-    -- call searcher
-    require('telescope.builtin').find_files(opts)
+local action_function = function(selection, opts)
+    -- check for exit
+    if selection ~= nil then
+        -- get path of file to edit
+        local to_edit = core_utils.trim_path_dir(selection['value']['filepath']) ..
+            '/' .. config_filesys.project_info_name
+        -- notify user
+        vim.notify(string.format('Project %s Information Opened', selection['value']['title']), vim.log.levels.INFO)
+        -- start editing
+        vim.cmd('edit ' .. to_edit)
+        -- format and refresh
+        vim.lsp.buf.format()
+        vim.cmd('write')
+    end
 end
+
+-------------------------------- create picker ---------------------------------
+
+local edit_project = project_picker('Edit Project Information', project_info_previewer, action_function)
 
 --------------------------------------------------------------------------------
 
-return choose_files
+return edit_project
 
 --------------------------------------------------------------------------------

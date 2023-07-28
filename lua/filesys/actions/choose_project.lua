@@ -2,7 +2,7 @@
 
 resolution is a Neovim config for writing TeX and doing computational math.
 
-This file implements a file picker for projects.
+This file implements a menu for choosing a project.
 
 Copyright (C) 2023 Roshan Truax
 
@@ -19,22 +19,33 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 --------------------------------- dependencies ---------------------------------
 
-local config_filesys = require('config.advanced.filesys')
 local core_utils = require('core.utilities')
+local project_picker = require('filesys.project_picker')
+local project_previewer = require('filesys.project_previewer')
 
-------------------------------------- main -------------------------------------
+------------------------------- action function --------------------------------
 
-local choose_files = function(opts)
-    -- set options
-    opts = opts or {}
-    opts.cwd = core_utils.current_project_path()
-    opts.file_ignore_patterns = { '%.pdf', config_filesys.project_info_name }
-    -- call searcher
-    require('telescope.builtin').find_files(opts)
+local action_function = function(selection, opts)
+    -- check for exit
+    if selection ~= nil then
+        -- enter directory
+        vim.cmd('cd ' .. core_utils.trim_path_dir(selection['value']['filepath']))
+        if opts.pick_files_after == true then
+            -- pick file if required
+            require('filesys.menus.choose_files')()
+        elseif opts.callback_function ~= nil then
+            -- callback function if required
+            opts.callback_function({ filepath = core_utils.trim_path_dir(selection['value']['filepath']) })
+        end
+    end
 end
+
+-------------------------------- create picker ---------------------------------
+
+local choose_project = project_picker('Open Project', project_previewer, action_function)
 
 --------------------------------------------------------------------------------
 
-return choose_files
+return choose_project
 
 --------------------------------------------------------------------------------

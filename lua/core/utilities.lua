@@ -26,6 +26,30 @@ local utilities = {}
 local prefs = require('config.preferences')
 local cfg_filesys = require('config.advanced.filesys')
 
+--------------------------------- search tools ---------------------------------
+
+-- get all subdirectories of directory
+utilities.get_subdirs_in_directory = function(dir)
+    -- initialize
+    local files = {}
+    local iterator = nil
+    -- actual process
+    if vim.g.windows == false then
+        iterator = io.popen('ls -d ' .. dir .. '*')
+    elseif vim.g.windows == true then
+        error('Windows is not implemented yet.')
+    else
+        error('Unrecognized operating system.')
+    end
+    -- file iterator into table
+    if iterator ~= nil then
+        for file in iterator:lines() do
+            table.insert(files, file)
+        end
+    end
+    return files
+end
+
 ----------------------------- file path operations -----------------------------
 
 -- get filepath of current buffer
