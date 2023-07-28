@@ -28,6 +28,28 @@ local cfg_filesys = require('config.advanced.filesys')
 
 --------------------------------- search tools ---------------------------------
 
+-- get all files in a directory
+utilities.get_files_in_directory = function(dir)
+    -- initalize
+    local files = {}
+    local iterator = nil
+    -- actual process
+    if vim.g.windows == false then
+        iterator = io.popen('ls -pa ' .. dir .. ' | grep -v /')
+    elseif vim.g.windows == true then
+        iterator = io.popen('dir "' .. dir .. '" /b')
+    else
+        error('Unrecognized operating system.')
+    end
+    -- file iterator into table
+    if iterator ~= nil then
+        for file in iterator:lines() do
+            table.insert(files, dir .. file)
+        end
+    end
+    return files
+end
+
 -- get all subdirectories of directory
 utilities.get_subdirs_in_directory = function(dir)
     -- initialize
