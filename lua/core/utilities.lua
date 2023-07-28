@@ -43,6 +43,11 @@ utilities.file_exists = function(path)
     return vim.fn.filereadable(path)
 end
 
+-- check if directory exists
+utilities.directory_exists = function(path)
+    return vim.fn.isdirectory(path)
+end
+
 -- get config path
 utilities.config_path = function()
     return vim.fn.stdpath('config')
@@ -103,6 +108,11 @@ utilities.cut_path_to_project = function(path)
     else
         return path:sub(1, x) .. '/'
     end
+end
+
+-- gets path of current project
+utilities.current_project_path = function()
+    return utilities.cut_path_to_project(utilities.current_filepath())
 end
 
 -- returns project name

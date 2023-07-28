@@ -26,6 +26,16 @@ local cfg_filesys = require('config.advanced.filesys')
 local states = require('core.states')
 local core_utils = require('core.utilities')
 
+----------------------- ensure project directory exists ------------------------
+
+utilities.project_dir_check = function()
+    if core_utils.directory_exists(prefs.project_root_path) then
+        return true
+    end
+    error('Project Folder Does Not Exist')
+    return false
+end
+
 ----------------------------- get most recent file -----------------------------
 
 utilities.most_recent_file = function(path, force)
