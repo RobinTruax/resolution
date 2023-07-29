@@ -36,9 +36,6 @@ local action_function = function(selection, opts)
         vim.notify(string.format('Project %s Information Opened', selection['value']['title']), vim.log.levels.INFO)
         -- start editing
         vim.cmd('edit ' .. to_edit)
-        -- format and refresh
-        vim.lsp.buf.format()
-        vim.cmd('write')
     end
 end
 

@@ -19,6 +19,8 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 ------------------------------------------------------------------------------]]
 
 local prefs = require('config.preferences')
+local core_utils = require('core.utilities')
+local git = require('filesys.github')
 
 return {
 
@@ -26,7 +28,6 @@ return {
         desc = 'resolution',
         cmd = false,
     },
-
     ['<leader>'] = {
         desc = 'all keybinds',
         cmd = '<cmd> WhichKey <cr>',
@@ -38,7 +39,6 @@ return {
         desc = 'search [b]uffers',
         cmd = '<cmd> Telescope buffers <cr>'
     },
-
     ['c'] = {
         desc = '[c]omputation (the napkin)',
         mode = { 'n', 'v' },
@@ -51,7 +51,6 @@ return {
             end,
         },
     },
-
     ['C'] = {
         desc = '[C]omputation (the notebook)',
         mode = 'n',
@@ -59,14 +58,12 @@ return {
             require('computation.notebook').initialize()
         end
     },
-
     ['d'] = {
         desc = '[d]elete buffer',
         cmd = function()
             require('core.ui').buf_del_wrapper()
         end,
     },
-
     ['D'] = {
         desc = '[D]elete all buffers',
         cmd = function()
@@ -74,19 +71,16 @@ return {
             require('mini.starter').open()
         end
     },
-
     ['e'] = {
         desc = '[e]xplore document',
         cmd = function()
             require('nvim-navbuddy').open()
         end
     },
-
     ['E'] = {
         desc = '[E]xplore files',
         cmd = '<cmd> NvimTreeFindFileToggle <cr>'
     },
-
     ['F'] = {
         desc = '[F]ormat TeX or code',
         cmd = function()
@@ -104,32 +98,26 @@ return {
             end
         end
     },
-
     ['h'] = {
         desc = '[h]elp and doc.',
         cmd = '<cmd> e ' .. vim.fn.stdpath('config') .. '/documentation.md <cr>'
     },
-
     ['j'] = {
         desc = '[j]ump in document',
         cmd = '<cmd> Telescope lsp_document_symbols <cr>'
     },
-
     ['J'] = {
         desc = '[J]ump in project',
         cmd = '<cmd> Telescope lsp_workspace_symbols <cr>'
     },
-
     ['L'] = {
         desc = '[L]atex compilation',
         cmd = '<cmd> VimtexCompile <cr>'
     },
-
     ['p'] = {
         desc = '[p]eek at reference',
         cmd = '<cmd> Lspsaga peek_definition <cr>',
     },
-
     ['q'] = {
         desc = '[q]uit/save',
         cmd = function()
@@ -140,70 +128,59 @@ return {
             end
         end
     },
-
     ['Q'] = {
         desc = '[q]uit/save all',
         cmd = '<cmd> silent wqa <cr>'
     },
-
     ['S'] = {
         desc = '[S]tart screen',
         cmd = function()
             require('mini.starter').open()
         end
     },
-
     ['t'] = {
         desc = '[t]erminal',
         cmd = '<cmd> ToggleTerm <cr>'
     },
-
     ['v'] = {
         desc = '[v]iew files in project',
         cmd = function()
             require('filesys.actions.choose_project_and_file')()
         end
     },
-
     ['V'] = {
         desc = '[V]iew projects',
         cmd = function()
-            require('filesys.actions.choose_project')({pick_files_after = true})
+            require('filesys.actions.choose_project')({ pick_files_after = true })
         end
     },
 
-    ------------------------ preferences (p) ------------------------
+    --------------------------------- options (o) ----------------------------------
 
     ['o'] = {
         desc = '[o]ptions',
         cmd = false,
     },
-
     ['oc'] = {
         desc = '[c]olorscheme',
         cmd = ''
     },
-
     ['od'] = {
         desc = 'toggle [d]ark mode',
         cmd = ''
     },
-
     ['ow'] = {
         desc = 'Toggle word wrap',
         cmd = ''
     },
-
     ['on'] = {
         desc = 'Toggle numbering',
         cmd = ''
     },
-
     ['or'] = {
         desc = 'Toggle relative numbering',
         cmd = ''
     },
-
     ['ov'] = {
         desc = 'Toggle virtual editing',
         cmd = ''
@@ -234,7 +211,7 @@ return {
         cmd = ''
     },
 
-    -------------------------- search (s) ---------------------------
+    ---------------------------------- search (s) ----------------------------------
 
     ['s'] = {
         desc = '[s]earch',
@@ -242,27 +219,33 @@ return {
     },
     ['se'] = {
         desc = 'System file [e]xplorer',
-        cmd = '<cmd> call system("xdg-open "..expand("%:p:h"))<cr>'
+        cmd = function()
+            if vim.g.windows == false then
+                vim.cmd('call system("xdg-open " . expand("%:p:h"))')
+            else
+                vim.cmd('call system("start " . expand("%:p:h"))')
+            end
+        end
     },
     ['sf'] = {
-        desc = '[s]earch [f]iles (root)',
+        desc = '[s]earch [f]iles',
         cmd = '<cmd> Telescope find_files cwd=~ <cr>'
     },
     ['sh'] = {
-        desc = '[s]earch [h]idden files (root)',
+        desc = '[s]earch [h]idden',
         cmd = '<cmd> Telescope find_files cwd=~ hidden=true <cr>'
     },
     ['sc'] = {
-        desc = '[s]earch [c]ommand history',
+        desc = '[s]earch [c]ommands',
         cmd = '<cmd> Telescope command_history <cr>'
     },
     ['ss'] = {
-        desc = '[s]earch [s]earch history',
+        desc = '[s]earch [s]earches',
         cmd = '<cmd> Telescope search_history <cr>'
     },
     ['sm'] = {
-        desc = '[s]earch/rep. [m]ulti. files',
-        cmd = '<cmd> Spectre <cr>'
+        desc = '[m]ulti [s]earch/rep',
+        cmd = '<cmd> MurenOpen <cr>'
     },
     ['sg'] = {
         desc = '[g]rep in file',
@@ -273,19 +256,39 @@ return {
     ['sG'] = {
         desc = '[G]rep in project',
         cmd = function()
-            require('telescope.builtin').live_grep({
-                prompt_title = 'Grep in Project',
-                entry_maker = require('plugins.telescope.grep_entry_maker')({ path_hidden = false })
-            })
+            if core_utils.current_project_path() ~= nil then
+                require('telescope.builtin').live_grep({
+                    prompt_title = 'Grep in Project',
+                    hide_path = false,
+                    search_dirs = { core_utils.current_project_path() },
+                })
+            else
+                require('telescope.builtin').live_grep({
+                    prompt_title = 'Grep in Project',
+                    hide_path = false,
+                })
+            end
         end,
     },
-    ['sw'] = {
-        desc = 'grep [w]ord in project',
-        cmd = require('telescope.builtin').grep_string
+    ['sv'] = {
+        mode = { 'n', 'v' },
+        desc = 'grep [v]isual selection in project',
+        cmd = function()
+            if core_utils.current_project_path() ~= nil then
+                require('telescope.builtin').grep_string({
+                    prompt_title = 'Grep Visual in Project',
+                    search_dirs = { core_utils.current_project_path() },
+                })
+            else
+                require('telescope.builtin').grep_string({
+                    prompt_title = 'Grep Visual in Project',
+                })
+            end
+        end,
     },
     ['sy'] = {
         desc = '[s]earch [y]anks',
-        cmd = '<cmd> Telescope neoclip <cr>'
+        cmd = '<cmd> Telescope neoclip prompt_title=Yanks<cr>'
     },
     ['su'] = {
         desc = '[s]earch [u]ndo tree',
@@ -293,14 +296,14 @@ return {
     },
     ['sr'] = {
         desc = '[s]earch rsltn files',
-        cmd = '<cmd> Telescope find_files cwd=' .. vim.fn.stdpath('config') .. ' <cr>'
+        cmd = '<cmd> Telescope find_files cwd=' .. core_utils.config_path() .. ' <cr>'
     },
     ['sk'] = {
         desc = '[s]earch keybinds',
         cmd = '<cmd> Telescope keybinds <cr>'
     },
 
-    ---------------------- file management (f) ----------------------
+    ----------------------------- file management (f) ------------------------------
 
     ['f'] = {
         desc = '[f]ile management',
@@ -309,29 +312,29 @@ return {
     ['fc'] = {
         desc = '[c]reate project',
         cmd = function()
-            require('filesys.menus.create_project')()
+            require('filesys.actions.create_project')()
         end,
     },
     ['fa'] = {
         desc = '[a]rchive project',
         cmd = function()
-            require('filesys.menus.archive_project')()
+            require('filesys.actions.archive_project')()
         end,
     },
     ['fe'] = {
         desc = '[e]dit project info',
         cmd = function()
-            require('filesys.menus.project_info_editor')()
+            require('filesys.actions.edit_project_info')()
         end,
     },
     ['fn'] = {
         desc = '[n]ew file from template',
         cmd = function()
-            require('filesys.menus.choose_template')()
+            require('filesys.actions.choose_template')()
         end,
     },
 
-    ----------------------- git and github (g) ----------------------
+    ------------------------------ git and github (g) ------------------------------
 
     ['g'] = {
         desc = '[g]it and github',
@@ -339,50 +342,50 @@ return {
     },
     ['gl'] = {
         desc = '[l]azy[g]it',
-        cmd = '<cmd> LazyGitCurrentFile <cr>',
-    },
-    ['ga'] = {
-        desc = 'Update [a]ll reg. repos',
-        cmd = false,
-    },
-    ['gb'] = {
-        desc = 'Update [b]uilt-in repos',
-        cmd = false,
+        cmd = function() git.lazygit() end,
     },
     ['gu'] = {
-        desc = 'Update [u]ser repos',
-        cmd = false,
+        desc = 'configure [g]ithub [u]ser',
+        cmd = function() git.configure_github_user() end,
+    },
+    ['gs'] = {
+        desc = '[g]it [s]tandard repos',
+        cmd = function() git.configure_standard_repos() end,
+    },
+    ['gM'] = {
+        desc = 'pull [g]it in [M]ath',
+        cmd = function() git.pull_git_in_math() end,
+    },
+    ['gm'] = {
+        desc = 'commit/push [g]it in [M]ath',
+        cmd = function() git.push_git_in_math() end,
+    },
+    ['gg'] = {
+        desc = 'pull [g]it',
+        cmd = function() git.pull_git() end,
+    },
+    ['gG'] = {
+        desc = 'commit/push [G]it',
+        cmd = function() git.push_git() end,
+    },
+    ['gR'] = {
+        desc = 'project from [g]ithub [R]epo',
+        cmd = function() git.github_to_project() end,
     },
     ['gr'] = {
-        desc = 'Create [r]epo from project',
-        cmd = false,
-    },
-    ['gc'] = {
-        desc = '[c]reate project from repo',
-        cmd = false,
+        desc = '[g]ithub [r]epo from project',
+        cmd = function() git.project_to_github() end,
     },
     ['gp'] = {
-        desc = 'Toggle file [p]ublicity',
-        cmd = false,
+        desc = 'toggle file [p]ublicity',
+        cmd = function() git.toggle_file_publicity() end,
     },
     ['gP'] = {
-        desc = 'Toggle project [p]ublicity',
-        cmd = false,
-    },
-    ['gh'] = {
-        desc = 'Configure [g]it[h]ub user',
-        cmd = false,
-    },
-    ['go'] = {
-        desc = 'Pull from [o]verleaf via [g]ithub',
-        cmd = false,
-    },
-    ['gO'] = {
-        desc = 'Push to [O]verleaf via [g]ithub',
-        cmd = false,
+        desc = 'toggle project [P]ublicity',
+        cmd = function() git.toggle_project_publicity() end,
     },
 
-    ---------------------- tex operations (t) -----------------------
+    ------------------------------ tex operations (t) ------------------------------
 
     ['l'] = {
         desc = '[t]ex operations',
@@ -390,24 +393,21 @@ return {
     },
     ['lc'] = {
         desc = '[l]atex [c]ite',
-        cmd = false,
+        cmd = function()
+        end,
     },
     ['lC'] = {
         desc = '[l]atex [C]olor editor',
         cmd = '<cmd> CccPick <cr>',
     },
-    ['lm'] = {
-        desc = '[l]atex [m]atrices',
-        cmd = false,
-    },
-    ['lt'] = {
-        desc = '[l]atex [t]tables',
-        cmd = false,
-    },
-    ['lr'] = {
-        desc = '[l]atex [r]eferences',
-        cmd = false,
-    },
+    -- ['lm'] = {
+    --     desc = '[l]atex [m]atrices',
+    --     cmd = false,
+    -- },
+    -- ['lt'] = {
+    --     desc = '[l]atex [t]tables',
+    --     cmd = false,
+    -- },
     ['le'] = {
         desc = '[l]atex [e]rrors',
         cmd = '<cmd> VimtexErrors <cr>',
@@ -433,39 +433,39 @@ return {
 
     ---------------------- tex extensions (x) -----------------------
 
-    ['x'] = {
-        desc = 'tex e[x]tensions',
-        cmd = false,
-    },
-    ['xo'] = {
-        desc = 'e[x]tension: [o]verleaf',
-        cmd = false
-    },
-    ['xc'] = {
-        desc = 'e[x]tension: [c]ommutative diagrams',
-        cmd = false
-    },
-    ['xq'] = {
-        desc = 'e[x]tension: [q]uantum circuits',
-        cmd = false
-    },
-    ['xk'] = {
-        desc = 'e[x]tension: [k]nots',
-        cmd = false
-    },
-    ['xg'] = {
-        desc = 'e[x]tension: [g]raphs',
-        cmd = false
-    },
-    ['xt'] = {
-        desc = 'e[x]tension: [t]ikz editor',
-        cmd = false
-    },
-    ['xi'] = {
-        desc = 'e[x]tension: [i]nkscape',
-        cmd = false
-    },
+    -- ['x'] = {
+    --     desc = 'tex e[x]tensions',
+    --     cmd = false,
+    -- },
+    -- ['xo'] = {
+    --     desc = 'e[x]tension: [o]verleaf',
+    --     cmd = false
+    -- },
+    -- ['xc'] = {
+    --     desc = 'e[x]tension: [c]ommutative diagrams',
+    --     cmd = false
+    -- },
+    -- ['xq'] = {
+    --     desc = 'e[x]tension: [q]uantum circuits',
+    --     cmd = false
+    -- },
+    -- ['xk'] = {
+    --     desc = 'e[x]tension: [k]nots',
+    --     cmd = false
+    -- },
+    -- ['xg'] = {
+    --     desc = 'e[x]tension: [g]raphs',
+    --     cmd = false
+    -- },
+    -- ['xt'] = {
+    --     desc = 'e[x]tension: [t]ikz editor',
+    --     cmd = false
+    -- },
+    -- ['xi'] = {
+    --     desc = 'e[x]tension: [i]nkscape',
+    --     cmd = false
+    -- },
 
 }
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------

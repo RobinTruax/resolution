@@ -8,6 +8,10 @@
 
 **Disclaimer:** *resolution* **is currently in a private alpha stage. Expect breaking changes in the editor; however, the TeX style files included in** *resolution* **will remain mostly consistent to avoid breaking any TeX created using** *resolution*.
 
+Test
+
+Test2
+
 ## Demonstrations
 
 #### Typing a Definition

@@ -23,7 +23,7 @@ local git = {}
 
 local prefs = require('config.preferences')
 local cfg_filesys = require('config.advanced.filesys')
-local utilities = require('menus.utilities')
+local utilities = require('filesys.utilities')
 local core_utils = require('core.utilities')
 
 --------------------------------- [l]azy[g]it ----------------------------------
@@ -156,7 +156,7 @@ git.push_git_in_math = function()
     vim.fn.system(string.format('cd %s | git push --git-dir=gitpublic --no-rebase', prefs.project_root_path))
 end
 
----------------------------------- pull [g]it ----------------------------------
+---------------------------------- [P]ull git ----------------------------------
 
 git.pull_git = function()
     -- pull local git
@@ -164,7 +164,7 @@ git.pull_git = function()
     vim.fn.system(string.format('cd %s | git pull --no-rebase', directory))
 end
 
------------------------------- commit/push [g]it -------------------------------
+------------------------------ commit/[p]ush git -------------------------------
 
 git.push_git = function()
     -- add all, commit all, push with merge all
@@ -177,7 +177,7 @@ end
 ------------------------- project from [g]ithub [R]epo -------------------------
 
 git.github_to_project = function()
-    require('filesys.create_project')('github')
+    require('filesys.create_project')(nil, {github = true})
 end
 
 ------------------------- [g]ithub [r]epo from project -------------------------
@@ -191,8 +191,8 @@ git.project_to_github = function()
     vim.fn.system(
         string.format(
             'cd %s | git init | git add -A | git commit -a | gh repo create %s --source . --gitignore tex --private --push',
-            prefs.project_root_path,
-            vim.fn.fnamemodify(core_utils.current_project_path, ':t')))
+            core_utils.current_project_path(),
+            vim.fn.fnamemodify(core_utils.current_project_path(), ':t')))
 end
 
 ------------------------- toggle file [g]it [p]ublicity --------------------------

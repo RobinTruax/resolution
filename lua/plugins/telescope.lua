@@ -38,8 +38,7 @@ return {
     ------------------------ nvim-neoclip.lua: search yanks ------------------------
     {
         'AckslD/nvim-neoclip.lua',
-        lazy = true,
-
+        event = 'VeryLazy',
         -- configuration
         config = true,
     },

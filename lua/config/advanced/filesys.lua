@@ -32,6 +32,8 @@ filesys.project_icons = {
 }
 
 filesys.archive_project_folder = 'Archive'
+filesys.bibliography_folder = 'Bibliography'
+filesys.packages_folder = 'Packages'
 
 --------------------------------------------------------------------------------
 

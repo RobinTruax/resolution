@@ -188,6 +188,17 @@ end
 
 ------------------------- file manipulation operations -------------------------
 
+-- create symlink
+utilities.symlink = function(oldloc, newloc)
+    if vim.g.windows == false then
+        vim.fn.system(string.format('ln -s %s %s', oldloc, newloc))
+    elseif vim.g.windows == true then
+        error('Windows not implemented.')
+    else
+        error('Unrecognized operating system.')
+    end
+end
+
 -- create directory
 utilities.create_directory = function(location)
     if vim.g.windows == false then

@@ -42,7 +42,7 @@ create_project.name = function(name, opts)
             -- reset if bad name
             if input:match("[^%w%s]") ~= nil then
                 create_project.name('Invalid Name, Try Again: ')
-            -- create otherwise
+                -- create otherwise
             else
                 create_project.type(input, opts)
             end
@@ -62,7 +62,7 @@ create_project.type = function(name, opts)
     }, function(choice)
         -- if choice is valid, move on to getting location
         if choice ~= nil then
-            create_project.location(name, choice[2], opts)
+            create_project.location(name, choice[1], opts)
         end
     end)
 end
@@ -90,7 +90,31 @@ create_project.location = function(name, proj_type, opts)
             -- cd into directory
             vim.cmd('cd ' .. dir_name)
             -- create file template
-            choose_template({ prompt_title = 'Create Starter File' })
+            local style_folder = core_utils.config_path() .. '/tex/style'
+            local python_folder = core_utils.config_path() .. '/computation/py'
+            local package_folder = prefs.project_root_path .. '/' .. config_filesys.packages_folder
+            local bibliography_folder = prefs.project_root_path .. '/' .. config_filesys.bibliography_folder
+            -- symlinks
+            core_utils.symlink(dir_name, style_folder)
+            core_utils.symlink(dir_name, python_folder)
+            core_utils.symlink(dir_name, package_folder)
+            core_utils.symlink(dir_name, bibliography_folder)
+            -- populate project
+            if opts.github ~= true then
+                choose_template({ prompt_title = 'Create Starter File' })
+            else
+                vim.ui.input({
+                    -- options
+                    prompt = 'Enter Git URL: ',
+                    default = '',
+                    relative = 'editor',
+                -- input
+                }, function(input)
+                    if input ~= nil then
+                        vim.fn.system(string.format('cd %s | git clone .'), core_utils.current_project_path())
+                    end
+                end)
+            end
         end
     end)
 end

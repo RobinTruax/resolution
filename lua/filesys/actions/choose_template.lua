@@ -33,15 +33,15 @@ local previewers = require('telescope.previewers')
 --------------------------------- menu itself ----------------------------------
 
 -- find template directory
-local template_directory = vim.fn.stdpath('config') .. '/tex/templates/'
+local template_directory = core_utils.config_path() .. '/tex/templates/'
 
 local choose_template_menu = function(opts)
     -- make sure users are in a project
     if core_utils.current_project_path() == nil then
         vim.notify('Choose Project First', vim.log.levels.WARN)
-        require('filesys.menus.choose_project')({
+        require('filesys.actions.choose_project')({
             pick_files_after = false,
-            callback_function = require('filesys.menus.choose_template'),
+            callback_function = require('filesys.actions.choose_template'),
             prompt_title = 'Open Project First'
         })
     -- otherwise
@@ -83,6 +83,11 @@ local choose_template_menu = function(opts)
                         if input ~= nil then
                             local oldfile = selection['value']
                             local newfile = string.format('%s/%s', filepath, input)
+                            if core_utils.file_exists(newfile) == true then
+                                vim.notify('File Exists Already, Cancelling', vim.log.levels.ERROR)
+                                return
+                            end
+                            vim.notify('Creating File...', vim.log.levels.INFO)
                             core_utils.copy_file(oldfile, newfile)
                             vim.cmd('edit ' .. newfile)
                         end
