@@ -32,7 +32,7 @@ local action_function = function(selection, opts)
         vim.cmd('cd ' .. core_utils.trim_path_dir(selection['value']['filepath']))
         if opts.pick_files_after == true then
             -- pick file if required
-            require('filesys.menus.choose_files')()
+            require('filesys.actions.choose_files')()
         elseif opts.callback_function ~= nil then
             -- callback function if required
             opts.callback_function({ filepath = core_utils.trim_path_dir(selection['value']['filepath']) })

@@ -86,7 +86,10 @@ end
 
 -- check if file exists and is readable
 utilities.file_exists = function(path)
-    return vim.fn.filereadable(path)
+    if vim.fn.filereadable(path) == 0 then
+        return false
+    end
+    return true
 end
 
 -- check if directory exists

@@ -24,10 +24,12 @@ local notebook = {}
 
 local config_computation = require('config.advanced.computation')
 local utilities = require('core.utilities')
+local wk = require('which-key')
+local map = vim.keymap.set
 
 ------------------------------- state variables --------------------------------
 
-notebook.intialized = {}
+notebook.initialized = {}
 
 ---------------------------------- utilities -----------------------------------
 
@@ -40,13 +42,37 @@ end
 notebook.create_notebook = function(path)
     local default = utilities.config_path() .. '/lua/computation/py/notebook.py'
     if not utilities.file_exists(path) then
-        utilities.copy(default, path)
+        vim.notify('Creating notebook file', vim.log.levels.INFO)
+        utilities.copy_file(default, path)
     end
 end
 
 -- open notebook
 notebook.open_notebook = function(path)
+    -- open file
     vim.cmd('e ' .. path)
+    -- overwrite keymap to move to notebook locally
+    vim.keymap.set('n', '<leader>C', '<cmd>WhichKey <LT>leader>C<cr>', { buffer = true })
+    -- add local keymaps (direct and hydra)
+    local flat_direct = {}
+    local flat_hydra = {}
+    -- create keybinds
+    for k, v in pairs(config_computation.direct_keybinds) do
+        -- direct keybinds
+        map('n', '<localleader>' .. k, v[1], { desc = v[2], buffer = true, silent = true })
+        -- hydra keybinds
+        map('n', '<leader>C' .. k, function()
+            v[1]()
+            vim.cmd('WhichKey <leader>C')
+        end, { desc = v[2], buffer = true, silent = true })
+        -- prepping for registration
+        flat_direct['<localleader>' .. k] = v[2]
+        local description = v[2] .. ' hydra'
+        flat_hydra['<leader>C' .. k] = description
+    end
+    -- register keybinds
+    wk.register(flat_direct)
+    wk.register(flat_hydra)
 end
 
 -- choose kernel
@@ -73,8 +99,11 @@ notebook.kernel_start = function(kernel)
     if kernel == nil then
         notebook.kernel_menu()
     else
-        vim.cmd('MagmaInit ' .. kernel.cmd)
-        notebook.initialization[utilities.current_filepath()] = true
+        vim.schedule(function()
+            vim.notify('Launching kernel for notebook', vim.log.levels.INFO)
+            vim.cmd('MagmaInit ' .. kernel.cmd)
+            notebook.initialized[utilities.current_filepath()] = true
+        end)
     end
 end
 
@@ -93,9 +122,9 @@ end
 -- send some text to the notebook
 notebook.write_to_notebook = function(string)
     local path = notebook.get_notebook_filename()
-    notebook.initialize()
+    notebook.create_notebook(path)
     utilities.append_string_to_file('\n' .. string, path)
-    vim.cmd('write')
+    vim.notify('Code sent to the notebook', vim.log.levels.INFO)
 end
 
 -- name something and send some text to the notebook
@@ -150,11 +179,18 @@ notebook.keybind_operations = {
         vim.cmd('norm }o')
         vim.cmd('norm O')
     end,
-    -- copy output: y or \y
+    -- copy cell: y or \y
+    copy_cell = function()
+        vim.cmd('norm yiP')
+    end,
+    -- copy output: o or \o
     copy_output = function()
+        local start_win = vim.fn.win_getid()
         vim.cmd('noautocmd MagmaEnterOutput')
-        vim.cmd('norm jVGy')
-        vim.cmd('wincmd p')
+        if vim.fn.win_getid() ~= start_win then
+            vim.cmd('norm jvG$y')
+            vim.cmd('wincmd p')
+        end
     end,
 }
 

@@ -77,11 +77,11 @@ napkin.set_keybinds = function(popups)
         -- send and named-send
         v:map('n', '<localleader>s', function()
             local sympy = table.concat(vim.api.nvim_buf_get_lines(napkin_popup.sympy.bufnr, 0, -1, false), ' ')
-            notebook.send_to_notebook(sympy)
+            notebook.write_to_notebook(sympy)
         end)
         v:map('n', '<localleader>S', function()
             local sympy = table.concat(vim.api.nvim_buf_get_lines(napkin_popup.sympy.bufnr, 0, -1, false), ' ')
-            notebook.send_to_notebook_named(sympy)
+            notebook.write_to_notebook_named(sympy)
         end)
     end
 end

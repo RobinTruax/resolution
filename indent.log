@@ -1,6 +1,6 @@
 INFO:  latexindent.pl version 3.22, 2023-06-01, a script to indent .tex files
        latexindent.pl lives here: /home/linuxbrew/.linuxbrew/Cellar/latexindent/3.22/libexec/bin/
-       Mon Jul 24 20:27:22 2023
+       Sat Jul 29 11:52:37 2023
        Filename: /home/roshan/.config/nvim/tmp.tex
 INFO:  Processing switches:
        -l|--localSettings: Read localSettings YAML file
@@ -49,6 +49,7 @@ INFO:  YAML settings, reading from the following files:
          beforeProcessing: '0'
 
 INFO:  Phase 1: searching for objects
+       No objects found.
 INFO:  Phase 2: finding surrounding indentation
 INFO:  Phase 3: indenting objects
 INFO:  Phase 4: final indentation check

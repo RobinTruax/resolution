@@ -43,7 +43,7 @@ local project_picker = function(prompt_title, previewer, function_on_selection)
         pickers.new(opts, {
             prompt_title = prompt_title,
             -- obtain project information
-            finder = finders.new_table {
+            finder = finders.new_table({
                 results = results,
                 entry_maker = function(entry)
                     local icon = ' '
@@ -58,7 +58,7 @@ local project_picker = function(prompt_title, previewer, function_on_selection)
                         ordinal = entry['title'],
                     }
                 end
-            },
+            }),
             -- default sorter
             sorter = conf.generic_sorter(opts),
             -- specified previewer

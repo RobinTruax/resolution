@@ -91,7 +91,7 @@ end
 
 ------------------------- compile project information --------------------------
 
-utilities.compile_project_infos = function(force)
+utilities.compile_project_infos = function()
     -- initialization
     local table_of_project_infos = {}
 
@@ -113,7 +113,7 @@ utilities.compile_project_infos = function(force)
             local project = vim.fn.fnamemodify(project_info, ':h:t')
             local title = string.format('%s/%s', category, project)
             -- create decoded project info and append to table
-            decoded_project_info = { title = title }
+            decoded_project_info = { title = title, filepath = project_info }
             table_of_project_infos[#table_of_project_infos + 1] = decoded_project_info
             -- notify user of error
             vim.notify(
@@ -124,7 +124,8 @@ utilities.compile_project_infos = function(force)
     end
 
     -- updating global state variable
-    states.table_of_project_infos = table_of_project_infos
+    return table_of_project_infos
+    -- states.table_of_project_infos = table_of_project_infos
 end
 
 --------------------------------------------------------------------------------

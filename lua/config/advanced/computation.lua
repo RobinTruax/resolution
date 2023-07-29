@@ -60,6 +60,22 @@ computation.default_kernels = {
     { name = 'SageMath', desc = 'Coming soon' },
 }
 
+computation.direct_keybinds = {
+    [ 'r' ] = { function() require('computation.notebook').keybind_operations.run() end, '[r]un cell' },
+    [ 'R' ] = { function() require('computation.notebook').keybind_operations.run_move() end, '[R]un cell and move' },
+    [ 'j' ] = { function() require('computation.notebook').keybind_operations.next_cell() end, 'move down' },
+    [ 'k' ] = { function() require('computation.notebook').keybind_operations.prev_cell() end, 'move up' },
+    [ 'v' ] = { function() require('computation.notebook').keybind_operations.select_cell() end, '[v]isual cell' },
+    [ 'c' ] = { function() require('computation.notebook').keybind_operations.comment_cell() end, '[c]omment cell' },
+    [ 'a' ] = { function() require('computation.notebook').keybind_operations.add_cell_above() end, 'cell [a]bove' },
+    [ 'b' ] = { function() require('computation.notebook').keybind_operations.add_cell_below() end, 'cell [b]elow' },
+    [ 'y' ] = { function() require('computation.notebook').keybind_operations.copy_cell() end, '[y]ank cell' },
+    [ 'o' ] = { function() require('computation.notebook').keybind_operations.copy_output() end, 'copy [o]utput' },
+}
+
+computation.hydra_keybinds = {
+}
+
 --------------------------------------------------------------------------------
 
 return computation

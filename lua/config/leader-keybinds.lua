@@ -1,30 +1,46 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-defines keybinds for rsltn's main operations; these use the
-<leader> key set in config.preferences
+resolution is a Neovim config for writing TeX and doing computational math.
 
----------------------------------------------------------------]]
+This files defined keybinds for resolution's main operations; use use the leader
+key set in config.preferences.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 local prefs = require('config.preferences')
 
 return {
+
     [''] = {
         desc = 'resolution',
         cmd = false,
     },
+
     ['<leader>'] = {
-        desc = 'keybinds',
+        desc = 'all keybinds',
         cmd = '<cmd> WhichKey <cr>',
     },
 
-    --------------------------- top-level ---------------------------
+    ---------------------------------- top-level -----------------------------------
 
     ['b'] = {
         desc = 'search [b]uffers',
         cmd = '<cmd> Telescope buffers <cr>'
     },
+
     ['c'] = {
-        desc = '',
+        desc = '[c]omputation (the napkin)',
         mode = { 'n', 'v' },
         cmd = {
             function()
@@ -35,12 +51,22 @@ return {
             end,
         },
     },
+
+    ['C'] = {
+        desc = '[C]omputation (the notebook)',
+        mode = 'n',
+        cmd = function()
+            require('computation.notebook').initialize()
+        end
+    },
+
     ['d'] = {
         desc = '[d]elete buffer',
         cmd = function()
             require('core.ui').buf_del_wrapper()
         end,
     },
+
     ['D'] = {
         desc = '[D]elete all buffers',
         cmd = function()
@@ -48,16 +74,19 @@ return {
             require('mini.starter').open()
         end
     },
+
     ['e'] = {
         desc = '[e]xplore document',
         cmd = function()
             require('nvim-navbuddy').open()
         end
     },
+
     ['E'] = {
         desc = '[E]xplore files',
         cmd = '<cmd> NvimTreeFindFileToggle <cr>'
     },
+
     ['F'] = {
         desc = '[F]ormat TeX or code',
         cmd = function()
@@ -67,7 +96,7 @@ return {
                 local filename = vim.fn.expand('%:p')
                 local format_style_file = prefs.format_style_file
                 vim.fn.system('latexindent -l ' .. format_style_file .. ' -m ' .. filename ..
-                ' > ' .. filename .. '-prettied')
+                    ' > ' .. filename .. '-prettied')
                 vim.fn.system('mv ' .. filename .. '-prettied ' .. filename)
                 vim.cmd('edit')
             else
@@ -75,26 +104,32 @@ return {
             end
         end
     },
+
     ['h'] = {
         desc = '[h]elp and doc.',
         cmd = '<cmd> e ' .. vim.fn.stdpath('config') .. '/documentation.md <cr>'
     },
+
     ['j'] = {
         desc = '[j]ump in document',
         cmd = '<cmd> Telescope lsp_document_symbols <cr>'
     },
+
     ['J'] = {
         desc = '[J]ump in project',
         cmd = '<cmd> Telescope lsp_workspace_symbols <cr>'
     },
+
     ['L'] = {
         desc = '[L]atex compilation',
         cmd = '<cmd> VimtexCompile <cr>'
     },
+
     ['p'] = {
         desc = '[p]eek at reference',
         cmd = '<cmd> Lspsaga peek_definition <cr>',
     },
+
     ['q'] = {
         desc = '[q]uit/save',
         cmd = function()
@@ -105,30 +140,35 @@ return {
             end
         end
     },
+
     ['Q'] = {
         desc = '[q]uit/save all',
         cmd = '<cmd> silent wqa <cr>'
     },
+
     ['S'] = {
         desc = '[S]tart screen',
         cmd = function()
             require('mini.starter').open()
         end
     },
+
     ['t'] = {
         desc = '[t]erminal',
         cmd = '<cmd> ToggleTerm <cr>'
     },
+
     ['v'] = {
-        desc = '[v]iew file in project',
+        desc = '[v]iew files in project',
         cmd = function()
-            require('filesys.menus.choose_project_and_file')()
+            require('filesys.actions.choose_project_and_file')()
         end
     },
+
     ['V'] = {
-        desc = '[V]iew project',
+        desc = '[V]iew projects',
         cmd = function()
-            require('filesys.menus.choose_project')()
+            require('filesys.actions.choose_project')({pick_files_after = true})
         end
     },
 
@@ -138,46 +178,57 @@ return {
         desc = '[o]ptions',
         cmd = false,
     },
+
     ['oc'] = {
         desc = '[c]olorscheme',
         cmd = ''
     },
+
     ['od'] = {
-        desc = 'Toggle dark mode',
+        desc = 'toggle [d]ark mode',
         cmd = ''
     },
+
     ['ow'] = {
         desc = 'Toggle word wrap',
         cmd = ''
     },
+
     ['on'] = {
         desc = 'Toggle numbering',
         cmd = ''
     },
+
     ['or'] = {
         desc = 'Toggle relative numbering',
         cmd = ''
     },
+
     ['ov'] = {
         desc = 'Toggle virtual editing',
         cmd = ''
     },
+
     ['os'] = {
         desc = 'Toggle autosnippets',
         cmd = ''
     },
+
     ['om'] = {
         desc = 'Toggle autocomplete',
         cmd = ''
     },
+
     ['oi'] = {
         desc = 'Toggle autoindent',
         cmd = ''
     },
+
     ['ol'] = {
         desc = 'Toggle conceal',
         cmd = ''
     },
+
     ['oz'] = {
         desc = 'Toggle spell-checker',
         cmd = ''
@@ -224,7 +275,8 @@ return {
         cmd = function()
             require('telescope.builtin').live_grep({
                 prompt_title = 'Grep in Project',
-                entry_maker = require('plugins.telescope.grep_entry_maker')({ path_hidden = false }) })
+                entry_maker = require('plugins.telescope.grep_entry_maker')({ path_hidden = false })
+            })
         end,
     },
     ['sw'] = {
