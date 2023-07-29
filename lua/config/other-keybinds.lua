@@ -1,12 +1,26 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-defines keybinds for rsltn's secondary operations; no prefix
+resolution is a Neovim config for writing TeX and doing computational math.
 
--------------------------------------------------------------]]
+Defines keybinds for resolution's secondary operations. Keybinds here have no
+prefix.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
 
 return {
 
-    --------------------- manipulating windows ----------------------
+    ----------------------------- manipulating windows -----------------------------
     ['<C-h>'] = {
         desc = 'Move left',
         cmd = require('smart-splits').move_cursor_left,
@@ -108,7 +122,7 @@ return {
         mode = { 'n', 'i' },
     },
 
-    ---------------------- manipulate buffers -----------------------
+    ------------------------------ manipulate buffers ------------------------------
     ['H'] = {
         desc = 'Move to next buffer',
         cmd = '<cmd>bp<cr>',
@@ -120,7 +134,7 @@ return {
         { silent = true, noremap = true },
     },
 
-    --------------------------- LSP gotos ---------------------------
+    ---------------------------------- LSP gotos -----------------------------------
     ['gd'] = {
         desc = '[g]oto [d]efinition',
         cmd = vim.lsp.buf.definition,
@@ -142,7 +156,7 @@ return {
         cmd = '<cmd> Lspsaga peek_definition <cr>',
     },
 
-    --------------------------- LSP other ---------------------------
+    ---------------------------------- LSP other -----------------------------------
     ['K'] = {
         desc = 'hover documentation',
         cmd = vim.lsp.buf.hover,
@@ -152,10 +166,10 @@ return {
         cmd = vim.lsp.buf.signature_help,
     },
 
-    ----------------------------- other -----------------------------
+    ------------------------------------ other -------------------------------------
 
     ["'"] = {
-        desc = 'Blackhole delete',
+        desc = 'Blackhole register',
         cmd = '"_',
         mode = { 'n', 'v' },
     },
@@ -177,7 +191,7 @@ return {
         opts = { silent = true, noremap = true },
     },
 
-    --------------------------- prefixes ----------------------------
+    ----------------------------------- prefixes -----------------------------------
     ['g'] = {
         desc = '+Movement and other',
         cmd = false,
@@ -208,4 +222,4 @@ return {
     },
 }
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
