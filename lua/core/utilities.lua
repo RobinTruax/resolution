@@ -26,6 +26,19 @@ local utilities = {}
 local prefs = require('config.preferences')
 local cfg_filesys = require('config.advanced.filesys')
 
+--------------------------------- system calls ---------------------------------
+
+-- change dir
+utilities.exec_in_dir = function(command, dir)
+    if vim.g.windows == false then
+        return vim.fn.system(string.format('(cd %s; %s)', dir, command))
+    elseif vim.g.windows == true then
+        error('Windows is not implemented yet.')
+    else
+        error('Unrecognized operating system.')
+    end
+end
+
 --------------------------------- search tools ---------------------------------
 
 -- get all files in a directory
@@ -57,7 +70,7 @@ utilities.get_subdirs_in_directory = function(dir)
     local iterator = nil
     -- actual process
     if vim.g.windows == false then
-        iterator = io.popen('ls -d ' .. dir .. '*')
+        iterator = io.popen('ls -d ' .. dir .. '/*')
     elseif vim.g.windows == true then
         error('Windows is not implemented yet.')
     else
@@ -140,7 +153,7 @@ end
 -- cuts path of current file to project
 utilities.cut_path_to_project = function(path)
     -- checks that file is in project folder
-    local root = prefs.project_root_path:gsub('(.-)[\\/]+$', '%1')
+    local root = prefs.project_root_path
     if path:match(root) == nil then
         return nil
     end

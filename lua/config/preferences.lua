@@ -28,7 +28,7 @@ local cfg = vim.fn.stdpath('config')
 ------------------------------ necessary settings ------------------------------
 
 -- where projects are stored
-prefs.project_root_path = '/home/roshan/Documents/Mathematics/'
+prefs.project_root_path = '/home/roshan/Documents/Mathematics'
 -- style file for formatting LaTeX
 prefs.format_style_file = cfg .. '/tex/format-style.yaml'
 -- dictionary files

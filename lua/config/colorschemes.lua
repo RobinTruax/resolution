@@ -201,11 +201,11 @@ colorschemes.colorscheme_configs = {
         light = 'tundra',
         colors = {
             dark = {
-                MiniStarterHeader     = { fg = '#bae6fd', bold = true },
-                MiniStarterFooter     = { fg = '#bae6fd', italic = true },
-                MiniStarterSection    = { fg = '#a5b4fc' },
+                MiniStarterHeader     = { fg = '#f9fafb', bold = true },
+                MiniStarterFooter     = { fg = '#f9fafb', bold = true },
+                MiniStarterSection    = { fg = '#f9fafb' },
                 MiniStarterItemPrefix = { fg = '#fecdd3', bold = true },
-                MiniStarterQuery      = { fg = '#ddd6fe' },
+                MiniStarterQuery      = { fg = '#fca5a5' },
                 NormalMode            = { fg = '#3c4759' },
                 InsertMode            = { fg = '#c7ffc1' },
                 VisualMode            = { fg = '#ccfdff' },

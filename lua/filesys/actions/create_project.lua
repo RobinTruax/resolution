@@ -31,6 +31,7 @@ local template_directory = core_utils.config_path() .. '/tex/templates/'
 local create_project = {}
 
 create_project.name = function(name, opts)
+    opts = opts or {}
     vim.ui.input({
         -- options
         prompt = name or 'Project Name: ',
@@ -70,7 +71,15 @@ end
 --------------------- get project location ----------------------
 
 create_project.location = function(name, proj_type, opts)
-    vim.ui.select(core_utils.get_subdirs_in_directory(prefs.project_root_path), {
+    local folders = {}
+    for _, v in ipairs(core_utils.get_subdirs_in_directory(prefs.project_root_path)) do
+        if v:match(config_filesys.archive_project_folder) or v:match(config_filesys.bibliography_folder) or v:match(config_filesys.packages_folder) then
+            -- do nothing
+        else
+            folders[#folders + 1] = v
+        end
+    end
+    vim.ui.select(folders, {
         -- options
         prompt = 'Folder for Project "' .. name .. '"',
         format_item = function(item)
@@ -91,14 +100,15 @@ create_project.location = function(name, proj_type, opts)
             vim.cmd('cd ' .. dir_name)
             -- create file template
             local style_folder = core_utils.config_path() .. '/tex/style'
-            local python_folder = core_utils.config_path() .. '/computation/py'
+            local python_folder = core_utils.config_path() .. '/lua/computation/py'
             local package_folder = prefs.project_root_path .. '/' .. config_filesys.packages_folder
             local bibliography_folder = prefs.project_root_path .. '/' .. config_filesys.bibliography_folder
             -- symlinks
-            core_utils.symlink(dir_name, style_folder)
-            core_utils.symlink(dir_name, python_folder)
-            core_utils.symlink(dir_name, package_folder)
-            core_utils.symlink(dir_name, bibliography_folder)
+            vim.notify('Creating Symlinks...', vim.log.levels.INFO)
+            core_utils.symlink(style_folder, dir_name)
+            core_utils.symlink(python_folder, dir_name)
+            core_utils.symlink(package_folder, dir_name)
+            core_utils.symlink(bibliography_folder, dir_name)
             -- populate project
             if opts.github ~= true then
                 choose_template({ prompt_title = 'Create Starter File' })
@@ -108,7 +118,7 @@ create_project.location = function(name, proj_type, opts)
                     prompt = 'Enter Git URL: ',
                     default = '',
                     relative = 'editor',
-                -- input
+                    -- input
                 }, function(input)
                     if input ~= nil then
                         vim.fn.system(string.format('cd %s | git clone .'), core_utils.current_project_path())

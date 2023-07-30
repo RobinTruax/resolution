@@ -32,7 +32,7 @@ local action_function = function(selection, opts)
     if selection ~= nil then
         -- figure out new folder name
         local project_filename = vim.fn.fnamemodify(selection['value']['filepath'], ':h:t')
-        local projects_path = prefs.project_root_path:gsub('(.-)[\\/]+$', '%1')
+        local projects_path = prefs.project_root_path
         local archive = string.format('%s/%s/%s', projects_path, config_filesys.archive_project_folder, project_filename)
         -- figure out old folder name
         local current = core_utils.cut_path_to_project(selection['value']['filepath'])

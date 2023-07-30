@@ -76,7 +76,7 @@ utilities.get_project_info_filepaths = function()
     -- trim list of files
     for filename in string_of_files:gmatch('[^\r\n]+') do
         -- get project root
-        local root = core_utils.trim_path_dir(project_root_path)
+        local root = prefs.project_root_path
         -- get archive folder
         local archive = root .. '/' .. cfg_filesys.archive_project_folder
         -- remove files in the archive folder

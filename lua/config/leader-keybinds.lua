@@ -348,26 +348,30 @@ return {
         desc = 'configure [g]ithub [u]ser',
         cmd = function() git.configure_github_user() end,
     },
+    ['gh'] = {
+        desc = 'configure [g]it[h]ub',
+        cmd = function() git.configure_github_repos() end,
+    },
     ['gs'] = {
         desc = '[g]it [s]tandard repos',
         cmd = function() git.configure_standard_repos() end,
     },
-    ['gM'] = {
-        desc = 'pull [g]it in [M]ath',
+    ['gP'] = {
+        desc = '[P]ull math [g]its',
         cmd = function() git.pull_git_in_math() end,
     },
-    ['gm'] = {
-        desc = 'commit/push [g]it in [M]ath',
+    ['gp'] = {
+        desc = 'commit/[p]ush math [g]its',
         cmd = function() git.push_git_in_math() end,
     },
-    ['gg'] = {
-        desc = 'pull [g]it',
-        cmd = function() git.pull_git() end,
-    },
-    ['gG'] = {
-        desc = 'commit/push [G]it',
-        cmd = function() git.push_git() end,
-    },
+    -- ['gP'] = {
+    --     desc = 'pull [g]it',
+    --     cmd = function() git.pull_git() end,
+    -- },
+    -- ['gp'] = {
+    --     desc = 'commit/push [G]it',
+    --     cmd = function() git.push_git() end,
+    -- },
     ['gR'] = {
         desc = 'project from [g]ithub [R]epo',
         cmd = function() git.github_to_project() end,
@@ -376,12 +380,12 @@ return {
         desc = '[g]ithub [r]epo from project',
         cmd = function() git.project_to_github() end,
     },
-    ['gp'] = {
-        desc = 'toggle file [p]ublicity',
+    ['gt'] = {
+        desc = '[t]oggle file publicity',
         cmd = function() git.toggle_file_publicity() end,
     },
-    ['gP'] = {
-        desc = 'toggle project [P]ublicity',
+    ['gT'] = {
+        desc = '[T]oggle project publicity',
         cmd = function() git.toggle_project_publicity() end,
     },
 

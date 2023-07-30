@@ -79,20 +79,20 @@ return {
                     {
                         {
                             action = function()
-                                require('filesys.menus.choose_project')()
+                                require('filesys.actions.choose_project')()
                             end,
                             name = 'open math project',
                             section = 'actions'
                         },
                         {
                             action = function()
-                                require('filesys.menus.create_project')()
+                                require('filesys.actions.create_project')()
                             end,
                             name = 'new math project',
                             section = 'actions'
                         },
                         {
-                            action = 'Telescope find_files hidden=true',
+                            action = 'Telescope find_files cwd=~',
                             name = 'search for file',
                             section = 'actions'
                         },
@@ -190,8 +190,8 @@ return {
                     lualine_x = { 'diff', 'branch' },
                     lualine_y = {
                         function()
-                            local cwd = vim.fn.getcwd()
-                            return require('filesys.utilities').get_project_name(cwd)
+                            local util = require('core.utilities')
+                            return util.get_project_name(util.current_directory())
                         end },
                     lualine_z = { 'location' },
                 },

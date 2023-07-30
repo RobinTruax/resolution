@@ -1,4 +1,4 @@
 # Resolution's Notebook
-from context import *
+from py.context import *
 
 
