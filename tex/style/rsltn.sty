@@ -94,8 +94,8 @@
 
     % Create theorem box
     \tcolorboxenvironment{#1}{
-        blanker, breakable, use color stack,
-        left=5mm, top=2mm, bottom=2mm,
+        parbox = false, blanker, breakable, use color stack,
+        left=5mm, top=-7mm, bottom=2mm,
         before skip=10pt, after skip=10pt,
         pad before break = 2pt, pad after break = 2pt,
         borderline west={1pt}{0pt}{#2},
@@ -115,8 +115,8 @@
     
     % Create proof box
     \tcolorboxenvironment{#1 proof}{
-        blanker, breakable, use color stack,
-        left=5mm, top=2mm, bottom=2mm,
+        parbox = false, blanker, breakable, use color stack,
+        left=5mm, top=-7mm, bottom=2mm,
         before skip=10pt, after skip=10pt,
         pad before break = 2pt, pad after break = 2pt,
         borderline west={1pt}{0pt}{#2},

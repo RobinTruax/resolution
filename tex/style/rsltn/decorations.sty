@@ -46,6 +46,24 @@
 }
 \lstset{style=rstln-standard}
 
+
+\lst@definelanguage{GAP}{%
+    morekeywords={%
+    Assert,Info,IsBound,QUIT,%
+    TryNextMethod,Unbind,and,break,%
+    continue,do,elif,%
+    else,end,false,fi,for,%
+    function,if,in,local,%
+    mod,not,od,or,%
+    quit,rec,repeat,return,%
+    then,true,until,while%
+    },%
+    sensitive,%
+    morecomment=[l]\#,%
+    morestring=[b]",%
+    morestring=[b]’,%
+}[keywords,comments,strings]
+
 % ---------------------------------- Title -------------------------------------
 
 \def\@maketitle{

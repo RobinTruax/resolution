@@ -170,45 +170,86 @@ return {
         cmd = ''
     },
     ['ow'] = {
-        desc = 'Toggle word wrap',
-        cmd = ''
+        desc = 'toggle [w]rap',
+        cmd = function()
+            vim.o.wrap = not vim.o.wrap
+        end
     },
     ['on'] = {
-        desc = 'Toggle numbering',
-        cmd = ''
+        desc = 'toggle [n]umbering',
+        cmd = function()
+            vim.o.number = not vim.o.number
+        end
     },
     ['or'] = {
-        desc = 'Toggle relative numbering',
-        cmd = ''
+        desc = 'toggle [r]elative numbering',
+        cmd = function()
+            vim.o.relativenumber = not vim.o.relativenumber
+        end
     },
     ['ov'] = {
-        desc = 'Toggle virtual editing',
-        cmd = ''
+        desc = 'toggle [v]irtual editing',
+        cmd = function()
+            vim.o.virtualedit = not vim.o.virtualedit
+        end
     },
-
     ['os'] = {
-        desc = 'Toggle autosnippets',
+        desc = 'toggle auto[s]nippets',
         cmd = ''
     },
-
     ['om'] = {
-        desc = 'Toggle autocomplete',
+        desc = 'toggle autoco[m]plete',
         cmd = ''
     },
-
     ['oi'] = {
-        desc = 'Toggle autoindent',
-        cmd = ''
+        desc = 'toggle auto[i]ndent',
+        cmd = function()
+            vim.o.autoindent = not vim.o.autoindent
+        end
     },
+    ['of'] = {
+        desc = 'toggle [f]ocus mode',
+        cmd = function()
+            if vim.o.laststatus ~= 0 then
+                vim.o.laststatus = 0
+            elseif vim.o.laststatus ~= 2 then
+                vim.o.laststatus = 2
+            end
 
+            if vim.o.showtabline ~= 0 then
+                vim.o.showtabline = 0
+            elseif vim.o.showtabline ~= 2 then
+                vim.o.showtabline = 2
+            end
+
+            if vim.o.cmdheight ~= 0 then
+                vim.o.cmdheight = 0
+            elseif vim.o.cmdheight ~= 1 then
+                vim.o.cmdheight = 1
+            end
+        end
+    },
+    ['ou'] = {
+        desc = 'toggle c[u]rsorline',
+        cmd = function()
+            vim.o.cursorline = not vim.o.cursorline
+        end
+    },
     ['ol'] = {
-        desc = 'Toggle conceal',
-        cmd = ''
+        desc = 'toggle concea[l]',
+        cmd = function()
+            if vim.o.conceallevel ~= 0 then
+                vim.o.conceallevel = 0
+            elseif vim.o.conceallevel ~= 1 then
+                vim.o.conceallevel = 1
+            end
+        end
     },
-
     ['oz'] = {
-        desc = 'Toggle spell-checker',
-        cmd = ''
+        desc = 'toggle spell-checker',
+        cmd = function()
+            vim.o.spell = not vim.o.spell
+        end
     },
 
     ---------------------------------- search (s) ----------------------------------
@@ -288,7 +329,7 @@ return {
     },
     ['sy'] = {
         desc = '[s]earch [y]anks',
-        cmd = '<cmd> Telescope neoclip prompt_title=Yanks<cr>'
+        cmd = '<cmd> Telescope neoclip plus prompt_title=Yanks<cr>'
     },
     ['su'] = {
         desc = '[s]earch [u]ndo tree',
