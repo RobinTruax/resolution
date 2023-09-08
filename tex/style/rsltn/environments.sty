@@ -60,8 +60,8 @@
 
 % --------------------------- Theorem Environments -----------------------------
 
-\usepackage{thmtools}                    % Theorem tools
-\usepackage[skins, breakable]{tcolorbox} % Theorem box
+\RequirePackage{thmtools}                    % Theorem tools
+\RequirePackage[skins, breakable]{tcolorbox} % Theorem box
 
 % ------------------------ Color-Changing Proof Setup --------------------------
 
@@ -129,6 +129,13 @@
     name    = Definition,
     parent  = section,
 ]{definition}
+
+\rsltntheoremstyle{algorithm}{rsltnDefinition}{}
+\declaretheorem[
+    style   = algorithm box,
+    name    = Algorithm,
+    parent  = section,
+]{algorithm}
 
 % Conjecture
 \rsltntheoremstyle{conjecture}{rsltnConjecture}{}

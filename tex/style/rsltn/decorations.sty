@@ -24,46 +24,6 @@
 \RequirePackage[skip=11pt plus1pt, indent=0pt]{parskip} % spacing and indentation
 \setcounter{MaxMatrixCols}{20}                          % matrix maximum size
 
-% ----------------------------------- Code -------------------------------------
-
-\RequirePackage{listings} % code environment
-
-% Standard rsltn code styling
-\lstdefinestyle{rstln-standard}{
-    basicstyle=\footnotesize\ttfamily,
-    columns=fullflexible,
-    frame=single,
-    numbers=left,
-    numbersep=10pt,
-    numberstyle=\footnotesize\color{rsltnNumbers}\ttfamily,
-    commentstyle=\color{rsltnComment},
-    keywordstyle=\color{rsltnKeyword},
-    stringstyle=\color{rsltnString},
-    showstringspaces=false,
-    breaklines=true,
-    postbreak=\mbox{\textcolor{rsltnLinebreak}{$\hookrightarrow$}\space},
-    tabsize=4,
-}
-\lstset{style=rstln-standard}
-
-
-\lst@definelanguage{GAP}{%
-    morekeywords={%
-    Assert,Info,IsBound,QUIT,%
-    TryNextMethod,Unbind,and,break,%
-    continue,do,elif,%
-    else,end,false,fi,for,%
-    function,if,in,local,%
-    mod,not,od,or,%
-    quit,rec,repeat,return,%
-    then,true,until,while%
-    },%
-    sensitive,%
-    morecomment=[l]\#,%
-    morestring=[b]",%
-    morestring=[b]’,%
-}[keywords,comments,strings]
-
 % ---------------------------------- Title -------------------------------------
 
 \def\@maketitle{

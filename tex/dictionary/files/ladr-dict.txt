@@ -1,0 +1,1111 @@
+$V$ is a complex vector space
+$V$ is a real vector space
+$n$-by-$n$
+Cauchy-Schwarz
+Cayley-Hamilton
+Euclidean
+Gram-Schmidt
+Pythagorean
+Suppose $V$ is a complex vector space
+Suppose $V$ is a real vector space
+Suppose that $V$ is
+a diagonal matrix
+A diagonal matrix
+a linear combination
+A linear combination
+a positive integer
+A positive integer
+a real inner product space
+A real inner product space
+a scalar multiple
+A scalar multiple
+a square matrix
+A square matrix
+absolute
+Absolute
+absolute value
+Absolute value
+abstract
+Abstract
+according
+According
+according to
+According to
+acomplex
+Acomplex
+actually
+Actually
+adding
+Adding
+addition
+Addition
+additional
+Additional
+additive
+Additive
+additive identity
+Additive identity
+additive inverse
+Additive inverse
+adjoining
+Adjoining
+adjoint
+Adjoint
+adjoints
+Adjoints
+algebra
+Algebra
+algorithm
+Algorithm
+all entries
+All entries
+all polynomials
+All polynomials
+allows
+Allows
+almost
+Almost
+already
+Already
+always
+Always
+an $n$-by-$n$
+An $n$-by-$n$
+an eigenvalue
+An eigenvalue
+an eigenvalue of
+An eigenvalue of
+an eigenvector
+An eigenvector
+an element
+An element
+an equality
+An equality
+an example
+An example
+an inner product space
+An inner product space
+an inner-product
+An inner-product
+an invertible
+An invertible
+an isometry
+An isometry
+an operator
+An operator
+an orthonormal
+An orthonormal
+an orthonormal basis
+An orthonormal basis
+an orthonormal list
+An orthonormal list
+an upper-triangular
+An upper-triangular
+analogous
+Analogous
+analogy
+Analogy
+analysis
+Analysis
+another
+Another
+answer
+Answer
+appear
+Appear
+appears
+Appears
+application
+Application
+applications
+Applications
+applied
+Applied
+appropriate
+Appropriate
+approximation
+Approximation
+arbitrary
+Arbitrary
+assume
+Assume
+assume that
+Assume that
+assuming
+Assuming
+attention
+Attention
+backward
+Backward
+basis
+Basis
+basis of
+Basis of
+basis vectors
+Basis vectors
+be linearly
+Be linearly
+because
+Because
+become
+Become
+becomes
+Becomes
+before
+Before
+beginning
+Beginning
+better
+Better
+between
+Between
+block diagonal
+Block diagonal
+blocks
+Blocks
+called
+Called
+cannot
+Cannot
+certain
+Certain
+change
+Change
+chapter
+Chapter
+chapters
+Chapters
+characteristic
+Characteristic
+choice
+Choice
+choose
+Choose
+chosen
+Chosen
+clearly
+Clearly
+closed
+Closed
+coefficient
+Coefficient
+coefficients
+Coefficients
+column
+Column
+columns
+Columns
+columns of
+Columns of
+combination
+Combination
+commutative
+Commutative
+complete
+Complete
+completing
+Completing
+completingthe
+Completingthe
+complex
+Complex
+complex conjugate
+Complex conjugate
+complex number
+Complex number
+complex numbers
+Complex numbers
+complex vector
+Complex vector
+complex vector space
+Complex vector space
+complex vector spaces
+Complex vector spaces
+complicated
+Complicated
+compute
+Compute
+computed
+Computed
+computing
+Computing
+concept
+Concept
+conclude
+Conclude
+conclusion
+Conclusion
+condition
+Condition
+conditions
+Conditions
+conjugate
+Conjugate
+conjugate transpose
+Conjugate transpose
+consider
+Consider
+consisting
+Consisting
+consists
+Consists
+constant
+Constant
+contain
+Contain
+contains
+Contains
+context
+Context
+coordinate
+Coordinate
+coordinates
+Coordinates
+corollary
+Corollary
+corresponding
+Corresponding
+corresponding to
+Corresponding to
+counterexample
+Counterexample
+counting
+Counting
+course
+Course
+dealing
+Dealing
+decomposition
+Decomposition
+decomposition of
+Decomposition of
+decompositions
+Decompositions
+definition
+Definition
+definitions
+Definitions
+degree
+Degree
+dening
+Dening
+denote
+Denote
+denoted
+Denoted
+denotes
+Denotes
+depend
+Depend
+dependence
+Dependence
+dependence lemma
+Dependence lemma
+dependent
+Dependent
+depends
+Depends
+derivative
+Derivative
+described
+Described
+description
+Description
+desired
+Desired
+determinant
+Determinant
+determinant of
+Determinant of
+determinants
+Determinants
+develop
+Develop
+diagonal
+Diagonal
+diagonal entries
+Diagonal entries
+diagonal entries of
+Diagonal entries of
+diagonal matrices
+Diagonal matrices
+diagonal matrix
+Diagonal matrix
+different
+Different
+differentiable
+Differentiable
+differentiation
+Differentiation
+dimension
+Dimension
+dimension of the
+Dimension of the
+dimensional
+Dimensional
+direct
+Direct
+direct sum
+Direct sum
+direction
+Direction
+discussed
+Discussed
+distinct
+Distinct
+distinct eigenvalues
+Distinct eigenvalues
+divide
+Divide
+domain
+Domain
+dot product
+Dot product
+eigenpair
+Eigenpair
+eigenpairs
+Eigenpairs
+eigenvalue
+Eigenvalue
+eigenvalue of
+Eigenvalue of
+eigenvalues
+Eigenvalues
+eigenvalues of
+Eigenvalues of
+eigenvector
+Eigenvector
+eigenvectors
+Eigenvectors
+either
+Either
+element
+Element
+elements
+Elements
+emphasize
+Emphasize
+enough
+Enough
+entries
+Entries
+equalities
+Equalities
+equality
+Equality
+equals
+Equals
+equation
+Equation
+equations
+Equations
+equivalent
+Equivalent
+especially
+Especially
+exactly
+Exactly
+example
+Example
+examples
+Examples
+except
+Except
+exercise
+Exercise
+exercises
+Exercises
+existence
+Existence
+exists
+Exists
+expect
+Expect
+explicit
+Explicit
+explicitly
+Explicitly
+extend
+Extend
+extended
+Extended
+factor
+Factor
+factorization
+Factorization
+familiar
+Familiar
+fashion
+Fashion
+finite dimensional
+Finite dimensional
+finite-dimensional
+Finite-dimensional
+following
+Following
+follows
+Follows
+formula
+Formula
+function
+Function
+functional
+Functional
+functionals
+Functionals
+functions
+Functions
+furthermore
+Furthermore
+general
+General
+generalized
+Generalized
+getting
+Getting
+guarantees
+Guarantees
+happens
+Happens
+however
+However
+hypothesis
+Hypothesis
+identity
+Identity
+identity map
+Identity map
+identity operator
+Identity operator
+if and only if
+If and only if
+implies
+Implies
+implies that
+Implies that
+imply that
+Imply that
+important
+Important
+indeed
+Indeed
+independence
+Independence
+independent
+Independent
+induction
+Induction
+induction hypothesis
+Induction hypothesis
+inequality
+Inequality
+infinite dimensional
+Infinite dimensional
+infinite-dimensional
+Infinite-dimensional
+injective
+Injective
+inner product
+Inner product
+inner-product
+Inner-product
+inner-product space
+Inner-product space
+inner-product spaces
+Inner-product spaces
+innite
+Innite
+instead
+Instead
+insures
+Insures
+integer
+Integer
+integers
+Integers
+integral
+Integral
+integration
+Integration
+interchanged
+Interchanged
+interchanging
+Interchanging
+introduce
+Introduce
+intuitive
+Intuitive
+invariant
+Invariant
+invariant subspace
+Invariant subspace
+invariant subspaces
+Invariant subspaces
+invariant under
+Invariant under
+inverse
+Inverse
+inverses
+Inverses
+invertibility
+Invertibility
+invertible
+Invertible
+invertible linear map
+Invertible linear map
+is an eigenvalue
+Is an eigenvalue
+is injective
+Is injective
+is invertible
+Is invertible
+is self-adjoint
+Is self-adjoint
+isometries
+Isometries
+isometry
+Isometry
+isomorphic
+Isomorphic
+itself
+Itself
+language
+Language
+larger
+Larger
+largest
+Largest
+length
+Length
+linear
+Linear
+linear algebra
+Linear algebra
+linear combination
+Linear combination
+linear dependence
+Linear dependence
+linear functional
+Linear functional
+linear map
+Linear map
+linear maps
+Linear maps
+linearity
+Linearity
+linearly
+Linearly
+linearly dependent
+Linearly dependent
+linearly independent
+Linearly independent
+longer
+Longer
+making
+Making
+mathematician
+Mathematician
+mathematics
+Mathematics
+matrices
+Matrices
+matrix
+Matrix
+matrix with respect to
+Matrix with respect to
+meaning
+Meaning
+meaning that
+Meaning that
+means that
+Means that
+minimal
+Minimal
+minimal polynomial
+Minimal polynomial
+minimization
+Minimization
+motivation
+Motivation
+multiple
+Multiple
+multiple of
+Multiple of
+multiplication
+Multiplication
+multiplication by
+Multiplication by
+multiplication on
+Multiplication on
+multiplicities
+Multiplicities
+multiplicities of
+Multiplicities of
+multiplicity
+Multiplicity
+multiplicity of
+Multiplicity of
+multiply
+Multiply
+multiplying
+Multiplying
+namely
+Namely
+natural
+Natural
+natural order
+Natural order
+necessarily
+Necessarily
+needed
+Needed
+negative
+Negative
+nilpotent
+Nilpotent
+nilpotent operator
+Nilpotent operator
+no eigenvalues
+No eigenvalues
+nonconstant
+Nonconstant
+nonnegative
+Nonnegative
+nonnegative integer
+Nonnegative integer
+nonzero
+Nonzero
+nonzero vector
+Nonzero vector
+normal
+Normal
+normal operators
+Normal operators
+not injective
+Not injective
+not invertible
+Not invertible
+notation
+Notation
+notice
+Notice
+notion
+Notion
+notions
+Notions
+null space
+Null space
+null spaces
+Null spaces
+number
+Number
+numbers
+Numbers
+object
+Object
+obtained
+Obtained
+obvious
+Obvious
+obviously
+Obviously
+one-dimensional
+One-dimensional
+operator
+Operator
+operators
+Operators
+ordered
+Ordered
+origin
+Origin
+original
+Original
+orthogonal
+Orthogonal
+orthogonal to
+Orthogonal to
+orthonormal
+Orthonormal
+orthonormal bases
+Orthonormal bases
+orthonormal basis
+Orthonormal basis
+orthonormal basis of
+Orthonormal basis of
+orthonormal list
+Orthonormal list
+other direction
+Other direction
+otherwise
+Otherwise
+otherwords
+Otherwords
+paragraph
+Paragraph
+parallelogram
+Parallelogram
+parentheses
+Parentheses
+particular
+Particular
+permutation
+Permutation
+picture
+Picture
+pieces
+Pieces
+points
+Points
+polynomial
+Polynomial
+polynomials
+Polynomials
+positive
+Positive
+positive integer
+Positive integer
+positive operator
+Positive operator
+positive operators
+Positive operators
+possible
+Possible
+possibly
+Possibly
+powers
+Powers
+precisely
+Precisely
+presented
+Presented
+previous
+Previous
+probably
+Probably
+problem
+Problem
+problems
+Problems
+procedure
+Procedure
+process
+Process
+product
+Product
+productof
+Productof
+products
+Products
+projection
+Projection
+projections
+Projections
+proof
+Proof
+proofs
+Proofs
+properties
+Properties
+properties of
+Properties of
+property
+Property
+proposition
+Proposition
+prove that
+Prove that
+prove this
+Prove this
+proved
+Proved
+provethat
+Provethat
+proving
+Proving
+question
+Question
+ranges
+Ranges
+rather
+Rather
+real coefficients
+Real coefficients
+real inner-product
+Real inner-product
+real number
+Real number
+real numbers
+Real numbers
+real spectral
+Real spectral
+real vector
+Real vector
+real vector space
+Real vector space
+real vector spaces
+Real vector spaces
+real-valued
+Real-valued
+reasonable
+Reasonable
+recall
+Recall
+regardless
+Regardless
+remove
+Remove
+repeated
+Repeated
+replace
+Replace
+replaced
+Replaced
+replacing
+Replacing
+representation
+Representation
+require
+Require
+required
+Required
+respect
+Respect
+respect to
+Respect to
+result
+Result
+results
+Results
+rows of
+Rows of
+satises
+Satises
+scalar
+Scalar
+scalar multiple
+Scalar multiple
+scalar multiple of
+Scalar multiple of
+scalar multiplication
+Scalar multiplication
+scalars
+Scalars
+second
+Second
+section
+Section
+self-adjoint
+Self-adjoint
+should
+Should
+showed
+Showed
+showing
+Showing
+shows that
+Shows that
+similar
+Similar
+simple
+Simple
+singular
+Singular
+singular value
+Singular value
+singular values
+Singular values
+singular values of
+Singular values of
+singular-value
+Singular-value
+situation
+Situation
+smaller
+Smaller
+smallest
+Smallest
+solution
+Solution
+solutions
+Solutions
+some basis
+Some basis
+something
+Something
+spaces
+Spaces
+spanning
+Spanning
+special
+Special
+specically
+Specically
+spectral
+Spectral
+spectral theorem
+Spectral theorem
+square
+Square
+square matrices
+Square matrices
+square matrix
+Square matrix
+square root
+Square root
+squares
+Squares
+standard
+Standard
+standard basis
+Standard basis
+started
+Started
+statement
+Statement
+states
+States
+states that
+States that
+structure
+Structure
+structure of
+Structure of
+students
+Students
+subject
+Subject
+subset
+Subset
+subsets
+Subsets
+subspace
+Subspace
+subspace of
+Subspace of
+subspaces
+Subspaces
+subspaces of
+Subspaces of
+such that
+Such that
+suppose
+Suppose
+suppose that
+Suppose that
+surjective
+Surjective
+symbol
+Symbol
+system
+System
+taking
+Taking
+techniques
+Techniques
+the dimension of the
+The dimension of the
+the left side of
+The left side of
+the left side of the equation
+The left side of the equation
+the right side of
+The right side of
+the right side of the equation
+The right side of the equation
+the spectral theorem
+The spectral theorem
+the vector space
+The vector space
+theorem
+Theorem
+theory
+Theory
+there exist
+There exist
+there exists
+There exists
+this follows
+This follows
+this implies
+This implies
+this result
+This result
+though
+Though
+thought
+Thought
+through
+Through
+together
+Together
+transpose
+Transpose
+triangle
+Triangle
+triangular
+Triangular
+trivial
+Trivial
+two-dimensional
+Two-dimensional
+typical
+Typical
+understand
+Understand
+understanding
+Understanding
+unique
+Unique
+uniquely
+Uniquely
+uniqueness
+Uniqueness
+upper triangular
+Upper triangular
+upper-triangular
+Upper-triangular
+useful
+Useful
+usually
+Usually
+values
+Values
+variables
+Variables
+vector
+Vector
+vector space
+Vector space
+vector spaces
+Vector spaces
+vectors
+Vectors
+verify
+Verify
+volume
+Volume
+volumes
+Volumes
+whenever
+Whenever
+whereas
+Whereas
+whether
+Whether
+which means
+Which means
+with respect
+With respect
+with respect to
+With respect to
+without
+Without
+working
+Working
+writing
+Writing
+written
+Written
+written uniquely
+Written uniquely

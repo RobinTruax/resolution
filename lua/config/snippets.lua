@@ -1014,7 +1014,6 @@ left         (string)  : left delimiter                     (required)
 right        (string)  : right delimiter                    (required)
 cmd_left     (string)  : left delimiter (command form)      (optional)
 cmd_right    (string)  : right delimiter (command form)     (optional)
-english_only (boolean) : english only (as opposed to Greek) (optional)
 --]]
 
 config.delimiters       = {

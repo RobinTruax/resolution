@@ -5,12 +5,31 @@ removeTrailingWhitespace:
 lookForAlignDelims: 
   alignFinalDoubleBackSlash: 1
   alignContentAfterDoubleBackSlash: 1
+verbatimEnvironments:
+    equation*: 1
 modifyLineBreaks: 
+  textWrapOptions:
+    beforeFindingChildCodeBlocks: 0
   oneSentencePerLine: 
     manipulateSentences: 1
     removalSentenceLineBreaks: 1
     textWrapSentences: 0
   environments: 
+    BeginStartsOnOwnLine: 1
     BodyStartsOnOwnLine: 1
     EndStartsOnOwnLine: 1
-    DBSFinishesWithLineBreak: 1
+    EndFinishesWithLineBreak: 1
+    DBSFinishesWithLineBreak: 0
+    equation*: 
+      BeginStartsOnOwnLine: 1
+      BodyStartsOnOwnLine: 1
+      EndStartsOnOwnLine: 1
+      EndFinishesWithLineBreak: 1
+      DBSFinishesWithLineBreak: 0
+  verbatim:
+    VerbatimBeginStartsOnOwnLine: 1
+    VerbatimEndFinishesWithLineBreak: 1
+  mandatoryArguments:
+    label:
+       RCuBFinishesWithLineBreak: 1
+

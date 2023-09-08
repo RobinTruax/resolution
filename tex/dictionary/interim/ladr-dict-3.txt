@@ -1,0 +1,31 @@
+Suppose that $V$ is
+Suppose $V$ is a complex vector space
+Suppose $V$ is a real vector space
+a diagonal matrix
+a linear combination
+a positive integer
+a real inner product space
+a scalar multiple
+a square matrix
+an eigenvalue of
+an inner product space
+an orthonormal basis
+an orthonormal list
+real vector space
+complex vector space
+determinant of
+diagonal entries of
+dimension of the
+eigenvalue of
+eigenvalues of
+invariant under
+is an eigenvalue
+matrix with respect to
+orthonormal basis of
+real vector space
+real vector spaces
+scalar multiple of
+singular values of
+the spectral theorem
+the vector space
+with respect to

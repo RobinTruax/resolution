@@ -18,6 +18,7 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ------------------------------------------------------------------------------]]
 
+
 return {
 
     ----------------------------- manipulating windows -----------------------------
@@ -183,6 +184,12 @@ return {
         cmd = '<Esc>:noh<cr><cr>',
         mode = 'n',
         opts = { silent = true },
+    },
+    ['<S-cr>'] = {
+        desc = 'Forced enter',
+        cmd = '<cr>',
+        mode = 'n',
+        opts = { silent = true, noremap = true },
     },
     ['<Esc>'] = {
         desc = 'Fixing escape in terminal',

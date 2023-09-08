@@ -71,7 +71,7 @@ napkin.set_keybinds = function(popups)
         -- yank and quit
         v:map('n', '<localleader>y', function()
             vim.api.nvim_set_current_win(napkin_popup.output_tex.winid)
-            vim.cmd('norm VGy')
+            vim.cmd('norm v$Gy')
             napkin_popup.layout:unmount()
         end)
         -- send and named-send

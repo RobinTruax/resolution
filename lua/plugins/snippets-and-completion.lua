@@ -1,43 +1,82 @@
---[[------------------- resolution v0.1.0 -----------------------
+--[[--------------------------- resolution v0.1.0 ------------------------------
 
-all plugins relating to LSP, autocompletion, snippets, etc.
+resolution is a Neovim config for writing TeX and doing computation math.
 
--------------------------------------------------------------]]
+All plugins relating to LSP, autocompletion, snippets, etc.
+
+Copyright (C) 2023 Roshan Truax
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) at any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------]]
+
+--------------------------------- dependencies ---------------------------------
 
 local prefs = require('config.preferences')
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 return {
 
-    ----------------------- LuaSnip: snippets -----------------------
+    ------------------------------ LuaSnip: snippets -------------------------------
     {
         'L3MON4D3/LuaSnip',
-        event = 'VeryLazy', 
-        -- ft = { 'tex', 'py', 'lua' },
+
+        -- trigger
+        event = 'VeryLazy',
+
+        -- freeze to avoid bug
         pin = true,
         commit = '4964cd11e19de4671189b97de37f3c4930d43191',
+
+        -- dependencies
         dependencies = {
             'rafamadriz/friendly-snippets',
         },
+
+        -- configuration
         config = function()
+
             -- dependencies
             local ls = require('luasnip')
             local loaders = require('luasnip.loaders.from_lua')
             local types = require('luasnip.util.types')
 
-            -- lazy load functions
+            -- load latex snippets defined in resolution
             loaders.lazy_load({ paths = './lua/snippets' })
 
-            -- set up luasnip (mappings are configured on the level of nvim-cmp)
+            -- load snippets for all other filetypes provided by friendly-snippets
+            require("luasnip.loaders.from_vscode").lazy_load({
+                exclude = { "latex", "tex", "sty" },
+            })
+
+            -- set options (mappings are configured in nvim-cmp)
             ls.config.set_config({
+
+                -- history = false to avoid accidental jumps
                 history = false,
+
+                -- events which balance catching updates & performance
                 update_events = { 'InsertLeave' },
                 region_check_events = { 'CursorMoved' },
                 delete_check_events = { 'TextChanged', 'InsertLeave' },
+
+                -- setting up visual-style snippets
                 store_selection_keys = '<Tab>',
+
+                -- enabling autosnippets
                 enable_autosnippets = true,
+
+                -- visual indicator for insert nodes
                 ext_opts = {
+
                     [types.insertNode] = {
                         active = {
                             virt_text = { { '●', 'Snippet' } }
@@ -48,26 +87,54 @@ return {
         end
     },
 
+    --------------------------- nvim-autopairs: pairing ----------------------------
+    {
+        'windwp/nvim-autopairs',
+
+        -- trigger
+        event = 'InsertEnter',
+
+        config = function()
+
+            -- dependency (itself)
+            local npairs = require("nvim-autopairs")
+            local Rule = require('nvim-autopairs.rule')
+            local cond = require('nvim-autopairs.conds')
+
+            -- setup
+            npairs.setup({
+                map_cr = false
+            })
+
+            npairs.add_rule(
+              Rule("$", "$",{"tex", "latex"})
+                :with_pair(cond.not_before_regex("\\", 3))
+            )
+        end
+    },
+
     ------------------- nvim-cmp: autocompletion --------------------
     {
         'hrsh7th/nvim-cmp',
+
+        -- trigger
         event = 'InsertEnter',
+
         dependencies = {
-            -- luasnip (so mappings can be unified)
+            -- for mapping
             'L3MON4D3/LuaSnip',
+
             -- completion sources
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-buffer',
-            -- 'uga-rosa/cmp-dictionary',
             'rafamadriz/friendly-snippets',
-            'kdheepak/cmp-latex-symbols',
             'FelipeLema/cmp-async-path',
-            'hrsh7th/cmp-calc',
             'uga-rosa/cmp-dynamic',
         },
         config = function()
+
             -- dependencies
             local cmp = require('cmp')
             local luasnip = require('luasnip')
@@ -91,6 +158,7 @@ return {
                 },
                 -- mappings
                 mapping = cmp.mapping.preset.insert {
+                    -- assorted maps
                     ['<C-n>'] = cmp.mapping.select_next_item(),
                     ['<C-p>'] = cmp.mapping.select_prev_item(),
                     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -99,7 +167,8 @@ return {
                         behavior = cmp.ConfirmBehavior.Replace,
                         select = true,
                     }),
-                    ['<Tab>'] = cmp.mapping(function(fallback)
+                    -- tab map
+                    ["<Tab>"] = cmp.mapping(function(fallback)
                         if luasnip.expand_or_locally_jumpable() then
                             luasnip.expand_or_jump()
                         elseif cmp.visible() then
@@ -109,7 +178,8 @@ return {
                         else
                             fallback()
                         end
-                    end, { 'i', 's' }),
+                    end, { "i", "s" }),
+                    -- shift-tab map
                     ['<S-Tab>'] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
@@ -122,49 +192,36 @@ return {
                 },
                 -- completion sources
                 sources = {
+                    -- text in buffer
+                    {
+                        name = 'buffer',
+                        priority = 10,
+                    },
                     -- math dictionary
                     {
                         name = 'dynamic',
                         keyword_length = 2,
-                        priority = 10,
+                        priority = 9,
                     },
                     -- snippets
                     {
                         name = 'luasnip',
-                        priority = 9
+                        priority = 8
                     },
                     -- nvim lsp
                     {
                         name = 'nvim_lsp',
-                        priority = 8
+                        priority = 6
                     },
                     {
                         name = 'nvim_lsp_signature_help',
-                        priority = 8
-                    },
-                    -- latex symbols
-                    {
-                        name = 'latex_symbols',
-                        option = {
-                            strategy = 2,
-                        },
-                        priority = 4,
+                        priority = 4
                     },
                     -- path completion
                     {
                         name = 'async_path',
                         priority = 3,
                     },
-                    -- simple-in system calculations
-                    {
-                        name = 'calc',
-                        priority = 2,
-                    },
-                    -- text in buffer
-                    -- {
-                    --     name = 'buffer',
-                    --     priority = 1,
-                    -- },
                 },
                 -- sorting
                 sorting = {
@@ -180,6 +237,7 @@ return {
                 }
             })
 
+            -- dictionary entries
             local dictionary_entries = require('tex.generate_dictionary')(prefs.dictionary_files)
             require('cmp_dynamic').register(dictionary_entries)
         end

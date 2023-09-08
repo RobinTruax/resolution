@@ -29,12 +29,16 @@ local cfg = vim.fn.stdpath('config')
 
 -- where projects are stored
 prefs.project_root_path = '/home/roshan/Documents/Mathematics'
+
+------------------------------- other locations --------------------------------
+
 -- style file for formatting LaTeX
 prefs.format_style_file = cfg .. '/tex/format-style.yaml'
 -- dictionary files
 prefs.dictionary_files = {
-    cfg .. '/tex/dictionary/proof-of-concept.txt'
+    cfg .. '/tex/dictionary/dictionary.txt'
 }
+
 
 ----------------------------- vimtex configuration -----------------------------
 
@@ -52,6 +56,8 @@ glb.vimtex_quickfix_ignore_filters = {
     'atopwithdelims',
     'has changed',
     'Package hyperref Warning',
+    'Font shape',
+    'Warning: Token not allowed',
 }
 
 --------------------------------- leader keys ----------------------------------

@@ -17,6 +17,9 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ------------------------------------------------------------------------------]]
 
+--------------------------------- dependencies ---------------------------------
+local utilities = require('core.utilities')
+
 ------------- install a faster fuzzy searcher if on a unix system --------------
 
 local fzf = {}
@@ -53,6 +56,7 @@ return {
             'BurntSushi/ripgrep',
             'AckslD/nvim-neoclip.lua',
             'debugloop/telescope-undo.nvim',
+            'nvim-telescope/telescope-bibtex.nvim',
         },
 
         -- configuration
@@ -60,7 +64,14 @@ return {
             -- set up telescope
             require('telescope').setup({
                 defaults = require('plugins.telescope.default_opts'),
-                pickers = require('plugins.telescope.picker_opts')
+                pickers = require('plugins.telescope.picker_opts'),
+                extensions = {
+                    bibtex = {
+                        global_files = {
+                            utilities.config_path() .. '/tex/style/zotero.bib'
+                        },
+                    }
+                }
             })
 
             -- eliminate a gap in telescope's positioning
@@ -84,6 +95,7 @@ return {
             end
             require('telescope').load_extension('neoclip')
             require('telescope').load_extension('undo')
+            require('telescope').load_extension('bibtex')
         end,
     },
 

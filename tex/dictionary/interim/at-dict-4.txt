@@ -1,0 +1,3 @@
+from the definition of
+the Kunneth formula
+the homotopy type of

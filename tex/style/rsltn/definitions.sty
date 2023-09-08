@@ -21,6 +21,43 @@
 
 \RequirePackage{xspace} % fixing spacing
 
+% ----------------------------------- Code -------------------------------------
+
+\RequirePackage{listings} % code environment
+
+% % Standard rsltn code styling
+\lstdefinestyle{rstln-standard}{
+    basicstyle=\footnotesize\ttfamily,
+    columns=fullflexible,
+    frame=single,
+    numbers=left,
+    numbersep=10pt,
+    numberstyle=\footnotesize\color{rsltnNumbers}\ttfamily,
+    commentstyle=\color{rsltnComment},
+    keywordstyle=\color{rsltnKeyword},
+    stringstyle=\color{rsltnString},
+    showstringspaces=false,
+    breaklines=true,
+    tabsize=4,
+}
+\lstset{style=rstln-standard}
+
+\lst@definelanguage{GAP}{%
+    morekeywords={%
+    Assert,Info,IsBound,QUIT,%
+    TryNextMethod,Unbind,and,break,%
+    continue,do,elif,%
+    else,end,false,fi,for,%
+    function,if,in,local,%
+    mod,not,od,or,%
+    quit,rec,repeat,return,%
+    then,true,until,while%
+    },%
+    sensitive,%
+    morecomment=[l]\#,%
+    morestring=[b]",%
+    morestring=[b]’,%
+}[keywords,comments,strings]
 % ------------------------------ Custom Objects --------------------------------
 
 % Grey line for separating problems

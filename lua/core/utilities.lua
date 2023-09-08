@@ -125,6 +125,11 @@ utilities.trim_path_file = function(path)
     return vim.fn.fnamemodify(path, ':t')
 end
 
+-- trim the path to file
+utilities.trim_path_file_name_only = function(path)
+    return vim.fn.fnamemodify(path, ':t:r')
+end
+
 -- read file to string, collapsing newlines
 utilities.string_from_file = function(path)
     if not utilities.file_exists(path) then return '' end
@@ -265,6 +270,18 @@ utilities.append_string_to_file = function(string, file)
     else
         error('Unrecognized operating system.')
     end
+end
+
+------------------------------------ other -------------------------------------
+
+utilities.has_value = function(tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+
+    return false
 end
 
 --------------------------------------------------------------------------------

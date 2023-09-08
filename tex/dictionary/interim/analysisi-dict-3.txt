@@ -1,0 +1,38 @@
+a Cauchy sequence
+a bounded interval
+a function from
+a function which
+a natural number
+a partially ordered
+a piecewise constant
+a positive integer
+a positive number
+a rational number
+all natural numbers
+all real numbers
+any real number
+at most countable
+axiom of choice
+each natural number
+eventually close to
+every element of
+every natural number
+every real number
+extended real number
+$f$ is continuous at
+$f$ is differentiable at
+for instance
+least upper bound
+greatest lower bound
+natural number $n$
+of real numbers
+some natural number
+some real number
+strict upper bound
+that there exists
+the real numbers
+the squeeze test
+the sandwich theorem
+then there exists
+there exists an
+with respect to

@@ -2,7 +2,7 @@
 
 resolution is a Neovim config for writing TeX and doing computational math.
 
-This file provides operations for the computational environment called the
+This file provides file operations for the computational environment called the
 Notebook.
 
 Copyright (C) 2023 Roshan Truax
@@ -38,9 +38,9 @@ notebook.get_notebook_filename = function()
     return utilities.current_directory() .. '/notebook.py'
 end
 
--- create notebook
-notebook.create_notebook = function(path)
-    local default = utilities.config_path() .. '/lua/computation/py/notebook.py'
+-- create notebook TODO:
+notebook.create_notebook = function(path, kernel)
+    local default = utilities.config_path() .. '/lua/computation/' .. kernel.folder .. '/notebook.py'
     if not utilities.file_exists(path) then
         vim.notify('Creating notebook file', vim.log.levels.INFO)
         utilities.copy_file(default, path)
@@ -77,7 +77,7 @@ end
 
 -- choose kernel
 notebook.kernel_menu = function()
-    vim.ui.select(config_computation.default_kernels, {
+    vim.ui.select(config_computation.kernel_list, {
         prompt = ' Kernel to Launch in Project ',
         format_item = function(item)
             local spaces = item.name:len() + item.desc:len()
@@ -100,6 +100,9 @@ notebook.kernel_start = function(kernel)
         notebook.kernel_menu()
     else
         vim.schedule(function()
+            local path = notebook.get_notebook_filename()
+            notebook.create_notebook(path, kernel)
+            notebook.open_notebook(path)
             vim.notify('Launching kernel for notebook', vim.log.levels.INFO)
             vim.cmd('MagmaInit ' .. kernel.cmd)
             notebook.initialized[utilities.current_filepath()] = true
@@ -110,8 +113,6 @@ end
 -- complete notebook initialization process
 notebook.initialize = function()
     local path = notebook.get_notebook_filename()
-    notebook.create_notebook(path)
-    notebook.open_notebook(path)
     if notebook.initialized[path] ~= true then
         notebook.kernel_menu()
     end
