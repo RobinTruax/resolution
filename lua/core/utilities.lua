@@ -26,6 +26,13 @@ local utilities = {}
 local prefs = require('config.preferences')
 local cfg_filesys = require('config.advanced.filesys')
 
+--------------------------------- meta-utility ---------------------------------
+
+utilities.escape_for_windows = function(str)
+    return string.gsub(str, "test", "(.)", "^%1")
+end
+
+
 --------------------------------- system calls ---------------------------------
 
 -- change dir
@@ -33,7 +40,7 @@ utilities.exec_in_dir = function(command, dir)
     if vim.g.windows == false then
         return vim.fn.system(string.format('(cd %s; %s)', dir, command))
     elseif vim.g.windows == true then
-        error('Windows is not implemented yet.')
+        return vim.fn.system(string.format('pushd %s && %s', dir, utilities.escape_for_windows(command)))
     else
         error('Unrecognized operating system.')
     end
@@ -54,7 +61,7 @@ utilities.get_files_in_directory = function(dir)
     if vim.g.windows == false then
         iterator = io.popen('ls -pa ' .. dir .. ' | grep -v /')
     elseif vim.g.windows == true then
-        iterator = io.popen('dir "' .. dir .. '" /b')
+        iterator = io.popen('dir ' .. dir .. ' /a-d /b')
     else
         error('Unrecognized operating system.')
     end
@@ -76,7 +83,7 @@ utilities.get_subdirs_in_directory = function(dir)
     if vim.g.windows == false then
         iterator = io.popen('ls -d ' .. dir .. '/*')
     elseif vim.g.windows == true then
-        error('Windows is not implemented yet.')
+        iterator = io.popen('dir ' .. dir .. ' /ad /b')
     else
         error('Unrecognized operating system.')
     end
@@ -222,7 +229,8 @@ utilities.symlink = function(oldloc, newloc)
     if vim.g.windows == false then
         vim.fn.system(string.format('ln -s %s %s', oldloc, newloc))
     elseif vim.g.windows == true then
-        error('Windows not implemented.')
+        newloc = newloc .. '/' .. utilities.trim_path_file(oldloc)
+        vim.fn.system(string.format('mklink \\d %s %s', oldloc, newloc))
     else
         error('Unrecognized operating system.')
     end
@@ -233,7 +241,7 @@ utilities.create_directory = function(location)
     if vim.g.windows == false then
         vim.fn.system(string.format('mkdir %s', location))
     elseif vim.g.windows == true then
-        vim.fn.system(string.format('md "%s"', location))
+        vim.fn.system(string.format('md %s', location))
     else
         error('Unrecognized operating system.')
     end
@@ -244,7 +252,7 @@ utilities.move_folder = function(oldloc, newloc)
     if vim.g.windows == false then
         vim.fn.system(string.format('mv %s %s', oldloc, newloc))
     elseif vim.g.windows == true then
-        vim.fn.system(string.format('move "%s" "%s"', oldloc, newloc))
+        vim.fn.system(string.format('move %s %s', oldloc, newloc))
     else
         error('Unrecognized operating system.')
     end
@@ -255,29 +263,29 @@ utilities.copy_file = function(from, to)
     if vim.g.windows == false then
         vim.fn.system(string.format('cp %s %s', from, to))
     elseif vim.g.windows == true then
-        vim.fn.system(string.format('copy "%s" "%s"', from, to))
+        vim.fn.system(string.format('copy %s %s', from, to))
     else
         error('Unrecognized operating system.')
     end
 end
 
 -- write string to file (overwrites)
-utilities.write_string_to_file = function(string, file)
+utilities.write_string_to_file = function(str, file)
     if vim.g.windows == false then
-        vim.fn.system(string.format('echo "%s" > %s', string, file))
+        vim.fn.system(string.format('echo "%s" > %s', str, file))
     elseif vim.g.windows == true then
-        vim.fn.system(string.format('echo "%s" > %s', string, file))
+        vim.fn.system(string.format('echo %s > %s', utilities.escape_for_windows(str), file))
     else
         error('Unrecognized operating system.')
     end
 end
 
 -- append string to file (does not overwrite)
-utilities.append_string_to_file = function(string, file)
+utilities.append_string_to_file = function(str, file)
     if vim.g.windows == false then
-        vim.fn.system(string.format('echo "%s" >> %s', string, file))
+        vim.fn.system(string.format('echo "%s" >> %s', str, file))
     elseif vim.g.windows == true then
-        vim.fn.system(string.format('echo "%s" >> %s', string, file))
+        vim.fn.system(string.format('echo %s >> %s', utilities.escape_for_windows(str), file))
     else
         error('Unrecognized operating system.')
     end
