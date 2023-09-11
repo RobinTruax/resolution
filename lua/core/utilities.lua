@@ -43,6 +43,10 @@ end
 
 -- get all files in a directory
 utilities.get_files_in_directory = function(dir)
+    -- check for existence
+    if utilities.directory_exists(dir) ~= true then
+        return {}
+    end
     -- initalize
     local files = {}
     local iterator = nil
@@ -107,7 +111,10 @@ end
 
 -- check if directory exists
 utilities.directory_exists = function(path)
-    return vim.fn.isdirectory(path)
+    if vim.fn.isdirectory(path) == 0 then
+        return false
+    end
+    return true
 end
 
 -- get config path
@@ -180,6 +187,10 @@ end
 -- gets path of current project
 utilities.current_project_path = function()
     return utilities.cut_path_to_project(utilities.current_filepath())
+end
+
+utilities.robust_current_project_path = function()
+    return utilities.cut_path_to_project(vim.fn.getcwd() .. '/blep')
 end
 
 -- returns project name

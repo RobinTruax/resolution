@@ -64,7 +64,7 @@ return {
 
         -- configuration
         config = function()
-            vim.g.lazygit_floating_window_border_chars = require('core.ui').get_borders_or_less()
+            vim.g.lazygit_floating_window_border_chars = require('core.ui').get_borders()
             vim.g.lazygit_floating_window_scaling_factor = 0.8
         end
     },

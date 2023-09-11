@@ -32,11 +32,19 @@ notebook_files.initialized = {}
 
 -------------------------------- get page path ---------------------------------
 
+notebook_files.get_folder_path = function()
+    -- get path
+    local path = string.format('%snotebook',
+        utilities.current_project_path())
+    -- return
+    return path
+end
+
 notebook_files.get_path = function(page)
     -- format page name
     local formatted_page = string.format('%03d', page)
     -- get path
-    local path = string.format('%s/notebook/%s.py',
+    local path = string.format('%snotebook/%s.py',
         utilities.current_project_path(),
         formatted_page)
     -- return
@@ -47,7 +55,7 @@ end
 
 notebook_files.get_pages = function()
     -- paths
-    local project_path = utilities.current_project_path()
+    local project_path = utilities.robust_current_project_path()
     local notebook_path = project_path .. 'notebook/'
     -- get pages
     local files = utilities.get_files_in_directory(notebook_path)
@@ -74,8 +82,12 @@ notebook_files.choose_kernel = function(path)
             -- start kernel
             vim.schedule(function()
                 if path ~= nil then
+                    local folder_path = notebook_files.get_folder_path()
+                    if utilities.directory_exists(folder_path) ~= true then
+                        utilities.create_directory(folder_path)
+                    end
                     notebook_files.create_page(path, choice)
-                    vim.cmd('e ' .. choice)
+                    vim.cmd('e ' .. path)
                 end
                 vim.notify('Launching kernel for notebook', vim.log.levels.INFO)
                 vim.cmd('MagmaInit ' .. choice.cmd)
@@ -108,8 +120,8 @@ notebook_files.add_page = function()
     -- list of all pages
     local pages = notebook_files.get_pages()
     local numbers = {}
-    for page in ipairs(pages) do
-        numbers.append(tonumber(utilities.trim_path_file_name_only(page)))
+    for _,page in ipairs(pages) do
+        numbers[#numbers + 1] = tonumber(utilities.trim_path_file_name_only(page))
     end
     -- find smallest number not in list
     local smallest = 0
@@ -130,43 +142,57 @@ end
 notebook_files.open_page = function()
     -- get pages
     local pages = notebook_files.get_pages()
+    if #pages == 0 then
+        vim.notify('No pages to choose from. Create a page first.', vim.log.levels.WARN)
+        notebook_files.add_page()
+    else
     -- page choice menu
-    vim.ui.select(pages, {
-        prompt = ' Open page ',
-        format_item = function(item)
-            return utilities.trim_path_file(item)
-        end,
-    }, function(choice)
-        -- open page
-        if choice ~= nil then
-            vim.cmd('e ' .. choice)
-            notebook_files.choose_kernel(nil)
-        end
-    end)
+        vim.ui.select(pages, {
+            prompt = ' Open page ',
+            format_item = function(item)
+                return utilities.trim_path_file(item)
+            end,
+        }, function(choice)
+            -- open page
+            if choice ~= nil then
+                vim.cmd('e ' .. choice)
+                if notebook_files.initialized[choice] ~= true then
+                    notebook_files.choose_kernel(nil)
+                end
+            end
+        end)
+    end
 end
 
 ------------------------------------- main -------------------------------------
 
 notebook_files.main = function()
-    vim.ui.select({
+    vim.ui.select(
         -- options
         {
             {'open', ' Open page '},
             {'create', ' Create page '},
-        }, prompt = 'Open or create page',
-        -- format item
-        format_item = function(item)
-            return item[2]
-        end
-    }, function(choice)
-        -- open
-        if choice[1] == 'open' then
-            notebook_files.open_page()
-        -- create
-        elseif choice[1] == 'create' then
-            notebook_files.create_page()
-        end
-    end)
+        },
+        {
+            -- prompt
+            prompt = 'Open or create page',
+            -- format item
+            format_item = function(item)
+                return item[2]
+            end
+        }, function(choice)
+            if choice == nil then
+                return
+            else
+                -- open
+                if choice[1] == 'open' then
+                    notebook_files.open_page()
+                -- create
+                elseif choice[1] == 'create' then
+                    notebook_files.add_page()
+                end
+            end
+        end)
 end
 
 --------------------------------------------------------------------------------

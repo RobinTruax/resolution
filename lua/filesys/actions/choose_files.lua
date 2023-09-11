@@ -28,7 +28,7 @@ local choose_files = function(opts)
     -- set options
     opts = opts or {}
     opts.cwd = core_utils.current_project_path()
-    opts.file_ignore_patterns = { '%.pdf', config_filesys.project_info_name }
+    opts.file_ignore_patterns = { 'aux/', '%.pdf', config_filesys.project_info_name, 'indent.log', '%.synctex.gz' }
     -- call searcher
     require('telescope.builtin').find_files(opts)
 end

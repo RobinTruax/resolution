@@ -1,6 +1,3 @@
-# Created by https://www.toptal.com/developers/gitignore/api/latex,python
-# Edit at https://www.toptal.com/developers/gitignore?templates=latex,python
-
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
 *.aux
@@ -481,5 +478,3 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
-
-# End of https://www.toptal.com/developers/gitignore/api/latex,python

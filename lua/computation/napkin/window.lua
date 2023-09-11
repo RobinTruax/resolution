@@ -56,6 +56,7 @@ popup.sympy = Popup({
         style = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
         text = {
             top = NuiText(' SymPy ', 'SpecialChar'),
+            -- bottom = NuiText(' q: quit ', 'SpecialChar')
             bottom = NuiText(' \\s, \\S: send ', 'SpecialChar')
         },
     },
@@ -75,6 +76,7 @@ popup.output_tex = Popup({
         text = {
             top = NuiText(' Output ', 'CommandMode'),
             bottom = NuiText(' q: quit, \\y: yank/quit ', 'CommandMode')
+            -- bottom = NuiText(' \\y: yank/quit ', 'CommandMode')
         },
     },
     focusable = true,

@@ -36,7 +36,7 @@ notebook_actions.register_keybinds = function()
     local flat_direct = {}
     local flat_hydra = {}
     -- create keybinds
-    for k, v in pairs(config.direct_keybinds) do
+    for k, v in pairs(config.keybinds) do
         -- direct keybinds
         map('n', '<localleader>' .. k, v[1], { desc = v[2], buffer = true, silent = true })
         -- hydra keybinds
@@ -106,17 +106,43 @@ notebook_actions.keybind_operations = {
             vim.cmd('wincmd p')
         end
     end,
+    -- create or open
+    create_or_open = function()
+        vim.cmd('norm $')
+        require('computation.notebook.files').main()
+    end,
 }
 
 ------------------------------------ hooks -------------------------------------
 
+notebook_actions.choose_page_callback = function(callback_function)
+    local notebook_files = require('computation.notebook.files')
+    local pages = notebook_files.get_pages()
+    if #pages == 0 then
+        vim.notify('No pages to choose from.', vim.log.levels.WARN)
+        notebook_files.add_page()
+    else
+    -- page choice menu
+        vim.ui.select(pages, {
+            prompt = ' Open page ',
+            format_item = function(item)
+                return utilities.trim_path_file(item)
+            end,
+        }, function(choice)
+            -- initiate callback
+            if choice ~= nil then
+                callback_function(choice)
+            end
+        end)
+    end
+end
+
 -- send some text to the notebook
 notebook_actions.write_to_notebook = function(string)
-    local notebook_files = require('computation.notebook.files')
-    local path = notebook_files.get_notebook_filename()
-    notebook_files.create_notebook(path)
-    utilities.append_string_to_file('\n' .. string, path)
-    vim.notify('Code sent to the notebook', vim.log.levels.INFO)
+    notebook_actions.choose_page_callback(function(choice)
+        utilities.append_string_to_file('\n' .. string, choice)
+        vim.notify('Code sent to the notebook', vim.log.levels.INFO)
+    end)
 end
 
 -- name something and send some text to the notebook

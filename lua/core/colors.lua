@@ -41,6 +41,7 @@ end
 colors.set_colorscheme = function(scheme, mode)
     -- first set mode
     vim.o.background = mode
+    vim.g.colorscheme = scheme
 
     -- set colorscheme
     if colorschemes.colorscheme_configs[scheme] == nil then

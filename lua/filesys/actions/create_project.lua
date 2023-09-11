@@ -100,15 +100,11 @@ create_project.location = function(name, proj_type, opts)
             vim.cmd('cd ' .. dir_name)
             -- create file template
             local style_folder = core_utils.config_path() .. '/tex/style'
-            local python_folder = core_utils.config_path() .. '/lua/computation/py'
-            local package_folder = prefs.project_root_path .. '/' .. config_filesys.packages_folder
-            local bibliography_folder = prefs.project_root_path .. '/' .. config_filesys.bibliography_folder
+            local computation_folder = core_utils.config_path() .. '/lua/computation/context'
             -- symlinks
             vim.notify('Creating Symlinks...', vim.log.levels.INFO)
             core_utils.symlink(style_folder, dir_name)
-            core_utils.symlink(python_folder, dir_name)
-            core_utils.symlink(package_folder, dir_name)
-            core_utils.symlink(bibliography_folder, dir_name)
+            core_utils.symlink(computation_folder, dir_name)
             -- populate project
             if opts.github ~= true then
                 choose_template({ prompt_title = 'Create Starter File' })

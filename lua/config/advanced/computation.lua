@@ -86,67 +86,73 @@ computation.keybinds = {
     -- run cell
     [ 'r' ] = {
         function()
-            require('computation.notebook').keybind_operations.run()
+            require('computation.notebook.actions').keybind_operations.run()
         end,
         '[r]un cell'
     },
     -- run cell & move
     [ 'R' ] = {
         function()
-            require('computation.notebook').keybind_operations.run_move()
+            require('computation.notebook.actions').keybind_operations.run_move()
         end,
         '[R]un cell and move'
     },
     -- next cell
     [ 'j' ] = {
         function()
-            require('computation.notebook').keybind_operations.next_cell()
+            require('computation.notebook.actions').keybind_operations.next_cell()
         end,
         'move down'
     },
     -- previous cell
     [ 'k' ] = {
         function()
-            require('computation.notebook').keybind_operations.prev_cell()
+            require('computation.notebook.actions').keybind_operations.prev_cell()
         end,
         'move up'
     },
     -- visual select cell
     [ 'v' ] = {
         function()
-            require('computation.notebook').keybind_operations.select_cell()
+            require('computation.notebook.actions').keybind_operations.select_cell()
         end, '[v]isual cell'
     },
     -- comment cell
     [ 'c' ] = {
         function()
-            require('computation.notebook').keybind_operations.comment_cell()
+            require('computation.notebook.actions').keybind_operations.comment_cell()
         end, '[c]omment cell'
     },
     -- add cell above
     [ 'a' ] = {
         function()
-            require('computation.notebook').keybind_operations.add_cell_above()
+            require('computation.notebook.actions').keybind_operations.add_cell_above()
         end, 'cell [a]bove'
     },
     -- add cell below
     [ 'b' ] = {
         function()
-            require('computation.notebook').keybind_operations.add_cell_below()
+            require('computation.notebook.actions').keybind_operations.add_cell_below()
         end, 'cell [b]elow'
     },
     -- yank cell
     [ 'y' ] = {
         function()
-            require('computation.notebook').keybind_operations.copy_cell()
+            require('computation.notebook.actions').keybind_operations.copy_cell()
         end, '[y]ank cell'
     },
     -- copy output
     [ 'o' ] = {
         function()
-            require('computation.notebook').keybind_operations.copy_output()
+            require('computation.notebook.actions').keybind_operations.copy_output()
         end,
         'copy [o]utput'
+    },
+    -- create or open new page
+    [ 'C' ] = {
+        function()
+            require('computation.notebook.actions').keybind_operations.create_or_open()
+        end, '[C]reate or open new page'
     },
 }
 

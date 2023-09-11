@@ -97,7 +97,7 @@ return {
                             section = 'actions'
                         },
                         {
-                            action = 'Telescope find_files cwd=' .. vim.fn.stdpath('config'),
+                            action = 'Telescope find_files cwd=' .. vim.fn.stdpath('config') .. '/lua/config',
                             name = 'customize rsltn',
                             section = 'actions'
                         },

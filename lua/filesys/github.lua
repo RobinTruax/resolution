@@ -27,13 +27,13 @@ local utilities = require('filesys.utilities')
 local core_utils = require('core.utilities')
 local exec_in_dir = core_utils.exec_in_dir
 
---------------------------------- [l]azy[g]it ----------------------------------
+------------------------------- lazy[g]it [g]ui --------------------------------
 
 git.lazygit = function()
     vim.cmd('LazyGitCurrentFile')
 end
 
--------------------------- configure [g]ithub [u]ser ---------------------------
+------------------------------- [g]ithub [u]ser --------------------------------
 
 git.configure_github_user = function()
     -- configure github user authentication
@@ -41,13 +41,13 @@ git.configure_github_user = function()
     vim.cmd('TermExec cmd="gh auth login"')
 end
 
----------------------- configure [g]it[h]ub repositories -----------------------
+---------------------------- [g]it [c]onfiguration -----------------------------
 
 git.configure_github_repos = function()
     -- check if user is cloning to local or creating remote repos
     vim.ui.select({
-        { name = 'Clone',  desc = 'Clone existing GitHub repositories to project folder' },
-        { name = 'Create', desc = 'Create GitHub repositories from project folder' }
+        { name = 'Clone',  desc = 'Clone existing GitHub repositories to project root folder' },
+        { name = 'Create', desc = 'Create GitHub repositories from project root folder' }
     }, {
         prompt = 'Choose initialization strategy:',
         format_item = function(item)
@@ -125,7 +125,7 @@ git.github_create_strategy = function()
         prefs.project_root_path .. '/.gitprivate')
 end
 
----------------------------- [g]it [s]tandard repos ----------------------------
+----------------------------- git standard repos -----------------------------
 
 git.configure_standard_repos = function(notify)
     -- check if repositories exist in the project folder
@@ -158,7 +158,7 @@ git.configure_standard_repos = function(notify)
     vim.notify('Created .gitignore file for LaTeX and Python', vim.log.levels.INFO)
 end
 
------------------------------ pull [g]it in [M]ath -----------------------------
+--------------------------------- [g]it [P]ull ---------------------------------
 
 git.pull_git_in_math = function()
     -- pull public
@@ -169,7 +169,7 @@ git.pull_git_in_math = function()
     exec_in_dir('git pull --git-dir=.gitprivate', prefs.project_root_path)
 end
 
-------------------------- commit/push [g]it in [m]ath --------------------------
+----------------------------- [g]it commit/[p]ush ------------------------------
 
 git.push_git_in_math = function()
     -- add, commit, and push private
@@ -183,25 +183,25 @@ git.push_git_in_math = function()
     exec_in_dir('git --git-dir=.gitpublic push --set-upstream origin master', prefs.project_root_path)
 end
 
---------------------------------- [g]it [P]ull ---------------------------------
-
-git.pull_git = function()
-    -- pull local git
-    vim.notify('Pulling', vim.log.levels.OFF)
-    local directory = core_utils.current_directory()
-    exec_in_dir('git pull', directory)
-end
-
------------------------------ [g]it commit/[p]ush ------------------------------
-
-git.push_git = function()
-    -- add all, commit all, push with merge all
-    vim.notify('Committing and Pushing', vim.log.levels.OFF)
-    local directory = core_utils.current_directory()
-    exec_in_dir('git add -A', directory)
-    exec_in_dir('git commit -a -m "Updating."', directory)
-    exec_in_dir('git push --set-upstream origin master', directory)
-end
+-- --------------------------------- [g]it [P]ull ---------------------------------
+--
+-- git.pull_git = function()
+--     -- pull local git
+--     vim.notify('Pulling', vim.log.levels.OFF)
+--     local directory = core_utils.current_directory()
+--     exec_in_dir('git pull', directory)
+-- end
+--
+-- ----------------------------- [g]it commit/[p]ush ------------------------------
+--
+-- git.push_git = function()
+--     -- add all, commit all, push with merge all
+--     vim.notify('Committing and Pushing', vim.log.levels.OFF)
+--     local directory = core_utils.current_directory()
+--     exec_in_dir('git add -A', directory)
+--     exec_in_dir('git commit -a -m "Updating."', directory)
+--     exec_in_dir('git push --set-upstream origin master', directory)
+-- end
 
 -- ------------------------- project from [g]ithub [R]epo -------------------------
 --

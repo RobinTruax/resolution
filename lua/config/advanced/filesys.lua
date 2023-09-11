@@ -31,9 +31,15 @@ filesys.project_icons = {
     { 'Code',       '' },
 }
 
+filesys.required_folders = {
+    'Research',
+    'Classes',
+    'Writing',
+    'Experimentation',
+    'Miscellaneous',
+}
+
 filesys.archive_project_folder = 'Archive'
-filesys.bibliography_folder = 'Bibliography'
-filesys.packages_folder = 'Packages'
 
 --------------------------------------------------------------------------------
 

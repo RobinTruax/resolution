@@ -24,11 +24,11 @@ local napkin = {}
 -- configuration
 local states = require('core.states')
 local preferences = require('config.preferences')
-local notebook = require('computation.notebook')
+local notebook_actions = require('computation.notebook.actions')
 local config_computation = require('config.advanced.computation')
 
 -- related files
-local napkin_popup = require('computation.napkin-popup')
+local napkin_popup = require('computation.napkin.window')
 
 -- nui.nvim
 local NuiText = require('nui.text')
@@ -77,11 +77,11 @@ napkin.set_keybinds = function(popups)
         -- send and named-send
         v:map('n', '<localleader>s', function()
             local sympy = table.concat(vim.api.nvim_buf_get_lines(napkin_popup.sympy.bufnr, 0, -1, false), ' ')
-            notebook.write_to_notebook(sympy)
+            notebook_actions.write_to_notebook(sympy)
         end)
         v:map('n', '<localleader>S', function()
             local sympy = table.concat(vim.api.nvim_buf_get_lines(napkin_popup.sympy.bufnr, 0, -1, false), ' ')
-            notebook.write_to_notebook_named(sympy)
+            notebook_actions.write_to_notebook_named(sympy)
         end)
     end
 end
@@ -264,7 +264,7 @@ napkin.computation_jobs = function()
             napkin.stop_all_jobs()
             -- call new update jobs
             napkin.sympy_from_latex(input_tex)
-            napkin.latex_from_latex(input_tex, vim.fn.stdpath('config') .. '/tmp.tex')
+            napkin.latex_from_latex(input_tex, vim.fn.stdpath('config') .. '/tex/tmp.tex')
         end)
     end)
 
@@ -276,7 +276,7 @@ napkin.computation_jobs = function()
             -- stop all jobs
             napkin.stop_all_jobs()
             -- call a new update job
-            napkin.latex_from_sympy(input_sympy, vim.fn.stdpath('config') .. '/tmp.tex')
+            napkin.latex_from_sympy(input_sympy, vim.fn.stdpath('config') .. '/tex/tmp.tex')
         end)
     end)
 end
