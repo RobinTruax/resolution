@@ -1,6 +1,7 @@
 utilities/
 lua/plugins/plugins/
 lua/plugins/lazy.nvim/
+tex/style/zotero.bib
 
 ### Lua ###
 # Compiled Lua sources

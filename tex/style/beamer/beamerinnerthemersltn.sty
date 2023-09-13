@@ -1,0 +1,28 @@
+% Items and Section
+\setbeamertemplate{items}[circle]
+%\setbeamertemplate{sections/subsections in toc}[sections numbered]
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+% Lines
+% https://tex.stackexchange.com/questions/343517/beamer-full-width-hrule-below-frame-title
+\setbeamertemplate{frametitle}{
+    {\color{TForeground}\par\hspace*{-\dimexpr0.5\paperwidth-0.5\textwidth}\rule[0.5\baselineskip]{\paperwidth}{0.4pt}}
+    \usebeamerfont{frametitle}
+    \insertframetitle
+    \vphantom{g}
+}
+
+% Section Title Slide
+\AtBeginSection[]{
+  \begin{frame}{$ $}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \vspace*{0.5\baselineskip}\hrule
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+\mode<all>

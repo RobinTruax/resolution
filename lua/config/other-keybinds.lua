@@ -121,6 +121,26 @@ return {
         cmd = { require('smart-splits').resize_right, '<Right>' },
         mode = { 'n', 'i' },
     },
+    ['<C-A-Left>'] = {
+        desc = 'Move left',
+        cmd = { require('smart-splits').swap_buf_left, '<Left>' },
+        mode = { 'n', 'i' },
+    },
+    ['<C-A-Down>'] = {
+        desc = 'Move down',
+        cmd = { require('smart-splits').swap_buf_down, '<Down>' },
+        mode = { 'n', 'i' },
+    },
+    ['<C-A-Up>'] = {
+        desc = 'Move up',
+        cmd = { require('smart-splits').swap_buf_up, '<Up>' },
+        mode = { 'n', 'i' },
+    },
+    ['<C-A-Right>'] = {
+        desc = 'Move right',
+        cmd = { require('smart-splits').swap_buf_right, '<Right>' },
+        mode = { 'n', 'i' },
+    },
 
     ------------------------------ manipulate buffers ------------------------------
     ['H'] = {

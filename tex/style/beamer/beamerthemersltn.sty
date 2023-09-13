@@ -1,0 +1,209 @@
+\mode<presentation>
+
+% Cheat sheet: https://www.cpt.univ-mrs.fr/~masson/latex/Beamer-appearance-cheat-sheet.pdf
+
+% Requirements
+\RequirePackage{tikz}
+
+% Settings
+\useinnertheme{rsltn}
+\useoutertheme[subsection=false]{miniframes}
+\usecolortheme{rsltn}
+\usefonttheme{professionalfonts}
+\usefonttheme{rsltn}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% Extra command
+\newcommand{\subtitleline}{\vspace*{0.5\baselineskip}\hrule}
+
+% --------------------------- Theorem Environments -----------------------------
+
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}                    % Theorem tools
+\RequirePackage[skins, breakable]{tcolorbox} % Theorem box
+
+% ------------------------ Color-Changing Proof Setup --------------------------
+
+\global\def\recentProof{theorem proof}
+\colorlet{environmentColor}{TForeground}
+\renewenvironment{proof}[1][\proofname]{
+    \begin{\recentProof}
+}{
+    \end{\recentProof}
+}
+
+% ------------------- Commands for Theorem and Proof Style ---------------------
+
+% Theorem Style
+\newcommand{\rsltntheoremstyle}[3]{
+
+    % Create theorem style
+    \declaretheoremstyle[
+        headfont=\bfseries\color{#2!80!black},
+        bodyfont=#3\color{rsltnText}
+    ]{#1 box}
+
+    % Create theorem box
+    \tcolorboxenvironment{#1}{
+        blanker, breakable, use color stack,
+        left=5mm, top=-1.3mm, bottom=1.3mm,
+        before skip=8pt, after skip=8pt,
+        pad before break = 2pt, pad after break = 2pt,
+        borderline west={1pt}{0pt}{#2},
+    }
+
+}
+
+% Proof Style
+\newcommand{\rsltntheoremproof}[2]{
+
+    % Create proof style
+    \declaretheoremstyle[
+        headfont=\itshape\color{#2!80!black},
+        bodyfont=\normalfont\color{rsltnText},
+        qed=$\square$,
+    ]{#1 proof box}
+    
+    % Create proof box
+    \tcolorboxenvironment{#1 proof}{
+        blanker, breakable, use color stack,
+        left=5mm, top=-1.3mm, bottom=1.3mm,
+        before skip=8pt, after skip=8pt,
+        pad before break = 2pt, pad after break = 2pt,
+        borderline west={1pt}{0pt}{#2},
+    }
+
+    \declaretheorem[
+        style = #1 proof box,
+        numbered = no,
+        name = Proof
+    ]{#1 proof}
+}
+
+% ---------------------- Definition-Style Environments -------------------------
+
+% Definition
+\AtBeginEnvironment{definition}{\setbeamerfont{block title}{series=\sffamily\color{rsltnDefinition!70!black}\bfseries}}
+\rsltntheoremstyle{definition}{rsltnDefinition}{}
+\declaretheorem[
+    style   = definition box,
+    name    = Definition,
+    parent  = section,
+    preheadhook = \colorlet{environmentColor}{rsltnDefinition}
+]{definition}
+
+\AtBeginEnvironment{algorithm}{\setbeamerfont{block title}{series=\sffamily\color{rsltnDefinition!70!black}\bfseries}}
+\rsltntheoremstyle{algorithm}{rsltnDefinition}{}
+\declaretheorem[
+    style   = algorithm box,
+    name    = Algorithm,
+    parent  = section,
+    preheadhook = \colorlet{environmentColor}{rsltnDefinition}
+]{algorithm}
+
+% Conjecture
+\AtBeginEnvironment{conjecture}{\setbeamerfont{block title}{series=\sffamily\color{rsltnConjecture!70!black}\bfseries}}
+\rsltntheoremstyle{conjecture}{rsltnConjecture}{}
+\declaretheorem[
+    style   = conjecture box,
+    name    = Conjecture,
+    parent  = section,
+    sibling = definition,
+    preheadhook = \colorlet{environmentColor}{rsltnConjecture}
+]{conjecture}
+
+% Example
+\AtBeginEnvironment{example}{\setbeamerfont{block title}{series=\sffamily\color{rsltnExample!70!black}\bfseries}}
+\rsltntheoremstyle{example}{rsltnExample}{}
+\declaretheorem[
+    style   = example box,
+    name    = Example,
+    parent  = section,
+    sibling = definition,
+    preheadhook = \colorlet{environmentColor}{rsltnExample}
+]{example}
+
+% Problem
+\AtBeginEnvironment{problem}{\setbeamerfont{block title}{series=\sffamily\color{rsltnProblem!70!black}\bfseries}}
+\rsltntheoremstyle{problem}{rsltnProblem}{}
+\declaretheorem[
+    style   = problem box,
+    name    = Problem,
+    parent  = section,
+    sibling = definition,
+    preheadhook = \colorlet{environmentColor}{rsltnProblem}
+]{problem}
+
+% Solution
+\AtBeginEnvironment{solution}{\setbeamerfont{block title}{series=\sffamily\color{rsltnSolution!70!black}\bfseries}}
+\rsltntheoremstyle{solution}{rsltnSolution}{}
+\declaretheorem[
+    style   = solution box,
+    name    = Solution,
+    parent  = section,
+    sibling = definition,
+    preheadhook = \colorlet{environmentColor}{rsltnSolution}
+]{solution}
+
+% ------------------------ Theorem-Style Environments --------------------------
+
+% Theorem
+\AtBeginEnvironment{theorem}{\setbeamerfont{block title}{series=\sffamily\color{rsltnTheorem!70!black}\bfseries}}
+\rsltntheoremstyle{theorem}{rsltnTheorem}{\itshape}
+\declaretheorem[
+    style       = theorem box,
+    name        = Theorem,
+    parent      = section,
+    sibling     = definition,
+    preheadhook = \global\def\recentProof{theorem proof}\colorlet{environmentColor}{rsltnTheorem}
+]{theorem}
+\AtBeginEnvironment{theorem proof}{\setbeamerfont{block title}{series=\sffamily\color{rsltnTheorem!70!black}\bfseries}}
+\rsltntheoremproof{theorem}{rsltnTheorem}
+
+% Proposition
+\AtBeginEnvironment{proposition}{\setbeamerfont{block title}{series=\sffamily\color{rsltnProposition!70!black}\bfseries}}
+\rsltntheoremstyle{proposition}{rsltnProposition}{\itshape}
+\declaretheorem[
+    style       = proposition box,
+    name        = Proposition,
+    parent      = section,
+    sibling     = definition,
+    preheadhook = \global\def\recentProof{proposition proof}\colorlet{environmentColor}{rsltnProposition}
+]{proposition}
+\AtBeginEnvironment{proposition proof}{\setbeamerfont{block title}{series=\sffamily\color{rsltnProposition!70!black}\bfseries}}
+\rsltntheoremproof{proposition}{rsltnProposition}
+
+% Lemma
+\AtBeginEnvironment{lemma}{\setbeamerfont{block title}{series=\sffamily\color{rsltnLemma!70!black}\bfseries}}
+\rsltntheoremstyle{lemma}{rsltnLemma}{\itshape}
+\declaretheorem[
+    style       = lemma box,
+    name        = Lemma,
+    parent      = section,
+    sibling     = definition,
+    preheadhook = \global\def\recentProof{lemma proof}\colorlet{environmentColor}{rsltnLemma}
+]{lemma}
+\AtBeginEnvironment{lemma proof}{\setbeamerfont{block title}{series=\sffamily\color{rsltnLemma!70!black}\bfseries}}
+\rsltntheoremproof{lemma}{rsltnLemma}
+
+% Corollary
+\AtBeginEnvironment{corollary}{\setbeamerfont{block title}{series=\sffamily\color{rsltnCorollary!70!black}\bfseries}}
+\rsltntheoremstyle{corollary}{rsltnCorollary}{\itshape}
+\declaretheorem[
+    style       = corollary box,
+    name        = Corollary,
+    parent      = section,
+    sibling     = definition,
+    preheadhook = \global\def\recentProof{corollary proof}\colorlet{environmentColor}{rsltnCorollary}
+]{corollary}
+\AtBeginEnvironment{corollary proof}{\setbeamerfont{block title}{series=\sffamily\color{rsltnCorollary!70!black}\bfseries}}
+\rsltntheoremproof{corollary}{rsltnCorollary}
+
+% ------------------------------------------------------------------------------
+
+% Fixing skips
+\RequirePackage[skip=11pt plus1pt, indent=0pt]{parskip}
+
+\mode<all>

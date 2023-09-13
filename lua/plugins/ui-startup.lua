@@ -17,6 +17,12 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ------------------------------------------------------------------------------]]
 
+--------------------------------- dependencies ---------------------------------
+
+local utilities = require('core.utilities')
+
+--------------------------------------------------------------------------------
+
 return {
 
     ------------------------- mini.starter: startup screen -------------------------
@@ -107,7 +113,7 @@ return {
                             section = 'actions'
                         },
                         {
-                            action = 'enew',
+                            action = 'e ' .. utilities.config_path() .. '/documentation.md' ,
                             name = 'documentation',
                             section = 'actions'
                         },

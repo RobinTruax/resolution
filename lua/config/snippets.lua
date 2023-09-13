@@ -1141,32 +1141,16 @@ config.math_symbols     = {
 
     },
     {
-        trigger = '%|%v',
-        program = '\\downarrow',
-        auto    = true,
-        prefix  = config.patterns.no_dashes,
-        suffix  = config.patterns.no_dashes
-
-    },
-    {
-        trigger = '%v%|',
-        program = '\\downarrow',
-        auto    = true,
-        prefix  = config.patterns.no_dashes,
-        suffix  = config.patterns.no_dashes
-
-    },
-    {
-        trigger  = '%<%-%>',
-        program  = '\\leftrightarrow',
+        trigger  = '%-%-%>',
+        program  = '\\longrightarrow',
         auto     = true,
         prefix   = config.patterns.no_dashes,
         suffix   = config.patterns.no_dashes,
         priority = 101
     },
     {
-        trigger  = '%-%-%>',
-        program  = '\\longrightarrow',
+        trigger  = '%<%-%-',
+        program  = '\\longleftarrow',
         auto     = true,
         prefix   = config.patterns.no_dashes,
         suffix   = config.patterns.no_dashes,
@@ -1296,7 +1280,7 @@ config.math_symbols     = {
         priority = 102
     },
     {
-        trigger  = '%=%=%=%>',
+        trigger  = '%=%=%=%=%>',
         program  = '\\xRightarrow[<>]{<>}',
         auto     = true,
         defaults = { 'sub', 'sup' },
@@ -1305,7 +1289,7 @@ config.math_symbols     = {
         priority = 102
     },
     {
-        trigger  = '%<%=%=%=',
+        trigger  = '%<%=%=%=%=',
         program  = '\\xLeftarrow[<>]{<>}',
         auto     = true,
         defaults = { 'sub', 'sup' },
@@ -1413,12 +1397,12 @@ config.math_symbols     = {
         auto     = true,
     },
     {
-        trigger  = '%.%:',
+        trigger  = '%:%.',
         program  = '\\ddots',
         priority = 101,
     },
     {
-        trigger  = '%:%.',
+        trigger  = '%.%:',
         program  = '\\iddots',
         priority = 101,
     },
@@ -1522,6 +1506,7 @@ config.math_symbols     = {
 --================================= SPECIAL ==================================--
 
 ------------------------------- m by n snippets --------------------------------
+
 --{{{
 
 --[[
@@ -1567,6 +1552,7 @@ config.m_by_n_objects   = {
 --}}}
 
 --------------------------------- unique type ----------------------------------
+
 --{{{
 
 

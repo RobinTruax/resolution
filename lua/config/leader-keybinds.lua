@@ -277,28 +277,28 @@ return {
     },
 
     -- toggle focus mode
-    ['of'] = {
-        desc = 'toggle [f]ocus mode',
-        cmd = function()
-            if vim.o.laststatus ~= 0 then
-                vim.o.laststatus = 0
-            elseif vim.o.laststatus ~= 2 then
-                vim.o.laststatus = 2
-            end
-
-            if vim.o.showtabline ~= 0 then
-                vim.o.showtabline = 0
-            elseif vim.o.showtabline ~= 2 then
-                vim.o.showtabline = 2
-            end
-
-            if vim.o.cmdheight ~= 0 then
-                vim.o.cmdheight = 0
-            elseif vim.o.cmdheight ~= 1 then
-                vim.o.cmdheight = 1
-            end
-        end
-    },
+    -- ['of'] = {
+    --     desc = 'toggle [f]ocus mode',
+    --     cmd = function()
+    --         if vim.o.laststatus ~= 0 then
+    --             vim.o.laststatus = 0
+    --         elseif vim.o.laststatus ~= 2 then
+    --             vim.o.laststatus = 2
+    --         end
+    --
+    --         if vim.o.showtabline ~= 0 then
+    --             vim.o.showtabline = 0
+    --         elseif vim.o.showtabline ~= 2 then
+    --             vim.o.showtabline = 2
+    --         end
+    --
+    --         if vim.o.cmdheight ~= 0 then
+    --             vim.o.cmdheight = 0
+    --         elseif vim.o.cmdheight ~= 1 then
+    --             vim.o.cmdheight = 1
+    --         end
+    --     end
+    -- },
 
     -- toggle cursorline
     ['ou'] = {
@@ -438,7 +438,7 @@ return {
     -- search keybinds
     ['sk'] = {
         desc = '[s]earch keybinds',
-        cmd = '<cmd> Telescope keybinds <cr>'
+        cmd = '<cmd> Telescope keymaps <cr>'
     },
 
     ----------------------------- file management (f) ------------------------------
@@ -536,7 +536,7 @@ return {
         cmd = function() git.toggle_project_publicity() end,
     },
 
-    ------------------------------ tex operations (t) ------------------------------
+    ----------------------------- latex operations (l) -----------------------------
 
     -- latex operations
     ['l'] = {
@@ -581,12 +581,12 @@ return {
     },
 
     -- latex rename variable
-    ['lR'] = {
-        desc = '[l]atex [R]ename',
-        cmd = function()
-            vim.lsp.buf.rename()
-        end
-    },
+    -- ['lR'] = {
+    --     desc = '[l]atex [R]ename',
+    --     cmd = function()
+    --         vim.lsp.buf.rename()
+    --     end
+    -- },
 
     ---------------------- tex extensions (x) -----------------------
 

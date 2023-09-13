@@ -104,11 +104,11 @@ return {
             local wk = require('which-key')
             wk.setup({
                 window = {
-                    winblend = 18,
+                    winblend = 5,
                     border = border,
                 },
                 layout = {
-                    height = { min = 4, max = 10 },
+                    height = { min = 4, max = 20 },
                     width = { min = 20, max = 40 },
                     spacing = 3,
                     align = 'center',

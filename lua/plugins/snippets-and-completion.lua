@@ -106,10 +106,15 @@ return {
                 map_cr = false
             })
 
+            -- latex rule
             npairs.add_rule(
               Rule("$", "$",{"tex", "latex"})
                 :with_pair(cond.not_before_regex("\\", 3))
             )
+
+            -- remove ' rule for tex and md
+            npairs.remove_rule("'")
+            npairs.remove_rule('"')
         end
     },
 
@@ -192,6 +197,11 @@ return {
                 },
                 -- completion sources
                 sources = {
+                    -- path completion
+                    {
+                        name = 'async_path',
+                        priority = 15,
+                    },
                     -- text in buffer
                     {
                         name = 'buffer',
@@ -216,11 +226,6 @@ return {
                     {
                         name = 'nvim_lsp_signature_help',
                         priority = 4
-                    },
-                    -- path completion
-                    {
-                        name = 'async_path',
-                        priority = 3,
                     },
                 },
                 -- sorting

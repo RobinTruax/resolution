@@ -73,7 +73,7 @@ end
 create_project.location = function(name, proj_type, opts)
     local folders = {}
     for _, v in ipairs(core_utils.get_subdirs_in_directory(prefs.project_root_path)) do
-        if v:match(config_filesys.archive_project_folder) or v:match(config_filesys.bibliography_folder) or v:match(config_filesys.packages_folder) then
+        if v:match(config_filesys.archive_project_folder) then
             -- do nothing
         else
             folders[#folders + 1] = v
@@ -92,8 +92,9 @@ create_project.location = function(name, proj_type, opts)
             local dir_name = choice .. '/' .. name:gsub('[%s-]+', '_'):gsub('[^%w_]', ''):lower()
             -- compute filename
             local file_name = dir_name .. '/' .. config_filesys.project_info_name
-            -- make directory
+            -- make directories
             core_utils.create_directory(dir_name)
+            core_utils.create_directory(dir_name .. '/notebook')
             -- make json file
             core_utils.write_table_to_file({ title = name, type = proj_type }, file_name)
             -- cd into directory
@@ -104,7 +105,7 @@ create_project.location = function(name, proj_type, opts)
             -- symlinks
             vim.notify('Creating Symlinks...', vim.log.levels.INFO)
             core_utils.symlink(style_folder, dir_name)
-            core_utils.symlink(computation_folder, dir_name)
+            core_utils.symlink(computation_folder, dir_name .. '/notebook')
             -- populate project
             if opts.github ~= true then
                 choose_template({ prompt_title = 'Create Starter File' })

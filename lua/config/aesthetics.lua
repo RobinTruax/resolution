@@ -22,7 +22,7 @@ local aesthetics = {}
 ------------------------------ aesthetic options -------------------------------
 
 -- built-in colorschemes: tokyonight, gruvbox, everforest, tundra
-aesthetics.default_colorscheme     = 'tundra'
+aesthetics.default_colorscheme     = 'tokyonight'
 -- built-in modes: dark or light
 aesthetics.default_mode            = 'dark'
 
