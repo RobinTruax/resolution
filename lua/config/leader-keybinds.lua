@@ -540,7 +540,7 @@ return {
 
     -- latex operations
     ['l'] = {
-        desc = '[t]ex operations',
+        desc = 'la[t]ex operations',
         cmd = false,
     },
 
