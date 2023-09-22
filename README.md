@@ -1,4 +1,4 @@
-# `rsltn`: write better $\LaTeX$ faster.
+# `rsltn`: write better LaTeX faster.
 
 ## Introduction
 
