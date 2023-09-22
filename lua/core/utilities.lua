@@ -59,15 +59,15 @@ utilities.get_files_in_directory = function(dir)
     local iterator = nil
     -- actual process
     if vim.g.windows == false then
-        iterator = io.popen('ls -pa ' .. dir .. ' | grep -v /')
+        iterator = vim.fn.system('ls -pa ' .. dir .. ' | grep -v /')
     elseif vim.g.windows == true then
-        iterator = io.popen('dir ' .. dir .. ' /a-d /b')
+        iterator = vim.fn.system('dir ' .. dir .. ' /a-d /b')
     else
         error('Unrecognized operating system.')
     end
     -- file iterator into table
     if iterator ~= nil then
-        for file in iterator:lines() do
+        for file in iterator:gmatch("[^\r\n]+") do
             table.insert(files, dir .. file)
         end
     end
