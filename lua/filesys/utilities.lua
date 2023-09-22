@@ -47,7 +47,9 @@ utilities.most_recent_file = function(path, force)
             local untrimmed = vim.fn.system(cmd)
             states.most_recent_files[path] = untrimmed:sub(1, -2)
         elseif vim.g.windows == true then
-            error('Not implemented on Windows yet.')
+            local cmd = 'Get-ChildItem -Path . -Filter "*.tex" | Sort-Object -Property LastWriteTime'
+            local untrimmed = vim.fn.system(cmd)
+            states.most_recent_files[path] = untrimmed:match("[^ ]+$")
         else
             error('Unrecognized operating system.')
         end
