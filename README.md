@@ -28,22 +28,10 @@ This video shows *the Napkin*, a tool for performing symbolic computations and m
 <details>
 <summary><big><b>Snippets</b></big></summary>
 
-<table style="table-layout: fixed;">
-<tr>
-</tr>
-<tr>
-<td>
-
 One way `rsltn` improves $\LaTeX$-writing is *snippets*. By creating shortcuts for common tasks such as defining an equation environment or definition environment, `rsltn` speeds up LaTeX-writing, automates repetitive tasks, improves keyboard ergonomics, and helps users remember common snippets of code.
-
-</td>
-<td>
 
 <img src="./images/gifs/snippets.gif" alt="A GIF of rsltn's snippet functionality"/>
 
-</td>
-</tr>
-</table>
 </details>
 
 <br>
@@ -72,8 +60,6 @@ Another tool `rsltn` implements is an extensible dictionary which is used as a f
 
 <details>
 <summary><big><b>File System</b></big></summary>
-
-<table style="table-layout: fixed;">
 
 `rsltn` comes with a simple file management tool. Using various keybinds, one can quickly create, archive, or navigate through a project or file. Using symbolic links, `rsltn` also ensures any project created a computer automatically has access to `rsltn`'s beautiful provided style files, and a central bibliography without adding additional dependencies. 
 
