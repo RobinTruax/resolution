@@ -219,7 +219,7 @@ The remainder of this document will help walk you through the installation of `r
 3. **Download Configuration Files:** Next, clone this git repository into Neovim's configuration folder.\* On Mac and Linux, this is fairly simple. Open a terminal window and use `cd` to navigate into the configuration folder, and then run `git clone https://github.com/RobinTruax/resolution.git .` On Windows, you may need to install `git` first. Visit [this link](git-scm.com/download/win) to do so. You can then repeat the process described above. (\*If you are already using Neovim, you can clone into a different empty folder, say `rsltn/`, in the folder one directory above Neovim's configuration folder. Then, you can launch `rsltn` with `NVIM_APPNAME=rsltn nvim`, and your existing configuration will be preserved and accessible with `nvim`). 
 4. **Auto-Install Plugins and Packages:** Next, open Neovim again. A number of messages should appear showing that a number of packages are being downloaded into the configuration folder. After they've stopped, close Neovim and reopen it. You should be met with a screen of the following sort and (hopefully) no errors.<br>
 <img src="./images/start.png" alt="Start screen" width="50%"/>
-5. **Set Project Root Path:** Open `rsltn`, and navigate to `customize rsltn`. Enter the `preferences.lua` file. Set the variable `prefs.project_root_path` to the folder you want to store your math projects in (this folder should exist but be empty). I chose to create a `Mathematics` folder in my `Documents` folder, and used that. Then, initialize required folders using the keybind `<space>fr` (press the keys in order, one at a time).
+5. **Set Project Root Path:** Open `rsltn`, and navigate to `customize rsltn`. Enter the `preferences.lua` file. Set the variable `prefs.project_root_path` to the folder you want to store your math projects in (preferably empty). I chose to create a `Mathematics` folder in my `Documents` folder, and used that.
 
 #### Dependencies and Add-Ons
 
@@ -311,7 +311,8 @@ Finally, some character-based movement options:
 Since it's such a ubiquitous task, it is worth having a dedicated section on the topic of basic navigation: opening and closing files.
 
 There are a number of ways to open a file. On the launch screen, you will see a list of files recently edited with `rsltn`. You can start typing their names to jump to them or use the up and down keys to navigate to them. More often, you will use one of the following methods: 
- - `<space>v` opens a file in the existing project; if no project is open, it will let the user choose a project. Similarly, `<space>V` lets the user choose a project and then a file. The currently open project is visible in the bottom-right. You will start out with no projects: create a project by using `<space>fc` and following the prompts. Create more file in the project from a template using `<space>fn`.
+ - `<space>v` opens a file in the existing project; if no project is open, it will let the user choose a project. Similarly, `<space>V` lets the user choose a project and then a file. The currently open project is visible in the bottom-right. You will start out with no projects, but the menu for opening projects also lets the user create a new project.
+ - `<space>n` lets the user create a new file in the project from a list of templates.
  - `<space>E` opens a sidebar file explorer that can also be used to create, delete, rename, copy, etc. files. Use the keybinding `g?` when your cursor is in the sidebar file explorer to see a list of keybindings.
  - `<space>s` opens a list of options for searching. Important options include `<space>sf` to search all files, `<space>sh` to search all files (inc. hidden files), `<space>sg` and `<space>sG` to search in the file and the project respectively.
 
@@ -366,10 +367,9 @@ Almost all of `rsltn`'s commands are "leader" keybinds. The "leader" key can be 
 The most important idea is that when you press `<space>` in Normal mode and wait, a UI listing all the possible next presses will appear. This is invaluable and will make it easy to learn the keybinds over time. 
 
 This UI is the suggested way to learn `rsltn`'s leader keybinds, which appear in the following categories: 
- - Top-level commands, which are common operations (e.g. jumping between buffers, opening a project, starting LaTeX compilation, etc.). These commands have the form `<space>?`, where `?` is a single letter. Press `<space>` to browse them.
+ - Top-level commands, which are common operations (e.g. jumping between buffers, opening/creating/archiving a project, creating a file, starting LaTeX compilation, etc.). These commands have the form `<space>?`, where `?` is a single letter. Press `<space>` to browse them.
  - Search commands (for finding text in the document or project, searching an undo tree, or a million other search functionalities). These commands have the form `<space>s?`; press `<space>s` to browse them.
  - Option commands (for on-the-fly editing of options). These commands have the form `<space>o?`. Press `<space>o` to browse them.
- - File mangement commands (for creating, archiving, and editing projects, and creating files from default templates). These commands have the form `<space>f?`. Press `<space>f` to browse them.
  - Git or GitHub commands (for built-in Git functionality). These commands have the form `<space>g?`. Press `<space>g` to browse them.
 
 ### Other Keybinds

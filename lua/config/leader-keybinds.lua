@@ -38,6 +38,14 @@ return {
 
     ---------------------------------- top-level -----------------------------------
 
+    -- archive project
+    ['a'] = {
+        desc = '[a]rchive project',
+        cmd = function()
+            require('filesys.actions.archive_project')()
+        end,
+    },
+
     -- search buffers
     ['b'] = {
         desc = 'search [b]uffers',
@@ -141,10 +149,27 @@ return {
         cmd = '<cmd> VimtexCompile <cr>'
     },
 
+
+    -- new file from template
+    ['n'] = {
+        desc = '[n]ew file from template',
+        cmd = function()
+            require('filesys.actions.choose_template')()
+        end,
+    },
+
     -- peek at reference
     ['p'] = {
         desc = '[p]eek at reference',
         cmd = '<cmd> Lspsaga peek_definition <cr>',
+    },
+
+    -- edit project info
+    ['P'] = {
+        desc = '[e]dit project info',
+        cmd = function()
+            require('filesys.actions.edit_project_info')()
+        end,
     },
 
     -- quit and save
@@ -464,30 +489,6 @@ return {
     --         require('filesys.actions.create_project')()
     --     end,
     -- },
-
-    -- archive project
-    ['fa'] = {
-        desc = '[a]rchive project',
-        cmd = function()
-            require('filesys.actions.archive_project')()
-        end,
-    },
-
-    -- edit project info
-    ['fe'] = {
-        desc = '[e]dit project info',
-        cmd = function()
-            require('filesys.actions.edit_project_info')()
-        end,
-    },
-
-    -- new file from template
-    ['fn'] = {
-        desc = '[n]ew file from template',
-        cmd = function()
-            require('filesys.actions.choose_template')()
-        end,
-    },
 
     ------------------------------ git and github (g) ------------------------------
 
