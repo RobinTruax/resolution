@@ -21,7 +21,7 @@ In this section, we give some demonstrations of `rsltn`'s functionality:
 <tr>
 </tr>
 <tr>
-<td style="width: 30%;">
+<td>
 
 This video shows *the Napkin*, a tool for performing symbolic computations and manipulations in $\LaTeX$. The Napkin can be launched in any document using `<space>c`. It coexists with the Notebook, a larger interactive computational environment for experimentation.
 
@@ -44,7 +44,7 @@ This video shows *the Napkin*, a tool for performing symbolic computations and m
 <tr>
 </tr>
 <tr>
-<td style="width: 30%;">
+<td>
 
 One way `rsltn` improves $\LaTeX$-writing is *snippets*. By creating shortcuts for common tasks such as defining an equation environment or definition environment, `rsltn` speeds up LaTeX-writing, automates repetitive tasks, improves keyboard ergonomics, and helps users remember common snippets of code.
 
