@@ -19,7 +19,7 @@ In this section, we give some demonstrations of `rsltn`'s functionality:
 
 This video shows *the Napkin*, a tool for performing symbolic computations and manipulations in $\LaTeX$. The Napkin can be launched in any document using `<space>c`. It coexists with the Notebook, a larger interactive computational environment for experimentation.
 
-<img src="/images/gifs/computation.gif" alt="A GIF of rsltn's computational integration"/>
+<img src="./images/gifs/computation.gif" alt="A GIF of rsltn's computational integration"/>
 
 </details>
 
