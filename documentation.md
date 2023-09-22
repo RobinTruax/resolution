@@ -1,11 +1,11 @@
-# `rsltn`: write better $\LaTeX$ faster.
+# `rsltn`: write better LaTeX faster.
 
 ## Introduction
 
 `rsltn` (pronounced *resolution*) is a fast, beautiful, and functional development environment for writing math built on Neovim.
 `rsltn` stands for **R**oshan's **S**ystem for **L**a**T**eX in **N**eovim, but the name also refers to the goal of the project, the *resolution* of the two main steps in the process of creating math: experimentation and exposition.
 <figure>
-<img src="./images/introduction.png" alt="A screenshot of rsltn being used to edit a beamer file" width="100%"/>
+<img src="https://raw.githubusercontent.com/RobinTruax/resolutiongifs/main/introduction.png" alt="A screenshot of rsltn being used to edit a beamer file" width="100%"/>
 <figcaption><code>rsltn</code> being used to edit a Beamer presentation in the <code>tokyonight</code> theme.</figcaption>
 </figure>
 
