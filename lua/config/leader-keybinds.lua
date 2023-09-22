@@ -450,20 +450,20 @@ return {
     },
 
     -- check for required files
-    ['fr'] = {
-        desc = '[r]equired folders',
-        cmd = function()
-            require('filesys.actions.required_folders')()
-        end,
-    },
+    -- ['fr'] = {
+    --     desc = '[r]equired folders',
+    --     cmd = function()
+    --         require('filesys.actions.required_folders')()
+    --     end,
+    -- },
 
     -- create project
-    ['fc'] = {
-        desc = '[c]reate project',
-        cmd = function()
-            require('filesys.actions.create_project')()
-        end,
-    },
+    -- ['fc'] = {
+    --     desc = '[c]reate project',
+    --     cmd = function()
+    --         require('filesys.actions.create_project')()
+    --     end,
+    -- },
 
     -- archive project
     ['fa'] = {

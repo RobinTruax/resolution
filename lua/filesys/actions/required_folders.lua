@@ -29,7 +29,7 @@ return function()
 
     for _,v in ipairs(cfg_filesys.required_folders) do
         if utilities.directory_exists(preferences.project_root_path .. '/' .. v) == false then
-            vim.notify('Required folder ' .. v .. ' missing; creating now...', vim.log.levels.OFF)
+            vim.notify('Required folder ' .. v .. ' missing; creating now...', vim.log.levels.WARN)
             utilities.create_directory(preferences.project_root_path .. '/' .. v)
         end
     end

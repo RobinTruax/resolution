@@ -59,6 +59,7 @@ notebook_files.get_pages = function()
     local notebook_path = project_path .. 'notebook/'
     -- get pages
     local files = utilities.get_files_in_directory(notebook_path)
+    table.remove(files, #files)
     return files
 end
 
@@ -139,61 +140,70 @@ end
 
 ---------------------------------- open page -----------------------------------
 
-notebook_files.open_page = function()
+notebook_files.main = function()
     -- get pages
     local pages = notebook_files.get_pages()
-    if #pages == 0 then
-        vim.notify('No pages to choose from. Create a page first.', vim.log.levels.WARN)
-        notebook_files.add_page()
-    else
+    pages[#pages + 1] = 'Create new page'
+    -- if #pages == 0 then
+    --     vim.notify('No pages to choose from. Create a page first.', vim.log.levels.WARN)
+    --     notebook_files.add_page()
+    -- else
     -- page choice menu
         vim.ui.select(pages, {
-            prompt = ' Open page ',
+            prompt = ' Choose Notebook page ',
             format_item = function(item)
-                return utilities.trim_path_file(item)
+                if item == 'Create new page' then
+                    return item
+                else
+                    return utilities.trim_path_file(item)
+                end
             end,
         }, function(choice)
             -- open page
-            if choice ~= nil then
+            if choice == nil then
+                return
+            elseif choice == 'Create new page' then
+                notebook_files.add_page()
+            else
                 vim.cmd('e ' .. choice)
                 if notebook_files.initialized[choice] ~= true then
                     notebook_files.choose_kernel(nil)
                 end
             end
         end)
-    end
+    -- end
 end
 
 ------------------------------------- main -------------------------------------
 
-notebook_files.main = function()
-    vim.ui.select(
-        -- options
-        {
-            {'open', ' Open page '},
-            {'create', ' Create page '},
-        },
-        {
-            -- prompt
-            prompt = 'Open or create page',
-            -- format item
-            format_item = function(item)
-                return item[2]
-            end
-        }, function(choice)
-            if choice == nil then
-                return
-            else
-                -- open
-                if choice[1] == 'open' then
-                    notebook_files.open_page()
-                -- create
-                elseif choice[1] == 'create' then
-                    notebook_files.add_page()
-                end
-            end
-        end)
-end
+-- notebook_files.main = function()
+--     vim.ui.select(
+--         -- options
+--         {
+--             {'open', ' Open page '},
+--             {'create', ' Create page '},
+--         },
+--         {
+--             -- prompt
+--             prompt = 'Open or create page',
+--             -- format item
+--             format_item = function(item)
+--                 return item[2]
+--             end
+--         }, function(choice)
+--             if choice == nil then
+--                 return
+--             else
+--                 -- open
+--                 if choice[1] == 'open' then
+--                     notebook_files.open_page()
+--                 -- create
+--                 elseif choice[1] == 'create' then
+--                     notebook_files.add_page()
+--                 end
+--             end
+--         end)
+-- end
 
 --------------------------------------------------------------------------------
 

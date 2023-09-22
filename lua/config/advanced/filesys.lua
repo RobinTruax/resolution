@@ -29,6 +29,7 @@ filesys.project_icons = {
     { 'Research',   '' },
     { 'Experiment', '' },
     { 'Code',       '' },
+    { 'Add',        '' },
 }
 
 filesys.required_folders = {

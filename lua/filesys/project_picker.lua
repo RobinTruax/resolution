@@ -22,6 +22,7 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 -- resolution
 local config_filesys = require('config.advanced.filesys')
 local states = require('core.states')
+local core_utils = require('core.utilities')
 local utilities = require('filesys.utilities')
 
 -- telescope
@@ -31,14 +32,53 @@ local conf = require('telescope.config').values
 local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 
+------------------------------------ sorter ------------------------------------
+
+local Sorter = require("telescope.sorters").Sorter
+
+local get_fzy_sorter = function(opts)
+    opts = opts or {}
+    local fzy = opts.fzy_mod or require "telescope.algos.fzy"
+    local OFFSET = -fzy.get_score_floor()
+
+    return Sorter:new {
+        discard = true,
+
+        scoring_function = function(_, prompt, line)
+            if line:match("Create new project...") ~= nil then
+                return 0
+            end
+
+            if not fzy.has_match(prompt, line) then
+                return -1
+            end
+
+            local fzy_score = fzy.score(prompt, line)
+
+            if fzy_score == fzy.get_score_min() then
+                return 1
+            end
+
+            return 1 / (fzy_score + OFFSET)
+        end,
+
+        highlighter = function(_, prompt, display)
+            return fzy.positions(prompt, display)
+        end,
+    }
+end
+
 ------------------------------------- main -------------------------------------
 
-local project_picker = function(prompt_title, previewer, function_on_selection)
+local project_picker = function(prompt_title, previewer, function_on_selection, additional)
     return function(opts)
         -- get options
         opts = opts or {}
         -- get result population
         local results = utilities.compile_project_infos()
+        if additional ~= nil then
+            results = core_utils.table_concat(results, additional)
+        end
         -- create picker
         pickers.new(opts, {
             prompt_title = prompt_title,
@@ -60,7 +100,7 @@ local project_picker = function(prompt_title, previewer, function_on_selection)
                 end
             }),
             -- default sorter
-            sorter = conf.generic_sorter(opts),
+            sorter = get_fzy_sorter(opts),
             -- specified previewer
             previewer = previewer.new(opts),
             -- action on selection

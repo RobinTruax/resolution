@@ -81,16 +81,24 @@ utilities.get_subdirs_in_directory = function(dir)
     local iterator = nil
     -- actual process
     if vim.g.windows == false then
-        iterator = io.popen('ls -d ' .. dir .. '/*')
+        iterator = vim.fn.system('ls -d ' .. dir .. '/*/')
     elseif vim.g.windows == true then
-        iterator = io.popen('dir ' .. dir .. ' /ad /b')
+        iterator = vim.fn.system('dir ' .. dir .. ' /ad /b')
     else
         error('Unrecognized operating system.')
     end
     -- file iterator into table
     if iterator ~= nil then
-        for file in iterator:lines() do
-            table.insert(files, file)
+        if iterator:find('ls: cannot access') == nil then
+            for file in iterator:gmatch("[^\r\n]+") do
+                if vim.g.windows == false then
+                    table.insert(files, string.sub(file, 1, -2))
+                elseif vim.g.windows == true then
+                    table.insert(files, file)
+                else
+                    error('Unrecognized operating system.')
+                end
+            end
         end
     end
     return files
@@ -301,6 +309,13 @@ utilities.has_value = function(tab, val)
     end
 
     return false
+end
+
+utilities.table_concat = function(t1, t2)
+    for i=1,#t2 do
+        t1[#t1+1] = t2[i]
+    end
+    return t1
 end
 
 --------------------------------------------------------------------------------

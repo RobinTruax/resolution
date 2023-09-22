@@ -32,7 +32,8 @@ utilities.project_dir_check = function()
     if core_utils.directory_exists(prefs.project_root_path) then
         return true
     end
-    error('Project Folder Does Not Exist')
+    vim.notify('Project folder does not exist. Creating now...', vim.log.levels.WARN)
+    core_utils.create_directory(prefs.project_root_path)
     return false
 end
 
@@ -56,37 +57,59 @@ end
 
 --------------------------- get project information ----------------------------
 
-utilities.get_project_info_filepaths = function()
-    local files = {}
-    local string_of_files = ''
-
-    -- get list of files
-    if vim.g.windows == false then
-        string_of_files = vim.fn.system(string.format(
-            "find %s -name '%s'",
-            prefs.project_root_path,
-            cfg_filesys.project_info_name
-        ))
-    elseif vim.g.windows == true then
-        error('Not implemented on Windows yet.')
-    else
-        error('Unrecognized operating system.')
+utilities.get_projects = function(path, depth)
+    -- clean path
+    if path == nil then
+        vim.notify('Error')
+        return {}
     end
 
-    -- trim list of files
-    for filename in string_of_files:gmatch('[^\r\n]+') do
-        -- get project root
-        local root = prefs.project_root_path
-        -- get archive folder
-        local archive = root .. '/' .. cfg_filesys.archive_project_folder
-        -- remove files in the archive folder
-        if filename:find(archive) == nil then
-            files[#files + 1] = filename
+    depth = depth or 0
+    if depth > 5 then
+        return {}
+    end
+
+    -- find subdirectories
+    local subdirs = core_utils.get_subdirs_in_directory(path)
+    local projects = {}
+
+    -- archive folder
+    local archive = prefs.project_root_path .. '/' .. cfg_filesys.archive_project_folder
+
+    -- iterate
+    for _,v in ipairs(subdirs) do
+        -- check if directory is project
+        local fn = v .. '/' .. cfg_filesys.project_info_name
+        if core_utils.file_exists(fn) then
+            -- add if true
+            projects[#projects + 1] = fn
+        -- check if directory is not archive
+        elseif v:find(archive) == nil then
+            -- recurse if false
+            -- vim.notify("Rec")
+            projects = core_utils.table_concat(
+                projects,
+                utilities.get_projects(v, depth + 1)
+            )
         end
     end
 
     -- return
-    return files
+    return projects
+end
+
+utilities.get_project_info_filepaths = function()
+    local files = {}
+    local string_of_files = ''
+
+    -- check for project folder
+    utilities.project_dir_check()
+
+    -- check for required folders
+    require('filesys.actions.required_folders')()
+
+    -- get list of files
+    return utilities.get_projects(prefs.project_root_path)
 end
 
 ------------------------- compile project information --------------------------
@@ -123,9 +146,7 @@ utilities.compile_project_infos = function()
         end
     end
 
-    -- updating global state variable
     return table_of_project_infos
-    -- states.table_of_project_infos = table_of_project_infos
 end
 
 --------------------------------------------------------------------------------
