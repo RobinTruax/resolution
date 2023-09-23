@@ -61,7 +61,7 @@ Another tool `rsltn` implements is an extensible dictionary which is used as a f
 <details>
 <summary><big><b>File System</b></big></summary>
 
-`rsltn` comes with a simple file management tool. Using various keybinds, one can quickly create, archive, or navigate through a project or file. Using symbolic links, `rsltn` also ensures any project created a computer automatically has access to `rsltn`'s beautiful provided style files, and a central bibliography without adding additional dependencies. 
+`rsltn` comes with a simple file management tool. Using various keybinds, one can quickly create, archive, or navigate through a project or file. Using symbolic links, `rsltn` also ensures any project created a computer automatically has access to `rsltn`'s beautiful provided style files, and a central bibliography.
 
 <img src="https://raw.githubusercontent.com/RobinTruax/resolutiongifs/main/gifs/filesys.gif" alt="A GIF of rsltn's file system functionality"/>
 
@@ -550,6 +550,11 @@ in the preamble. However, note that trying to import all of `style/rsltn` will a
 
 ### Citations
 To use the citations tool, install Zotero and its extension as discussed in the Installation section. Then, on any website which Zotero recognizes as a paper, the icon of the Zotero extension will change from a paper to a paper with a pencil: click on it to save it to Zotero (note that, on some systems, Zotero must be running in the background for this to work). Then, to use this universal library, first add the package `biblatex` to your preamble, and then add the `zotero.bib` file as a resource: this can be done with the command `\addbibresource{style/zotero.bib}`. Then, type `<space>lc` anywhere in the document to open the citation picker and add a reference. A painless solution to the painful citation process of LaTeX.
+
+## GitHub Integration
+`rsltn` comes with a few built-in tools so you don't have to learn git to share or back up your files (though you absolutely should). After setting up `rsltn` for the first time, use `<space>gu` to configure your GitHub user (assuming you have the relevant dependency), and then `<space>gc` (select the "Create" option) to set up two git repositories: a private and a public one. The private one contains all files in your project, and the public one will, by default, contain nothing -- but will allow you to make individual files or projects public to share them with others. Use `<space>gt` to toggle a file's publicity, `<space>gT` to toggle a project's publicity, `<space>gP` to pull both repos, and `<space>gp` to push both repos (back them up).
+
+If you set up `rsltn` on another computer, using `<space>gu` and `<space>gc`, this time choosing the "Clone" option for the latter, `rsltn` will sync your new project folder with the project folder on your old computer.
 
 ## Configuration and Extension
 There are numerous configuration options (which are all explained) in the preferences files. You can access these by either using the keybind `<space>sr` and choosing anything in the configuration folder `lua/config/`, or by starting to type `customize rsltn` from the start screen. A description of the various files and their functions follow: 

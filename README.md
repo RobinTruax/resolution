@@ -98,3 +98,7 @@ Another tool `rsltn` implements is an extensible dictionary which is used as a f
 <img src="https://raw.githubusercontent.com/RobinTruax/resolutiongifs/main/gifs/options.gif" alt="A GIF of rsltn's options functionality"/>
 
 </details>
+
+## Get Started
+
+Get started by following the installation instructions in the documentation file `documentation.md`.
