@@ -559,7 +559,7 @@ If you set up `rsltn` on another computer, using `<space>gu` and `<space>gc`, th
 ## Configuration and Extension
 There are numerous configuration options (which are all explained) in the preferences files. You can access these by either using the keybind `<space>sr` and choosing anything in the configuration folder `lua/config/`, or by starting to type `customize rsltn` from the start screen. A description of the various files and their functions follow: 
  - `preferences.lua` configures high-level or generic preferences.
- - `aesthetics.lua` configures aesthetic options.
+ - `aesthetics.lua` configures aesthetic options, including the colorscheme.
  - `snippets.lua` configures all snippets.
  - `path.lua` configures PATH variables for Neovim; this is useful because if one wants to run Neovim using Neovide or create a keyboard shortcut to circumvent the terminal, PATH settings may need to be configured again.
  - `colorschemes.lua` configures all customization of colorschemes to work with the installed plugins.
