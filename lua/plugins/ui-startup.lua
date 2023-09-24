@@ -85,7 +85,7 @@ return {
                     {
                         {
                             action = function()
-                                require('filesys.actions.choose_project')()
+                                require('filesys.actions.choose_project')({ pick_files_after = true })
                             end,
                             name = 'open/create math project',
                             section = 'actions'
