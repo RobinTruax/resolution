@@ -87,14 +87,7 @@ return {
                             action = function()
                                 require('filesys.actions.choose_project')()
                             end,
-                            name = 'open math project',
-                            section = 'actions'
-                        },
-                        {
-                            action = function()
-                                require('filesys.actions.create_project')()
-                            end,
-                            name = 'new math project',
+                            name = 'open/create math project',
                             section = 'actions'
                         },
                         {
