@@ -19,7 +19,12 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ---------------------------- detect windows or unix ----------------------------
 
-vim.g.windows = (vim.loop.os_uname().sysname == "Windows")
+local os_name = vim.loop.os_uname().sysname
+if string.find(os_name, "Windows") then
+    vim.g.windows = true
+else
+    vim.g.windows = false
+end
 
 --------------------------------- set up path ----------------------------------
 

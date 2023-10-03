@@ -38,7 +38,7 @@ end
 -- change dir
 utilities.exec_in_dir = function(command, dir)
     if vim.g.windows == false then
-        return vim.fn.system(string.format('(cd %s; %s)', dir, command))
+        return vim.fn.system(string.format('(cd "%s"; %s)', dir, command))
     elseif vim.g.windows == true then
         return vim.fn.system(string.format('pushd %s && %s', dir, utilities.escape_for_windows(command)))
     else
@@ -59,7 +59,7 @@ utilities.get_files_in_directory = function(dir)
     local iterator = nil
     -- actual process
     if vim.g.windows == false then
-        iterator = vim.fn.system('ls -pa ' .. dir .. ' | grep -v /')
+        iterator = vim.fn.system('ls -pa "' .. dir .. '" | grep -v /')
     elseif vim.g.windows == true then
         iterator = vim.fn.system('dir ' .. dir .. ' /a-d /b')
     else
@@ -81,7 +81,7 @@ utilities.get_subdirs_in_directory = function(dir)
     local iterator = nil
     -- actual process
     if vim.g.windows == false then
-        iterator = vim.fn.system('ls -d ' .. dir .. '/*/')
+        iterator = vim.fn.system('ls -d "' .. dir .. '"/*/')
     elseif vim.g.windows == true then
         iterator = vim.fn.system('dir ' .. dir .. ' /ad /b')
     else
@@ -177,6 +177,23 @@ end
 
 ----------------------------- related to projects ------------------------------
 
+-- return path after project root folder
+utilities.project_tail = function(path)
+    -- get root
+    local root = prefs.project_root_path
+    -- checks that file is in project folder
+    if path:match(root) == nil then
+        return nil
+    end
+    -- subtract off start
+    local length = #root
+    if string.sub(path, length + 1, -1) == '' then
+        return '/'
+    else
+        return string.sub(path, length + 1, -1)
+    end
+end
+
 -- cuts path of current file to project
 utilities.cut_path_to_project = function(path)
     -- checks that file is in project folder
@@ -184,18 +201,12 @@ utilities.cut_path_to_project = function(path)
     if path:match(root) == nil then
         return nil
     end
-    -- searches for specific folder of project
-    local _, x = path:find(root)
-    _, x = path:find('[\\/]', x + 1)
-    if x == nil then return nil end
-    _, x = path:find('[\\/]', x + 1)
-    if x == nil then return nil end
-    _, x = path:find('[\\/]', x + 1)
-    if x == nil then x = path:len() end
-    if path:sub(x, x) == '/' then
-        return path:sub(1, x)
+    -- checks if there is a project info file
+    if utilities.file_exists(path .. '/' .. cfg_filesys.project_info_name) then
+        return path .. '/'
     else
-        return path:sub(1, x) .. '/'
+        local head = utilities.trim_path_dir(path)
+        return utilities.cut_path_to_project(head)
     end
 end
 
@@ -205,7 +216,7 @@ utilities.current_project_path = function()
 end
 
 utilities.robust_current_project_path = function()
-    return utilities.cut_path_to_project(vim.fn.getcwd() .. '/blep')
+    return utilities.cut_path_to_project(vim.fn.getcwd())
 end
 
 -- returns project name
@@ -235,7 +246,7 @@ end
 -- create symlink
 utilities.symlink = function(oldloc, newloc)
     if vim.g.windows == false then
-        vim.fn.system(string.format('ln -s %s %s', oldloc, newloc))
+        vim.fn.system(string.format('ln -s "%s" "%s"', oldloc, newloc))
     elseif vim.g.windows == true then
         newloc = newloc .. '/' .. utilities.trim_path_file(oldloc)
         vim.fn.system(string.format('mklink \\d %s %s', oldloc, newloc))
@@ -247,7 +258,7 @@ end
 -- create directory
 utilities.create_directory = function(location)
     if vim.g.windows == false then
-        vim.fn.system(string.format('mkdir %s', location))
+        vim.fn.system(string.format('mkdir "%s"', location))
     elseif vim.g.windows == true then
         vim.fn.system(string.format('md %s', location))
     else
@@ -258,7 +269,7 @@ end
 -- move folder
 utilities.move_folder = function(oldloc, newloc)
     if vim.g.windows == false then
-        vim.fn.system(string.format('mv %s %s', oldloc, newloc))
+        vim.fn.system(string.format('mv "%s" "%s"', oldloc, newloc))
     elseif vim.g.windows == true then
         vim.fn.system(string.format('move %s %s', oldloc, newloc))
     else
@@ -269,7 +280,7 @@ end
 -- copy file
 utilities.copy_file = function(from, to)
     if vim.g.windows == false then
-        vim.fn.system(string.format('cp %s %s', from, to))
+        vim.fn.system(string.format('cp "%s" "%s"', from, to))
     elseif vim.g.windows == true then
         vim.fn.system(string.format('copy %s %s', from, to))
     else
@@ -280,7 +291,7 @@ end
 -- write string to file (overwrites)
 utilities.write_string_to_file = function(str, file)
     if vim.g.windows == false then
-        vim.fn.system(string.format('echo "%s" > %s', str, file))
+        vim.fn.system(string.format('echo "%s" > "%s"', str, file))
     elseif vim.g.windows == true then
         vim.fn.system(string.format('echo %s > %s', utilities.escape_for_windows(str), file))
     else
@@ -291,7 +302,7 @@ end
 -- append string to file (does not overwrite)
 utilities.append_string_to_file = function(str, file)
     if vim.g.windows == false then
-        vim.fn.system(string.format('echo "%s" >> %s', str, file))
+        vim.fn.system(string.format('echo "%s" >> "%s"', str, file))
     elseif vim.g.windows == true then
         vim.fn.system(string.format('echo %s >> %s', utilities.escape_for_windows(str), file))
     else

@@ -24,6 +24,7 @@ local prefs = require('config.preferences')
 local config_filesys = require('config.advanced.filesys')
 local core_utils = require('core.utilities')
 local choose_template = require('filesys.actions.choose_template')
+local file_utils = require('filesys.utilities')
 
 ------------------------------- get project name -------------------------------
 
@@ -71,19 +72,11 @@ end
 --------------------- get project location ----------------------
 
 create_project.location = function(name, proj_type, opts)
-    local folders = {}
-    for _, v in ipairs(core_utils.get_subdirs_in_directory(prefs.project_root_path)) do
-        if v:match(config_filesys.archive_project_folder) then
-            -- do nothing
-        else
-            folders[#folders + 1] = v
-        end
-    end
-    vim.ui.select(folders, {
+    vim.ui.select(file_utils.get_project_containers(prefs.project_root_path), {
         -- options
         prompt = 'Folder for Project "' .. name .. '"',
         format_item = function(item)
-            return ' ' .. core_utils.trim_path_file(item)
+            return ' ' .. core_utils.project_tail(item)
         end,
     }, function(choice)
         -- if choice is valid, create the project and move into it

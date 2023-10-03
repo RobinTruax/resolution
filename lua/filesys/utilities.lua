@@ -43,12 +43,12 @@ utilities.most_recent_file = function(path, force)
     -- either if the data has not been compiled or if the system requests a "force"
     if states.most_recent_files[path] == nil or force == true then
         if vim.g.windows == false then
-            local cmd = 'ls -t ' .. path .. '/*.tex | head -n1'
+            local cmd = 'ls -t "' .. path .. '"/*.tex | head -n1'
             local untrimmed = vim.fn.system(cmd)
             states.most_recent_files[path] = untrimmed:sub(1, -2)
         elseif vim.g.windows == true then
             local cmd = 'Get-ChildItem -Path . -Filter "*.tex" | Sort-Object -Property LastWriteTime'
-            local untrimmed = vim.fn.system(cmd)
+            local untrimmed = core_utils.exec_in_dir(cmd, path)
             states.most_recent_files[path] = untrimmed:match("[^ ]+$")
         else
             error('Unrecognized operating system.')
@@ -62,10 +62,11 @@ end
 utilities.get_projects = function(path, depth)
     -- clean path
     if path == nil then
-        vim.notify('Error')
+        vim.notify('Error', vim.log.levels.ERROR)
         return {}
     end
 
+    -- cancel if reached set depth
     depth = depth or 0
     if depth > 5 then
         return {}
@@ -98,6 +99,43 @@ utilities.get_projects = function(path, depth)
 
     -- return
     return projects
+end
+
+utilities.get_project_containers = function(path, depth)
+    -- clean path
+    if path == nil then
+        vim.notify('Error', vim.log.levels.ERROR)
+        return {}
+    end
+
+    -- cancel if reached set depth
+    depth = depth or 0
+    if depth > 5 then
+        return {}
+    end
+
+    -- initialize container list
+    local containers = { path }
+
+    -- get archive folder
+    local archive = prefs.project_root_path .. '/' .. cfg_filesys.archive_project_folder
+
+    -- iterate
+    local subdirs = core_utils.get_subdirs_in_directory(path)
+    for _,v in ipairs(subdirs) do
+        -- check if directory is project
+        local fn = v .. '/' .. cfg_filesys.project_info_name
+        if core_utils.file_exists(fn) == false and v:find(archive) == nil then
+            -- recurse if not
+            containers = core_utils.table_concat(
+                containers,
+                utilities.get_project_containers(v, depth + 1)
+            )
+        end
+    end
+
+    -- return
+    return containers
 end
 
 utilities.get_project_info_filepaths = function()
