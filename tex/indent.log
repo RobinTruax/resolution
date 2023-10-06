@@ -1,6 +1,6 @@
 INFO:  latexindent.pl version 3.22, 2023-06-01, a script to indent .tex files
        latexindent.pl lives here: /home/linuxbrew/.linuxbrew/Cellar/latexindent/3.22/libexec/bin/
-       Tue Sep 12 22:46:19 2023
+       Thu Oct  5 16:19:12 2023
        Filename: /home/roshan/.config/nvim/tex/tmp.tex
 INFO:  Processing switches:
        -l|--localSettings: Read localSettings YAML file
